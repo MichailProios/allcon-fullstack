@@ -1,0 +1,55 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "scripts": {
+    "clean": "rimraf node_modules build .cache public/build",
+    "build": "remix build",
+    "dev": "remix build && run-p \"dev:*\"",
+    "dev:node": "cross-env NODE_ENV=development nodemon --require dotenv/config ./server.js --watch ./server.js",
+    "dev:remix": "remix watch",
+    "start": "cross-env NODE_ENV=production node ./server.js"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^2.0.11",
+    "@chakra-ui/react": "^2.3.6",
+    "@emotion/react": "^11.10.5",
+    "@emotion/server": "^11.10.0",
+    "@emotion/styled": "^11.10.5",
+    "@remix-run/architect": "^1.7.4",
+    "@remix-run/express": "^1.7.6",
+    "@remix-run/node": "^1.7.4",
+    "@remix-run/react": "^1.7.4",
+    "@remix-validated-form/with-zod": "^2.0.2",
+    "@types/exenv": "^1.2.0",
+    "compression": "^1.7.4",
+    "cross-env": "^7.0.3",
+    "exenv": "^1.2.2",
+    "express": "^4.18.2",
+    "google-map-react": "^2.2.0",
+    "isbot": "^3.6.5",
+    "morgan": "^1.10.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.6.0",
+    "react-scroll": "^1.8.8",
+    "react-slick": "^0.29.0",
+    "remix-validated-form": "^4.6.0",
+    "zod": "^3.19.1"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "^1.7.6",
+    "@remix-run/eslint-config": "^1.7.6",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.8",
+    "@types/react-scroll": "^1.8.5",
+    "@types/react-slick": "^0.23.10",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.27.0",
+    "nodemon": "^2.0.20",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^4.8.4"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

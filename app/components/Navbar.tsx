@@ -38,10 +38,10 @@ import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 // import LogoSideways from "public/logos/Logo-Sideways.svg";
 // import LogoPlain from "public/logos/Logo-Plain.svg";
 
-const LogoPlain =
-  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Logos/logo-new.png";
-const LogoSideways =
-  "https://allconcontracting.com/image-resizing?&quality=100&height=1920&width=1080&metadata=none&image=https://allconcontracting.com:2096/files/getFile/Logos/logoCropped.png";
+const logo_full =
+  "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/944385c7-c2df-41ab-0e75-a67518f15700/public";
+const logo_small =
+  "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/fa4b2f8e-d107-45eb-e36d-adbb14f13a00/public";
 
 interface NavbarProps {
   navigationLinks: { label: string; url: string }[];
@@ -160,8 +160,8 @@ function NavbarHeader({
                 h={50}
                 w={"auto"}
                 minWidth="156px"
-                src={LogoSideways}
-                alt="Eucrona-Logo"
+                src={logo_full}
+                alt="Allcon-Logo"
                 draggable="false"
                 loading="eager"
               />
@@ -178,8 +178,8 @@ function NavbarHeader({
                 objectFit="contain"
                 h={50}
                 w={"auto"}
-                src={LogoPlain}
-                alt="Eucrona-Logo"
+                src={logo_small}
+                alt="Allcon-Logo"
                 draggable="false"
                 loading="eager"
               />
@@ -299,8 +299,8 @@ function NavbarDrawer({
               objectFit="contain"
               h={50}
               w={"auto"}
-              src={LogoPlain}
-              alt="Eucrona-Logo"
+              src={logo_small}
+              alt="Allcon-Logo"
               draggable="false"
               loading="eager"
             />

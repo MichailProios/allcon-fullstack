@@ -42,8 +42,11 @@ import { useWindowDimensions } from "~/utils/hooks";
 // import { useTransition } from "@remix-run/react";
 import Slider from "react-slick";
 import { Search2Icon } from "@chakra-ui/icons";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+
+export const meta: MetaFunction = ({ params }: any) => ({
+  title: `Allcon Contracting - Testimonials`,
+  description: `Allcon Contracting testionies from clients`,
+});
 
 export const loader: LoaderFunction = async ({ request }: any) => {
   try {

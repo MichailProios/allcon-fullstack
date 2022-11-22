@@ -2,6 +2,8 @@ const path = require("path");
 const express = require("express");
 const compression = require("compression");
 const morgan = require("morgan");
+const https = require("https");
+const fs = require("fs");
 const { createRequestHandler } = require("@remix-run/express");
 
 const BUILD_DIR = path.join(process.cwd(), "build");
@@ -45,6 +47,15 @@ const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log(`Express server listening on port ${port}`);
+});
+
+const httpsOptions = {
+  key: fs.readFileSync(`${process.cwd()}/security/key.pem`),
+  cert: fs.readFileSync(`${process.cwd()}/security/cert.pem`),
+};
+
+https.createServer(httpsOptions, app).listen(443, () => {
+  console.log("HTTPS server listening on port " + 443);
 });
 
 function purgeRequireCache() {

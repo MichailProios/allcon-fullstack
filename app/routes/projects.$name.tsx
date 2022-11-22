@@ -36,9 +36,15 @@ import {
   StatGroup,
   StackDivider,
   Skeleton,
+  AspectRatio,
+  Tag,
+  TagLabel,
+  TagLeftIcon,
 } from "@chakra-ui/react";
 
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
+
+import { json } from "@remix-run/node";
 
 import { useLoaderData } from "@remix-run/react";
 import { useWindowDimensions } from "~/utils/hooks";
@@ -51,6 +57,18 @@ import Slider from "react-slick";
 
 import { projects } from "~/utils/projects";
 
+import {
+  AiOutlineDollarCircle,
+  AiOutlineCalendar,
+  AiOutlineFileText,
+} from "react-icons/ai";
+import { BiBuildings } from "react-icons/bi";
+
+export const meta: MetaFunction = ({ params }: any) => ({
+  title: `Allcon Contracting - ${projects.get(params.name.toLowerCase()).name}`,
+  description: projects.get(params.name.toLowerCase()).description,
+});
+
 export const loader: LoaderFunction = async ({ request, params }: any) => {
   try {
     if (!projects.has(params.name.toLowerCase())) {
@@ -59,13 +77,9 @@ export const loader: LoaderFunction = async ({ request, params }: any) => {
 
     const project = projects.get(params.name.toLowerCase());
 
-    const res = await fetch(
-      `https://allconcontracting.com:2096/files/getFileList${project.pictures}`
-    );
-
-    const pictureList = await res.json();
-
-    return { project: project, pictures: pictureList };
+    return json({
+      project: project,
+    });
   } catch (error) {
     throw error;
   }
@@ -77,18 +91,18 @@ export default function Index() {
 
   return (
     <SlideFade in={true} reverse delay={0.1}>
-      <Container maxW={"1600px"} px={{ base: 6, md: 10 }} py={14}>
+      <Container maxW={"1500px"} px={{ base: 6, md: 10 }} py={14}>
         <VStack spacing="26px" w="full">
-          <Heading textAlign="center">{data.project.projectName}</Heading>
+          <Heading textAlign="center">{data.project.name}</Heading>
         </VStack>
 
         <Box position={"relative"} w="full">
           <IconButton
             aria-label="left-arrow"
-            variant={{ base: "solid", xl: "ghost" }}
+            variant="solid"
             borderRadius="full"
             position="absolute"
-            left="10px"
+            left={{ base: "5px", md: "10px" }}
             top="50%"
             transform={"translate(0%, -50%)"}
             zIndex={2}
@@ -98,10 +112,10 @@ export default function Index() {
 
           <IconButton
             aria-label="right-arrow"
-            variant={{ base: "solid", xl: "ghost" }}
+            variant="solid"
             borderRadius="full"
             position="absolute"
-            right="10px"
+            right={{ base: "5px", md: "10px" }}
             top="50%"
             transform={"translate(0%, -50%)"}
             zIndex={2}
@@ -112,73 +126,122 @@ export default function Index() {
           <Box mt={"26px"}>
             <Slider
               arrows={false}
-              // dots={Object.values(data.pictures).length <= 8 ? true : false}\
-
               infinite={true}
               speed={300}
+              lazyLoad="progressive"
               ref={(slider) => setSlider(slider)}
             >
-              {Object.values(data.pictures).map((img: any, index: any) => (
-                <Image
-                  key={index}
-                  src={
-                    `https://allconcontracting.com/image-resizing?&quality=${data.project.quality}&height=1920&width=1080&metadata=none&image=` +
-                    img
+              {Object.values(data.project.media)
+                .sort((a: any, b: any) => a.order - b.order)
+                .map((value: any, index: any) => {
+                  if (value.image) {
+                    return (
+                      <AspectRatio
+                        key={index}
+                        ratio={{ base: 9 / 16, md: 16 / 9 }}
+                      >
+                        <Image
+                          src={value.image}
+                          alt={`Project Image ${index}`}
+                          // objectFit="scale-down"
+                          rounded="md"
+                          fallback={<Skeleton h="full" w="full" />}
+                        />
+                      </AspectRatio>
+                    );
+                  } else if (value.video) {
+                    return (
+                      <AspectRatio
+                        key={index}
+                        ratio={{ base: 9 / 16, md: 16 / 9 }}
+                      >
+                        <iframe
+                          title={`Project Video ${index}`}
+                          src={value.video}
+                          allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                          style={{
+                            border: "none",
+                            height: "100%",
+                            width: "100%",
+                            borderRadius: "0.375rem",
+                            color: "#f3f3f3",
+                            pointerEvents: "none",
+                          }}
+                        />
+                      </AspectRatio>
+                    );
+                  } else {
+                    return null;
                   }
-                  alt={`Project Image ${index}`}
-                  objectFit="contain"
-                  height="800px"
-                  rounded="md"
-                  fallback={<Skeleton h="800px" w="full" />}
-                />
-              ))}
+                })}
             </Slider>
           </Box>
         </Box>
       </Container>
-      <Container maxW={"1600px"} px={{ base: 6, md: 10 }} py={14}>
+      <Divider />
+      <Container maxW={"1500px"} px={{ base: 6, md: 10 }} py={14}>
         <VStack spacing="18px">
           <Heading textAlign="center">Project Information</Heading>
           <Card rounded="md" boxShadow="xl" w={"full"}>
             <CardBody>
               <Stack divider={<StackDivider />} spacing="4">
                 <Box>
-                  <Heading fontSize="lg" textTransform="uppercase">
-                    Client / Affiliated Agency
-                  </Heading>
-                  <Text pt="2" fontSize="xl">
+                  <Tag size="lg" borderRadius="full">
+                    <Icon h={6} w={6} as={BiBuildings} ml={-1} mr={2} />
+                    <TagLabel fontSize="lg">
+                      Client / Affiliated Agency
+                    </TagLabel>
+                  </Tag>
+                  <Text pl="1" pt="2" fontSize="xl">
                     {data.project.clientAffiliatedAgency}
                   </Text>
                 </Box>
                 <Box>
-                  <Heading fontSize="lg" textTransform="uppercase">
-                    Year Completed
-                  </Heading>
-                  <Text pt="2" fontSize="xl">
+                  <Tag size="lg" borderRadius="full">
+                    <Icon h={6} w={6} as={AiOutlineCalendar} ml={-1} mr={2} />
+                    <TagLabel fontSize="lg">Year Completed</TagLabel>
+                  </Tag>
+                  <Text pl="1" pt="2" fontSize="xl">
                     {data.project.yearCompleted}
                   </Text>
                 </Box>
                 <Box>
-                  <Heading fontSize="lg" textTransform="uppercase">
-                    Cost / Budget
-                  </Heading>
-                  <Text pt="2" fontSize="xl">
-                    {data.project.projectCostBudget}
+                  <Tag size="lg" borderRadius="full">
+                    <Icon
+                      h={6}
+                      w={6}
+                      as={AiOutlineDollarCircle}
+                      ml={-1}
+                      mr={2}
+                    />
+                    <TagLabel fontSize="lg">Cost / Budget</TagLabel>
+                  </Tag>
+                  <Text pl="1" pt="2" fontSize="xl">
+                    {data.project.costBudget}
                   </Text>
                 </Box>
                 <Box>
-                  <Heading fontSize="lg" textTransform="uppercase">
-                    Designer
-                  </Heading>
-                  <Text pt="2" fontSize="xl">
-                    {data.project.projectDesigner}
+                  <Tag size="lg" borderRadius="full">
+                    <Avatar
+                      size="xs"
+                      name={
+                        data.project.designer !== "N/A" && data.project.designer
+                      }
+                      ml={-1}
+                      mr={2}
+                    />
+                    <TagLabel fontSize="lg">Designer</TagLabel>
+                  </Tag>
+                  <Text pl="1" pt="2" fontSize="xl">
+                    {data.project.designer}
                   </Text>
                 </Box>
                 <Box>
-                  <Heading fontSize="lg" textTransform="uppercase">
-                    Description
-                  </Heading>
-                  <Text pt="2" fontSize="xl">
+                  <Tag size="lg" borderRadius="full">
+                    <Icon h={6} w={6} as={AiOutlineFileText} ml={-1} mr={2} />
+                    <TagLabel fontSize="lg">Description</TagLabel>
+                  </Tag>
+                  <Text pl="1" pt="2" fontSize="xl" textAlign="justify">
                     <span
                       dangerouslySetInnerHTML={{
                         __html: data.project.description,

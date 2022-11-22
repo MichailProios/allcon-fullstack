@@ -5,8 +5,9 @@ const morgan = require("morgan");
 const https = require("https");
 const fs = require("fs");
 const { createRequestHandler } = require("@remix-run/express");
+const { dirname } = require("path");
 
-const BUILD_DIR = path.join(process.cwd(), "build");
+const BUILD_DIR = path.join(__dirname, "build");
 
 const app = express();
 

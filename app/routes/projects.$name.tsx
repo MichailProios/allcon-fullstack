@@ -136,10 +136,7 @@ export default function Index() {
                 .map((value: any, index: any) => {
                   if (value.image) {
                     return (
-                      <AspectRatio
-                        key={index}
-                        ratio={{ base: 9 / 16, md: 16 / 9 }}
-                      >
+                      <AspectRatio key={index} ratio={{ base: 1, md: 16 / 9 }}>
                         <Image
                           src={value.image}
                           alt={`Project Image ${index}`}
@@ -151,10 +148,7 @@ export default function Index() {
                     );
                   } else if (value.video) {
                     return (
-                      <AspectRatio
-                        key={index}
-                        ratio={{ base: 9 / 16, md: 16 / 9 }}
-                      >
+                      <AspectRatio key={index} ratio={{ base: 1, md: 16 / 9 }}>
                         <iframe
                           title={`Project Video ${index}`}
                           src={value.video}
@@ -178,82 +172,114 @@ export default function Index() {
           </Box>
         </Box>
       </Container>
-      <Divider />
-      <Container maxW={"1500px"} px={{ base: 6, md: 10 }} py={14}>
-        <VStack spacing="18px">
-          <Heading textAlign="center">Project Information</Heading>
-          <Card rounded="md" boxShadow="xl" w={"full"}>
-            <CardBody>
-              <Stack divider={<StackDivider />} spacing="4">
-                <Box>
-                  <Tag size="lg" borderRadius="full">
-                    <Icon h={6} w={6} as={BiBuildings} ml={-1} mr={2} />
-                    <TagLabel fontSize="lg">
-                      Client / Affiliated Agency
-                    </TagLabel>
-                  </Tag>
-                  <Text pl="1" pt="2" fontSize="xl">
-                    {data.project.clientAffiliatedAgency}
-                  </Text>
-                </Box>
-                <Box>
-                  <Tag size="lg" borderRadius="full">
-                    <Icon h={6} w={6} as={AiOutlineCalendar} ml={-1} mr={2} />
-                    <TagLabel fontSize="lg">Year Completed</TagLabel>
-                  </Tag>
-                  <Text pl="1" pt="2" fontSize="xl">
-                    {data.project.yearCompleted}
-                  </Text>
-                </Box>
-                <Box>
-                  <Tag size="lg" borderRadius="full">
-                    <Icon
-                      h={6}
-                      w={6}
-                      as={AiOutlineDollarCircle}
-                      ml={-1}
-                      mr={2}
-                    />
-                    <TagLabel fontSize="lg">Cost / Budget</TagLabel>
-                  </Tag>
-                  <Text pl="1" pt="2" fontSize="xl">
-                    {data.project.costBudget}
-                  </Text>
-                </Box>
-                <Box>
-                  <Tag size="lg" borderRadius="full">
-                    <Avatar
-                      size="xs"
-                      name={
-                        data.project.designer !== "N/A" && data.project.designer
-                      }
-                      ml={-1}
-                      mr={2}
-                    />
-                    <TagLabel fontSize="lg">Designer</TagLabel>
-                  </Tag>
-                  <Text pl="1" pt="2" fontSize="xl">
-                    {data.project.designer}
-                  </Text>
-                </Box>
-                <Box>
-                  <Tag size="lg" borderRadius="full">
-                    <Icon h={6} w={6} as={AiOutlineFileText} ml={-1} mr={2} />
-                    <TagLabel fontSize="lg">Description</TagLabel>
-                  </Tag>
-                  <Text pl="1" pt="2" fontSize="xl" textAlign="justify">
-                    <span
-                      dangerouslySetInnerHTML={{
-                        __html: data.project.description,
-                      }}
-                    />
-                  </Text>
-                </Box>
-              </Stack>
-            </CardBody>
-          </Card>
-        </VStack>
-      </Container>
+      {data.project.clientAffiliatedAgency ||
+      data.project.yearCompleted ||
+      data.project.costBudget ||
+      data.project.designer ||
+      data.project.description ? (
+        <>
+          <Divider />
+          <Container maxW={"1500px"} px={{ base: 6, md: 10 }} py={14}>
+            <VStack spacing="18px">
+              <Heading textAlign="center">Project Information</Heading>
+              <Card rounded="md" boxShadow="xl" w={"full"}>
+                <CardBody>
+                  <Stack divider={<StackDivider />} spacing="4">
+                    {data.project.clientAffiliatedAgency && (
+                      <Box>
+                        <Tag size="lg" borderRadius="full">
+                          <Icon h={6} w={6} as={BiBuildings} ml={-1} mr={2} />
+                          <TagLabel fontSize="lg">
+                            Client / Affiliated Agency
+                          </TagLabel>
+                        </Tag>
+                        <Text pl="1" pt="2" fontSize="xl">
+                          {data.project.clientAffiliatedAgency}
+                        </Text>
+                      </Box>
+                    )}
+
+                    {data.project.yearCompleted && (
+                      <Box>
+                        <Tag size="lg" borderRadius="full">
+                          <Icon
+                            h={6}
+                            w={6}
+                            as={AiOutlineCalendar}
+                            ml={-1}
+                            mr={2}
+                          />
+                          <TagLabel fontSize="lg">Year Completed</TagLabel>
+                        </Tag>
+                        <Text pl="1" pt="2" fontSize="xl">
+                          {data.project.yearCompleted}
+                        </Text>
+                      </Box>
+                    )}
+
+                    {data.project.costBudget && (
+                      <Box>
+                        <Tag size="lg" borderRadius="full">
+                          <Icon
+                            h={6}
+                            w={6}
+                            as={AiOutlineDollarCircle}
+                            ml={-1}
+                            mr={2}
+                          />
+                          <TagLabel fontSize="lg">Cost / Budget</TagLabel>
+                        </Tag>
+                        <Text pl="1" pt="2" fontSize="xl">
+                          {data.project.costBudget}
+                        </Text>
+                      </Box>
+                    )}
+
+                    {data.project.designer && (
+                      <Box>
+                        <Tag size="lg" borderRadius="full">
+                          <Avatar
+                            size="xs"
+                            name={data.project.designer}
+                            ml={-1}
+                            mr={2}
+                          />
+                          <TagLabel fontSize="lg">Designer</TagLabel>
+                        </Tag>
+                        <Text pl="1" pt="2" fontSize="xl">
+                          {data.project.designer}
+                        </Text>
+                      </Box>
+                    )}
+
+                    {data.project.description && (
+                      <Box>
+                        <Tag size="lg" borderRadius="full">
+                          <Icon
+                            h={6}
+                            w={6}
+                            as={AiOutlineFileText}
+                            ml={-1}
+                            mr={2}
+                          />
+                          <TagLabel fontSize="lg">Description</TagLabel>
+                        </Tag>
+                        <Text pl="1" pt="2" fontSize="xl" textAlign="justify">
+                          <span
+                            dangerouslySetInnerHTML={{
+                              __html: data.project.description,
+                            }}
+                          />
+                        </Text>
+                      </Box>
+                    )}
+                  </Stack>
+                </CardBody>
+              </Card>
+            </VStack>
+          </Container>
+        </>
+      ) : null}
     </SlideFade>
   );
 }

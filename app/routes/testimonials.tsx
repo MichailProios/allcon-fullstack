@@ -81,11 +81,9 @@ export const loader: LoaderFunction = async ({ request }: any) => {
       {
         name: "Kim Zdrill",
         position: "FSA, MAAA - Berry St.",
-        content: `Most contractors I’ve worked with are usually focused on the next
-              job as they are working on the current one. This is definitely not
-              the case with ALL CON….anyone who chooses to work with them will
-              be very happy and extremely satisfied with the experience and
-              results.`,
+        content: `The workmanship was excellent, and the crew was extremely
+              professional. I would not hesitate recommending your company to
+              others.`,
       },
       {
         name: "Edward L. Rose",

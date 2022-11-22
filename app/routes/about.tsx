@@ -80,11 +80,11 @@ export default function About() {
               <br />
               <br />
             </Text>
-            <AspectRatio ratio={16 / 9} w="full">
+            <AspectRatio ratio={{ base: 4 / 3, md: 16 / 9 }} w="full">
               <Image
                 src={data.allconStaff}
                 alt="Company Group Photo"
-                objectFit="contain"
+                // objectFit="fit"
                 boxShadow="xl"
                 rounded="md"
                 userSelect="none"

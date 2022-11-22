@@ -1,84 +1,274 @@
 export let projects = new Map();
 
 projects
-  .set("apartment724", {
-    thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c71596c6-7bae-47c7-e4fa-868ba422a600/public",
-    path: "/projects/apartment724",
-    media: [
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3e896263-ffee-4f9f-9da7-d3c64ac66300/public",
-        order: 1,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/db29887a-b564-4cee-3367-948e7d77d200/public",
-        order: 2,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/cce353f0-53a9-4466-3d97-3694b7aa4a00/public",
-        order: 3,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c71596c6-7bae-47c7-e4fa-868ba422a600/public",
-        order: 4,
-      },
-    ],
-    name: "Apartment 724",
-    projectLocation: "N/A",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
-    costBudget: "N/A",
-    designer: "N/A",
-    description: `N/A`,
-  })
-  .set("success-academy-schools", {
+  .set("lupton-hall", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/dbe0310f-785e-4ee6-d032-5ce2bd7c0f00/public",
-    path: "/projects/success-academy-schools",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4aee4395-0887-4070-980f-427a13fdb400/public",
+    path: "/projects/lupton-hall",
     media: [
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/dbe0310f-785e-4ee6-d032-5ce2bd7c0f00/public",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4aee4395-0887-4070-980f-427a13fdb400/public",
         order: 1,
       },
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/a42fe716-4b3f-4ac9-a03e-60a0ad158900/public",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/fb31d82d-de7b-4b78-7696-c25a404e7400/public",
         order: 2,
       },
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/703bf395-ab27-4383-4dc6-4f784cb2ae00/public",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/1475bdbd-5d54-464e-e167-ed882dbafe00/public",
         order: 3,
       },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/d5dbe854-6c92-4437-3ea1-10309d307900/public",
+        order: 4,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e31c4ddd-e85a-4308-3c95-751fc2679200/public",
+        order: 5,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e09765a8-fcf2-4d7e-80b0-0d7736683d00/public",
+        order: 6,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5ed56c9f-3769-4491-df95-27c2d4f8b900/public",
+        order: 7,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5e9f56da-0023-42fa-7520-397aac25de00/public",
+        order: 8,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/509cc521-880b-41e0-2a05-b81da893f800/public",
+        order: 9,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3e869efd-9729-41d4-505c-22378c842300/public",
+        order: 10,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/8cfe2996-dd43-4959-922a-3b2cf0f18100/public",
+        order: 11,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/8d34b330-ea19-458e-bf90-2f6cf6bf5b00/public",
+        order: 12,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/7b6136cc-91ee-4ce6-9b8e-6e985405ae00/public",
+        order: 13,
+      },
     ],
-    name: "Success Academy Schools",
-    location: "N/A",
-    clientAffiliatedAgency: "Success Academy Charter Schools",
-    yearCompleted: "2019",
-    costBudget: "$5,000,000+",
-    designer: "N/A",
-    description: `
-        ALLCON was selected by Success Academy Charter Schools as the General
-        Contractor to complete full renovations of interior spaces throughout
-        the school system. The projects were done at an extremely rapid pace at
-        multiple facilities and required quick mobilization of the work force
-        and constant coordination between ALLCON, the owner and design team to
-        meet the 4 week completion schedule. The collaborative approach between
-        these parties was a major component for the programs success. ALLCON
-        worked with suppliers to obtain and secure materials in advance of the
-        actual work starting. ALLCON was able to secure what are typically long
-        lead items by preplanning the construction and preparing deliveries
-        prior to the summer period when work was required to be completed. Over
-        a period of five years Allcon delivered state of the art classroom
-        spaces which included mechanical, electrical and plumbing systems
-        upgrades.
-      `,
+    name: "SUNY Farmingdale Lupton Hall",
+    projectLocation: "2350 Broadhollow Road, Farmingdale, NY 11735",
+    clientAffiliatedAgency: "NYS OGS – Design & Construction Group",
+    yearCompleted: "In Progress",
+    costBudget: "$10,856,274.00",
+    designer: "Hoffmann Architects, Inc.",
+    description: `  ALLCON constructed this uniquely designed 90,000sf copper roof which now
+      transforms Lupton Hall into a landmark for the SUNY Farmingdale Campus.
+      ALLCON proposed and helped developed a distinctive structural design
+      during the initial removal and abatement stages of the project. The
+      structural design included a high gauge metal framing system that
+      bypasses the concrete deck and attaches to the existing framing
+      structure with blind bolts. Craftsmanship is found throughout the roof
+      from the artfully fabricated dormers to the carefully sculpted gutter
+      system designed to withstands wind speed up to 126 mph. ALLCON made sure
+      that the copper fabrication was a mix of machine fabrication for the
+      panels to control cost and hard created units for the fine intricate
+      detail work. This inspiration assignment is not just a showcase project
+      for ALLCON but a signature piece of work for Farmingdale’s dedication to
+      excellence on campus.`,
+  })
+  .set("dot-elwood-ny-operation-facility", {
+    sector: "public",
+    thumbnail:
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c0ce0238-47bb-4d18-f278-79a57d207b00/public",
+    path: "/projects/dot-elwood-ny-operation-facility",
+    media: [
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ed4adb38-21bf-4b5b-b620-16125cf56700/public",
+        order: 1,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/0fd7e300-c2f9-4058-83d9-1b59e1a6d900/public",
+        order: 2,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2251a5c0-46c9-46ae-6445-9d0cf6eff900/public",
+        order: 3,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/69f7dcdc-7243-4b72-98e2-e3509db0cb00/public",
+        order: 4,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/79e88004-c5e4-44c6-9472-ebf5b6c5df00/public",
+        order: 5,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2fa05c2a-09b1-48b6-b723-520cbaf69000/public",
+        order: 6,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/592a2268-127d-43b7-71f5-3116d504d000/public",
+        order: 7,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/aba7602f-34dc-4ffd-1cf8-51be7cce0c00/public",
+        order: 8,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/36f280e4-143c-442e-bd4c-9ecbfc2ceb00/public",
+        order: 9,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/9492136a-ba4e-47a3-a2b7-c5aac0640800/public",
+        order: 10,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/36387977-1c91-49f6-dfa8-4bc5c6b6c600/public",
+        order: 11,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/91075744-6d21-4f97-84ba-7c50e66ae000/public",
+        order: 12,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/86382856-7487-464c-f1bc-03fe5e2e6000/public",
+        order: 13,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ae21043e-097f-48a8-6acb-ea5d316b2d00/public",
+        order: 14,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3676a5d7-595c-4f95-c0a7-1426c4b67f00/public",
+        order: 15,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c0ce0238-47bb-4d18-f278-79a57d207b00/public",
+        order: 16,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/f5291a6b-1730-4597-9e13-f2a5c1ce3800/public",
+        order: 17,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3092d834-68c3-4760-17ab-2ff5d321ad00/public",
+        order: 18,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/9a557653-a5f1-491d-367b-70de65121600/public",
+        order: 19,
+      },
+    ],
+
+    name: "DOT Elwood, NY Operation Facility ",
+    projectLocation: null,
+    clientAffiliatedAgency: "NYS Office of General Services",
+    yearCompleted: "In Closeout",
+    costBudget: "$7,000,000",
+    designer: "Kallen & Lemelson, LLP",
+    description: `ALLCON Contracting was selected as the general contractor for the
+        construction of a new DOT Operation Facility in Elwood, NY. The project
+        included the restoration of an existing salt shed, the construction of a
+        new heavy timer shed, new vehicle service and storage building as well
+        as the new operations office. ALLCON performed more than 60% of the
+        general contracting work on this project which included interior
+        finishes, masonry, millwork, and metal panel installation. We worked
+        closely with Laland Baptiste who served as the CM on the project. Both
+        companies built on a spirit of collaboration to make sure a     building was assembled for both NYS OGS the contract manager and the NYS
+        Department of Transportation. This was the second project collaboration
+        between ALLCON and Laland Baptiste and that team spirit proved
+        invaluable at addressing unforeseen field conditions, addressing issues
+        as they arose and maintain both schedule constraints and budgetary
+        limitations.`,
+  })
+
+  .set("greatneck-terrace-roofs", {
+    sector: "public",
+    thumbnail:
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400/public",
+    path: "/projects/greatneck-terrace-roofs",
+    media: [
+      {
+        video:
+          "https://customer-sn71r1ndnen7y1an.cloudflarestream.com/1813d1be91c9949d3fc00053953b0c22/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-sn71r1ndnen7y1an.cloudflarestream.com%2F1813d1be91c9949d3fc00053953b0c22%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D2s%26height%3D600&startTime=2s&controls=false",
+        order: 1,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400/public",
+        order: 2,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/736315aa-97e9-43b3-8ab7-419739e23800/public",
+        order: 3,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e8098e3f-c65b-413d-368b-22b50268b300/public",
+        order: 4,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/bd02dac9-0544-4b23-4ca8-f91ed23e7a00/public",
+        order: 5,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ed685c0b-cce2-4e23-713f-10f5829e9800/public",
+        order: 6,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ed685c0b-cce2-4e23-713f-10f5829e9800/public",
+        order: 7,
+      },
+    ],
+
+    name: "Greatneck Terrace Roofs",
+    projectLocation: null,
+    clientAffiliatedAgency: null,
+    yearCompleted: null,
+    costBudget: null,
+    designer: null,
+    description: null,
   })
   .set("rockville-centre-police", {
     sector: "public",
@@ -248,273 +438,93 @@ projects
       the CM and building occupants ALLCON was able to complete this project
       ahead of schedule.`,
   })
-  .set("greatneck-terrace-roofs", {
-    sector: "public",
+  .set("apartment724", {
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400/public",
-    path: "/projects/greatneck-terrace-roofs",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c71596c6-7bae-47c7-e4fa-868ba422a600/public",
+    path: "/projects/apartment724",
     media: [
       {
-        video:
-          "https://customer-sn71r1ndnen7y1an.cloudflarestream.com/1813d1be91c9949d3fc00053953b0c22/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-sn71r1ndnen7y1an.cloudflarestream.com%2F1813d1be91c9949d3fc00053953b0c22%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D2s%26height%3D600&startTime=2s&controls=false",
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3e896263-ffee-4f9f-9da7-d3c64ac66300/public",
         order: 1,
       },
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400/public",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/db29887a-b564-4cee-3367-948e7d77d200/public",
         order: 2,
       },
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/736315aa-97e9-43b3-8ab7-419739e23800/public",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/cce353f0-53a9-4466-3d97-3694b7aa4a00/public",
         order: 3,
       },
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e8098e3f-c65b-413d-368b-22b50268b300/public",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c71596c6-7bae-47c7-e4fa-868ba422a600/public",
         order: 4,
       },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/bd02dac9-0544-4b23-4ca8-f91ed23e7a00/public",
-        order: 5,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ed685c0b-cce2-4e23-713f-10f5829e9800/public",
-        order: 6,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ed685c0b-cce2-4e23-713f-10f5829e9800/public",
-        order: 7,
-      },
     ],
-
-    name: "Greatneck Terrace Roofs",
-    projectLocation: "N/A",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
-    costBudget: "N/A",
-    designer: "N/A",
-    description: "N/A",
+    name: "Apartment 724",
+    projectLocation: null,
+    clientAffiliatedAgency: null,
+    yearCompleted: null,
+    costBudget: null,
+    designer: null,
+    description: `N/A`,
   })
-  .set("dot-elwood-ny-operation-facility", {
+  .set("nold-hall", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c0ce0238-47bb-4d18-f278-79a57d207b00/public",
-    path: "/projects/dot-elwood-ny-operation-facility",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2ebdeb7e-442b-4443-6cb3-98f6746f2200/public",
+    path: "/projects/nold-hall",
     media: [
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ed4adb38-21bf-4b5b-b620-16125cf56700/public",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2ebdeb7e-442b-4443-6cb3-98f6746f2200/public",
         order: 1,
       },
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/0fd7e300-c2f9-4058-83d9-1b59e1a6d900/public",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/6d100150-69ce-4eb7-747e-03d44b382000/public",
         order: 2,
       },
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2251a5c0-46c9-46ae-6445-9d0cf6eff900/public",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/430c4a3b-0c36-447f-c81b-f18e83a40400/public",
         order: 3,
       },
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/69f7dcdc-7243-4b72-98e2-e3509db0cb00/public",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/722f8507-dcb4-4077-3073-f2444950f600/public",
         order: 4,
       },
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/79e88004-c5e4-44c6-9472-ebf5b6c5df00/public",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/1cf1069c-71b6-4130-5c4f-ab77b7a71f00/public",
         order: 5,
       },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2fa05c2a-09b1-48b6-b723-520cbaf69000/public",
-        order: 6,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/592a2268-127d-43b7-71f5-3116d504d000/public",
-        order: 7,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/aba7602f-34dc-4ffd-1cf8-51be7cce0c00/public",
-        order: 8,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/36f280e4-143c-442e-bd4c-9ecbfc2ceb00/public",
-        order: 9,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/9492136a-ba4e-47a3-a2b7-c5aac0640800/public",
-        order: 10,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/36387977-1c91-49f6-dfa8-4bc5c6b6c600/public",
-        order: 11,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/91075744-6d21-4f97-84ba-7c50e66ae000/public",
-        order: 12,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/86382856-7487-464c-f1bc-03fe5e2e6000/public",
-        order: 13,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ae21043e-097f-48a8-6acb-ea5d316b2d00/public",
-        order: 14,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3676a5d7-595c-4f95-c0a7-1426c4b67f00/public",
-        order: 15,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c0ce0238-47bb-4d18-f278-79a57d207b00/public",
-        order: 16,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/f5291a6b-1730-4597-9e13-f2a5c1ce3800/public",
-        order: 17,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3092d834-68c3-4760-17ab-2ff5d321ad00/public",
-        order: 18,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/9a557653-a5f1-491d-367b-70de65121600/public",
-        order: 19,
-      },
     ],
-
-    name: "DOT Elwood, NY Operation Facility ",
-    projectLocation: "N/A",
-    clientAffiliatedAgency: "NYS Office of General Services",
-    yearCompleted: "In Closeout",
-    costBudget: "$7,000,000",
-    designer: "Kallen & Lemelson, LLP",
-    description: `ALLCON Contracting was selected as the general contractor for the
-        construction of a new DOT Operation Facility in Elwood, NY. The project
-        included the restoration of an existing salt shed, the construction of a
-        new heavy timer shed, new vehicle service and storage building as well
-        as the new operations office. ALLCON performed more than 60% of the
-        general contracting work on this project which included interior
-        finishes, masonry, millwork, and metal panel installation. We worked
-        closely with Laland Baptiste who served as the CM on the project. Both
-        companies built on a spirit of collaboration to make sure a     building was assembled for both NYS OGS the contract manager and the NYS
-        Department of Transportation. This was the second project collaboration
-        between ALLCON and Laland Baptiste and that team spirit proved
-        invaluable at addressing unforeseen field conditions, addressing issues
-        as they arose and maintain both schedule constraints and budgetary
-        limitations.`,
-  })
-  .set("lupton-hall", {
-    sector: "public",
-    thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4aee4395-0887-4070-980f-427a13fdb400/public",
-    path: "/projects/lupton-hall",
-    media: [
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4aee4395-0887-4070-980f-427a13fdb400/public",
-        order: 1,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/fb31d82d-de7b-4b78-7696-c25a404e7400/public",
-        order: 2,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/1475bdbd-5d54-464e-e167-ed882dbafe00/public",
-        order: 3,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/d5dbe854-6c92-4437-3ea1-10309d307900/public",
-        order: 4,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e31c4ddd-e85a-4308-3c95-751fc2679200/public",
-        order: 5,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e09765a8-fcf2-4d7e-80b0-0d7736683d00/public",
-        order: 6,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5ed56c9f-3769-4491-df95-27c2d4f8b900/public",
-        order: 7,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5e9f56da-0023-42fa-7520-397aac25de00/public",
-        order: 8,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/509cc521-880b-41e0-2a05-b81da893f800/public",
-        order: 9,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3e869efd-9729-41d4-505c-22378c842300/public",
-        order: 10,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/8cfe2996-dd43-4959-922a-3b2cf0f18100/public",
-        order: 11,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/8d34b330-ea19-458e-bf90-2f6cf6bf5b00/public",
-        order: 12,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/7b6136cc-91ee-4ce6-9b8e-6e985405ae00/public",
-        order: 13,
-      },
-    ],
-    name: "SUNY Farmingdale Lupton Hall",
+    name: "SUNY Farmingdale Nold Hall Gymnasium",
     projectLocation: "2350 Broadhollow Road, Farmingdale, NY 11735",
-    clientAffiliatedAgency: "NYS OGS – Design & Construction Group",
-    yearCompleted: "In Progress",
-    costBudget: "$10,856,274.00",
-    designer: "Hoffmann Architects, Inc.",
-    description: `  ALLCON constructed this uniquely designed 90,000sf copper roof which now
-      transforms Lupton Hall into a landmark for the SUNY Farmingdale Campus.
-      ALLCON proposed and helped developed a distinctive structural design
-      during the initial removal and abatement stages of the project. The
-      structural design included a high gauge metal framing system that
-      bypasses the concrete deck and attaches to the existing framing
-      structure with blind bolts. Craftsmanship is found throughout the roof
-      from the artfully fabricated dormers to the carefully sculpted gutter
-      system designed to withstands wind speed up to 126 mph. ALLCON made sure
-      that the copper fabrication was a mix of machine fabrication for the
-      panels to control cost and hard created units for the fine intricate
-      detail work. This inspiration assignment is not just a showcase project
-      for ALLCON but a signature piece of work for Farmingdale’s dedication to
-      excellence on campus.`,
+    clientAffiliatedAgency: "State University Construction Fund",
+    yearCompleted: "2017",
+    costBudget: "$2.5M",
+    designer: "Peter Gisolfi Associates",
+    description: `AllCon was selected by the State University Construction Fund to
+      transform Nold Hall’s Gymnasium for the State University of New York
+      College of Technology at Farmingdale. The work was completed within the
+      occupied structure and was sequenced to minimize impact of the schools’
+      operations. AllCon carefully demolished the existing sports floor,
+      bleacher systems, sports equipment and press box as well as removed
+      unsuitable fill materials below the existing slab. They worked with the
+      design team to install a new recessed slab to contain a state-of-the-art
+      wood and urethane sports flooring system. The new floors accommodate the
+      variety of sports that take place in the facility from basketball,
+      volleyball and track. AllCon provided modifications to the existing
+      sprinkler system and electrical upgrade to accommodate the revised gym
+      layout and upgraded sports equipment installed. As part of the contract
+      work AllCon installed native landscaping and a decorative concrete
+      walkway and plaza that rejuvenates Nold Hall’s Main Entry.`,
   })
   .set("saint-demetrios-church", {
     sector: "public",
@@ -595,66 +605,57 @@ projects
     clientAffiliatedAgency: "South Nassau Hellenic Community Inc.",
     yearCompleted: "2020",
     costBudget: "$59,500.00",
-    designer: "N/A",
+    designer: null,
     description: `As part of a multiphase project for Saint Demetrios Greek Orthodox
       Church, AllCon was selected as the General Contractor for the first
       phase. AllCon performed the demolition and site clearing/preparation of
       existing adjacent houses and garages acquired by the church to expand
       its site and it service to the South Nassau Hellenic Community.`,
   })
-  .set("nold-hall", {
+  .set("success-academy-schools", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2ebdeb7e-442b-4443-6cb3-98f6746f2200/public",
-    path: "/projects/nold-hall",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/dbe0310f-785e-4ee6-d032-5ce2bd7c0f00/public",
+    path: "/projects/success-academy-schools",
     media: [
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2ebdeb7e-442b-4443-6cb3-98f6746f2200/public",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/dbe0310f-785e-4ee6-d032-5ce2bd7c0f00/public",
         order: 1,
       },
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/6d100150-69ce-4eb7-747e-03d44b382000/public",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/a42fe716-4b3f-4ac9-a03e-60a0ad158900/public",
         order: 2,
       },
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/430c4a3b-0c36-447f-c81b-f18e83a40400/public",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/703bf395-ab27-4383-4dc6-4f784cb2ae00/public",
         order: 3,
       },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/722f8507-dcb4-4077-3073-f2444950f600/public",
-        order: 4,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/1cf1069c-71b6-4130-5c4f-ab77b7a71f00/public",
-        order: 5,
-      },
     ],
-    name: "SUNY Farmingdale Nold Hall Gymnasium",
-    projectLocation: "2350 Broadhollow Road, Farmingdale, NY 11735",
-    clientAffiliatedAgency: "State University Construction Fund",
-    yearCompleted: "2017",
-    costBudget: "$2.5M",
-    designer: "Peter Gisolfi Associates",
-    description: `AllCon was selected by the State University Construction Fund to
-      transform Nold Hall’s Gymnasium for the State University of New York
-      College of Technology at Farmingdale. The work was completed within the
-      occupied structure and was sequenced to minimize impact of the schools’
-      operations. AllCon carefully demolished the existing sports floor,
-      bleacher systems, sports equipment and press box as well as removed
-      unsuitable fill materials below the existing slab. They worked with the
-      design team to install a new recessed slab to contain a state-of-the-art
-      wood and urethane sports flooring system. The new floors accommodate the
-      variety of sports that take place in the facility from basketball,
-      volleyball and track. AllCon provided modifications to the existing
-      sprinkler system and electrical upgrade to accommodate the revised gym
-      layout and upgraded sports equipment installed. As part of the contract
-      work AllCon installed native landscaping and a decorative concrete
-      walkway and plaza that rejuvenates Nold Hall’s Main Entry.`,
+    name: "Success Academy Schools",
+    location: null,
+    clientAffiliatedAgency: "Success Academy Charter Schools",
+    yearCompleted: "2019",
+    costBudget: "$5,000,000+",
+    designer: null,
+    description: `
+        ALLCON was selected by Success Academy Charter Schools as the General
+        Contractor to complete full renovations of interior spaces throughout
+        the school system. The projects were done at an extremely rapid pace at
+        multiple facilities and required quick mobilization of the work force
+        and constant coordination between ALLCON, the owner and design team to
+        meet the 4 week completion schedule. The collaborative approach between
+        these parties was a major component for the programs success. ALLCON
+        worked with suppliers to obtain and secure materials in advance of the
+        actual work starting. ALLCON was able to secure what are typically long
+        lead items by preplanning the construction and preparing deliveries
+        prior to the summer period when work was required to be completed. Over
+        a period of five years Allcon delivered state of the art classroom
+        spaces which included mechanical, electrical and plumbing systems
+        upgrades.
+      `,
   })
   .set("bareburger", {
     sector: "public",
@@ -755,11 +756,11 @@ projects
       },
     ],
     name: "Williston Animal Hospital",
-    projectLocation: "N/A",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
-    costBudget: "N/A",
-    designer: "N/A",
+    projectLocation: null,
+    clientAffiliatedAgency: null,
+    yearCompleted: null,
+    costBudget: null,
+    designer: null,
     description: `Complete interior renovation. Work included demolition, carpentry,
       tiles, flooring rough carpentry, painting, electrical, plumbing, and
       HVAC.`,
@@ -783,11 +784,11 @@ projects
     ],
 
     name: "255 West 108th Street",
-    projectLocation: "N/A",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
-    costBudget: "N/A",
-    designer: "N/A",
+    projectLocation: null,
+    clientAffiliatedAgency: null,
+    yearCompleted: null,
+    costBudget: null,
+    designer: null,
     description: `Work consisted of exterior renovation Local Law 11.`,
   })
   .set("20east", {
@@ -809,11 +810,11 @@ projects
     ],
 
     name: "20 East 9th Street",
-    projectLocation: "N/A",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
-    costBudget: "N/A",
-    designer: "N/A",
+    projectLocation: null,
+    clientAffiliatedAgency: null,
+    yearCompleted: null,
+    costBudget: null,
+    designer: null,
     description: `Work consisted of exterior renovation Local Law 11.`,
   })
   .set("upper-east-veterinary", {
@@ -850,11 +851,11 @@ projects
     ],
 
     name: "Upper East Side Veterinary Hospital",
-    projectLocation: "N/A",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
-    costBudget: "N/A",
-    designer: "N/A",
+    projectLocation: null,
+    clientAffiliatedAgency: null,
+    yearCompleted: null,
+    costBudget: null,
+    designer: null,
     description: `Complete interior renovation. Work included demolition, carpentry,
       tiles, flooring rough carpentry, painting, electrical, plumbing, and
       HVAC.`,
@@ -893,11 +894,11 @@ projects
     ],
 
     name: "Carle Place UFSD – Auditorium Renovations",
-    projectLocation: "N/A",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
-    costBudget: "N/A",
-    designer: "N/A",
+    projectLocation: null,
+    clientAffiliatedAgency: null,
+    yearCompleted: null,
+    costBudget: null,
+    designer: null,
     description: `Interior renovation of existing Auditorium, Work included complete
       demolition, carpentry, concrete work, new wall and ceiling paneling and
       system. Painting and complete finish work.`,
@@ -930,11 +931,11 @@ projects
       },
     ],
     name: "Carle Place UFSD – Lobby Renovations",
-    projectLocation: "N/A",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
-    costBudget: "N/A",
-    designer: "N/A",
+    projectLocation: null,
+    clientAffiliatedAgency: null,
+    yearCompleted: null,
+    costBudget: null,
+    designer: null,
     description: `N/A`,
   })
   .set("carle-place-library", {
@@ -970,11 +971,11 @@ projects
       },
     ],
     name: "Carle Place UFSD – Library Renovations",
-    projectLocation: "N/A",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
-    costBudget: "N/A",
-    designer: "N/A",
+    projectLocation: null,
+    clientAffiliatedAgency: null,
+    yearCompleted: null,
+    costBudget: null,
+    designer: null,
     description: `N/A`,
   })
   .set("newjersey-veterinary", {
@@ -1015,11 +1016,11 @@ projects
       },
     ],
     name: "New Jersey Veterinary Hospital",
-    projectLocation: "N/A",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
-    costBudget: "N/A",
-    designer: "N/A",
+    projectLocation: null,
+    clientAffiliatedAgency: null,
+    yearCompleted: null,
+    costBudget: null,
+    designer: null,
     description: `Complete interior renovation. Work included demolition, carpentry,
       tiles, flooring rough carpentry, painting, electrical, plumbing, and
       HVAC.`,
@@ -1057,11 +1058,11 @@ projects
       },
     ],
     name: "Hudson Animal Hospital",
-    projectLocation: "N/A",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
-    costBudget: "N/A",
-    designer: "N/A",
+    projectLocation: null,
+    clientAffiliatedAgency: null,
+    yearCompleted: null,
+    costBudget: null,
+    designer: null,
     description: `Complete interior renovation. Work included demolition, carpentry,
       tiles, flooring rough carpentry, painting, electrical, plumbing, and
       HVAC.`,
@@ -1095,11 +1096,11 @@ projects
     ],
 
     name: "866 Westchester Ave.",
-    projectLocation: "N/A",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
-    costBudget: "N/A",
-    designer: "N/A",
+    projectLocation: null,
+    clientAffiliatedAgency: null,
+    yearCompleted: null,
+    costBudget: null,
+    designer: null,
     description: `Complete interior renovation of commercial offices. The work included
       demolition, carpentry, new VCT floors, new carpeting, millwork,
       carpentry, painting, electric, plumbing and HVAC.`,
@@ -1168,11 +1169,11 @@ projects
     ],
 
     name: "55 Pierrpoint Street",
-    projectLocation: "N/A",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
-    costBudget: "N/A",
-    designer: "N/A",
+    projectLocation: null,
+    clientAffiliatedAgency: null,
+    yearCompleted: null,
+    costBudget: null,
+    designer: null,
     description: `Complete interior renovation of an existing nursing home containing 189
       apartments. The work included demolition, carpentry, new terrazzo
       floors, VCT flooring millwork, apartment renovations, hallway
@@ -1197,11 +1198,11 @@ projects
     ],
 
     name: "164 W79th Street",
-    projectLocation: "N/A",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
-    costBudget: "N/A",
-    designer: "N/A",
+    projectLocation: null,
+    clientAffiliatedAgency: null,
+    yearCompleted: null,
+    costBudget: null,
+    designer: null,
     description: `Work consisted of exterior renovation Local Law 11.`,
   })
   .set("17w-10th-townhouse", {
@@ -1243,11 +1244,11 @@ projects
     ],
 
     name: "17W 10th St Townhouse",
-    projectLocation: "N/A",
-    clientAffiliatedAgency: "N/A",
-    yearCompleted: "N/A",
-    costBudget: "N/A",
-    designer: "N/A",
+    projectLocation: null,
+    clientAffiliatedAgency: null,
+    yearCompleted: null,
+    costBudget: null,
+    designer: null,
     description: `The work consisted of restoration of an existing townhouse. New
       bathrooms, new kitchens, costume millwork flooring, painting, HVAC,
       electric and plumbing.`,

@@ -124,7 +124,7 @@ export default function Index() {
             alignItems="center"
             w="full"
           >
-            <Stack
+            {/* <Stack
               direction={{ base: "column", sm: "row" }}
               w="full"
               justifyContent="center"
@@ -153,7 +153,7 @@ export default function Index() {
                 <option value="public">Public Sector</option>
                 <option value="private">Private Sector</option>
               </Select>
-            </Stack>
+            </Stack> */}
             <SimpleGrid
               columns={{ base: 1, md: 1, lg: 2, xl: 2 }}
               spacing={4}
@@ -182,7 +182,7 @@ export default function Index() {
                   w="full"
                   h="full"
                 >
-                  <AspectRatio key={index} ratio={16 / 9}>
+                  <AspectRatio key={index} ratio={{ base: 4 / 3, md: 16 / 9 }}>
                     <Image
                       roundedTopLeft="md"
                       roundedTopRight="md"

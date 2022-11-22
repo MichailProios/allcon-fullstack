@@ -212,6 +212,7 @@ function NavbarHeader({
             ))}
             <IconButton
               variant={"ghost"}
+              disabled
               aria-label="Color Scheme"
               onClick={() => {
                 toggleColorMode();
@@ -226,6 +227,7 @@ function NavbarHeader({
           <IconButton
             variant={"ghost"}
             aria-label="Color Scheme"
+            disabled
             onClick={() => {
               toggleColorMode();
             }}

@@ -9,6 +9,8 @@ const { dirname } = require("path");
 
 const BUILD_DIR = path.join(__dirname, "build");
 
+const SECURITY_DIR = path.join(__dirname, "security");
+
 const app = express();
 
 app.use(compression());
@@ -51,8 +53,8 @@ app.listen(port, () => {
 });
 
 const httpsOptions = {
-  key: fs.readFileSync(`${process.cwd()}/security/key.pem`),
-  cert: fs.readFileSync(`${process.cwd()}/security/cert.pem`),
+  key: fs.readFileSync(`${SECURITY_DIR}/key.pem`),
+  cert: fs.readFileSync(`${SECURITY_DIR}/cert.pem`),
 };
 
 https.createServer(httpsOptions, app).listen(443, () => {

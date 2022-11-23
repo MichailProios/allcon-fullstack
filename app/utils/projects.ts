@@ -74,8 +74,9 @@ projects
       },
     ],
     name: "SUNY Farmingdale Lupton Hall",
-    projectLocation: "2350 Broadhollow Road, Farmingdale, NY 11735",
-    clientAffiliatedAgency: "NYS OGS – Design & Construction Group",
+    location:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.5075324586696!2d-73.43202646215182!3d40.750860643462644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e82af739f4a2db%3A0xeb51b04102116aed!2sLupton%20Hall!5e0!3m2!1sen!2sus!4v1669183475862!5m2!1sen!2sus",
+    // clientAffiliatedAgency: "NYS OGS – Design & Construction Group",
     yearCompleted: "In Progress",
     costBudget: "$10,856,274.00",
     designer: "Hoffmann Architects, Inc.",
@@ -198,7 +199,7 @@ projects
     ],
 
     name: "DOT Elwood, NY Operation Facility ",
-    projectLocation: null,
+    location: null,
     clientAffiliatedAgency: "NYS Office of General Services",
     yearCompleted: "In Closeout",
     costBudget: "$7,000,000",
@@ -227,7 +228,7 @@ projects
     media: [
       {
         video:
-          "https://customer-sn71r1ndnen7y1an.cloudflarestream.com/1813d1be91c9949d3fc00053953b0c22/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-sn71r1ndnen7y1an.cloudflarestream.com%2F1813d1be91c9949d3fc00053953b0c22%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D2s%26height%3D600&startTime=2s&controls=false",
+          "https://customer-sn71r1ndnen7y1an.cloudflarestream.com/1813d1be91c9949d3fc00053953b0c22/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-sn71r1ndnen7y1an.cloudflarestream.com%2F1813d1be91c9949d3fc00053953b0c22%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
         order: 1,
       },
       {
@@ -263,7 +264,7 @@ projects
     ],
 
     name: "Greatneck Terrace Roofs",
-    projectLocation: null,
+    location: null,
     clientAffiliatedAgency: null,
     yearCompleted: null,
     costBudget: null,
@@ -318,7 +319,8 @@ projects
       },
     ],
     name: "Rockville Centre Police Station",
-    projectLocation: "142 Maple Ave Rockville Ctr, NY 11570",
+    location:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3026.710274740523!2d-73.64101872353227!3d40.658316540899754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c27b5b05cac5dd:0x65e61c20263ba48a!2s142%20Maple%20Ave,%20Rockville%20Centre,%20NY%2011570!5e0!3m2!1sen!2sus!4v1669183978772!5m2!1sen!2sus",
     clientAffiliatedAgency: "Incorporated Village of Rockville Centre",
     yearCompleted: "2022",
     costBudget: "$2,344,107.00",
@@ -419,7 +421,8 @@ projects
     ],
 
     name: "Brighton Houses Inc.", // – Alterations Associated to Superstorm SANDY
-    projectLocation: "500 Brightwater Court, Brooklyn, NY 11235",
+    location:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3030.4709497381195!2d-73.96471462353541!3d40.5753589459688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c244405e66eb9f:0x1353c628363dc2ab!2s500%20Brightwater%20Ct,%20Brooklyn,%20NY%2011235!5e0!3m2!1sen!2sus!4v1669183949967!5m2!1sen!2sus",
     clientAffiliatedAgency: "NYC Housing Preservation & Development",
     yearCompleted: "2019",
     costBudget: "$15M",
@@ -465,12 +468,12 @@ projects
       },
     ],
     name: "Apartment 724",
-    projectLocation: null,
+    location: null,
     clientAffiliatedAgency: null,
     yearCompleted: null,
     costBudget: null,
     designer: null,
-    description: `N/A`,
+    description: null,
   })
   .set("nold-hall", {
     sector: "public",
@@ -505,7 +508,8 @@ projects
       },
     ],
     name: "SUNY Farmingdale Nold Hall Gymnasium",
-    projectLocation: "2350 Broadhollow Road, Farmingdale, NY 11735",
+    location:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.5223105359014!2d-73.43219812352879!3d40.75053553525474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e82af0c896fe23:0x80fd83aee2558b2c!2sNold%20Athletic%20Complex!5e0!3m2!1sen!2sus!4v1669183918754!5m2!1sen!2sus",
     clientAffiliatedAgency: "State University Construction Fund",
     yearCompleted: "2017",
     costBudget: "$2.5M",
@@ -600,8 +604,8 @@ projects
     ],
 
     name: "Saint Demetrios Greek Orthodox Church",
-    projectLocation:
-      "2 Annette Ave, 12 Annette Ave, 127 Hewlett Ave Merrick, NY 11566",
+    location:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3026.6657127229264!2d-73.55127528620477!3d40.65929870597982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c27eb1e6ab0b2b:0xbdb6be6f3ab5dfe5!2sSaint%20Demetrios%20Greek%20Orthodox%20Church!5e0!3m2!1sen!2sus!4v1669183876097!5m2!1sen!2sus",
     clientAffiliatedAgency: "South Nassau Hellenic Community Inc.",
     yearCompleted: "2020",
     costBudget: "$59,500.00",
@@ -690,7 +694,8 @@ projects
       },
     ],
     name: "Bareburger 1681 East 87th Street",
-    projectLocation: "1681 East 87th Street",
+    location:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3021.2859124934575!2d-73.95156192065431!3d40.77772810000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258ba8c9be281:0x127b383ea2c8e1ce!2sBareburger!5e0!3m2!1sen!2sus!4v1669185832569!5m2!1sen!2sus",
     clientAffiliatedAgency: "Petrus Tzanidakis",
     yearCompleted: "2014",
     costBudget: "$300,000+",
@@ -756,7 +761,7 @@ projects
       },
     ],
     name: "Williston Animal Hospital",
-    projectLocation: null,
+    location: null,
     clientAffiliatedAgency: null,
     yearCompleted: null,
     costBudget: null,
@@ -784,7 +789,7 @@ projects
     ],
 
     name: "255 West 108th Street",
-    projectLocation: null,
+    location: null,
     clientAffiliatedAgency: null,
     yearCompleted: null,
     costBudget: null,
@@ -810,7 +815,7 @@ projects
     ],
 
     name: "20 East 9th Street",
-    projectLocation: null,
+    location: null,
     clientAffiliatedAgency: null,
     yearCompleted: null,
     costBudget: null,
@@ -851,7 +856,7 @@ projects
     ],
 
     name: "Upper East Side Veterinary Hospital",
-    projectLocation: null,
+    location: null,
     clientAffiliatedAgency: null,
     yearCompleted: null,
     costBudget: null,
@@ -894,7 +899,7 @@ projects
     ],
 
     name: "Carle Place UFSD – Auditorium Renovations",
-    projectLocation: null,
+    location: null,
     clientAffiliatedAgency: null,
     yearCompleted: null,
     costBudget: null,
@@ -931,12 +936,12 @@ projects
       },
     ],
     name: "Carle Place UFSD – Lobby Renovations",
-    projectLocation: null,
+    location: null,
     clientAffiliatedAgency: null,
     yearCompleted: null,
     costBudget: null,
     designer: null,
-    description: `N/A`,
+    description: null,
   })
   .set("carle-place-library", {
     sector: "public",
@@ -971,12 +976,12 @@ projects
       },
     ],
     name: "Carle Place UFSD – Library Renovations",
-    projectLocation: null,
+    location: null,
     clientAffiliatedAgency: null,
     yearCompleted: null,
     costBudget: null,
     designer: null,
-    description: `N/A`,
+    description: null,
   })
   .set("newjersey-veterinary", {
     sector: "public",
@@ -1016,7 +1021,7 @@ projects
       },
     ],
     name: "New Jersey Veterinary Hospital",
-    projectLocation: null,
+    location: null,
     clientAffiliatedAgency: null,
     yearCompleted: null,
     costBudget: null,
@@ -1058,7 +1063,7 @@ projects
       },
     ],
     name: "Hudson Animal Hospital",
-    projectLocation: null,
+    location: null,
     clientAffiliatedAgency: null,
     yearCompleted: null,
     costBudget: null,
@@ -1096,7 +1101,7 @@ projects
     ],
 
     name: "866 Westchester Ave.",
-    projectLocation: null,
+    location: null,
     clientAffiliatedAgency: null,
     yearCompleted: null,
     costBudget: null,
@@ -1169,7 +1174,7 @@ projects
     ],
 
     name: "55 Pierrpoint Street",
-    projectLocation: null,
+    location: null,
     clientAffiliatedAgency: null,
     yearCompleted: null,
     costBudget: null,
@@ -1198,7 +1203,7 @@ projects
     ],
 
     name: "164 W79th Street",
-    projectLocation: null,
+    location: null,
     clientAffiliatedAgency: null,
     yearCompleted: null,
     costBudget: null,
@@ -1244,7 +1249,7 @@ projects
     ],
 
     name: "17W 10th St Townhouse",
-    projectLocation: null,
+    location: null,
     clientAffiliatedAgency: null,
     yearCompleted: null,
     costBudget: null,

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, LegacyRef, useEffect, useRef, useState } from "react";
 import {
   Text,
   Button,
@@ -27,18 +27,47 @@ import {
   IconButton,
   Tooltip,
   AspectRatio,
+  Checkbox,
+  FormControl,
+  FormLabel,
+  Switch,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+  Highlight,
 } from "@chakra-ui/react";
+
+import autoAnimate from "@formkit/auto-animate";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 import { LoaderFunction, MetaFunction, redirect, json } from "@remix-run/node";
 
 // import {  } from "@remix-run/node";
-import { useLoaderData, Link, useSubmit, Form } from "@remix-run/react";
+import {
+  useLoaderData,
+  Link,
+  useSubmit,
+  Form,
+  useMatches,
+  useTransition,
+} from "@remix-run/react";
 import { useWindowDimensions } from "~/utils/hooks";
 
 // import * as auth from "app/utils/auth.server";
 // import { useTransition } from "@remix-run/react";
 import Slider from "react-slick";
-import { Search2Icon } from "@chakra-ui/icons";
+import {
+  ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  QuestionIcon,
+  Search2Icon,
+} from "@chakra-ui/icons";
 import projects from "~/utils/projects";
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
@@ -50,9 +79,21 @@ export const meta: MetaFunction = ({ params }: any) => ({
 
 export const loader: LoaderFunction = async ({ request, params }: any) => {
   try {
-    return json({
-      projects: Array.from(projects.values()),
-    });
+    const url = new URL(request.url);
+    const search = url.searchParams.get("search");
+
+    if (search) {
+      return json({
+        search: search,
+        projects: Array.from(projects.values()).filter((value) =>
+          value.name.toLowerCase().includes(search)
+        ),
+      });
+    } else {
+      return json({
+        projects: Array.from(projects.values()),
+      });
+    }
   } catch (error) {
     throw error;
   }
@@ -62,6 +103,8 @@ export async function action({ request }: { request: Request }) {
   const data = await request.formData();
   const searchParams = data.get("search");
   const sectorParams = data.get("sector");
+
+  // const [parent, enableAnimations] = useAutoAnimate();
 
   let searchUrl = null;
 
@@ -83,7 +126,7 @@ export async function action({ request }: { request: Request }) {
 
   try {
     if (searchParams || sectorParams) {
-      return redirect(`/projects/${url}`);
+      return redirect(`/projects${url}`);
     } else {
       return redirect("/projects");
     }
@@ -124,7 +167,7 @@ export default function Index() {
             alignItems="center"
             w="full"
           >
-            {/* <Stack
+            <Stack
               direction={{ base: "column", sm: "row" }}
               w="full"
               justifyContent="center"
@@ -141,10 +184,11 @@ export default function Index() {
                   colorScheme="primary"
                   placeholder="Search for projects"
                   w="full"
+                  bgColor="gray.50"
                 />
               </InputGroup>
 
-              <Select
+              {/* <Select
                 colorScheme="primary"
                 placeholder="All Sectors"
                 w={{ base: "full", sm: "220px" }}
@@ -152,8 +196,107 @@ export default function Index() {
               >
                 <option value="public">Public Sector</option>
                 <option value="private">Private Sector</option>
-              </Select>
-            </Stack> */}
+              </Select> */}
+
+              {/* <Menu closeOnSelect={false} autoSelect={false}>
+                <MenuButton
+                  as={Button}
+                  bgColor="gray.50"
+                  rightIcon={<ChevronDownIcon />}
+                >
+                  Filter
+                </MenuButton>
+                <MenuList>
+                  <MenuItem _hover={{ bgColor: "transparent" }}>
+                    <Flex direction="column">
+                      <Checkbox
+                        isChecked={allChecked}
+                        isIndeterminate={isIndeterminate}
+                        onChange={(e) =>
+                          setCheckedItems([e.target.checked, e.target.checked])
+                        }
+                      >
+                        All Sectors
+                      </Checkbox>
+                      <Stack pl={6} mt={1} spacing={1}>
+                        <Checkbox
+                          isChecked={checkedItems[0]}
+                          onChange={(e) =>
+                            setCheckedItems([e.target.checked, checkedItems[1]])
+                          }
+                        >
+                          Private Sector
+                        </Checkbox>
+                        <Checkbox
+                          isChecked={checkedItems[1]}
+                          onChange={(e) =>
+                            setCheckedItems([checkedItems[0], e.target.checked])
+                          }
+                        >
+                          Public Sector
+                        </Checkbox>
+                      </Stack>
+                    </Flex>
+                  </MenuItem>
+                  <MenuDivider />
+                  <MenuItem _hover={{ bgColor: "transparent" }}>
+                    <Flex direction="column">
+                      <Checkbox
+                        isChecked={allChecked1}
+                        isIndeterminate={isIndeterminate1}
+                        onChange={(e) =>
+                          setCheckedItems1([
+                            e.target.checked,
+                            e.target.checked,
+                            e.target.checked,
+                          ])
+                        }
+                      >
+                        All Categories
+                      </Checkbox>
+                      <Stack pl={6} mt={1} spacing={1}>
+                        <Checkbox
+                          isChecked={checkedItems1[0]}
+                          onChange={(e) =>
+                            setCheckedItems1([
+                              e.target.checked,
+                              checkedItems1[1],
+                              checkedItems1[2],
+                            ])
+                          }
+                        >
+                          Exterior
+                        </Checkbox>
+                        <Checkbox
+                          isChecked={checkedItems1[1]}
+                          onChange={(e) =>
+                            setCheckedItems1([
+                              checkedItems1[0],
+                              e.target.checked,
+                              checkedItems1[2],
+                            ])
+                          }
+                        >
+                          Interior
+                        </Checkbox>
+                        <Checkbox
+                          isChecked={checkedItems1[2]}
+                          onChange={(e) =>
+                            setCheckedItems1([
+                              checkedItems1[0],
+                              checkedItems1[1],
+                              e.target.checked,
+                            ])
+                          }
+                        >
+                          Apartments
+                        </Checkbox>
+                      </Stack>
+                    </Flex>
+                  </MenuItem>
+                </MenuList>
+              </Menu> */}
+            </Stack>
             <SimpleGrid
               columns={{ base: 1, md: 1, lg: 2, xl: 2 }}
               spacing={4}
@@ -201,7 +344,17 @@ export default function Index() {
                   </AspectRatio>
                   <CardFooter justifyContent="center" p={2}>
                     <Text textAlign="center" fontSize="xl">
-                      {value.name}
+                      <Highlight
+                        query={data.search || ""}
+                        styles={{
+                          px: "4px",
+                          py: "4px",
+                          bg: "primary.100",
+                          borderRadius: "0.375rem",
+                        }}
+                      >
+                        {value.name as string}
+                      </Highlight>
                     </Text>
                   </CardFooter>
 
@@ -233,12 +386,56 @@ export default function Index() {
             </SimpleGrid>
           </VStack>
           {data.projects.length <= 0 && (
-            <Text textAlign="center" fontSize="lg">
-              No Results
-            </Text>
+            <Box textAlign="center" py={10} px={6}>
+              <QuestionIcon boxSize={"50px"} color="primary.500" />
+              <Heading as="h2" size="lg" mt={6} mb={2}>
+                No Results
+              </Heading>
+              <Text color={"gray.500"}>
+                The search terms you provided did not match any of our records.
+                Please try again using different keywords.
+              </Text>
+            </Box>
           )}
         </VStack>
       </Container>
+
+      {/* <Container maxW={"1600px"} px={2} py={4}>
+        <Flex w="full" alignItems="center" justifyContent="center">
+          <IconButton
+            aria-label="previous"
+            mx={1}
+            px={4}
+            py={2}
+            rounded="md"
+            icon={<ChevronLeftIcon />}
+          />
+          <Button
+            mx={1}
+            px={4}
+            py={2}
+            rounded="md"
+            isActive
+            colorScheme="primary"
+          >
+            1
+          </Button>
+          <Button mx={1} px={4} py={2} rounded="md">
+            2
+          </Button>
+          <Button mx={1} px={4} py={2} rounded="md">
+            3
+          </Button>
+          <IconButton
+            aria-label="next"
+            mx={1}
+            px={4}
+            py={2}
+            rounded="md"
+            icon={<ChevronRightIcon />}
+          />
+        </Flex>
+      </Container> */}
     </SlideFade>
   );
 }

@@ -51,7 +51,7 @@ import { useWindowDimensions } from "~/utils/hooks";
 
 // import { GrNext, GrPrevious } from "react-icons/gr";
 
-import { ChevronRightIcon, ChevronLeftIcon } from "@chakra-ui/icons";
+import { ChevronRightIcon, ChevronLeftIcon, InfoIcon } from "@chakra-ui/icons";
 
 import Slider from "react-slick";
 
@@ -62,7 +62,7 @@ import {
   AiOutlineCalendar,
   AiOutlineFileText,
 } from "react-icons/ai";
-import { BiBuildings } from "react-icons/bi";
+import { BiBuildings, BiMap } from "react-icons/bi";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - ${projects.get(params.name.toLowerCase()).name}`,
@@ -91,7 +91,7 @@ export default function Index() {
 
   return (
     <SlideFade in={true} reverse delay={0.1}>
-      <Container maxW={"1500px"} px={{ base: 6, md: 10 }} py={14}>
+      <Container maxW={"1400px"} px={{ base: 6, md: 10 }} py={14}>
         <VStack spacing="26px" w="full">
           <Heading textAlign="center">{data.project.name}</Heading>
         </VStack>
@@ -126,9 +126,12 @@ export default function Index() {
           <Box mt={"26px"}>
             <Slider
               arrows={false}
+              dots={false}
               infinite={true}
               speed={300}
               lazyLoad="progressive"
+              slidesToShow={1}
+              slidesToScroll={1}
               ref={(slider) => setSlider(slider)}
             >
               {Object.values(data.project.media)
@@ -140,7 +143,6 @@ export default function Index() {
                         <Image
                           src={value.image}
                           alt={`Project Image ${index}`}
-                          // objectFit="scale-down"
                           rounded="md"
                           fallback={<Skeleton h="full" w="full" />}
                         />
@@ -159,7 +161,7 @@ export default function Index() {
                             width: "100%",
                             borderRadius: "0.375rem",
                             color: "#f3f3f3",
-                            pointerEvents: "none",
+                            // pointerEvents: "none",
                           }}
                         />
                       </AspectRatio>
@@ -171,20 +173,52 @@ export default function Index() {
             </Slider>
           </Box>
         </Box>
-      </Container>
-      {data.project.clientAffiliatedAgency ||
-      data.project.yearCompleted ||
-      data.project.costBudget ||
-      data.project.designer ||
-      data.project.description ? (
-        <>
-          <Divider />
-          <Container maxW={"1500px"} px={{ base: 6, md: 10 }} py={14}>
-            <VStack spacing="18px">
+      </Container>{" "}
+      <Divider />
+      <Container maxW={"1400px"} px={{ base: 6, md: 10 }} py={14}>
+        <VStack spacing="18px">
+          {data.project.clientAffiliatedAgency ||
+          data.project.location ||
+          data.project.yearCompleted ||
+          data.project.costBudget ||
+          data.project.designer ||
+          data.project.description ? (
+            <>
+              {" "}
               <Heading textAlign="center">Project Information</Heading>
               <Card rounded="md" boxShadow="xl" w={"full"}>
                 <CardBody>
                   <Stack divider={<StackDivider />} spacing="4">
+                    {data.project.location && (
+                      <Box>
+                        <Tag size="lg" borderRadius="full">
+                          <Icon h={6} w={6} as={BiMap} ml={-1} mr={2} />
+                          <TagLabel fontSize="lg">Location</TagLabel>
+                        </Tag>
+                        <AspectRatio
+                          ratio={{ base: 1, md: 16 / 9 }}
+                          maxW="100%"
+                          mb={4}
+                          ml={1}
+                          mt={4}
+                        >
+                          <iframe
+                            title={`Project ${data.project.title} location`}
+                            src={data.project.location}
+                            style={{
+                              border: "none",
+                              height: "100%",
+                              width: "100%",
+                              borderRadius: "0.375rem",
+                              color: "#f3f3f3",
+                            }}
+                            allowFullScreen={false}
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                          />
+                        </AspectRatio>
+                      </Box>
+                    )}
                     {data.project.clientAffiliatedAgency && (
                       <Box>
                         <Tag size="lg" borderRadius="full">
@@ -264,7 +298,12 @@ export default function Index() {
                           />
                           <TagLabel fontSize="lg">Description</TagLabel>
                         </Tag>
-                        <Text pl="1" pt="2" fontSize="xl" textAlign="justify">
+                        <Text
+                          pl="1"
+                          pt="2"
+                          fontSize="xl"
+                          textAlign={{ base: "start", sm: "justify" }}
+                        >
                           <span
                             dangerouslySetInnerHTML={{
                               __html: data.project.description,
@@ -276,10 +315,26 @@ export default function Index() {
                   </Stack>
                 </CardBody>
               </Card>
-            </VStack>
-          </Container>
-        </>
-      ) : null}
+            </>
+          ) : (
+            <Card rounded="md" boxShadow="xl" w={"full"}>
+              <CardBody>
+                <Box textAlign="center" py={10} px={6}>
+                  <InfoIcon boxSize={"50px"} color={"blue.500"} />
+                  <Heading as="h2" size="lg" mt={6} mb={2}>
+                    This project has no additional information
+                  </Heading>
+                  <Text color={"gray.500"}>
+                    Our team is devoted to providing accurate data for each
+                    project. Please allow us some time as we update "
+                    {data.project.name}"
+                  </Text>
+                </Box>
+              </CardBody>
+            </Card>
+          )}
+        </VStack>
+      </Container>
     </SlideFade>
   );
 }

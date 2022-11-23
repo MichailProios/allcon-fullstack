@@ -54,7 +54,7 @@ export default function About() {
         <VStack spacing="26px">
           <Heading textAlign="center">About Us</Heading>
           <VStack>
-            <Text fontSize="xl" textAlign="justify">
+            <Text fontSize="xl" textAlign={{ base: "start", sm: "justify" }}>
               Allcon Contracting is built on a reputation of delivering high
               quality projects serving a variety of private and public clients
               throughout New York State.
@@ -158,7 +158,11 @@ export default function About() {
                     {value.subtitle}
                   </Text>
 
-                  <Text py="2" fontSize="xl" textAlign="justify">
+                  <Text
+                    py="2"
+                    fontSize="xl"
+                    textAlign={{ base: "start", sm: "justify" }}
+                  >
                     <span
                       dangerouslySetInnerHTML={{ __html: value.description }}
                     />

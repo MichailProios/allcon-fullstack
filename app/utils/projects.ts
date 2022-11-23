@@ -77,7 +77,7 @@ projects
     location:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.5075324586696!2d-73.43202646215182!3d40.750860643462644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e82af739f4a2db%3A0xeb51b04102116aed!2sLupton%20Hall!5e0!3m2!1sen!2sus!4v1669183475862!5m2!1sen!2sus",
     // clientAffiliatedAgency: "NYS OGS – Design & Construction Group",
-    yearCompleted: "In Progress",
+    status: { text: "The project is currently in progress", completed: false },
     costBudget: "$10,856,274.00",
     designer: "Hoffmann Architects, Inc.",
     description: `  ALLCON constructed this uniquely designed 90,000sf copper roof which now
@@ -201,7 +201,7 @@ projects
     name: "DOT Elwood, NY Operation Facility ",
     location: null,
     clientAffiliatedAgency: "NYS Office of General Services",
-    yearCompleted: "In Closeout",
+    status: { text: "The project is in the closeout stage", completed: false },
     costBudget: "$7,000,000",
     designer: "Kallen & Lemelson, LLP",
     description: `ALLCON Contracting was selected as the general contractor for the
@@ -266,7 +266,7 @@ projects
     name: "Greatneck Terrace Roofs",
     location: null,
     clientAffiliatedAgency: null,
-    yearCompleted: null,
+    status: null,
     costBudget: null,
     designer: null,
     description: null,
@@ -322,7 +322,7 @@ projects
     location:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3026.710274740523!2d-73.64101872353227!3d40.658316540899754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c27b5b05cac5dd:0x65e61c20263ba48a!2s142%20Maple%20Ave,%20Rockville%20Centre,%20NY%2011570!5e0!3m2!1sen!2sus!4v1669183978772!5m2!1sen!2sus",
     clientAffiliatedAgency: "Incorporated Village of Rockville Centre",
-    yearCompleted: "2022",
+    status: { text: "The project was finished in 2022", completed: true },
     costBudget: "$2,344,107.00",
     designer: "H2M Architects",
     description: `
@@ -424,7 +424,7 @@ projects
     location:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3030.4709497381195!2d-73.96471462353541!3d40.5753589459688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c244405e66eb9f:0x1353c628363dc2ab!2s500%20Brightwater%20Ct,%20Brooklyn,%20NY%2011235!5e0!3m2!1sen!2sus!4v1669183949967!5m2!1sen!2sus",
     clientAffiliatedAgency: "NYC Housing Preservation & Development",
-    yearCompleted: "2019",
+    status: { text: "The project was finished in 2019", completed: true },
     costBudget: "$15M",
     designer: "Purcell Architects P.C.",
     description: `Located along the boardwalk of Brighton Beach Brooklyn and just 300 feet
@@ -470,7 +470,7 @@ projects
     name: "Apartment 724",
     location: null,
     clientAffiliatedAgency: null,
-    yearCompleted: null,
+    status: null,
     costBudget: null,
     designer: null,
     description: null,
@@ -511,7 +511,8 @@ projects
     location:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.5223105359014!2d-73.43219812352879!3d40.75053553525474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e82af0c896fe23:0x80fd83aee2558b2c!2sNold%20Athletic%20Complex!5e0!3m2!1sen!2sus!4v1669183918754!5m2!1sen!2sus",
     clientAffiliatedAgency: "State University Construction Fund",
-    yearCompleted: "2017",
+    status: { text: "The project was finished in 2017", completed: true },
+
     costBudget: "$2.5M",
     designer: "Peter Gisolfi Associates",
     description: `AllCon was selected by the State University Construction Fund to
@@ -607,7 +608,8 @@ projects
     location:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3026.6657127229264!2d-73.55127528620477!3d40.65929870597982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c27eb1e6ab0b2b:0xbdb6be6f3ab5dfe5!2sSaint%20Demetrios%20Greek%20Orthodox%20Church!5e0!3m2!1sen!2sus!4v1669183876097!5m2!1sen!2sus",
     clientAffiliatedAgency: "South Nassau Hellenic Community Inc.",
-    yearCompleted: "2020",
+    status: { text: "The project was finished in 2020", completed: true },
+
     costBudget: "$59,500.00",
     designer: null,
     description: `As part of a multiphase project for Saint Demetrios Greek Orthodox
@@ -641,7 +643,7 @@ projects
     name: "Success Academy Schools",
     location: null,
     clientAffiliatedAgency: "Success Academy Charter Schools",
-    yearCompleted: "2019",
+    status: { text: "The project was finished in 2019", completed: true },
     costBudget: "$5,000,000+",
     designer: null,
     description: `
@@ -697,7 +699,8 @@ projects
     location:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3021.2859124934575!2d-73.95156192065431!3d40.77772810000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258ba8c9be281:0x127b383ea2c8e1ce!2sBareburger!5e0!3m2!1sen!2sus!4v1669185832569!5m2!1sen!2sus",
     clientAffiliatedAgency: "Petrus Tzanidakis",
-    yearCompleted: "2014",
+    status: { text: "The project was finished in 2014", completed: true },
+
     costBudget: "$300,000+",
     designer: "Theta Design",
     description: `ALLCON was selected as the General Contractor to complete this full
@@ -763,7 +766,7 @@ projects
     name: "Williston Animal Hospital",
     location: null,
     clientAffiliatedAgency: null,
-    yearCompleted: null,
+    status: null,
     costBudget: null,
     designer: null,
     description: `Complete interior renovation. Work included demolition, carpentry,
@@ -791,7 +794,7 @@ projects
     name: "255 West 108th Street",
     location: null,
     clientAffiliatedAgency: null,
-    yearCompleted: null,
+    status: null,
     costBudget: null,
     designer: null,
     description: `Work consisted of exterior renovation Local Law 11.`,
@@ -817,7 +820,7 @@ projects
     name: "20 East 9th Street",
     location: null,
     clientAffiliatedAgency: null,
-    yearCompleted: null,
+    status: null,
     costBudget: null,
     designer: null,
     description: `Work consisted of exterior renovation Local Law 11.`,
@@ -858,7 +861,7 @@ projects
     name: "Upper East Side Veterinary Hospital",
     location: null,
     clientAffiliatedAgency: null,
-    yearCompleted: null,
+    status: null,
     costBudget: null,
     designer: null,
     description: `Complete interior renovation. Work included demolition, carpentry,
@@ -901,7 +904,7 @@ projects
     name: "Carle Place UFSD – Auditorium Renovations",
     location: null,
     clientAffiliatedAgency: null,
-    yearCompleted: null,
+    status: null,
     costBudget: null,
     designer: null,
     description: `Interior renovation of existing Auditorium, Work included complete
@@ -938,7 +941,7 @@ projects
     name: "Carle Place UFSD – Lobby Renovations",
     location: null,
     clientAffiliatedAgency: null,
-    yearCompleted: null,
+    status: null,
     costBudget: null,
     designer: null,
     description: null,
@@ -978,7 +981,7 @@ projects
     name: "Carle Place UFSD – Library Renovations",
     location: null,
     clientAffiliatedAgency: null,
-    yearCompleted: null,
+    status: null,
     costBudget: null,
     designer: null,
     description: null,
@@ -1023,7 +1026,7 @@ projects
     name: "New Jersey Veterinary Hospital",
     location: null,
     clientAffiliatedAgency: null,
-    yearCompleted: null,
+    status: null,
     costBudget: null,
     designer: null,
     description: `Complete interior renovation. Work included demolition, carpentry,
@@ -1065,7 +1068,7 @@ projects
     name: "Hudson Animal Hospital",
     location: null,
     clientAffiliatedAgency: null,
-    yearCompleted: null,
+    status: null,
     costBudget: null,
     designer: null,
     description: `Complete interior renovation. Work included demolition, carpentry,
@@ -1103,7 +1106,7 @@ projects
     name: "866 Westchester Ave.",
     location: null,
     clientAffiliatedAgency: null,
-    yearCompleted: null,
+    status: null,
     costBudget: null,
     designer: null,
     description: `Complete interior renovation of commercial offices. The work included
@@ -1176,7 +1179,7 @@ projects
     name: "55 Pierrpoint Street",
     location: null,
     clientAffiliatedAgency: null,
-    yearCompleted: null,
+    status: null,
     costBudget: null,
     designer: null,
     description: `Complete interior renovation of an existing nursing home containing 189
@@ -1205,7 +1208,7 @@ projects
     name: "164 W79th Street",
     location: null,
     clientAffiliatedAgency: null,
-    yearCompleted: null,
+    status: null,
     costBudget: null,
     designer: null,
     description: `Work consisted of exterior renovation Local Law 11.`,
@@ -1251,7 +1254,7 @@ projects
     name: "17W 10th St Townhouse",
     location: null,
     clientAffiliatedAgency: null,
-    yearCompleted: null,
+    status: null,
     costBudget: null,
     designer: null,
     description: `The work consisted of restoration of an existing townhouse. New

@@ -40,6 +40,7 @@ import {
   Tag,
   TagLabel,
   TagLeftIcon,
+  Badge,
 } from "@chakra-ui/react";
 
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
@@ -179,7 +180,7 @@ export default function Index() {
         <VStack spacing="18px">
           {data.project.clientAffiliatedAgency ||
           data.project.location ||
-          data.project.yearCompleted ||
+          data.project.status ||
           data.project.costBudget ||
           data.project.designer ||
           data.project.description ? (
@@ -233,21 +234,26 @@ export default function Index() {
                       </Box>
                     )}
 
-                    {data.project.yearCompleted && (
+                    {data.project.status && (
                       <Box>
-                        <Tag size="lg" borderRadius="full">
-                          <Icon
-                            h={6}
-                            w={6}
-                            as={AiOutlineCalendar}
-                            ml={-1}
-                            mr={2}
-                          />
-                          <TagLabel fontSize="lg">Year Completed</TagLabel>
-                        </Tag>
-                        <Text pl="1" pt="2" fontSize="xl">
-                          {data.project.yearCompleted}
-                        </Text>
+                        <HStack alignItems="center">
+                          <Tag size="lg" borderRadius="full">
+                            <Icon
+                              h={6}
+                              w={6}
+                              as={AiOutlineCalendar}
+                              ml={-1}
+                              mr={2}
+                            />
+                            <TagLabel fontSize="lg">Status</TagLabel>
+                          </Tag>
+                          {data.project.status.completed ? (
+                            <Badge colorScheme="green">completed</Badge>
+                          ) : (
+                            <Badge colorScheme="yellow">not completed</Badge>
+                          )}
+                        </HStack>
+                        <Text fontSize="xl">{data.project.status.text}</Text>
                       </Box>
                     )}
 
@@ -320,7 +326,7 @@ export default function Index() {
             <Card rounded="md" boxShadow="xl" w={"full"}>
               <CardBody>
                 <Box textAlign="center" py={10} px={6}>
-                  <InfoIcon boxSize={"50px"} color={"blue.500"} />
+                  <InfoIcon boxSize={"50px"} color={"primary.500"} />
                   <Heading as="h2" size="lg" mt={6} mb={2}>
                     This project has no additional information
                   </Heading>

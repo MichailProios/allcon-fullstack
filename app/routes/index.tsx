@@ -28,6 +28,15 @@ import Slider from "react-slick";
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  EffectFade,
+  Autoplay,
+  EffectCreative,
+  Pagination,
+  Navigation,
+} from "swiper";
+
 export const loader: LoaderFunction = async ({ request }: any) => {
   try {
     // await auth.protectedRoute(request);
@@ -64,7 +73,7 @@ export default function Index() {
   return (
     <SlideFade in={true} reverse delay={0.1}>
       <Box>
-        <Slider
+        {/* <Slider
           fade={true}
           infinite={true}
           autoplay={true}
@@ -76,37 +85,52 @@ export default function Index() {
           pauseOnHover={false}
           lazyLoad={"progressive"}
           adaptiveHeight
+        > */}
+        <Swiper
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          modules={[Autoplay, EffectFade]}
+          effect={"fade"}
+          allowTouchMove={false}
+          style={{
+            height: height ? `calc(${height}px - 64px)` : `calc(100vh - 64px)`,
+          }}
         >
           {images.map((img: any, index: any) => (
-            <AspectRatio
-              key={index}
-              ratio={16 / 9}
-              height={
-                height ? `calc(${height}px - 4.01em)` : `calc(100vh - 4.01em)`
-              }
-              overflow="hidden"
-              display="block"
-              lineHeight={0}
-            >
-              <Image
-                src={img}
-                alt={`Landing Page Image ${index}`}
-                w="full"
-                h="full"
-                fallback={<Skeleton h="full" w="full" />}
+            <SwiperSlide key={index}>
+              <AspectRatio
+                ratio={16 / 9}
+                height={
+                  height ? `calc(${height}px - 64px)` : `calc(100vh - 64px)`
+                }
                 overflow="hidden"
                 display="block"
                 lineHeight={0}
-              />
-            </AspectRatio>
+              >
+                <Image
+                  src={img}
+                  alt={`Landing Page Image ${index}`}
+                  w="full"
+                  h="full"
+                  fallback={<Skeleton h="full" w="full" />}
+                  overflow="hidden"
+                  display="block"
+                  lineHeight={0}
+                />
+              </AspectRatio>
+            </SwiperSlide>
           ))}
-        </Slider>
+        </Swiper>
+        {/* </Slider> */}
         <VStack
           position="absolute"
           top="50%"
           left="50%"
           transform="translate(-50%, -50%)"
           w="full"
+          zIndex={600}
         >
           <SlideFade in={true} reverse delay={0.6}>
             <Text

@@ -40,12 +40,19 @@ import {
   MenuOptionGroup,
   MenuDivider,
   Highlight,
+  Badge,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
 } from "@chakra-ui/react";
 
-import autoAnimate from "@formkit/auto-animate";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { redirect, json } from "@remix-run/node";
 
-import { LoaderFunction, MetaFunction, redirect, json } from "@remix-run/node";
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
+
+import * as cookie from "app/utils/cookie.server";
 
 // import {  } from "@remix-run/node";
 import {
@@ -79,20 +86,47 @@ export const meta: MetaFunction = ({ params }: any) => ({
 
 export const loader: LoaderFunction = async ({ request, params }: any) => {
   try {
-    const url = new URL(request.url);
-    const search = url.searchParams.get("search");
+    // const url = new URL(request.url);
+    // const search = url.searchParams.get("search");
 
-    if (search) {
+    // if (search) {
+    //   return json({
+    // search: search,
+    // projects: Array.from(projects.values()).filter((value) =>
+    //   value.name.toLowerCase().includes(search)
+    // ),
+    //   });
+    // } else {
+    // return json({
+    //   projects: Array.from(projects.values()),
+    // });
+    // }
+
+    const session = await cookie.getSession(request.headers.get("Cookie"));
+    const filter = session.get("filter") || null;
+
+    if (filter?.search) {
       return json({
-        search: search,
-        projects: Array.from(projects.values()).filter((value) =>
-          value.name.toLowerCase().includes(search)
+        filter: filter?.search,
+        projects: Array.from(projects.values()).filter(
+          (value) =>
+            value.name.toLowerCase().includes(filter?.search.toLowerCase()) ||
+            value.client?.tag
+              .toLowerCase()
+              .includes(filter?.search.toLowerCase())
         ),
       });
     } else {
-      return json({
-        projects: Array.from(projects.values()),
-      });
+      return json(
+        {
+          projects: Array.from(projects.values()),
+        },
+        {
+          headers: {
+            "Set-Cookie": await cookie.destroySession(session),
+          },
+        }
+      );
     }
   } catch (error) {
     throw error;
@@ -101,35 +135,48 @@ export const loader: LoaderFunction = async ({ request, params }: any) => {
 
 export async function action({ request }: { request: Request }) {
   const data = await request.formData();
-  const searchParams = data.get("search");
-  const sectorParams = data.get("sector");
+  const search = data.get("search");
+
+  console.log(search);
+  // const sectorParams = data.get("sector");
 
   // const [parent, enableAnimations] = useAutoAnimate();
 
-  let searchUrl = null;
+  // if (searchParams) {
+  //   searchUrl = `?search=${searchParams}`;
+  // }
 
-  if (searchParams) {
-    searchUrl = `?search=${searchParams}`;
-  }
+  // let sectorUrl = null;
 
-  let sectorUrl = null;
+  // if (sectorParams) {
+  //   sectorUrl = `?sector=${sectorParams}`;
+  // }
 
-  if (sectorParams) {
-    sectorUrl = `?sector=${sectorParams}`;
-  }
+  // if (sectorParams && searchParams) {
+  //   sectorUrl = `&sector=${sectorParams}`;
+  // }
 
-  if (sectorParams && searchParams) {
-    sectorUrl = `&sector=${sectorParams}`;
-  }
+  // const url = `${searchUrl || ""}${sectorUrl || ""}`;
 
-  const url = `${searchUrl || ""}${sectorUrl || ""}`;
+  // try {
+  //   if (searchParams || sectorParams) {
+  //     return redirect(`/projects${url}`);
+  //   } else {
+  //     return redirect("/projects");
 
+  //   }
   try {
-    if (searchParams || sectorParams) {
-      return redirect(`/projects${url}`);
-    } else {
-      return redirect("/projects");
-    }
+    const session = await cookie.getSession(request.headers.get("Cookie"));
+    session.flash("filter", { search });
+
+    return json(
+      { status: "Filtering Projects" },
+      {
+        headers: {
+          "Set-Cookie": await cookie.commitSession(session),
+        },
+      }
+    );
   } catch (error) {
     return "error";
   }
@@ -141,12 +188,8 @@ export default function Index() {
   const data = useLoaderData();
 
   function handleChange(event: any) {
-    submit(event.currentTarget, { replace: true });
+    submit(event.currentTarget);
   }
-
-  useEffect(() => {
-    submit(null, { method: "post", action: "/projects" });
-  }, []);
 
   return (
     <SlideFade in={true} reverse delay={0.1}>
@@ -156,17 +199,82 @@ export default function Index() {
         py={14}
         as={Form}
         method="post"
-        action="/projects"
         onChange={handleChange}
       >
         <VStack spacing="26px">
           <Heading textAlign="center">Projects</Heading>
+
           <VStack
             spacing="16px"
             justifyContent="center"
             alignItems="center"
             w="full"
           >
+            {/* <Tabs
+              variant="unstyled"
+              colorScheme="gray"
+              orientation="horizontal"
+              w="full"
+              justifyContent="center"
+            >
+              <TabList
+                gap={2}
+                justifyContent="center"
+                flexDirection={{ base: "column", sm: "row" }}
+              >
+                <Tab
+                  w={{ base: "100%", sm: "8em" }}
+                  fontWeight="semibold"
+                  _selected={{ bg: "primary.200" }}
+                  rounded="md"
+                  as={Button}
+                  variant="solid"
+                >
+                  All Projects
+                </Tab>
+                <Tab
+                  w={{ base: "100%", sm: "8em" }}
+                  fontWeight="semibold"
+                  _selected={{ bg: "primary.200" }}
+                  rounded="md"
+                  as={Button}
+                  variant="solid"
+                >
+                  SUNY
+                </Tab>
+                <Tab
+                  w={{ base: "100%", sm: "8em" }}
+                  fontWeight="semibold"
+                  _selected={{ bg: "primary.200" }}
+                  rounded="md"
+                  as={Button}
+                  variant="solid"
+                >
+                  OGS
+                </Tab>
+                <Tab
+                  w={{ base: "100%", sm: "8em" }}
+                  fontWeight="semibold"
+                  _selected={{ bg: "primary.200" }}
+                  rounded="md"
+                  as={Button}
+                  variant="solid"
+                >
+                  SCA
+                </Tab>
+                <Tab
+                  w={{ base: "100%", sm: "8em" }}
+                  fontWeight="semibold"
+                  _selected={{ bg: "primary.200" }}
+                  rounded="md"
+                  as={Button}
+                  variant="solid"
+                >
+                  Interior
+                </Tab>
+              </TabList>
+            </Tabs> */}
+
             <Stack
               direction={{ base: "column", sm: "row" }}
               w="full"
@@ -184,6 +292,7 @@ export default function Index() {
                   colorScheme="primary"
                   placeholder="Search for projects"
                   w="full"
+                  defaultValue={data.search}
                   bgColor="gray.50"
                 />
               </InputGroup>
@@ -345,7 +454,7 @@ export default function Index() {
                   <CardFooter justifyContent="center" p={2}>
                     <Text textAlign="center" fontSize="xl">
                       <Highlight
-                        query={data.search || ""}
+                        query={data.filter || ""}
                         styles={{
                           px: "4px",
                           py: "4px",
@@ -357,6 +466,33 @@ export default function Index() {
                       </Highlight>
                     </Text>
                   </CardFooter>
+
+                  <Box position="absolute" top="8px" right="8px">
+                    <VStack alignItems="flex-end" spacing={2}>
+                      {value.status?.completed === true && (
+                        <Tooltip label={value.status?.text} closeOnScroll>
+                          <Badge colorScheme="green">Completed</Badge>
+                        </Tooltip>
+                      )}
+
+                      {value.status?.completed === false && (
+                        <Tooltip label={value.status?.text} closeOnScroll>
+                          <Badge colorScheme="yellow">in progress</Badge>
+                        </Tooltip>
+                      )}
+                      {value?.categories &&
+                        value.categories.map((value: any, index: any) => (
+                          <Tooltip key={index} label={value.text} closeOnScroll>
+                            <Badge colorScheme="teal">{value.tag}</Badge>
+                          </Tooltip>
+                        ))}
+                      {value.client?.tag && (
+                        <Tooltip label={value.client?.text} closeOnScroll>
+                          <Badge colorScheme="blue">{value.client.tag}</Badge>
+                        </Tooltip>
+                      )}
+                    </VStack>
+                  </Box>
 
                   <Box display={{ base: "none", lg: "flex" }}>
                     <SlideFade

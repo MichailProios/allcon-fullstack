@@ -4,7 +4,7 @@ projects
   .set("lupton-hall", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4aee4395-0887-4070-980f-427a13fdb400/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4aee4395-0887-4070-980f-427a13fdb400/thumbnail",
     path: "/projects/lupton-hall",
     media: [
       {
@@ -75,30 +75,34 @@ projects
     ],
     name: "SUNY Farmingdale Lupton Hall",
     location:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.5075324586696!2d-73.43202646215182!3d40.750860643462644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e82af739f4a2db%3A0xeb51b04102116aed!2sLupton%20Hall!5e0!3m2!1sen!2sus!4v1669183475862!5m2!1sen!2sus",
-    // clientAffiliatedAgency: "NYS OGS – Design & Construction Group",
-    status: { text: "The project is currently in progress", completed: false },
-    costBudget: "$10,856,274.00",
+      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3656.175962884135!2d-73.43184257672124!3d40.75006397777022!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0xeb51b04102116aed!2sLupton%20Hall!5e1!3m2!1sen!2sus!4v1669330021063!5m2!1sen!2sus",
+    client: {
+      text: "State University Construction Fund",
+      tag: "SUNY",
+    },
+    status: { text: "The project was finished in 2022", completed: true },
+    // categories: [{ text: "Interior", tag: "misc" }],
+    cost: "$10,856,274.00",
     designer: "Hoffmann Architects, Inc.",
-    description: `  ALLCON constructed this uniquely designed 90,000sf copper roof which now
+    description: `  Allcon constructed this uniquely designed 90,000sf copper roof which now
       transforms Lupton Hall into a landmark for the SUNY Farmingdale Campus.
-      ALLCON proposed and helped developed a distinctive structural design
+      Allcon proposed and helped developed a distinctive structural design
       during the initial removal and abatement stages of the project. The
       structural design included a high gauge metal framing system that
       bypasses the concrete deck and attaches to the existing framing
       structure with blind bolts. Craftsmanship is found throughout the roof
       from the artfully fabricated dormers to the carefully sculpted gutter
-      system designed to withstands wind speed up to 126 mph. ALLCON made sure
+      system designed to withstands wind speed up to 126 mph. Allcon made sure
       that the copper fabrication was a mix of machine fabrication for the
       panels to control cost and hard created units for the fine intricate
       detail work. This inspiration assignment is not just a showcase project
-      for ALLCON but a signature piece of work for Farmingdale’s dedication to
+      for Allcon but a signature piece of work for Farmingdale’s dedication to
       excellence on campus.`,
   })
   .set("dot-elwood-ny-operation-facility", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c0ce0238-47bb-4d18-f278-79a57d207b00/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c0ce0238-47bb-4d18-f278-79a57d207b00/thumbnail",
     path: "/projects/dot-elwood-ny-operation-facility",
     media: [
       {
@@ -200,21 +204,26 @@ projects
 
     name: "DOT Elwood, NY Operation Facility ",
     location: null,
-    clientAffiliatedAgency: "NYS Office of General Services",
+    client: {
+      text: "NYS Office of General Services",
+      tag: "OGS",
+    },
+
     status: { text: "The project is in the closeout stage", completed: false },
-    costBudget: "$7,000,000",
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: "$7,000,000",
     designer: "Kallen & Lemelson, LLP",
-    description: `ALLCON Contracting was selected as the general contractor for the
+    description: `Allcon Contracting was selected as the general contractor for the
         construction of a new DOT Operation Facility in Elwood, NY. The project
         included the restoration of an existing salt shed, the construction of a
         new heavy timer shed, new vehicle service and storage building as well
-        as the new operations office. ALLCON performed more than 60% of the
+        as the new operations office. Allcon performed more than 60% of the
         general contracting work on this project which included interior
         finishes, masonry, millwork, and metal panel installation. We worked
         closely with Laland Baptiste who served as the CM on the project. Both
         companies built on a spirit of collaboration to make sure a     building was assembled for both NYS OGS the contract manager and the NYS
         Department of Transportation. This was the second project collaboration
-        between ALLCON and Laland Baptiste and that team spirit proved
+        between Allcon and Laland Baptiste and that team spirit proved
         invaluable at addressing unforeseen field conditions, addressing issues
         as they arose and maintain both schedule constraints and budgetary
         limitations.`,
@@ -223,12 +232,12 @@ projects
   .set("greatneck-terrace-roofs", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400/thumbnail",
     path: "/projects/greatneck-terrace-roofs",
     media: [
       {
         video:
-          "https://customer-sn71r1ndnen7y1an.cloudflarestream.com/1813d1be91c9949d3fc00053953b0c22/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-sn71r1ndnen7y1an.cloudflarestream.com%2F1813d1be91c9949d3fc00053953b0c22%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
+          "https://customer-sn71r1ndnen7y1an.cloudflarestream.com/1813d1be91c9949d3fc00053953b0c22/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-sn71r1ndnen7y1an.cloudflarestream.com%2F1813d1be91c9949d3fc00053953b0c22%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D3s%26height%3D600&startTime=3s",
         order: 1,
       },
       {
@@ -265,16 +274,17 @@ projects
 
     name: "Greatneck Terrace Roofs",
     location: null,
-    clientAffiliatedAgency: null,
+    client: null,
     status: null,
-    costBudget: null,
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: null,
     designer: null,
     description: null,
   })
   .set("rockville-centre-police", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/96f08191-f50b-4359-f535-6c84ab162000/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/96f08191-f50b-4359-f535-6c84ab162000/thumbnail",
     path: "/projects/rockville-centre-police",
     media: [
       {
@@ -320,10 +330,11 @@ projects
     ],
     name: "Rockville Centre Police Station",
     location:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3026.710274740523!2d-73.64101872353227!3d40.658316540899754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c27b5b05cac5dd:0x65e61c20263ba48a!2s142%20Maple%20Ave,%20Rockville%20Centre,%20NY%2011570!5e0!3m2!1sen!2sus!4v1669183978772!5m2!1sen!2sus",
-    clientAffiliatedAgency: "Incorporated Village of Rockville Centre",
+      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3661.2161386469497!2d-73.638444!3d40.658313!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c27b5b05cac5dd:0x65e61c20263ba48a!2s142%20Maple%20Ave,%20Rockville%20Centre,%20NY%2011570!5e1!3m2!1sen!2sus!4v1669330079249!5m2!1sen!2sus",
+    client: { text: "Incorporated Village of Rockville Centre", tag: "" },
     status: { text: "The project was finished in 2022", completed: true },
-    costBudget: "$2,344,107.00",
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: "$2,344,107.00",
     designer: "H2M Architects",
     description: `
         ALLCON’s was selected to construct a new state of the art Police
@@ -334,7 +345,7 @@ projects
         The construction included new CMU walls, stud framed walls, and ACT
         ceilings. The team also built new secure holding cells and sally ports.
         Our flooring experts installed a combination of carpet, LVT, and ceramic
-        tiles throughout. The ALLCON team manufactured and installed custom
+        tiles throughout. The Allcon team manufactured and installed custom
         millwork counters throughout the facility. New wood doors, wood-clad
         windows, and roll-up gates were installed to rejuvenate the building’s
         exterior and provide the necessary security. Lastly, exterior new
@@ -345,7 +356,7 @@ projects
   .set("500bridgewater", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/f80ae0ad-57a4-43aa-af52-16e1e4998d00/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/f80ae0ad-57a4-43aa-af52-16e1e4998d00/thumbnail",
     path: "/projects/500bridgewater",
     media: [
       {
@@ -422,28 +433,31 @@ projects
 
     name: "Brighton Houses Inc.", // – Alterations Associated to Superstorm SANDY
     location:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3030.4709497381195!2d-73.96471462353541!3d40.5753589459688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c244405e66eb9f:0x1353c628363dc2ab!2s500%20Brightwater%20Ct,%20Brooklyn,%20NY%2011235!5e0!3m2!1sen!2sus!4v1669183949967!5m2!1sen!2sus",
-    clientAffiliatedAgency: "NYC Housing Preservation & Development",
+      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3665.7652061803356!2d-73.96214!3d40.575355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c244405e66eb9f:0x1353c628363dc2ab!2s500%20Brightwater%20Ct,%20Brooklyn,%20NY%2011235!5e1!3m2!1sen!2sus!4v1669330118025!5m2!1sen!2sus",
+
+    client: { text: "NYC Housing Preservation & Development", tag: "" },
+
     status: { text: "The project was finished in 2019", completed: true },
-    costBudget: "$15M",
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: "$15M",
     designer: "Purcell Architects P.C.",
     description: `Located along the boardwalk of Brighton Beach Brooklyn and just 300 feet
       from the Ocean waters, this project was required as a result of sever
-      damages incurred during Superstorm Sandy. AllCon constructed two 3,000
+      damages incurred during Superstorm Sandy. Allcon constructed two 3,000
       sf infrastructure building additions on top of the existing parking
       structure/ promenade to house the facilities new boilers, hot water
       heaters, electrical services, and new generator system. This 18 story,
       192-unit apartment building for the elderly was fully occupied during
-      construction and required extensive coordination between ALLCON and the
+      construction and required extensive coordination between Allcon and the
       construction manager. Complete window and balcony door replacement was
       required as well as over 15,000 sf of built-up roofing and 35,000 sf of
       unit pavers throughout the building. Through close collaboration with
-      the CM and building occupants ALLCON was able to complete this project
+      the CM and building occupants Allcon was able to complete this project
       ahead of schedule.`,
   })
   .set("apartment724", {
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c71596c6-7bae-47c7-e4fa-868ba422a600/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c71596c6-7bae-47c7-e4fa-868ba422a600/thumbnail",
     path: "/projects/apartment724",
     media: [
       {
@@ -469,16 +483,17 @@ projects
     ],
     name: "Apartment 724",
     location: null,
-    clientAffiliatedAgency: null,
+    client: null,
     status: null,
-    costBudget: null,
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: null,
     designer: null,
     description: null,
   })
   .set("nold-hall", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2ebdeb7e-442b-4443-6cb3-98f6746f2200/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2ebdeb7e-442b-4443-6cb3-98f6746f2200/thumbnail",
     path: "/projects/nold-hall",
     media: [
       {
@@ -509,32 +524,36 @@ projects
     ],
     name: "SUNY Farmingdale Nold Hall Gymnasium",
     location:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.5223105359014!2d-73.43219812352879!3d40.75053553525474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e82af0c896fe23:0x80fd83aee2558b2c!2sNold%20Athletic%20Complex!5e0!3m2!1sen!2sus!4v1669183918754!5m2!1sen!2sus",
-    clientAffiliatedAgency: "State University Construction Fund",
+      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3656.2423819162545!2d-73.431517!3d40.748856!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x80fd83aee2558b2c!2sNold%20Athletic%20Complex!5e1!3m2!1sen!2sus!4v1669330154160!5m2!1sen!2sus",
+    client: {
+      text: "State University Construction Fund",
+      tag: "SUNY",
+    },
     status: { text: "The project was finished in 2017", completed: true },
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
 
-    costBudget: "$2.5M",
+    cost: "$2.5M",
     designer: "Peter Gisolfi Associates",
-    description: `AllCon was selected by the State University Construction Fund to
+    description: `Allcon was selected by the State University Construction Fund to
       transform Nold Hall’s Gymnasium for the State University of New York
       College of Technology at Farmingdale. The work was completed within the
       occupied structure and was sequenced to minimize impact of the schools’
-      operations. AllCon carefully demolished the existing sports floor,
+      operations. Allcon carefully demolished the existing sports floor,
       bleacher systems, sports equipment and press box as well as removed
       unsuitable fill materials below the existing slab. They worked with the
       design team to install a new recessed slab to contain a state-of-the-art
       wood and urethane sports flooring system. The new floors accommodate the
       variety of sports that take place in the facility from basketball,
-      volleyball and track. AllCon provided modifications to the existing
+      volleyball and track. Allcon provided modifications to the existing
       sprinkler system and electrical upgrade to accommodate the revised gym
       layout and upgraded sports equipment installed. As part of the contract
-      work AllCon installed native landscaping and a decorative concrete
+      work Allcon installed native landscaping and a decorative concrete
       walkway and plaza that rejuvenates Nold Hall’s Main Entry.`,
   })
   .set("saint-demetrios-church", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/47bb7306-c89f-40e1-459d-54ab29978900/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/47bb7306-c89f-40e1-459d-54ab29978900/thumbnail",
     path: "/projects/saint-demetrios-church",
     media: [
       {
@@ -607,21 +626,22 @@ projects
     name: "Saint Demetrios Greek Orthodox Church",
     location:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3026.6657127229264!2d-73.55127528620477!3d40.65929870597982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c27eb1e6ab0b2b:0xbdb6be6f3ab5dfe5!2sSaint%20Demetrios%20Greek%20Orthodox%20Church!5e0!3m2!1sen!2sus!4v1669183876097!5m2!1sen!2sus",
-    clientAffiliatedAgency: "South Nassau Hellenic Community Inc.",
+    client: { text: "South Nassau Hellenic Community Inc.", tag: "" },
     status: { text: "The project was finished in 2020", completed: true },
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
 
-    costBudget: "$59,500.00",
+    cost: "$59,500.00",
     designer: null,
     description: `As part of a multiphase project for Saint Demetrios Greek Orthodox
-      Church, AllCon was selected as the General Contractor for the first
-      phase. AllCon performed the demolition and site clearing/preparation of
+      Church, Allcon was selected as the General Contractor for the first
+      phase. Allcon performed the demolition and site clearing/preparation of
       existing adjacent houses and garages acquired by the church to expand
       its site and it service to the South Nassau Hellenic Community.`,
   })
   .set("success-academy-schools", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/dbe0310f-785e-4ee6-d032-5ce2bd7c0f00/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/dbe0310f-785e-4ee6-d032-5ce2bd7c0f00/thumbnail",
     path: "/projects/success-academy-schools",
     media: [
       {
@@ -642,20 +662,22 @@ projects
     ],
     name: "Success Academy Schools",
     location: null,
-    clientAffiliatedAgency: "Success Academy Charter Schools",
+    client: { text: "Success Academy Charter Schools", tag: "" },
+
     status: { text: "The project was finished in 2019", completed: true },
-    costBudget: "$5,000,000+",
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: "$5,000,000+",
     designer: null,
     description: `
-        ALLCON was selected by Success Academy Charter Schools as the General
+        Allcon was selected by Success Academy Charter Schools as the General
         Contractor to complete full renovations of interior spaces throughout
         the school system. The projects were done at an extremely rapid pace at
         multiple facilities and required quick mobilization of the work force
-        and constant coordination between ALLCON, the owner and design team to
+        and constant coordination between Allcon, the owner and design team to
         meet the 4 week completion schedule. The collaborative approach between
-        these parties was a major component for the programs success. ALLCON
+        these parties was a major component for the programs success. Allcon
         worked with suppliers to obtain and secure materials in advance of the
-        actual work starting. ALLCON was able to secure what are typically long
+        actual work starting. Allcon was able to secure what are typically long
         lead items by preplanning the construction and preparing deliveries
         prior to the summer period when work was required to be completed. Over
         a period of five years Allcon delivered state of the art classroom
@@ -666,7 +688,7 @@ projects
   .set("bareburger", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/59c97422-f001-446d-de7c-714fedb76900/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/59c97422-f001-446d-de7c-714fedb76900/thumbnail",
     path: "/projects/bareburger",
     media: [
       {
@@ -696,35 +718,38 @@ projects
       },
     ],
     name: "Bareburger 1681 East 87th Street",
-    location:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3021.2859124934575!2d-73.95156192065431!3d40.77772810000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258ba8c9be281:0x127b383ea2c8e1ce!2sBareburger!5e0!3m2!1sen!2sus!4v1669185832569!5m2!1sen!2sus",
-    clientAffiliatedAgency: "Petrus Tzanidakis",
-    status: { text: "The project was finished in 2014", completed: true },
 
-    costBudget: "$300,000+",
+    location:
+      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3654.6544491296677!2d-73.948987!3d40.777728!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x127b383ea2c8e1ce!2sBareburger!5e1!3m2!1sen!2sus!4v1669329957624!5m2!1sen!2sus",
+
+    client: { text: "Petrus Tzanidakis", tag: "" },
+    status: { text: "The project was finished in 2014", completed: true },
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+
+    cost: "$300,000+",
     designer: "Theta Design",
-    description: `ALLCON was selected as the General Contractor to complete this full
+    description: `Allcon was selected as the General Contractor to complete this full
       renovation/interior fit-out for this Bareburger Establishment. Since the
       project was being conducted along a busy NYC street, pedestrian
       protection was planned and installed to a secure work site and assure
-      efficient access to complete the work on a tight time schedule. ALLCON
+      efficient access to complete the work on a tight time schedule. Allcon
       modified the existing structure by removing a n existing stair and
       installing new wood joist and subfloor. A decorative tin ceiling was
-      installed by ALLCON craftsmen and reclaimed wood planks were fitted
+      installed by Allcon craftsmen and reclaimed wood planks were fitted
       throughout the restaurant. Fire rated materials were installed in-order
       to establish the required fire rating between the first-floor restaurant
       and residential apartments above. Masonry openings were modified to
       provide the required access to both the restaurant and apartments above.
-      ALLCON provided all the required MEP systems, filtration and Fire
+      Allcon provided all the required MEP systems, filtration and Fire
       Protection required for the fit-out and installed all furniture and
       equipment through close coordination with the owner. This project was
       the first of two Bareburger restaurant projects successfully completed
-      by ALLCON.`,
+      by Allcon.`,
   })
   .set("wilson-animal", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3e772772-db0b-4740-97cb-dc3f41edb100/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3e772772-db0b-4740-97cb-dc3f41edb100/thumbnail",
     path: "/projects/wilson-animal",
     media: [
       {
@@ -765,9 +790,10 @@ projects
     ],
     name: "Williston Animal Hospital",
     location: null,
-    clientAffiliatedAgency: null,
+    client: null,
     status: null,
-    costBudget: null,
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: null,
     designer: null,
     description: `Complete interior renovation. Work included demolition, carpentry,
       tiles, flooring rough carpentry, painting, electrical, plumbing, and
@@ -776,7 +802,7 @@ projects
   .set("255west", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/9b7c339d-3bef-4f1f-d292-5f092f1de400/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/9b7c339d-3bef-4f1f-d292-5f092f1de400/thumbnail",
     path: "/projects/255west",
     media: [
       {
@@ -793,16 +819,17 @@ projects
 
     name: "255 West 108th Street",
     location: null,
-    clientAffiliatedAgency: null,
+    client: null,
     status: null,
-    costBudget: null,
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: null,
     designer: null,
     description: `Work consisted of exterior renovation Local Law 11.`,
   })
   .set("20east", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/446b6dfa-5500-4f02-27a5-2db7189c7000/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/446b6dfa-5500-4f02-27a5-2db7189c7000/thumbnail",
     path: "/projects/20east",
     media: [
       {
@@ -819,16 +846,17 @@ projects
 
     name: "20 East 9th Street",
     location: null,
-    clientAffiliatedAgency: null,
+    client: null,
     status: null,
-    costBudget: null,
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: null,
     designer: null,
     description: `Work consisted of exterior renovation Local Law 11.`,
   })
   .set("upper-east-veterinary", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/79b0595e-d481-454b-998e-a7025813e400/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/79b0595e-d481-454b-998e-a7025813e400/thumbnail",
     path: "/projects/upper-east-veterinary",
     media: [
       {
@@ -860,9 +888,10 @@ projects
 
     name: "Upper East Side Veterinary Hospital",
     location: null,
-    clientAffiliatedAgency: null,
+    client: null,
     status: null,
-    costBudget: null,
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: null,
     designer: null,
     description: `Complete interior renovation. Work included demolition, carpentry,
       tiles, flooring rough carpentry, painting, electrical, plumbing, and
@@ -871,7 +900,7 @@ projects
   .set("carle-place-auditorium", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/8a5deedd-df6b-4a1f-2151-27555ae26300/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/8a5deedd-df6b-4a1f-2151-27555ae26300/thumbnail",
     path: "/projects/carle-place-auditorium",
     media: [
       {
@@ -903,9 +932,10 @@ projects
 
     name: "Carle Place UFSD – Auditorium Renovations",
     location: null,
-    clientAffiliatedAgency: null,
+    client: null,
     status: null,
-    costBudget: null,
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: null,
     designer: null,
     description: `Interior renovation of existing Auditorium, Work included complete
       demolition, carpentry, concrete work, new wall and ceiling paneling and
@@ -914,7 +944,7 @@ projects
   .set("carle-place-lobby", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/7d0357a0-47d7-4bea-895f-ba2e2765e600/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/7d0357a0-47d7-4bea-895f-ba2e2765e600/thumbnail",
     path: "/projects/carle-place-lobby",
     media: [
       {
@@ -940,16 +970,17 @@ projects
     ],
     name: "Carle Place UFSD – Lobby Renovations",
     location: null,
-    clientAffiliatedAgency: null,
+    client: null,
     status: null,
-    costBudget: null,
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: null,
     designer: null,
     description: null,
   })
   .set("carle-place-library", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/7add89a7-4a1c-494d-bc52-9a5cc0fda500/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/7add89a7-4a1c-494d-bc52-9a5cc0fda500/thumbnail",
     path: "/projects/carle-place-library",
     media: [
       {
@@ -980,16 +1011,17 @@ projects
     ],
     name: "Carle Place UFSD – Library Renovations",
     location: null,
-    clientAffiliatedAgency: null,
+    client: null,
     status: null,
-    costBudget: null,
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: null,
     designer: null,
     description: null,
   })
   .set("newjersey-veterinary", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/34825b87-75d4-4762-6c4e-e00821b3e100/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/34825b87-75d4-4762-6c4e-e00821b3e100/thumbnail",
     path: "/projects/newjersey-veterinary",
     media: [
       {
@@ -1025,9 +1057,10 @@ projects
     ],
     name: "New Jersey Veterinary Hospital",
     location: null,
-    clientAffiliatedAgency: null,
+    client: null,
     status: null,
-    costBudget: null,
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: null,
     designer: null,
     description: `Complete interior renovation. Work included demolition, carpentry,
       tiles, flooring rough carpentry, painting, electrical, plumbing, and
@@ -1036,7 +1069,7 @@ projects
   .set("hudson-animal-hospital", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/1b7601bc-7b65-4ffd-ee76-65ef91619200/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/1b7601bc-7b65-4ffd-ee76-65ef91619200/thumbnail",
     path: "/projects/hudson-animal-hospital",
     media: [
       {
@@ -1067,9 +1100,10 @@ projects
     ],
     name: "Hudson Animal Hospital",
     location: null,
-    clientAffiliatedAgency: null,
+    client: null,
     status: null,
-    costBudget: null,
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: null,
     designer: null,
     description: `Complete interior renovation. Work included demolition, carpentry,
       tiles, flooring rough carpentry, painting, electrical, plumbing, and
@@ -1078,7 +1112,7 @@ projects
   .set("866westchester", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ab42a9c2-764d-4612-57e0-52ab11909100/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ab42a9c2-764d-4612-57e0-52ab11909100/thumbnail",
     path: "/projects/866westchester",
     media: [
       {
@@ -1105,9 +1139,10 @@ projects
 
     name: "866 Westchester Ave.",
     location: null,
-    clientAffiliatedAgency: null,
+    client: null,
     status: null,
-    costBudget: null,
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: null,
     designer: null,
     description: `Complete interior renovation of commercial offices. The work included
       demolition, carpentry, new VCT floors, new carpeting, millwork,
@@ -1116,7 +1151,7 @@ projects
   .set("55pierrpoint", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5ac5f9d0-6987-4c7a-bac9-1fe67e194500/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5ac5f9d0-6987-4c7a-bac9-1fe67e194500/thumbnail",
     path: "/projects/55pierrpoint",
     media: [
       {
@@ -1178,9 +1213,10 @@ projects
 
     name: "55 Pierrpoint Street",
     location: null,
-    clientAffiliatedAgency: null,
+    client: null,
     status: null,
-    costBudget: null,
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: null,
     designer: null,
     description: `Complete interior renovation of an existing nursing home containing 189
       apartments. The work included demolition, carpentry, new terrazzo
@@ -1190,7 +1226,7 @@ projects
   .set("164w-79th", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3f30eafb-d4dc-45c5-d722-b89f7d236600/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3f30eafb-d4dc-45c5-d722-b89f7d236600/thumbnail",
     path: "/projects/164w-79th",
     media: [
       {
@@ -1207,16 +1243,17 @@ projects
 
     name: "164 W79th Street",
     location: null,
-    clientAffiliatedAgency: null,
+    client: null,
     status: null,
-    costBudget: null,
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: null,
     designer: null,
     description: `Work consisted of exterior renovation Local Law 11.`,
   })
   .set("17w-10th-townhouse", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/364d4c94-46cf-4c97-f844-01fbe3679200/public",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/364d4c94-46cf-4c97-f844-01fbe3679200/thumbnail",
     path: "/projects/17w-10th-townhouse",
     media: [
       {
@@ -1253,9 +1290,10 @@ projects
 
     name: "17W 10th St Townhouse",
     location: null,
-    clientAffiliatedAgency: null,
+    client: null,
     status: null,
-    costBudget: null,
+    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    cost: null,
     designer: null,
     description: `The work consisted of restoration of an existing townhouse. New
       bathrooms, new kitchens, costume millwork flooring, painting, HVAC,

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useCallback, useRef, useState } from "react";
 import {
   Text,
   Button,
@@ -43,6 +43,9 @@ import {
   Badge,
 } from "@chakra-ui/react";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Keyboard, Pagination, Navigation } from "swiper";
+
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 
 import { json } from "@remix-run/node";
@@ -60,8 +63,10 @@ import { projects } from "~/utils/projects";
 
 import {
   AiOutlineDollarCircle,
-  AiOutlineCalendar,
   AiOutlineFileText,
+  AiOutlineCheckCircle,
+  AiOutlineTag,
+  AiOutlineTags,
 } from "react-icons/ai";
 import { BiBuildings, BiMap } from "react-icons/bi";
 
@@ -86,8 +91,19 @@ export const loader: LoaderFunction = async ({ request, params }: any) => {
   }
 };
 
-export default function Index() {
-  const [slider, setSlider] = useState<Slider | null>(null);
+export default function Project() {
+  const sliderRef = useRef<any>(null);
+
+  const handlePrev = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slidePrev();
+  }, []);
+
+  const handleNext = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slideNext();
+  }, []);
+
   const data = useLoaderData();
 
   return (
@@ -107,7 +123,7 @@ export default function Index() {
             top="50%"
             transform={"translate(0%, -50%)"}
             zIndex={2}
-            onClick={() => slider?.slickPrev()}
+            onClick={handlePrev}
             icon={<ChevronLeftIcon w={6} h={6} />}
           />
 
@@ -120,72 +136,82 @@ export default function Index() {
             top="50%"
             transform={"translate(0%, -50%)"}
             zIndex={2}
-            onClick={() => slider?.slickNext()}
+            onClick={handleNext}
             icon={<ChevronRightIcon w={6} h={6} />}
           />
 
-          <Box mt={"26px"}>
-            <Slider
-              arrows={false}
-              dots={false}
-              infinite={true}
-              speed={300}
-              lazyLoad="progressive"
-              slidesToShow={1}
-              slidesToScroll={1}
-              ref={(slider) => setSlider(slider)}
+          <Box mt={"26px"} boxShadow="xl" w={"full"}>
+            <Swiper
+              pagination={{
+                clickable: true,
+                dynamicBullets: true,
+              }}
+              keyboard={{
+                enabled: true,
+              }}
+              loop={true}
+              modules={[Keyboard, Pagination, Navigation]}
+              effect={"slide"}
+              ref={sliderRef}
+              style={{ borderRadius: "0.375rem" }}
             >
               {Object.values(data.project.media)
                 .sort((a: any, b: any) => a.order - b.order)
                 .map((value: any, index: any) => {
                   if (value.image) {
                     return (
-                      <AspectRatio key={index} ratio={{ base: 1, md: 16 / 9 }}>
-                        <Image
-                          src={value.image}
-                          alt={`Project Image ${index}`}
-                          rounded="md"
-                          fallback={<Skeleton h="full" w="full" />}
-                        />
-                      </AspectRatio>
+                      <SwiperSlide key={index}>
+                        <AspectRatio ratio={{ base: 1, md: 16 / 9 }}>
+                          <Image
+                            src={value.image}
+                            alt={`Project Image ${index}`}
+                            // rounded="md"
+                            fallback={<Skeleton h="full" w="full" />}
+                          />
+                        </AspectRatio>
+                      </SwiperSlide>
                     );
                   } else if (value.video) {
                     return (
-                      <AspectRatio key={index} ratio={{ base: 1, md: 16 / 9 }}>
-                        <iframe
-                          title={`Project Video ${index}`}
-                          src={value.video}
-                          allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                          style={{
-                            border: "none",
-                            height: "100%",
-                            width: "100%",
-                            borderRadius: "0.375rem",
-                            color: "#f3f3f3",
-                            // pointerEvents: "none",
-                          }}
-                        />
-                      </AspectRatio>
+                      <SwiperSlide key={index}>
+                        <AspectRatio
+                          key={index}
+                          ratio={{ base: 1, md: 16 / 9 }}
+                        >
+                          <iframe
+                            title={`Project Video ${index}`}
+                            src={value.video}
+                            allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                            style={{
+                              border: "none",
+                              height: "100%",
+                              width: "100%",
+                              // borderRadius: "0.375rem",
+                              color: "#f3f3f3",
+                            }}
+                          />
+                        </AspectRatio>
+                      </SwiperSlide>
                     );
                   } else {
                     return null;
                   }
                 })}
-            </Slider>
+            </Swiper>
           </Box>
         </Box>
-      </Container>{" "}
+      </Container>
       <Divider />
       <Container maxW={"1400px"} px={{ base: 6, md: 10 }} py={14}>
         <VStack spacing="18px">
-          {data.project.clientAffiliatedAgency ||
+          {data.project.client ||
+          data.project.categories ||
           data.project.location ||
           data.project.status ||
-          data.project.costBudget ||
+          data.project.cost ||
           data.project.designer ||
           data.project.description ? (
             <>
-              {" "}
               <Heading textAlign="center">Project Information</Heading>
               <Card rounded="md" boxShadow="xl" w={"full"}>
                 <CardBody>
@@ -220,16 +246,22 @@ export default function Index() {
                         </AspectRatio>
                       </Box>
                     )}
-                    {data.project.clientAffiliatedAgency && (
+                    {data.project.client && (
                       <Box>
-                        <Tag size="lg" borderRadius="full">
-                          <Icon h={6} w={6} as={BiBuildings} ml={-1} mr={2} />
-                          <TagLabel fontSize="lg">
-                            Client / Affiliated Agency
-                          </TagLabel>
-                        </Tag>
+                        <HStack alignItems="center">
+                          <Tag size="lg" borderRadius="full">
+                            <Icon h={6} w={6} as={BiBuildings} ml={-1} mr={2} />
+                            <TagLabel fontSize="lg">Client</TagLabel>
+                          </Tag>
+                          {data.project.client?.tag && (
+                            <Badge colorScheme="blue">
+                              {data.project.client?.tag}
+                            </Badge>
+                          )}
+                        </HStack>
+
                         <Text pl="1" pt="2" fontSize="xl">
-                          {data.project.clientAffiliatedAgency}
+                          {data.project.client.text}
                         </Text>
                       </Box>
                     )}
@@ -241,7 +273,7 @@ export default function Index() {
                             <Icon
                               h={6}
                               w={6}
-                              as={AiOutlineCalendar}
+                              as={AiOutlineCheckCircle}
                               ml={-1}
                               mr={2}
                             />
@@ -250,14 +282,68 @@ export default function Index() {
                           {data.project.status.completed ? (
                             <Badge colorScheme="green">completed</Badge>
                           ) : (
-                            <Badge colorScheme="yellow">not completed</Badge>
+                            <Badge colorScheme="yellow">in progress</Badge>
                           )}
                         </HStack>
-                        <Text fontSize="xl">{data.project.status.text}</Text>
+                        <Text pl="1" pt="2" fontSize="xl">
+                          {data.project.status.text}
+                        </Text>
                       </Box>
                     )}
 
-                    {data.project.costBudget && (
+                    {data.project.categories && (
+                      <Box>
+                        <Stack
+                          alignItems={{ base: "flex-start", sm: "center" }}
+                          direction={{ base: "column", sm: "row" }}
+                        >
+                          <Tag size="lg" borderRadius="full">
+                            <Icon
+                              h={6}
+                              w={6}
+                              as={
+                                data.project.categories.length === 1
+                                  ? AiOutlineTag
+                                  : AiOutlineTags
+                              }
+                              ml={-1}
+                              mr={2}
+                            />
+                            <TagLabel fontSize="lg">
+                              {data.project.categories.length === 1
+                                ? "Category"
+                                : "Categories"}
+                            </TagLabel>
+                          </Tag>
+                          {data.project.categories.map(
+                            (value: any, index: any) => (
+                              <Badge key={index} colorScheme="teal">
+                                {value.tag}
+                              </Badge>
+                            )
+                          )}
+                        </Stack>
+
+                        <Text pl="1" pt="2" fontSize="xl">
+                          {data.project.categories.map(
+                            (value: any, index: any) => {
+                              let text = value.text;
+
+                              if (
+                                index + 1 !==
+                                data.project.categories.length
+                              ) {
+                                text += `, `;
+                              }
+
+                              return text;
+                            }
+                          )}
+                        </Text>
+                      </Box>
+                    )}
+
+                    {data.project.cost && (
                       <Box>
                         <Tag size="lg" borderRadius="full">
                           <Icon
@@ -267,10 +353,10 @@ export default function Index() {
                             ml={-1}
                             mr={2}
                           />
-                          <TagLabel fontSize="lg">Cost / Budget</TagLabel>
+                          <TagLabel fontSize="lg">Cost</TagLabel>
                         </Tag>
                         <Text pl="1" pt="2" fontSize="xl">
-                          {data.project.costBudget}
+                          {data.project.cost}
                         </Text>
                       </Box>
                     )}

@@ -33,6 +33,7 @@
     "react-scroll": "^1.8.8",
     "react-slick": "^0.29.0",
     "remix-validated-form": "^4.6.4",
+    "swiper": "^8.4.5",
     "zod": "^3.19.1"
   },
   "devDependencies": {

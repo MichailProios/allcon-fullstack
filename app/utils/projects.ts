@@ -209,7 +209,7 @@ projects
       tag: "OGS",
     },
 
-    status: { text: "The project is in the closeout stage", completed: false },
+    status: { text: "The project was finished in 2022", completed: true },
     // categories: [{ text: "Miscellaneous", tag: "misc" }],
     cost: "$7,000,000",
     designer: "Kallen & Lemelson, LLP",
@@ -625,12 +625,12 @@ projects
 
     name: "Saint Demetrios Greek Orthodox Church",
     location:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3026.6657127229264!2d-73.55127528620477!3d40.65929870597982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c27eb1e6ab0b2b:0xbdb6be6f3ab5dfe5!2sSaint%20Demetrios%20Greek%20Orthodox%20Church!5e0!3m2!1sen!2sus!4v1669183876097!5m2!1sen!2sus",
+      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3661.1821115490325!2d-73.547051!3d40.658933!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0xbdb6be6f3ab5dfe5!2sSaint%20Demetrios%20Greek%20Orthodox%20Church!5e1!3m2!1sen!2sus!4v1669344856338!5m2!1sen!2sus",
     client: { text: "South Nassau Hellenic Community Inc.", tag: "" },
-    status: { text: "The project was finished in 2020", completed: true },
+    status: { text: "The project was finished in 2016", completed: true },
     // categories: [{ text: "Miscellaneous", tag: "misc" }],
 
-    cost: "$59,500.00",
+    cost: "$2,500,000.00",
     designer: null,
     description: `As part of a multiphase project for Saint Demetrios Greek Orthodox
       Church, Allcon was selected as the General Contractor for the first

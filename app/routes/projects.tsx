@@ -292,7 +292,7 @@ export default function Index() {
                   colorScheme="primary"
                   placeholder="Search for projects"
                   w="full"
-                  defaultValue={data.search}
+                  defaultValue={data.filter}
                   bgColor="gray.50"
                 />
               </InputGroup>

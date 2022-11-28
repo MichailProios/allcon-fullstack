@@ -67,19 +67,8 @@ import {
 } from "@remix-run/react";
 import { useWindowDimensions } from "~/utils/hooks";
 
-// import * as auth from "app/utils/auth.server";
-// import { useTransition } from "@remix-run/react";
-// import Slider from "react-slick";
-import {
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  QuestionIcon,
-  Search2Icon,
-} from "@chakra-ui/icons";
+import { CloseIcon, QuestionIcon, Search2Icon } from "@chakra-ui/icons";
 import projects from "~/utils/projects";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - Projects`,
@@ -88,22 +77,6 @@ export const meta: MetaFunction = ({ params }: any) => ({
 
 export const loader: LoaderFunction = async ({ request, params }: any) => {
   try {
-    // const url = new URL(request.url);
-    // const search = url.searchParams.get("search");
-
-    // if (search) {
-    //   return json({
-    // search: search,
-    // projects: Array.from(projects.values()).filter((value) =>
-    //   value.name.toLowerCase().includes(search)
-    // ),
-    //   });
-    // } else {
-    // return json({
-    //   projects: Array.from(projects.values()),
-    // });
-    // }
-
     const session = await cookie.getSession(request.headers.get("Cookie"));
     const filter = session.get("filter") || null;
 
@@ -120,9 +93,7 @@ export const loader: LoaderFunction = async ({ request, params }: any) => {
       });
     } else {
       return json(
-        {
-          projects: Array.from(projects.values()),
-        },
+        { projects: Array.from(projects.values()) },
         {
           headers: {
             "Set-Cookie": await cookie.destroySession(session),
@@ -137,48 +108,41 @@ export const loader: LoaderFunction = async ({ request, params }: any) => {
 
 export async function action({ request }: { request: Request }) {
   const data = await request.formData();
-  const search = data.get("search");
 
-  console.log(search);
-  // const sectorParams = data.get("sector");
-
-  // const [parent, enableAnimations] = useAutoAnimate();
-
-  // if (searchParams) {
-  //   searchUrl = `?search=${searchParams}`;
-  // }
-
-  // let sectorUrl = null;
-
-  // if (sectorParams) {
-  //   sectorUrl = `?sector=${sectorParams}`;
-  // }
-
-  // if (sectorParams && searchParams) {
-  //   sectorUrl = `&sector=${sectorParams}`;
-  // }
-
-  // const url = `${searchUrl || ""}${sectorUrl || ""}`;
-
-  // try {
-  //   if (searchParams || sectorParams) {
-  //     return redirect(`/projects${url}`);
-  //   } else {
-  //     return redirect("/projects");
-
-  //   }
   try {
-    const session = await cookie.getSession(request.headers.get("Cookie"));
-    session.flash("filter", { search });
+    switch (data.get("type")) {
+      case "search": {
+        const search = data.get("search");
+        const session = await cookie.getSession(request.headers.get("Cookie"));
+        session.flash("filter", { search });
 
-    return json(
-      { status: "Filtering Projects" },
-      {
-        headers: {
-          "Set-Cookie": await cookie.commitSession(session),
-        },
+        return json(
+          { status: "Filtering Projects" },
+          {
+            headers: {
+              "Set-Cookie": await cookie.commitSession(session),
+            },
+          }
+        );
       }
-    );
+
+      case "clear": {
+        const session = await cookie.getSession(request.headers.get("Cookie"));
+
+        return json(
+          { status: "Clearing Search" },
+          {
+            headers: {
+              "Set-Cookie": await cookie.destroySession(session),
+            },
+          }
+        );
+      }
+
+      default: {
+        throw new Error("Unexpected action");
+      }
+    }
   } catch (error) {
     return "error";
   }
@@ -190,14 +154,21 @@ export default function Index() {
   const inputRef = useRef<any>(null);
   const data = useLoaderData();
 
-  function handleChange(event: any) {
+  function onEnter(e: any) {
+    if (e.key === "Enter") {
+      e.target.blur();
+    }
+  }
+
+  function handleFormSearch(event: any) {
     submit(event.currentTarget);
   }
 
-  function handleKeyDown(event: any) {
-    if (event.keyCode === 75 && event.metaKey) {
-      console.log("search");
-    }
+  function handleFormClear() {
+    const formData = new FormData();
+    formData.set("type", "clear");
+    submit(formData, { method: "delete" });
+    inputRef.current.value = "";
   }
 
   useEffect(() => {
@@ -233,7 +204,7 @@ export default function Index() {
         py={14}
         as={Form}
         method="post"
-        onChange={handleChange}
+        onChange={handleFormSearch}
       >
         <VStack spacing="26px">
           <Heading textAlign="center">Projects</Heading>
@@ -321,12 +292,21 @@ export default function Index() {
                   children={<Search2Icon color="gray.300" />}
                 />
                 <InputRightElement
-                  mr={6}
-                  display={{ base: "none", md: "flex" }}
+                  mr={{ base: 0, md: 8 }}
                   children={
-                    <Flex gap={1}>
-                      <Kbd>Ctrl</Kbd>
-                      <Kbd>K</Kbd>
+                    <Flex gap={1} justifyContent="center" alignItems="center">
+                      <Box display={{ base: "none", md: "flex" }} gap={1}>
+                        <Kbd>Ctrl</Kbd>
+                        <Kbd>K</Kbd>
+                      </Box>
+                      <Tooltip label="Clear Search" closeOnScroll>
+                        <IconButton
+                          aria-label="Clear Search"
+                          size="xs"
+                          onClick={handleFormClear}
+                          icon={<CloseIcon />}
+                        />
+                      </Tooltip>
                     </Flex>
                   }
                 />
@@ -337,12 +317,13 @@ export default function Index() {
                   colorScheme="primary"
                   placeholder="Search for projects"
                   w="full"
+                  onKeyUp={onEnter}
                   defaultValue={data.filter}
-                  onKeyDown={handleKeyDown}
                   bgColor="gray.50"
                 />
               </InputGroup>
 
+              <input type="hidden" name="type" value="search" />
               {/* <Select
                 colorScheme="primary"
                 placeholder="All Sectors"

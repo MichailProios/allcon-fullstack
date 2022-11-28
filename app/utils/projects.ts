@@ -1,11 +1,11 @@
 export let projects = new Map();
 
 projects
-  .set("lupton-hall", {
+  .set("suny-lupton-hall", {
     sector: "public",
     thumbnail:
       "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4aee4395-0887-4070-980f-427a13fdb400/thumbnail",
-    path: "/projects/lupton-hall",
+    path: "/projects/suny-lupton-hall",
     media: [
       {
         image:
@@ -99,11 +99,11 @@ projects
       for Allcon but a signature piece of work for Farmingdale’s dedication to
       excellence on campus.`,
   })
-  .set("dot-elwood-ny-operation-facility", {
+  .set("ogs-dot-elwood-ny-operation-facility", {
     sector: "public",
     thumbnail:
       "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c0ce0238-47bb-4d18-f278-79a57d207b00/thumbnail",
-    path: "/projects/dot-elwood-ny-operation-facility",
+    path: "/projects/ogs-dot-elwood-ny-operation-facility",
     media: [
       {
         image:
@@ -202,7 +202,7 @@ projects
       },
     ],
 
-    name: "DOT Elwood, NY Operation Facility ",
+    name: "OGS DOT Elwood, NY Operation Facility ",
     location: null,
     client: {
       text: "NYS Office of General Services",
@@ -210,7 +210,6 @@ projects
     },
 
     status: { text: "The project was finished in 2022", completed: true },
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
     cost: "$7,000,000",
     designer: "Kallen & Lemelson, LLP",
     description: `Allcon Contracting was selected as the general contractor for the
@@ -228,7 +227,80 @@ projects
         as they arose and maintain both schedule constraints and budgetary
         limitations.`,
   })
-
+  .set("sca-fiorello-laguardia-highschool", {
+    sector: "public",
+    thumbnail:
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/51598770-6c6c-49fa-c235-410159bb3700/thumbnail",
+    path: "/projects/sca-fiorello-laguardia-highschool",
+    media: [
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/51598770-6c6c-49fa-c235-410159bb3700/public",
+        order: 1,
+      },
+    ],
+    name: "SCA Fiorello H. LaGuardia Highschool",
+    location:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3654.8520104292147!2d-73.98837852352789!3d40.7741368338087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2585fcad1613f:0xcb0f24e1e025feaa!2s100%20Amsterdam%20Ave,%20New%20York,%20NY%2010023!5e1!3m2!1sen!2sus!4v1669673691833!5m2!1sen!2sus",
+    client: {
+      text: "School Construction Authority",
+      tag: "SCA",
+    },
+    status: { text: "The project is in progress", completed: false },
+    cost: null,
+    designer: null,
+    description: "Upgrade of the highschool's theater shop.",
+  })
+  .set("sca-ps146-edward-collins", {
+    sector: "public",
+    thumbnail:
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b83d58f9-1d62-403a-883d-171d68e3b500/thumbnail",
+    path: "/projects/sca-ps146-edward-collins",
+    media: [
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b83d58f9-1d62-403a-883d-171d68e3b500/public",
+        order: 1,
+      },
+    ],
+    name: "SCA PS 146 Edward Collins Elementary School",
+    location:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.0632337292773!2d-73.90829902352601!3d40.82480563070135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f44c8e955555:0xde76fafb865f275!2sP.S.%20146%20Edward%20Collins!5e1!3m2!1sen!2sus!4v1669674006853!5m2!1sen!2sus",
+    client: {
+      text: "School Construction Authority",
+      tag: "SCA",
+    },
+    status: { text: "The project is in progress", completed: false },
+    cost: null,
+    designer: null,
+    description:
+      "Full program accesibility and low voltage electrical system work.",
+  })
+  .set("sca-psis218-rafael-hernandez", {
+    sector: "public",
+    thumbnail:
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/cf40a4b0-0c6b-4990-31ef-02d0ef82d000/thumbnail",
+    path: "/projects/sca-psis218-rafael-hernandez",
+    media: [
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/cf40a4b0-0c6b-4990-31ef-02d0ef82d000/public",
+        order: 1,
+      },
+    ],
+    name: "SCA PS/IS 218 Rafael Hernandez Magnet School",
+    location:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d912.8667424917443!2d-73.92035793036202!3d40.8356323128756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f43a6d921751:0x8da8781af2e34078!2sP.S./I.S.%20218%20Rafael%20Hernandez%20Dual%20Language%20Magnet%20School!5e1!3m2!1sen!2sus!4v1669674811391!5m2!1sen!2sus",
+    client: {
+      text: "School Construction Authority",
+      tag: "SCA",
+    },
+    status: { text: "The project is in progress", completed: false },
+    cost: null,
+    designer: null,
+    description:
+      "Roofs, exterior masonry, parapets, and flood elimination work.",
+  })
   .set("greatneck-terrace-roofs", {
     sector: "public",
     thumbnail:
@@ -281,6 +353,7 @@ projects
     designer: null,
     description: null,
   })
+
   .set("rockville-centre-police", {
     sector: "public",
     thumbnail:
@@ -490,11 +563,11 @@ projects
     designer: null,
     description: null,
   })
-  .set("nold-hall", {
+  .set("suny-nold-hall", {
     sector: "public",
     thumbnail:
       "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2ebdeb7e-442b-4443-6cb3-98f6746f2200/thumbnail",
-    path: "/projects/nold-hall",
+    path: "/projects/suny-nold-hall",
     media: [
       {
         image:

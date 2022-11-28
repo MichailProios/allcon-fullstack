@@ -186,7 +186,7 @@ export default function Project() {
                               border: "none",
                               height: "100%",
                               width: "100%",
-                              // borderRadius: "0.375rem",
+
                               color: "#f3f3f3",
                             }}
                           />

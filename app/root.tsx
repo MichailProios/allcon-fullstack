@@ -27,8 +27,7 @@ import global from "app/styles/global.css";
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "Allcon Contracting",
-  description:
-    "Production-ready Applications and Solutions built and developed to last",
+  description: "Infinite Possibilities through Integrated Solutions",
   viewport: "width=device-width,initial-scale=1",
 });
 

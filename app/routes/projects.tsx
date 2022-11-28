@@ -46,6 +46,8 @@ import {
   TabPanels,
   Tab,
   TabPanel,
+  InputRightElement,
+  Kbd,
 } from "@chakra-ui/react";
 
 import { redirect, json } from "@remix-run/node";
@@ -185,11 +187,43 @@ export async function action({ request }: { request: Request }) {
 export default function Index() {
   const [showButton, setShowButton] = useState({ index: null, flag: false });
   const submit = useSubmit();
+  const inputRef = useRef<any>(null);
   const data = useLoaderData();
 
   function handleChange(event: any) {
     submit(event.currentTarget);
   }
+
+  function handleKeyDown(event: any) {
+    if (event.keyCode === 75 && event.metaKey) {
+      console.log("search");
+    }
+  }
+
+  useEffect(() => {
+    const ctrl1 = (e: KeyboardEvent) =>
+      e.ctrlKey && e.key.toLowerCase() === "k";
+
+    const handler = (e: KeyboardEvent) => {
+      if (ctrl1(e)) {
+        inputRef.current.focus();
+      }
+    };
+
+    const ignore = (e: KeyboardEvent) => {
+      if (ctrl1(e)) {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener("keyup", handler);
+    window.addEventListener("keydown", ignore);
+
+    return () => {
+      window.removeEventListener("keyup", handler);
+      window.removeEventListener("keydown", ignore);
+    };
+  }, []);
 
   return (
     <SlideFade in={true} reverse delay={0.1}>
@@ -286,13 +320,25 @@ export default function Index() {
                   pointerEvents="none"
                   children={<Search2Icon color="gray.300" />}
                 />
+                <InputRightElement
+                  mr={6}
+                  display={{ base: "none", md: "flex" }}
+                  children={
+                    <Flex gap={1}>
+                      <Kbd>Ctrl</Kbd>
+                      <Kbd>K</Kbd>
+                    </Flex>
+                  }
+                />
                 <Input
+                  ref={inputRef}
                   type="text"
                   name="search"
                   colorScheme="primary"
                   placeholder="Search for projects"
                   w="full"
                   defaultValue={data.filter}
+                  onKeyDown={handleKeyDown}
                   bgColor="gray.50"
                 />
               </InputGroup>

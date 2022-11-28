@@ -35,17 +35,17 @@ export const links: LinksFunction = () => {
   return [
     // { rel: "preconnect", href: "https://fonts.googleapis.com" },
     // { rel: "preconnect", href: "https://fonts.gstatic.com" },
-    {
-      rel: "stylesheet",
-      type: "text/css",
-      charSet: "UTF-8",
-      href: "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css",
-    },
-    {
-      rel: "stylesheet",
-      type: "text/css",
-      href: "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css",
-    },
+    // {
+    //   rel: "stylesheet",
+    //   type: "text/css",
+    //   charSet: "UTF-8",
+    //   href: "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css",
+    // },
+    // {
+    //   rel: "stylesheet",
+    //   type: "text/css",
+    //   href: "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css",
+    // },
     {
       rel: "stylesheet",
       type: "text/css",

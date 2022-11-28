@@ -69,7 +69,7 @@ import { useWindowDimensions } from "~/utils/hooks";
 
 // import * as auth from "app/utils/auth.server";
 // import { useTransition } from "@remix-run/react";
-import Slider from "react-slick";
+// import Slider from "react-slick";
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
@@ -464,10 +464,10 @@ export default function Index() {
                   rounded="md"
                   boxShadow="xl"
                   position="relative"
-                  onMouseEnter={(e) => {
+                  onMouseEnter={(e: any) => {
                     setShowButton({ index: index, flag: true });
                   }}
-                  onMouseLeave={(e) => {
+                  onMouseLeave={(e: any) => {
                     setShowButton({ index: index, flag: false });
                   }}
                   transition="transform 0.15s ease-in-out"
@@ -478,7 +478,7 @@ export default function Index() {
                   to={value.path}
                   draggable={false}
                   w="full"
-                  h="full"
+                  // h="full"
                 >
                   <AspectRatio key={index} ratio={{ base: 4 / 3, md: 16 / 9 }}>
                     <Image

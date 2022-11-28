@@ -40,7 +40,7 @@ import { useWindowDimensions } from "~/utils/hooks";
 
 // import * as auth from "app/utils/auth.server";
 // import { useTransition } from "@remix-run/react";
-import Slider from "react-slick";
+// import Slider from "react-slick";
 import { Search2Icon } from "@chakra-ui/icons";
 
 export const meta: MetaFunction = ({ params }: any) => ({

@@ -57,7 +57,7 @@ import { useWindowDimensions } from "~/utils/hooks";
 
 import { ChevronRightIcon, ChevronLeftIcon, InfoIcon } from "@chakra-ui/icons";
 
-import Slider from "react-slick";
+// import Slider from "react-slick";
 
 import { projects } from "~/utils/projects";
 

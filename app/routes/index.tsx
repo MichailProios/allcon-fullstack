@@ -24,7 +24,7 @@ import { useWindowDimensions } from "~/utils/hooks";
 
 // import * as auth from "app/utils/auth.server";
 // import { useTransition } from "@remix-run/react";
-import Slider from "react-slick";
+// import Slider from "react-slick";
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
 

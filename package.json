@@ -31,7 +31,6 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
     "react-scroll": "^1.8.8",
-    "react-slick": "^0.29.0",
     "remix-validated-form": "^4.6.4",
     "swiper": "^8.4.5",
     "zod": "^3.19.1"
@@ -42,7 +41,6 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
     "@types/react-scroll": "^1.8.5",
-    "@types/react-slick": "^0.23.10",
     "dotenv": "^16.0.3",
     "eslint": "^8.28.0",
     "nodemon": "^2.0.20",

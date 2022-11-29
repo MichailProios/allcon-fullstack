@@ -21,24 +21,10 @@ import {
   InputGroup,
   Flex,
   Stack,
-  Select,
   Skeleton,
-  ButtonGroup,
   IconButton,
   Tooltip,
   AspectRatio,
-  Checkbox,
-  FormControl,
-  FormLabel,
-  Switch,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
   Highlight,
   Badge,
   Tabs,
@@ -57,38 +43,51 @@ import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import * as cookie from "app/utils/cookie.server";
 
 // import {  } from "@remix-run/node";
-import {
-  useLoaderData,
-  Link,
-  useSubmit,
-  Form,
-  useMatches,
-  useTransition,
-} from "@remix-run/react";
-import { useWindowDimensions } from "~/utils/hooks";
+import { useLoaderData, Link, useSubmit, Form } from "@remix-run/react";
 
 import { CloseIcon, QuestionIcon, Search2Icon } from "@chakra-ui/icons";
 import projects from "~/utils/projects";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - Projects`,
-  description: "Allcon Contracting project listing",
+  description: "Allcon Contracting projects listing",
 });
 
-export const loader: LoaderFunction = async ({ request, params }: any) => {
+export const loader: LoaderFunction = async ({ request }: any) => {
   try {
     const session = await cookie.getSession(request.headers.get("Cookie"));
     const filter = session.get("filter") || null;
 
-    if (filter?.search) {
+    if (filter?.search && !filter?.client) {
       return json({
-        filter: filter?.search,
+        filter: filter,
         projects: Array.from(projects.values()).filter(
           (value) =>
             value.name.toLowerCase().includes(filter?.search.toLowerCase()) ||
             value.client?.tag
               .toLowerCase()
               .includes(filter?.search.toLowerCase())
+        ),
+      });
+    } else if (filter?.client && !filter?.search) {
+      return json({
+        filter: filter,
+        projects: Array.from(projects.values()).filter((value) =>
+          value.client?.tag.toLowerCase().includes(filter?.client.toLowerCase())
+        ),
+      });
+    } else if (filter?.search && filter?.client) {
+      return json({
+        filter: filter,
+        projects: Array.from(projects.values()).filter(
+          (value) =>
+            (value.name.toLowerCase().includes(filter?.search.toLowerCase()) ||
+              value.client?.tag
+                .toLowerCase()
+                .includes(filter?.search.toLowerCase())) &&
+            value.client?.tag
+              .toLowerCase()
+              .includes(filter?.client.toLowerCase())
         ),
       });
     } else {
@@ -110,11 +109,14 @@ export async function action({ request }: { request: Request }) {
   const data = await request.formData();
 
   try {
-    switch (data.get("type")) {
+    const type = data.get("type");
+    const search = data.get("search") || "";
+    const client = data.get("client") || "";
+
+    switch (type) {
       case "search": {
-        const search = data.get("search");
         const session = await cookie.getSession(request.headers.get("Cookie"));
-        session.flash("filter", { search });
+        session.flash("filter", { search: search, client: client });
 
         return json(
           { status: "Filtering Projects" },
@@ -126,11 +128,39 @@ export async function action({ request }: { request: Request }) {
         );
       }
 
-      case "clear": {
+      case "client": {
         const session = await cookie.getSession(request.headers.get("Cookie"));
+        session.flash("filter", { search: search, client: client });
+
+        return json(
+          { status: "Filtering Projects" },
+          {
+            headers: {
+              "Set-Cookie": await cookie.commitSession(session),
+            },
+          }
+        );
+      }
+
+      case "clearSearch": {
+        const session = await cookie.getSession(request.headers.get("Cookie"));
+        session.flash("filter", { search: search, client: client });
 
         return json(
           { status: "Clearing Search" },
+          {
+            headers: {
+              "Set-Cookie": await cookie.commitSession(session),
+            },
+          }
+        );
+      }
+
+      case "clearAll": {
+        const session = await cookie.getSession(request.headers.get("Cookie"));
+
+        return json(
+          { status: "Clearing All" },
           {
             headers: {
               "Set-Cookie": await cookie.destroySession(session),
@@ -164,9 +194,26 @@ export default function Index() {
     submit(event.currentTarget);
   }
 
-  function handleFormClear() {
+  function handleFormClient(client: string) {
     const formData = new FormData();
-    formData.set("type", "clear");
+    formData.set("type", "client");
+    formData.set("client", client);
+    submit(formData, { method: "post" });
+    inputRef.current.value = "";
+  }
+
+  function handleFormSearchClear() {
+    const formData = new FormData();
+    formData.set("type", "clearSearch");
+    formData.set("search", "");
+    formData.set("client", checkClient(data.filter?.client).client || "");
+    submit(formData, { method: "delete" });
+    inputRef.current.value = "";
+  }
+
+  function handleFormAllClear() {
+    const formData = new FormData();
+    formData.set("type", "clearAll");
     submit(formData, { method: "delete" });
     inputRef.current.value = "";
   }
@@ -198,9 +245,37 @@ export default function Index() {
 
   useEffect(() => {
     if (data.filter) {
-      handleFormClear();
+      handleFormAllClear();
     }
   }, []);
+
+  const [tabIndex, setTabIndex] = useState();
+
+  function handleTabsChange(index: any) {
+    setTabIndex(index);
+  }
+
+  function checkClient(client: string) {
+    switch (client) {
+      case "":
+        return { index: 0, client: client };
+      case "suny":
+        return { index: 1, client: client };
+
+      case "ogs":
+        return { index: 2, client: client };
+
+      case "sca":
+        return { index: 3, client: client };
+
+      default:
+        return { index: 0, client: client };
+    }
+  }
+
+  useEffect(() => {
+    handleTabsChange(checkClient(data.filter?.client).index);
+  }, [data.filter?.client]);
 
   return (
     <SlideFade in={true} reverse delay={0.1}>
@@ -216,228 +291,148 @@ export default function Index() {
           <Heading textAlign="center">Projects</Heading>
 
           <VStack
-            spacing="16px"
+            spacing={"16px"}
             justifyContent="center"
             alignItems="center"
             w="full"
           >
-            {/* <Tabs
-              variant="unstyled"
-              colorScheme="gray"
-              orientation="horizontal"
-              w="full"
-              justifyContent="center"
-            >
-              <TabList
-                gap={2}
-                justifyContent="center"
-                flexDirection={{ base: "column", sm: "row" }}
-              >
-                <Tab
-                  w={{ base: "100%", sm: "8em" }}
-                  fontWeight="semibold"
-                  _selected={{ bg: "primary.200" }}
-                  rounded="md"
-                  as={Button}
-                  variant="solid"
-                >
-                  All Projects
-                </Tab>
-                <Tab
-                  w={{ base: "100%", sm: "8em" }}
-                  fontWeight="semibold"
-                  _selected={{ bg: "primary.200" }}
-                  rounded="md"
-                  as={Button}
-                  variant="solid"
-                >
-                  SUNY
-                </Tab>
-                <Tab
-                  w={{ base: "100%", sm: "8em" }}
-                  fontWeight="semibold"
-                  _selected={{ bg: "primary.200" }}
-                  rounded="md"
-                  as={Button}
-                  variant="solid"
-                >
-                  OGS
-                </Tab>
-                <Tab
-                  w={{ base: "100%", sm: "8em" }}
-                  fontWeight="semibold"
-                  _selected={{ bg: "primary.200" }}
-                  rounded="md"
-                  as={Button}
-                  variant="solid"
-                >
-                  SCA
-                </Tab>
-                <Tab
-                  w={{ base: "100%", sm: "8em" }}
-                  fontWeight="semibold"
-                  _selected={{ bg: "primary.200" }}
-                  rounded="md"
-                  as={Button}
-                  variant="solid"
-                >
-                  Interior
-                </Tab>
-              </TabList>
-            </Tabs> */}
-
-            <Stack
-              direction={{ base: "column", sm: "row" }}
-              w="full"
+            <VStack
+              spacing={2}
               justifyContent="center"
               alignItems="center"
+              w="full"
             >
-              <InputGroup w="full" colorScheme="primary">
-                <InputLeftElement
-                  pointerEvents="none"
-                  children={<Search2Icon color="gray.300" />}
-                />
-                <InputRightElement
-                  mr={{ base: 0, md: 8 }}
-                  children={
-                    <Flex gap={1} justifyContent="center" alignItems="center">
-                      <Box display={{ base: "none", md: "flex" }} gap={1}>
-                        <Kbd>Ctrl</Kbd>
-                        <Kbd>K</Kbd>
-                      </Box>
-                      <Tooltip label="Clear Search" closeOnScroll>
-                        <IconButton
-                          aria-label="Clear Search"
-                          size="xs"
-                          onClick={handleFormClear}
-                          icon={<CloseIcon />}
-                        />
-                      </Tooltip>
-                    </Flex>
-                  }
-                />
-                <Input
-                  ref={inputRef}
-                  type="text"
-                  name="search"
-                  colorScheme="primary"
-                  placeholder="Search for projects"
-                  w="full"
-                  onKeyUp={onEnter}
-                  defaultValue={data.filter}
-                />
-              </InputGroup>
-
-              <input type="hidden" name="type" value="search" />
-              {/* <Select
-                colorScheme="primary"
-                placeholder="All Sectors"
-                w={{ base: "full", sm: "220px" }}
-                name="sector"
+              <Tabs
+                variant="unstyled"
+                colorScheme="gray"
+                orientation="horizontal"
+                w="full"
+                justifyContent="center"
+                index={tabIndex}
+                onChange={handleTabsChange}
               >
-                <option value="public">Public Sector</option>
-                <option value="private">Private Sector</option>
-              </Select> */}
-
-              {/* <Menu closeOnSelect={false} autoSelect={false}>
-                <MenuButton
-                  as={Button}
-                  bgColor="gray.50"
-                  rightIcon={<ChevronDownIcon />}
+                <TabList
+                  gap={2}
+                  justifyContent="center"
+                  flexDirection={{ base: "column", sm: "row" }}
                 >
-                  Filter
-                </MenuButton>
-                <MenuList>
-                  <MenuItem _hover={{ bgColor: "transparent" }}>
-                    <Flex direction="column">
-                      <Checkbox
-                        isChecked={allChecked}
-                        isIndeterminate={isIndeterminate}
-                        onChange={(e) =>
-                          setCheckedItems([e.target.checked, e.target.checked])
-                        }
-                      >
-                        All Sectors
-                      </Checkbox>
-                      <Stack pl={6} mt={1} spacing={1}>
-                        <Checkbox
-                          isChecked={checkedItems[0]}
-                          onChange={(e) =>
-                            setCheckedItems([e.target.checked, checkedItems[1]])
-                          }
-                        >
-                          Private Sector
-                        </Checkbox>
-                        <Checkbox
-                          isChecked={checkedItems[1]}
-                          onChange={(e) =>
-                            setCheckedItems([checkedItems[0], e.target.checked])
-                          }
-                        >
-                          Public Sector
-                        </Checkbox>
-                      </Stack>
-                    </Flex>
-                  </MenuItem>
-                  <MenuDivider />
-                  <MenuItem _hover={{ bgColor: "transparent" }}>
-                    <Flex direction="column">
-                      <Checkbox
-                        isChecked={allChecked1}
-                        isIndeterminate={isIndeterminate1}
-                        onChange={(e) =>
-                          setCheckedItems1([
-                            e.target.checked,
-                            e.target.checked,
-                            e.target.checked,
-                          ])
-                        }
-                      >
-                        All Categories
-                      </Checkbox>
-                      <Stack pl={6} mt={1} spacing={1}>
-                        <Checkbox
-                          isChecked={checkedItems1[0]}
-                          onChange={(e) =>
-                            setCheckedItems1([
-                              e.target.checked,
-                              checkedItems1[1],
-                              checkedItems1[2],
-                            ])
-                          }
-                        >
-                          Exterior
-                        </Checkbox>
-                        <Checkbox
-                          isChecked={checkedItems1[1]}
-                          onChange={(e) =>
-                            setCheckedItems1([
-                              checkedItems1[0],
-                              e.target.checked,
-                              checkedItems1[2],
-                            ])
-                          }
-                        >
-                          Interior
-                        </Checkbox>
-                        <Checkbox
-                          isChecked={checkedItems1[2]}
-                          onChange={(e) =>
-                            setCheckedItems1([
-                              checkedItems1[0],
-                              checkedItems1[1],
-                              e.target.checked,
-                            ])
-                          }
-                        >
-                          Apartments
-                        </Checkbox>
-                      </Stack>
-                    </Flex>
-                  </MenuItem>
-                </MenuList>
-              </Menu> */}
-            </Stack>
+                  <Tooltip label="Show all projects" closeOnScroll>
+                    <Tab
+                      w={{ base: "100%", sm: "8em" }}
+                      fontWeight="semibold"
+                      _selected={{ bg: "primary.300" }}
+                      rounded="md"
+                      as={Button}
+                      variant="outline"
+                      onClick={() => handleFormClient("")}
+                    >
+                      All Projects
+                    </Tab>
+                  </Tooltip>
+                  <Tooltip
+                    label="Show State University of New York projects"
+                    closeOnScroll
+                  >
+                    <Tab
+                      w={{ base: "100%", sm: "8em" }}
+                      fontWeight="semibold"
+                      _selected={{ bg: "primary.300" }}
+                      rounded="md"
+                      as={Button}
+                      variant="outline"
+                      onClick={() => handleFormClient("suny")}
+                    >
+                      SUNY
+                    </Tab>
+                  </Tooltip>
+                  <Tooltip
+                    label="Show NYS Office of General Services projects"
+                    closeOnScroll
+                  >
+                    <Tab
+                      w={{ base: "100%", sm: "8em" }}
+                      fontWeight="semibold"
+                      _selected={{ bg: "primary.300" }}
+                      rounded="md"
+                      as={Button}
+                      variant="outline"
+                      onClick={() => handleFormClient("ogs")}
+                    >
+                      OGS
+                    </Tab>
+                  </Tooltip>
+                  <Tooltip
+                    label="Show School Construction Authority projects"
+                    closeOnScroll
+                  >
+                    <Tab
+                      w={{ base: "100%", sm: "8em" }}
+                      fontWeight="semibold"
+                      _selected={{ bg: "primary.300" }}
+                      rounded="md"
+                      as={Button}
+                      variant="outline"
+                      onClick={() => handleFormClient("sca")}
+                    >
+                      SCA
+                    </Tab>
+                  </Tooltip>
+                </TabList>
+              </Tabs>
+
+              <Stack
+                direction={{ base: "column", sm: "row" }}
+                w="full"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <InputGroup w="full" colorScheme="primary">
+                  <InputLeftElement
+                    pointerEvents="none"
+                    children={<Search2Icon color="gray.300" />}
+                  />
+                  <InputRightElement
+                    mr={{ base: 0, md: 8 }}
+                    children={
+                      <Flex gap={1} justifyContent="center" alignItems="center">
+                        <Box display={{ base: "none", md: "flex" }} gap={1}>
+                          <Kbd>Ctrl</Kbd>
+                          <Kbd>K</Kbd>
+                        </Box>
+                        <Tooltip label="Clear Search" closeOnScroll>
+                          <IconButton
+                            aria-label="Clear Search"
+                            size="xs"
+                            onClick={handleFormSearchClear}
+                            icon={<CloseIcon />}
+                          />
+                        </Tooltip>
+                      </Flex>
+                    }
+                  />
+                  <Input
+                    ref={inputRef}
+                    type="text"
+                    name="search"
+                    colorScheme="primary"
+                    placeholder={`Search for ${
+                      checkClient(data.filter?.client).client?.toUpperCase() ||
+                      "all"
+                    } projects`}
+                    w="full"
+                    onKeyUp={onEnter}
+                    defaultValue={data.filter?.search}
+                  />
+                </InputGroup>
+
+                <input type="hidden" name="type" value="search" />
+                <input
+                  type="hidden"
+                  name="client"
+                  defaultValue={checkClient(data.filter?.client).client}
+                />
+              </Stack>
+            </VStack>
             <SimpleGrid
               columns={{ base: 1, md: 1, lg: 2, xl: 2 }}
               spacing={4}
@@ -470,14 +465,13 @@ export default function Index() {
                     <Image
                       roundedTopLeft="md"
                       roundedTopRight="md"
-                      // objectFit="cover"
-                      // h={{ base: "350px", sm: "450px" }}
                       src={value.thumbnail}
                       alt={`${value.name} project`}
                       boxShadow="xl"
                       draggable={false}
                       userSelect="none"
                       w="full"
+                      loading="lazy"
                       fallback={
                         <Skeleton h={{ base: "350px", sm: "450px" }} w="full" />
                       }
@@ -486,7 +480,7 @@ export default function Index() {
                   <CardFooter justifyContent="center" p={2}>
                     <Text textAlign="center" fontSize="xl">
                       <Highlight
-                        query={data.filter || ""}
+                        query={data.filter?.search || ""}
                         styles={{
                           px: "4px",
                           py: "4px",

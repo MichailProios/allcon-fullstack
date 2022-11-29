@@ -38,8 +38,12 @@ import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 // import LogoSideways from "public/logos/Logo-Sideways.svg";
 // import LogoPlain from "public/logos/Logo-Plain.svg";
 
-const logo_full =
-  "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/944385c7-c2df-41ab-0e75-a67518f15700/public";
+const logo_full_dark =
+  "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/public";
+
+const logo_full_light =
+  "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/aabe8ae8-4716-4d41-f8ab-92df61f51900/public";
+
 const logo_small =
   "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/fa4b2f8e-d107-45eb-e36d-adbb14f13a00/public";
 
@@ -130,7 +134,7 @@ function NavbarHeader({
       alignItems={"center"}
       justifyContent={"center"}
       px={{ base: 4, sm: 6, lg: 8 }}
-      bg={useColorModeValue("gray.50", "gray.900")}
+      bg={useColorModeValue("gray.50", "gray.800")}
       position="sticky"
       top={0}
       zIndex={800}
@@ -157,10 +161,10 @@ function NavbarHeader({
             >
               <Image
                 objectFit="contain"
-                h={50}
+                h={"50px"}
                 w={"auto"}
-                minWidth="156px"
-                src={logo_full}
+                minWidth="230px"
+                src={colorMode === "light" ? logo_full_dark : logo_full_light}
                 alt="Allcon-Logo"
                 draggable="false"
                 loading="eager"
@@ -176,7 +180,7 @@ function NavbarHeader({
             >
               <Image
                 objectFit="contain"
-                h={50}
+                h={"50px"}
                 w={"auto"}
                 src={logo_small}
                 alt="Allcon-Logo"
@@ -212,7 +216,6 @@ function NavbarHeader({
             ))}
             <IconButton
               variant={"ghost"}
-              disabled
               aria-label="Color Scheme"
               onClick={() => {
                 toggleColorMode();
@@ -227,7 +230,6 @@ function NavbarHeader({
           <IconButton
             variant={"ghost"}
             aria-label="Color Scheme"
-            disabled
             onClick={() => {
               toggleColorMode();
             }}

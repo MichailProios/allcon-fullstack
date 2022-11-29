@@ -196,6 +196,12 @@ export default function Index() {
     };
   }, []);
 
+  useEffect(() => {
+    if (data.filter) {
+      handleFormClear();
+    }
+  }, []);
+
   return (
     <SlideFade in={true} reverse delay={0.1}>
       <Container
@@ -319,7 +325,6 @@ export default function Index() {
                   w="full"
                   onKeyUp={onEnter}
                   defaultValue={data.filter}
-                  bgColor="gray.50"
                 />
               </InputGroup>
 

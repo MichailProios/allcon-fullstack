@@ -17,6 +17,21 @@ import {
   AlertTitle,
   SlideFade,
   Checkbox,
+  ButtonGroup,
+  Divider,
+  Card,
+  Icon,
+  useClipboard,
+  useToast,
+  Box,
+  CardBody,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  AspectRatio,
+  HStack,
 } from "@chakra-ui/react";
 import { useActionData } from "@remix-run/react";
 
@@ -29,6 +44,10 @@ import {
 import { withZod } from "@remix-validated-form/with-zod";
 import { z } from "zod";
 import { MetaFunction } from "@remix-run/node";
+import { PhoneIcon } from "@chakra-ui/icons";
+import { FaFax, FaLinkedin } from "react-icons/fa";
+
+import { BiSend, BiMap, BiStreetView } from "react-icons/bi";
 // import { ses } from "app/utils/email.server";
 // import { EmailSubscribers } from "~/utils/db.server";
 // import { db } from "app/utils/db.server";
@@ -165,6 +184,7 @@ function SubmitButton(props: any) {
       isLoading={isSubmitting}
       loadingText="Sending"
       disabled={actionData === "success" || isSubmitting}
+      leftIcon={<Icon h={5} w={5} as={BiSend} />}
     >
       {props.label}
     </Button>
@@ -173,6 +193,9 @@ function SubmitButton(props: any) {
 
 export default function Contacts() {
   const actionData = useActionData();
+
+  const { onCopy } = useClipboard("+1-516-333-3344");
+  const toast = useToast();
 
   return (
     <SlideFade in={true} reverse delay={0.1}>
@@ -197,7 +220,7 @@ export default function Contacts() {
               boxShadow="lg"
               p={{ base: 5, sm: 10 }}
             >
-              <VStack spacing={6} w="100%">
+              <VStack spacing={6} w="full">
                 <Stack
                   w="100%"
                   spacing={3}
@@ -236,29 +259,229 @@ export default function Contacts() {
                   placeholder="Enter your message"
                   rounded="md"
                 />
-
-                <SubmitButton
-                  type="submit"
-                  colorScheme="primary"
-                  label="Send Message"
-                />
+                <VStack spacing={3} w="full">
+                  <SubmitButton
+                    type="submit"
+                    colorScheme="primary"
+                    label="Send Message"
+                  />
+                  <HStack w="full">
+                    <Divider />
+                    <Text userSelect="none">or</Text>
+                    <Divider />
+                  </HStack>
+                  <Stack direction={{ base: "column", md: "row" }}>
+                    <Button
+                      leftIcon={<PhoneIcon />}
+                      onClick={() => window.open("tel:+1-516-333-3339")}
+                    >
+                      Call +1-516-333-3339
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        onCopy();
+                        toast({
+                          title: "Fax number copied to clipboard.",
+                          // description: "We've created your account for you.",
+                          status: "success",
+                          duration: 3000,
+                        });
+                      }}
+                      leftIcon={<Icon as={FaFax} />}
+                    >
+                      Fax +1-516-333-3339
+                    </Button>
+                    <Button
+                      onClick={() =>
+                        window.open(
+                          "https://www.linkedin.com/company/allcon-contracting"
+                        )
+                      }
+                      leftIcon={<Icon as={FaLinkedin} />}
+                    >
+                      View Allcon LinkedIn
+                    </Button>
+                  </Stack>
+                </VStack>
               </VStack>
-
-              {/* {actionData && (
-          <Alert
-            status={actionData === "success" ? "success" : "error"}
-            rounded="md"
-          >
-            <AlertIcon />
-            <AlertTitle>
-              {actionData === "success"
-                ? "Email sent successfully. Thank you!"
-                : "Email failed to send. Please try again."}
-            </AlertTitle>
-          </Alert>
-        )} */}
             </VStack>
           </Stack>
+        </VStack>
+      </Container>
+      <Divider />
+      <Container maxW={"1400px"} px={{ base: 6, md: 10 }} py={14}>
+        <VStack spacing="26px">
+          <Heading textAlign="center">Office Locations</Heading>
+          <Card rounded="md" boxShadow="xl" w={"full"}>
+            <CardBody>
+              <Tabs isFitted isLazy colorScheme="primary">
+                <TabList>
+                  <Tab>66 Brooklyn Ave, Westbury, New York 11590</Tab>
+                  <Tab>300 Kimball St #204b, Woodbridge, New Jersey 07095</Tab>
+                </TabList>
+
+                <TabPanels>
+                  <TabPanel p={0} pt={6}>
+                    <Tabs
+                      // isFitted
+                      isLazy
+                      size="sm"
+                      // orientation="vertical"
+                      variant="unstyled"
+                    >
+                      <TabList gap={2} justifyContent="center">
+                        <Tab
+                          w={{ base: "100%", sm: "8em" }}
+                          fontWeight="semibold"
+                          _selected={{ bg: "primary.300" }}
+                          rounded="md"
+                          as={Button}
+                          variant="solid"
+                          leftIcon={<Icon h={5} w={5} as={BiMap} />}
+                        >
+                          Map View
+                        </Tab>
+                        <Tab
+                          w={{ base: "100%", sm: "8em" }}
+                          fontWeight="semibold"
+                          _selected={{ bg: "primary.300" }}
+                          rounded="md"
+                          as={Button}
+                          variant="solid"
+                          leftIcon={<Icon h={5} w={5} as={BiStreetView} />}
+                        >
+                          Street View
+                        </Tab>
+                      </TabList>
+
+                      <TabPanels>
+                        <TabPanel p={0} pt={2}>
+                          <AspectRatio
+                            ratio={{ base: 1, md: 16 / 9 }}
+                            maxW="100%"
+                          >
+                            <iframe
+                              title="Westbury Office Map"
+                              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3655.8116696361553!2d-73.56175772352869!3d40.75668893487772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c280cb33822bf3:0x68442c7cd931282c!2s66%20Brooklyn%20Ave,%20Westbury,%20NY%2011590!5e1!3m2!1sen!2sus!4v1669765457161!5m2!1sen!2sus"
+                              style={{
+                                border: "none",
+                                height: "100%",
+                                width: "100%",
+                                borderRadius: "0.375rem",
+                                color: "#f3f3f3",
+                              }}
+                              allowFullScreen={false}
+                              loading="lazy"
+                              referrerPolicy="no-referrer-when-downgrade"
+                            />
+                          </AspectRatio>
+                        </TabPanel>
+                        <TabPanel p={0} pt={2}>
+                          <AspectRatio
+                            ratio={{ base: 1, md: 16 / 9 }}
+                            maxW="100%"
+                          >
+                            <iframe
+                              title="Westbury Office Street"
+                              src="https://www.google.com/maps/embed?pb=!4v1669765886676!6m8!1m7!1sTcnxcY2Y2Lig8CJSThJlcQ!2m2!1d40.75661651754456!2d-73.55950228715!3f67.12134601477624!4f-4.0828521741744055!5f0.7820865974627469"
+                              style={{
+                                border: "none",
+                                height: "100%",
+                                width: "100%",
+                                borderRadius: "0.375rem",
+                                color: "#f3f3f3",
+                              }}
+                              allowFullScreen={false}
+                              loading="lazy"
+                              referrerPolicy="no-referrer-when-downgrade"
+                            />
+                          </AspectRatio>
+                        </TabPanel>
+                      </TabPanels>
+                    </Tabs>
+                  </TabPanel>
+                  <TabPanel p={0} pt={6}>
+                    <Tabs
+                      isLazy
+                      size="sm"
+                      // orientation="vertical"
+                      variant="unstyled"
+                    >
+                      <TabList gap={2} justifyContent="center">
+                        <Tab
+                          w={{ base: "100%", sm: "8em" }}
+                          fontWeight="semibold"
+                          _selected={{ bg: "primary.300" }}
+                          rounded="md"
+                          as={Button}
+                          variant="solid"
+                          leftIcon={<Icon h={5} w={5} as={BiMap} />}
+                        >
+                          Map View
+                        </Tab>
+                        <Tab
+                          w={{ base: "100%", sm: "8em" }}
+                          fontWeight="semibold"
+                          _selected={{ bg: "primary.300" }}
+                          rounded="md"
+                          as={Button}
+                          variant="solid"
+                          leftIcon={<Icon h={5} w={5} as={BiStreetView} />}
+                        >
+                          Street View
+                        </Tab>
+                      </TabList>
+
+                      <TabPanels>
+                        <TabPanel p={0} pt={2}>
+                          <AspectRatio
+                            ratio={{ base: 1, md: 16 / 9 }}
+                            maxW="100%"
+                          >
+                            <iframe
+                              title="Woodbridge Office Map"
+                              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3666.0322650324183!2d-74.29245454625772!3d40.570480486509716!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c3b43787c7a943%3A0x787f23130498f061!2s300%20Kimball%20St%2C%20Woodbridge%2C%20NJ%2007095!5e1!3m2!1sen!2sus!4v1669765966678!5m2!1sen!2sus"
+                              style={{
+                                border: "none",
+                                height: "100%",
+                                width: "100%",
+                                borderRadius: "0.375rem",
+                                color: "#f3f3f3",
+                              }}
+                              allowFullScreen={false}
+                              loading="lazy"
+                              referrerPolicy="no-referrer-when-downgrade"
+                            />
+                          </AspectRatio>
+                        </TabPanel>
+                        <TabPanel p={0} pt={2}>
+                          <AspectRatio
+                            ratio={{ base: 1, md: 16 / 9 }}
+                            maxW="100%"
+                          >
+                            <iframe
+                              title="Woodbridge Office Street"
+                              src="https://www.google.com/maps/embed?pb=!4v1669765851819!6m8!1m7!1sKD8qO05CQpv_gw7JaJeuJg!2m2!1d40.57073619981268!2d-74.29078223233066!3f159.0701538714232!4f-3.7724398134783144!5f0.7820865974627469"
+                              style={{
+                                border: "none",
+                                height: "100%",
+                                width: "100%",
+                                borderRadius: "0.375rem",
+                                color: "#f3f3f3",
+                              }}
+                              allowFullScreen={false}
+                              loading="lazy"
+                              referrerPolicy="no-referrer-when-downgrade"
+                            />
+                          </AspectRatio>
+                        </TabPanel>
+                      </TabPanels>
+                    </Tabs>
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
+            </CardBody>
+          </Card>
         </VStack>
       </Container>
     </SlideFade>

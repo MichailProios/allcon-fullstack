@@ -290,7 +290,7 @@ projects
     ],
     name: "SCA PS/IS 218 Rafael Hernandez Magnet School",
     location:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d912.8667424917443!2d-73.92035793036202!3d40.8356323128756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f43a6d921751:0x8da8781af2e34078!2sP.S./I.S.%20218%20Rafael%20Hernandez%20Dual%20Language%20Magnet%20School!5e1!3m2!1sen!2sus!4v1669674811391!5m2!1sen!2sus",
+      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3651.4719044706962!2d-73.92125895243812!3d40.835542724149!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x8da8781af2e34078!2sP.S./I.S.%20218%20Rafael%20Hernandez%20Dual%20Language%20Magnet%20School!5e1!3m2!1sen!2sus!4v1669762170248!5m2!1sen!2sus",
     client: {
       text: "School Construction Authority",
       tag: "SCA",

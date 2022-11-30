@@ -1,4 +1,4 @@
-import { Fragment, LegacyRef, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import {
   Text,
   Button,
@@ -43,7 +43,13 @@ import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import * as cookie from "app/utils/cookie.server";
 
 // import {  } from "@remix-run/node";
-import { useLoaderData, Link, useSubmit, Form } from "@remix-run/react";
+import {
+  useLoaderData,
+  Link,
+  useSubmit,
+  Form,
+  useBeforeUnload,
+} from "@remix-run/react";
 
 import { CloseIcon, QuestionIcon, Search2Icon } from "@chakra-ui/icons";
 import projects from "~/utils/projects";
@@ -112,6 +118,8 @@ export async function action({ request }: { request: Request }) {
     const type = data.get("type");
     const search = data.get("search") || "";
     const client = data.get("client") || "";
+
+    console.log(client);
 
     switch (type) {
       case "search": {
@@ -195,27 +203,27 @@ export default function Index() {
   }
 
   function handleFormClient(client: string) {
+    inputRef.current.value = "";
     const formData = new FormData();
     formData.set("type", "client");
     formData.set("client", client);
     submit(formData, { method: "post" });
-    inputRef.current.value = "";
   }
 
   function handleFormSearchClear() {
+    inputRef.current.value = "";
     const formData = new FormData();
     formData.set("type", "clearSearch");
     formData.set("search", "");
     formData.set("client", checkClient(data.filter?.client).client || "");
     submit(formData, { method: "delete" });
-    inputRef.current.value = "";
   }
 
   function handleFormAllClear() {
+    inputRef.current.value = "";
     const formData = new FormData();
     formData.set("type", "clearAll");
     submit(formData, { method: "delete" });
-    inputRef.current.value = "";
   }
 
   useEffect(() => {
@@ -269,7 +277,7 @@ export default function Index() {
         return { index: 3, client: client };
 
       default:
-        return { index: 0, client: client };
+        return { index: 0, client: "" };
     }
   }
 
@@ -316,7 +324,11 @@ export default function Index() {
                   justifyContent="center"
                   flexDirection={{ base: "column", sm: "row" }}
                 >
-                  <Tooltip label="Show all projects" closeOnScroll>
+                  <Tooltip
+                    label="Show all projects"
+                    closeOnScroll
+                    display={{ base: "none", sm: "flex" }}
+                  >
                     <Tab
                       w={{ base: "100%", sm: "8em" }}
                       fontWeight="semibold"
@@ -332,6 +344,7 @@ export default function Index() {
                   <Tooltip
                     label="Show State University of New York projects"
                     closeOnScroll
+                    display={{ base: "none", sm: "flex" }}
                   >
                     <Tab
                       w={{ base: "100%", sm: "8em" }}
@@ -348,6 +361,7 @@ export default function Index() {
                   <Tooltip
                     label="Show NYS Office of General Services projects"
                     closeOnScroll
+                    display={{ base: "none", sm: "flex" }}
                   >
                     <Tab
                       w={{ base: "100%", sm: "8em" }}
@@ -364,6 +378,7 @@ export default function Index() {
                   <Tooltip
                     label="Show School Construction Authority projects"
                     closeOnScroll
+                    display={{ base: "none", sm: "flex" }}
                   >
                     <Tab
                       w={{ base: "100%", sm: "8em" }}
@@ -415,7 +430,7 @@ export default function Index() {
                     type="text"
                     name="search"
                     colorScheme="primary"
-                    placeholder={`Search for ${
+                    placeholder={`Search ${
                       checkClient(data.filter?.client).client?.toUpperCase() ||
                       "all"
                     } projects`}

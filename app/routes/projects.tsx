@@ -319,79 +319,81 @@ export default function Index() {
                 index={tabIndex}
                 onChange={handleTabsChange}
               >
-                <TabList
-                  gap={2}
-                  justifyContent="center"
-                  flexDirection={{ base: "column", sm: "row" }}
-                >
-                  <Tooltip
-                    label="Show all projects"
-                    closeOnScroll
-                    display={{ base: "none", sm: "flex" }}
+                <TabList justifyContent="center">
+                  <SimpleGrid
+                    justifyContent="center"
+                    columns={{ base: 2, sm: 2, md: 4, lg: 4, xl: 4 }}
+                    spacing={2}
                   >
-                    <Tab
-                      w={{ base: "100%", sm: "8em" }}
-                      fontWeight="semibold"
-                      _selected={{ bg: "primary.300" }}
-                      rounded="md"
-                      as={Button}
-                      variant="outline"
-                      onClick={() => handleFormClient("")}
+                    <Tooltip
+                      label="Show all projects"
+                      closeOnScroll
+                      display={{ base: "none", sm: "flex" }}
                     >
-                      All Projects
-                    </Tab>
-                  </Tooltip>
-                  <Tooltip
-                    label="Show State University of New York projects"
-                    closeOnScroll
-                    display={{ base: "none", sm: "flex" }}
-                  >
-                    <Tab
-                      w={{ base: "100%", sm: "8em" }}
-                      fontWeight="semibold"
-                      _selected={{ bg: "primary.300" }}
-                      rounded="md"
-                      as={Button}
-                      variant="outline"
-                      onClick={() => handleFormClient("suny")}
+                      <Tab
+                        w={{ base: "100%", sm: "8em" }}
+                        fontWeight="semibold"
+                        _selected={{ bg: "primary.300" }}
+                        rounded="md"
+                        as={Button}
+                        variant="outline"
+                        onClick={() => handleFormClient("")}
+                      >
+                        All Projects
+                      </Tab>
+                    </Tooltip>
+                    <Tooltip
+                      label="Show State University of New York projects"
+                      closeOnScroll
+                      display={{ base: "none", sm: "flex" }}
                     >
-                      SUNY
-                    </Tab>
-                  </Tooltip>
-                  <Tooltip
-                    label="Show NYS Office of General Services projects"
-                    closeOnScroll
-                    display={{ base: "none", sm: "flex" }}
-                  >
-                    <Tab
-                      w={{ base: "100%", sm: "8em" }}
-                      fontWeight="semibold"
-                      _selected={{ bg: "primary.300" }}
-                      rounded="md"
-                      as={Button}
-                      variant="outline"
-                      onClick={() => handleFormClient("ogs")}
+                      <Tab
+                        w={{ base: "100%", sm: "8em" }}
+                        fontWeight="semibold"
+                        _selected={{ bg: "primary.300" }}
+                        rounded="md"
+                        as={Button}
+                        variant="outline"
+                        onClick={() => handleFormClient("suny")}
+                      >
+                        SUNY
+                      </Tab>
+                    </Tooltip>
+                    <Tooltip
+                      label="Show NYS Office of General Services projects"
+                      closeOnScroll
+                      display={{ base: "none", sm: "flex" }}
                     >
-                      OGS
-                    </Tab>
-                  </Tooltip>
-                  <Tooltip
-                    label="Show School Construction Authority projects"
-                    closeOnScroll
-                    display={{ base: "none", sm: "flex" }}
-                  >
-                    <Tab
-                      w={{ base: "100%", sm: "8em" }}
-                      fontWeight="semibold"
-                      _selected={{ bg: "primary.300" }}
-                      rounded="md"
-                      as={Button}
-                      variant="outline"
-                      onClick={() => handleFormClient("sca")}
+                      <Tab
+                        w={{ base: "100%", sm: "8em" }}
+                        fontWeight="semibold"
+                        _selected={{ bg: "primary.300" }}
+                        rounded="md"
+                        as={Button}
+                        variant="outline"
+                        onClick={() => handleFormClient("ogs")}
+                      >
+                        OGS
+                      </Tab>
+                    </Tooltip>
+                    <Tooltip
+                      label="Show School Construction Authority projects"
+                      closeOnScroll
+                      display={{ base: "none", sm: "flex" }}
                     >
-                      SCA
-                    </Tab>
-                  </Tooltip>
+                      <Tab
+                        w={{ base: "100%", sm: "8em" }}
+                        fontWeight="semibold"
+                        _selected={{ bg: "primary.300" }}
+                        rounded="md"
+                        as={Button}
+                        variant="outline"
+                        onClick={() => handleFormClient("sca")}
+                      >
+                        SCA
+                      </Tab>
+                    </Tooltip>
+                  </SimpleGrid>
                 </TabList>
               </Tabs>
 

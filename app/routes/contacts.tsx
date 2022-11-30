@@ -34,6 +34,7 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { useActionData } from "@remix-run/react";
+import { useEffect } from "react";
 
 import {
   ValidatedForm,
@@ -43,14 +44,16 @@ import {
 } from "remix-validated-form";
 import { withZod } from "@remix-validated-form/with-zod";
 import { z } from "zod";
-import { MetaFunction } from "@remix-run/node";
+import type { MetaFunction } from "@remix-run/node";
 import { PhoneIcon } from "@chakra-ui/icons";
 import { FaFax, FaLinkedin } from "react-icons/fa";
 
+import * as mailer from "~/utils/email.server";
 import { BiSend, BiMap, BiStreetView } from "react-icons/bi";
-// import { ses } from "app/utils/email.server";
-// import { EmailSubscribers } from "~/utils/db.server";
-// import { db } from "app/utils/db.server";
+
+const phoneRegExp = new RegExp(
+  /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/
+);
 
 export const validator = withZod(
   z.object({
@@ -59,6 +62,13 @@ export const validator = withZod(
       .min(1, { message: "Full Name is required" })
       .max(20, { message: "Full Name cannot be more than 20 characters" }),
 
+    phoneNumber: z
+      .string()
+      .min(9, { message: "Phone Number cannot be less than 9 characters" })
+      .max(15, { message: "Phone Number cannot be more than 15 characters" })
+      .regex(phoneRegExp, {
+        message: "Phone number is not valid (format +1-123-456-789)",
+      }),
     emailAddress: z
       .string()
       .min(1, { message: "Email is required" })
@@ -70,7 +80,7 @@ export const validator = withZod(
       .min(1, { message: "Subject is required" })
       .max(50, { message: "Subject cannot be more than 50 characters" }),
 
-    body: z
+    message: z
       .string()
       .min(1, { message: "Body is required" })
       .max(500, { message: "Subject cannot be more than 500 characters" }),
@@ -79,7 +89,7 @@ export const validator = withZod(
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - Contacts`,
-  description: `Allcon Contracting contact information and `,
+  description: `Allcon Contracting contact and office information`,
 });
 
 export async function action({ request }: { request: Request }) {
@@ -89,32 +99,16 @@ export async function action({ request }: { request: Request }) {
     return validationError(data.error);
   }
 
-  const { fullName, emailAddress, subject, body } = data.data;
+  const { fullName, emailAddress, phoneNumber, subject, message } = data.data;
 
   try {
-    // if (subscribe) {
-    //   const exists = await EmailSubscribers.query("EmailAddress")
-    //     .eq(emailAddress)
-    //     .exec();
-
-    //   if (!exists[0]) {
-    //     await EmailSubscribers.create({ EmailAddress: emailAddress });
-    //   }
-    // }
-
-    // await ses.sendEmail({
-    //   Destination: {
-    //     ToAddresses: ["mproios@eucrona.com"],
-    //   },
-    //   Message: {
-    //     Body: {
-    //       Text: { Data: body },
-    //     },
-
-    //     Subject: { Data: `New inquiry ${fullName} - ${subject}` },
-    //   },
-    //   Source: "inquiries@eucrona.com",
-    // });
+    await mailer.sendEmail({
+      fullName,
+      emailAddress,
+      phoneNumber,
+      subject,
+      message,
+    });
 
     return "success";
   } catch (error) {
@@ -157,23 +151,6 @@ function TextArea(props: any) {
   );
 }
 
-function CheckBox(props: any) {
-  const { getInputProps } = useField(props.name);
-  const actionData = useActionData();
-
-  return (
-    <Checkbox
-      {...props}
-      {...getInputProps()}
-      defaultChecked
-      value={"yes"}
-      disabled={actionData === "success"}
-    >
-      {props.label}
-    </Checkbox>
-  );
-}
-
 function SubmitButton(props: any) {
   const isSubmitting = useIsSubmitting();
   const actionData = useActionData();
@@ -184,7 +161,8 @@ function SubmitButton(props: any) {
       isLoading={isSubmitting}
       loadingText="Sending"
       disabled={actionData === "success" || isSubmitting}
-      leftIcon={<Icon h={5} w={5} as={BiSend} />}
+      w="200px"
+      rightIcon={<Icon h={5} w={5} as={BiSend} />}
     >
       {props.label}
     </Button>
@@ -196,6 +174,22 @@ export default function Contacts() {
 
   const { onCopy } = useClipboard("+1-516-333-3344");
   const toast = useToast();
+
+  useEffect(() => {
+    if (actionData === "success") {
+      toast({
+        title: "Message Sent Successfully!",
+        description: "We'll get back to you shortly.",
+        status: "success",
+      });
+    } else if (actionData === "error") {
+      toast({
+        title: "Message Failed to Send.",
+        description: "Please try again.",
+        status: "error",
+      });
+    }
+  }, [actionData, toast]);
 
   return (
     <SlideFade in={true} reverse delay={0.1}>
@@ -233,12 +227,18 @@ export default function Contacts() {
                     rounded="md"
                     type="text"
                   />
-
                   <TextField
                     label="Email"
                     type="email"
                     name="emailAddress"
                     placeholder="Enter your email address"
+                    rounded="md"
+                  />
+                  <TextField
+                    label="Phone Number"
+                    type="text"
+                    name="phoneNumber"
+                    placeholder="Enter your phone number"
                     rounded="md"
                   />
                 </Stack>
@@ -255,7 +255,7 @@ export default function Contacts() {
                   label="Message"
                   type="text"
                   size="lg"
-                  name="body"
+                  name="message"
                   placeholder="Enter your message"
                   rounded="md"
                 />
@@ -274,6 +274,7 @@ export default function Contacts() {
                     <Button
                       leftIcon={<PhoneIcon />}
                       onClick={() => window.open("tel:+1-516-333-3339")}
+                      w="200px"
                     >
                       Call +1-516-333-3339
                     </Button>
@@ -288,6 +289,7 @@ export default function Contacts() {
                         });
                       }}
                       leftIcon={<Icon as={FaFax} />}
+                      w="200px"
                     >
                       Fax +1-516-333-3339
                     </Button>
@@ -298,6 +300,7 @@ export default function Contacts() {
                         )
                       }
                       leftIcon={<Icon as={FaLinkedin} />}
+                      w="200px"
                     >
                       View Allcon LinkedIn
                     </Button>
@@ -316,8 +319,8 @@ export default function Contacts() {
             <CardBody>
               <Tabs isFitted isLazy colorScheme="primary">
                 <TabList>
-                  <Tab>66 Brooklyn Ave, Westbury, New York 11590</Tab>
-                  <Tab>300 Kimball St #204b, Woodbridge, New Jersey 07095</Tab>
+                  <Tab>New York Office</Tab>
+                  <Tab>New Jersey Office</Tab>
                 </TabList>
 
                 <TabPanels>
@@ -329,7 +332,11 @@ export default function Contacts() {
                       // orientation="vertical"
                       variant="unstyled"
                     >
-                      <TabList gap={2} justifyContent="center">
+                      <TabList
+                        gap={2}
+                        justifyContent="center"
+                        flexDirection={{ base: "column", xs: "row" }}
+                      >
                         <Tab
                           w={{ base: "100%", sm: "8em" }}
                           fontWeight="semibold"
@@ -407,7 +414,11 @@ export default function Contacts() {
                       // orientation="vertical"
                       variant="unstyled"
                     >
-                      <TabList gap={2} justifyContent="center">
+                      <TabList
+                        gap={2}
+                        justifyContent="center"
+                        flexDirection={{ base: "column", xs: "row" }}
+                      >
                         <Tab
                           w={{ base: "100%", sm: "8em" }}
                           fontWeight="semibold"

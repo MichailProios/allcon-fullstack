@@ -125,6 +125,9 @@ export default function Project() {
             zIndex={2}
             onClick={handlePrev}
             icon={<ChevronLeftIcon w={6} h={6} />}
+            bgColor="gray.50"
+            textColor="black"
+            _hover={{ bgColor: "gray.200" }}
           />
 
           <IconButton
@@ -138,6 +141,9 @@ export default function Project() {
             zIndex={2}
             onClick={handleNext}
             icon={<ChevronRightIcon w={6} h={6} />}
+            bgColor="gray.50"
+            textColor="black"
+            _hover={{ bgColor: "gray.200" }}
           />
 
           <Box mt={"26px"} boxShadow="xl" w={"full"}>

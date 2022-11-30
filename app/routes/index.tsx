@@ -12,9 +12,11 @@ import {
   AspectRatio,
   Skeleton,
   useColorModeValue,
+  ButtonGroup,
+  Stack,
 } from "@chakra-ui/react";
 // import { useDataRefresh } from "remix-utils";
-import { BiBuildings } from "react-icons/bi";
+import { BiBuildings, BiBook } from "react-icons/bi";
 
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
@@ -22,20 +24,8 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useWindowDimensions } from "~/utils/hooks";
 
-// import * as auth from "app/utils/auth.server";
-// import { useTransition } from "@remix-run/react";
-// import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
-
 import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  EffectFade,
-  Autoplay,
-  EffectCreative,
-  Pagination,
-  Navigation,
-} from "swiper";
+import { EffectFade, Autoplay, Pagination } from "swiper";
 
 export const loader: LoaderFunction = async ({ request }: any) => {
   try {
@@ -73,29 +63,21 @@ export default function Index() {
   return (
     <SlideFade in={true} reverse delay={0.1}>
       <Box>
-        {/* <Slider
-          fade={true}
-          infinite={true}
-          autoplay={true}
-          autoplaySpeed={5000}
-          speed={300}
-          arrows={false}
-          draggable={false}
-          swipe={false}
-          pauseOnHover={false}
-          lazyLoad={"progressive"}
-          adaptiveHeight
-        > */}
         <Swiper
           autoplay={{
-            delay: 3000,
+            delay: 5000,
             disableOnInteraction: false,
           }}
-          modules={[Autoplay, EffectFade]}
+          centeredSlides={true}
+          modules={[Autoplay, Pagination, EffectFade]}
           effect={"fade"}
+          lazy={false}
           allowTouchMove={false}
           style={{
             height: height ? `calc(${height}px - 64px)` : `calc(100vh - 64px)`,
+          }}
+          pagination={{
+            clickable: true,
           }}
         >
           {images.map((img: any, index: any) => (
@@ -118,6 +100,9 @@ export default function Index() {
                   overflow="hidden"
                   display="block"
                   lineHeight={0}
+                  filter={"brightness(75%)"}
+                  draggable={false}
+                  loading="eager"
                 />
               </AspectRatio>
             </SwiperSlide>
@@ -150,20 +135,38 @@ export default function Index() {
           </SlideFade>
 
           <SlideFade in={true} reverse delay={1}>
-            <Button
-              colorScheme="primary"
-              variant="solid"
-              bgColor="#018b8b"
-              textColor="white"
-              as={Link}
-              to="projects"
-              boxShadow="dark-lg"
-              rounded="md"
-              size="md"
-              rightIcon={<Icon as={BiBuildings} />}
-            >
-              Explore our Projects
-            </Button>
+            <Stack direction={{ base: "column", sm: "row" }}>
+              <Button
+                colorScheme="primary"
+                variant="solid"
+                bgColor="#018b8b"
+                textColor="white"
+                as={Link}
+                to="projects"
+                boxShadow="dark-lg"
+                rounded="md"
+                size="md"
+                rightIcon={<Icon as={BiBuildings} />}
+                draggable={false}
+              >
+                Explore our Projects
+              </Button>
+              <Button
+                as={Link}
+                to="about"
+                boxShadow="dark-lg"
+                rounded="md"
+                size="md"
+                variant="solid"
+                bgColor="gray.50"
+                _hover={{ bgColor: "gray.200" }}
+                textColor="black"
+                rightIcon={<Icon as={BiBook} />}
+                draggable={false}
+              >
+                Learn More
+              </Button>
+            </Stack>
           </SlideFade>
         </VStack>
       </Box>

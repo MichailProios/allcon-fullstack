@@ -319,11 +319,12 @@ export default function Index() {
                 index={tabIndex}
                 onChange={handleTabsChange}
               >
-                <TabList justifyContent="center">
+                <TabList justifyContent="center" w="full">
                   <SimpleGrid
                     justifyContent="center"
                     columns={{ base: 2, sm: 2, md: 4, lg: 4, xl: 4 }}
                     spacing={2}
+                    w={{ base: "full", md: "auto" }}
                   >
                     <Tooltip
                       label="Show all projects"
@@ -331,7 +332,7 @@ export default function Index() {
                       display={{ base: "none", sm: "flex" }}
                     >
                       <Tab
-                        w={{ base: "100%", sm: "8em" }}
+                        w={{ base: "full", md: "8em" }}
                         fontWeight="semibold"
                         _selected={{ bg: "primary.300" }}
                         rounded="md"
@@ -348,7 +349,7 @@ export default function Index() {
                       display={{ base: "none", sm: "flex" }}
                     >
                       <Tab
-                        w={{ base: "100%", sm: "8em" }}
+                        w={{ base: "full", md: "8em" }}
                         fontWeight="semibold"
                         _selected={{ bg: "primary.300" }}
                         rounded="md"
@@ -365,7 +366,7 @@ export default function Index() {
                       display={{ base: "none", sm: "flex" }}
                     >
                       <Tab
-                        w={{ base: "100%", sm: "8em" }}
+                        w={{ base: "full", md: "8em" }}
                         fontWeight="semibold"
                         _selected={{ bg: "primary.300" }}
                         rounded="md"
@@ -382,7 +383,7 @@ export default function Index() {
                       display={{ base: "none", sm: "flex" }}
                     >
                       <Tab
-                        w={{ base: "100%", sm: "8em" }}
+                        w={{ base: "full", md: "8em" }}
                         fontWeight="semibold"
                         _selected={{ bg: "primary.300" }}
                         rounded="md"
@@ -554,7 +555,14 @@ export default function Index() {
                         left="50%"
                         transform="translate(-50%, -50%)"
                       >
-                        <Button variant="solid" boxShadow="lg" rounded="md">
+                        <Button
+                          variant="solid"
+                          boxShadow="lg"
+                          rounded="md"
+                          bgColor="gray.50"
+                          textColor="black"
+                          _hover={{ bgColor: "gray.200" }}
+                        >
                           View Project
                         </Button>
                       </Box>

@@ -264,7 +264,7 @@ export async function sendEmail({
                              <tr>
                                 <td style="padding: 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
                                     <h2 style="margin: 0 0 10px 0; font-family: sans-serif; font-size: 20px; line-height: 30px; color: #333333; font-weight: normal;">Phone Number</h1>
-                                    <p style="margin: 0;">${phoneNumber}</p>
+                                    <p style="margin: 0;" type="tel">${phoneNumber}</p>
                                 </td>
                             </tr>  
                                <tr>

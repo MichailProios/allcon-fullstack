@@ -64,6 +64,7 @@ export const validator = withZod(
 
     phoneNumber: z
       .string()
+      .min(1, { message: "Phone Number is required" })
       .min(9, { message: "Phone Number cannot be less than 9 characters" })
       .max(15, { message: "Phone Number cannot be more than 15 characters" })
       .regex(phoneRegExp, {
@@ -82,8 +83,8 @@ export const validator = withZod(
 
     message: z
       .string()
-      .min(1, { message: "Body is required" })
-      .max(500, { message: "Subject cannot be more than 500 characters" }),
+      .min(1, { message: "Message is required" })
+      .max(500, { message: "Message cannot be more than 500 characters" }),
   })
 );
 
@@ -276,9 +277,9 @@ export default function Contacts() {
                       onClick={() => window.open("tel:+1-516-333-3339")}
                       w="200px"
                     >
-                      Call +1-516-333-3339
+                      +1-516-333-3339
                     </Button>
-                    <Button
+                    {/* <Button
                       onClick={() => {
                         onCopy();
                         toast({
@@ -292,7 +293,7 @@ export default function Contacts() {
                       w="200px"
                     >
                       Fax +1-516-333-3339
-                    </Button>
+                    </Button> */}
                     <Button
                       onClick={() =>
                         window.open(
@@ -302,7 +303,7 @@ export default function Contacts() {
                       leftIcon={<Icon as={FaLinkedin} />}
                       w="200px"
                     >
-                      View Allcon LinkedIn
+                      Allcon LinkedIn
                     </Button>
                   </Stack>
                 </VStack>
@@ -312,7 +313,7 @@ export default function Contacts() {
         </VStack>
       </Container>
       <Divider />
-      <Container maxW={"1400px"} px={{ base: 6, md: 10 }} py={14}>
+      <Container maxW={"1200px"} px={{ base: 6, md: 10 }} py={14}>
         <VStack spacing="26px">
           <Heading textAlign="center">Office Locations</Heading>
           <Card rounded="md" boxShadow="xl" w={"full"}>

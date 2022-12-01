@@ -129,8 +129,6 @@ export async function action({ request }: { request: Request }) {
     const search = data.get("search") || "";
     const client = data.get("client") || "";
 
-    console.log(client);
-
     switch (type) {
       case "search": {
         const session = await cookie.getSession(request.headers.get("Cookie"));
@@ -206,7 +204,10 @@ export default function Index() {
   const data = useLoaderData();
   const firstRender = useFirstRender();
 
-  const [inputValue, setInputValue] = useState(data.filter?.search || "");
+  const [inputValue, setInputValue] = useState({
+    text: data.filter?.search || "",
+    type: "",
+  });
 
   function onEnter(e: any) {
     if (e.key === "Enter") {
@@ -215,26 +216,10 @@ export default function Index() {
   }
 
   useEffect(() => {
-    if (!firstRender) {
-      if (!toastIdRef.current) {
-        toastIdRef.current = toast({
-          title: "Searching Projects",
-          status: "loading",
-          duration: null,
-          isClosable: false,
-        });
-      } else if (toastIdRef.current) {
-        toast.update(toastIdRef.current, {
-          title: "Searching Projects",
-          status: "loading",
-          duration: null,
-          isClosable: false,
-        });
-      }
-    }
-
     const timer = setTimeout(() => {
-      handleFormSearch(inputValue);
+      if (inputValue.type !== "clear") {
+        handleFormSearch(inputValue.text);
+      }
     }, 200);
 
     return () => clearTimeout(timer);
@@ -253,6 +238,21 @@ export default function Index() {
 
   function handleFormSearch(input: string) {
     if (!firstRender) {
+      if (!toastIdRef.current) {
+        toastIdRef.current = toast({
+          title: "Searching Projects",
+          status: "loading",
+          duration: null,
+          isClosable: false,
+        });
+      } else if (toastIdRef.current) {
+        toast.update(toastIdRef.current, {
+          title: "Searching Projects",
+          status: "loading",
+          duration: null,
+          isClosable: false,
+        });
+      }
       const formData = new FormData();
       formData.set("search", input);
       formData.set("type", "search");
@@ -278,7 +278,7 @@ export default function Index() {
       });
     }
 
-    setInputValue("");
+    setInputValue({ text: "", type: "clear" });
     const formData = new FormData();
     formData.set("type", "client");
     formData.set("client", client);
@@ -286,7 +286,7 @@ export default function Index() {
   }
 
   function handleFormSearchClear() {
-    setInputValue("");
+    setInputValue({ text: "", type: "clear" });
     const formData = new FormData();
     formData.set("type", "clearSearch");
     formData.set("search", "");
@@ -295,7 +295,7 @@ export default function Index() {
   }
 
   function handleFormAllClear() {
-    setInputValue("");
+    setInputValue({ text: "", type: "clear" });
     const formData = new FormData();
     formData.set("type", "clearAll");
     submit(formData, { method: "delete" });
@@ -368,7 +368,25 @@ export default function Index() {
         py={14}
         as={Form}
         method="post"
-        // onChange={handleFormSearch}
+        onSubmit={() => {
+          if (!firstRender) {
+            if (!toastIdRef.current) {
+              toastIdRef.current = toast({
+                title: "Searching Projects",
+                status: "loading",
+                duration: null,
+                isClosable: false,
+              });
+            } else if (toastIdRef.current) {
+              toast.update(toastIdRef.current, {
+                title: "Searching Projects",
+                status: "loading",
+                duration: null,
+                isClosable: false,
+              });
+            }
+          }
+        }}
       >
         <VStack spacing="26px">
           <Heading textAlign="center">Projects</Heading>
@@ -506,8 +524,13 @@ export default function Index() {
                   <Input
                     type="text"
                     name="search"
-                    onChange={(e) => setInputValue(e.target.value)}
-                    value={inputValue}
+                    onChange={(e) =>
+                      setInputValue({
+                        text: e.target.value,
+                        type: "input-change",
+                      })
+                    }
+                    value={inputValue.text}
                     colorScheme="primary"
                     placeholder={`Search ${
                       checkClient(data.filter?.client).client?.toUpperCase() ||

@@ -208,8 +208,6 @@ export default function Index() {
 
   const [inputValue, setInputValue] = useState(data.filter?.search || "");
 
-  const [loadingText, setLoadingText] = useState("Loading");
-
   function onEnter(e: any) {
     if (e.key === "Enter") {
       e.target.blur();
@@ -217,6 +215,24 @@ export default function Index() {
   }
 
   useEffect(() => {
+    if (!firstRender) {
+      if (!toastIdRef.current) {
+        toastIdRef.current = toast({
+          title: "Searching Projects",
+          status: "loading",
+          duration: null,
+          isClosable: false,
+        });
+      } else if (toastIdRef.current) {
+        toast.update(toastIdRef.current, {
+          title: "Searching Projects",
+          status: "loading",
+          duration: null,
+          isClosable: false,
+        });
+      }
+    }
+
     const timer = setTimeout(() => {
       handleFormSearch(inputValue);
     }, 200);
@@ -224,18 +240,19 @@ export default function Index() {
     return () => clearTimeout(timer);
   }, [inputValue]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (toastIdRef.current) {
+        toast.closeAll();
+        toastIdRef.current = null;
+      }
+    }, 800);
+
+    return () => clearTimeout(timer);
+  }, [toastIdRef.current]);
+
   function handleFormSearch(input: string) {
     if (!firstRender) {
-      if (!toast.isActive("search")) {
-        toast({
-          id: "search",
-          title: `Searching Projects`,
-          status: "loading",
-          duration: 800,
-          isClosable: false,
-        });
-      }
-
       const formData = new FormData();
       formData.set("search", input);
       formData.set("type", "search");
@@ -245,12 +262,21 @@ export default function Index() {
   }
 
   function handleFormClient(client: string) {
-    toast({
-      title: `Showing ${client.toUpperCase() || "All"} Projects`,
-      status: "loading",
-      duration: 800,
-      isClosable: false,
-    });
+    if (!toastIdRef.current) {
+      toastIdRef.current = toast({
+        title: `Showing ${client.toUpperCase() || "All"} Projects`,
+        status: "loading",
+        duration: null,
+        isClosable: false,
+      });
+    } else if (toastIdRef.current) {
+      toast.update(toastIdRef.current, {
+        title: `Showing ${client.toUpperCase() || "All"} Projects`,
+        status: "loading",
+        duration: null,
+        isClosable: false,
+      });
+    }
 
     setInputValue("");
     const formData = new FormData();
@@ -260,13 +286,6 @@ export default function Index() {
   }
 
   function handleFormSearchClear() {
-    toast({
-      title: "Clearing Search",
-      status: "loading",
-      duration: 800,
-      isClosable: false,
-    });
-
     setInputValue("");
     const formData = new FormData();
     formData.set("type", "clearSearch");
@@ -340,23 +359,6 @@ export default function Index() {
   useEffect(() => {
     handleTabsChange(checkClient(data.filter?.client).index);
   }, [data.filter?.client]);
-
-  // const transition = useTransition();
-  //
-  // useEffect(() => {
-  //   if (
-
-  //     !firstRender
-
-  //   ) {
-  //     toast({
-  //       title: loadingText,
-  //       status: "loading",
-  //       duration: 800,
-  //       isClosable: false,
-  //     });
-  //   }
-  // }, [transition, toast, loadingText, firstRender, inputValue]);
 
   return (
     <SlideFade in={true} reverse delay={0.1}>
@@ -669,7 +671,8 @@ export default function Index() {
               </AnimatePresence>
             </SimpleGrid>
           </VStack>
-          {data.projects.length <= 0 && (
+
+          <ScaleFade in={data.projects.length <= 0 ? true : false}>
             <Box textAlign="center" py={10} px={6}>
               <QuestionIcon boxSize={"50px"} color="primary.500" />
               <Heading as="h2" size="lg" mt={6} mb={2}>
@@ -680,7 +683,7 @@ export default function Index() {
                 Please try again using different keywords.
               </Text>
             </Box>
-          )}
+          </ScaleFade>
         </VStack>
       </Container>
 

@@ -49,7 +49,7 @@ export const loader: LoaderFunction = async ({ request }: any) => {
     const greatneckRoofs =
       "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400/public";
 
-    return [greatneckRoofs, lupton, elwood, policeStation, apt724, nold];
+    return [lupton, elwood, policeStation, nold, apt724, greatneckRoofs];
   } catch (error) {
     throw error;
   }
@@ -119,7 +119,7 @@ export default function Index() {
         >
           <SlideFade in={true} reverse delay={0.6}>
             <Text
-              fontSize={{ base: "2xl", md: "3xl" }}
+              fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
               fontWeight="medium"
               letterSpacing={"0.05em"}
               textTransform="uppercase"
@@ -135,7 +135,10 @@ export default function Index() {
           </SlideFade>
 
           <SlideFade in={true} reverse delay={1}>
-            <Stack direction={{ base: "column", sm: "row" }}>
+            <Stack
+              direction={{ base: "column", sm: "row" }}
+              alignItems="center"
+            >
               <Button
                 colorScheme="primary"
                 variant="solid"
@@ -148,6 +151,7 @@ export default function Index() {
                 size="md"
                 rightIcon={<Icon as={BiBuildings} />}
                 draggable={false}
+                w="12.2em"
               >
                 Explore our Projects
               </Button>
@@ -159,10 +163,11 @@ export default function Index() {
                 size="md"
                 variant="solid"
                 bgColor="gray.50"
-                _hover={{ bgColor: "gray.200" }}
+                _hover={{ bgColor: "gray.300" }}
                 textColor="black"
                 rightIcon={<Icon as={BiBook} />}
                 draggable={false}
+                w="8.2em"
               >
                 Learn More
               </Button>

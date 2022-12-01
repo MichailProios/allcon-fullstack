@@ -1,4 +1,6 @@
-// import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+
+import { motion, useAnimationControls } from "framer-motion";
 
 import type { ReactNode } from "react";
 
@@ -14,6 +16,7 @@ import {
   Skeleton,
   Spinner,
   Progress,
+  VStack,
 } from "@chakra-ui/react";
 import Navbar from "app/components/Navbar";
 import { useWindowDimensions } from "app/utils/hooks";
@@ -21,6 +24,8 @@ import { animateScroll as scroll } from "react-scroll";
 import { useScrollButtonVisibility } from "app/utils/hooks";
 import { ChevronUpIcon } from "@chakra-ui/icons";
 import { useTransition } from "@remix-run/react";
+
+import { useLoading } from "app/utils/hooks";
 
 interface LayoutProps {
   children: ReactNode;
@@ -36,7 +41,7 @@ const navigationLinks = [
 export default function Layout({ children }: LayoutProps) {
   const { height } = useWindowDimensions();
   const showButton = useScrollButtonVisibility();
-  // const transition = useTransition();
+  const transition = useTransition();
 
   const handleScrollToTop = () => {
     scroll.scrollToTop({
@@ -45,6 +50,20 @@ export default function Layout({ children }: LayoutProps) {
       smooth: "easeInOutQuart",
     });
   };
+
+  const routeLoading = useLoading();
+
+  useEffect(() => {
+    if (transition.state === "loading" && transition.type === "normalLoad") {
+      routeLoading.startLoading();
+    }
+
+    if (transition.state === "idle") {
+      setTimeout(() => {
+        routeLoading.finishLoading();
+      }, 1);
+    }
+  }, [transition, routeLoading]);
 
   return (
     <Box
@@ -55,17 +74,34 @@ export default function Layout({ children }: LayoutProps) {
       justifyContent="flex-start"
     >
       <Navbar navigationLinks={navigationLinks} />
-      {/* <Progress
-        isIndeterminate
-        display={transition.state !== "idle" ? "flex" : "none"}
-        size="xs"
+
+      <Progress
+        display={routeLoading.isLoading ? "flex" : "none"}
+        value={routeLoading.loadingValue}
+        height="3px"
         position="fixed"
         top={"64px"}
         zIndex={800}
-        width={"100%"}
+        width="full"
         backgroundColor="transparent"
-        colorScheme={"primary"} */}
-      {/* /> */}
+        colorScheme={"primary"}
+        sx={{
+          "& > div:first-of-type": {
+            transitionProperty: "width",
+          },
+        }}
+      />
+
+      {/* )} */}
+
+      {/* <Spinner
+        display={actionLoading.isLoading ? "flex" : "none"}
+        position="fixed"
+        top={"80px"}
+        right={"16px"}
+        backgroundColor="transparent"
+        color="primary.500"
+      /> */}
 
       <Box display={{ base: "none", md: "flex" }}>
         <Fade in={showButton} unmountOnExit style={{ zIndex: 1000 }}>

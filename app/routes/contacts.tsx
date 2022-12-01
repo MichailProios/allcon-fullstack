@@ -273,7 +273,7 @@ export default function Contacts() {
                   </HStack>
                   <Stack direction={{ base: "column", md: "row" }}>
                     <Button
-                      leftIcon={<PhoneIcon />}
+                      rightIcon={<PhoneIcon />}
                       onClick={() => window.open("tel:+1-516-333-3339")}
                       w="200px"
                     >
@@ -289,22 +289,22 @@ export default function Contacts() {
                           duration: 3000,
                         });
                       }}
-                      leftIcon={<Icon as={FaFax} />}
+                      rightIcon={<Icon as={FaFax} />}
                       w="200px"
                     >
                       Fax +1-516-333-3339
                     </Button> */}
-                    <Button
+                    {/* <Button
                       onClick={() =>
                         window.open(
                           "https://www.linkedin.com/company/allcon-contracting"
                         )
                       }
-                      leftIcon={<Icon as={FaLinkedin} />}
+                      rightIcon={<Icon as={FaLinkedin} />}
                       w="200px"
                     >
                       Allcon LinkedIn
-                    </Button>
+                    </Button> */}
                   </Stack>
                 </VStack>
               </VStack>
@@ -339,24 +339,24 @@ export default function Contacts() {
                         flexDirection={{ base: "column", xs: "row" }}
                       >
                         <Tab
-                          w={{ base: "100%", sm: "8em" }}
+                          w={{ base: "100%", md: "8.6em" }}
                           fontWeight="semibold"
-                          _selected={{ bg: "primary.300" }}
+                          _selected={{ color: "white", bg: "primary.500" }}
                           rounded="md"
                           as={Button}
                           variant="solid"
-                          leftIcon={<Icon h={5} w={5} as={BiMap} />}
+                          rightIcon={<Icon h={5} w={5} as={BiMap} />}
                         >
                           Map View
                         </Tab>
                         <Tab
-                          w={{ base: "100%", sm: "8em" }}
+                          w={{ base: "100%", md: "8.6em" }}
                           fontWeight="semibold"
-                          _selected={{ bg: "primary.300" }}
+                          _selected={{ color: "white", bg: "primary.500" }}
                           rounded="md"
                           as={Button}
                           variant="solid"
-                          leftIcon={<Icon h={5} w={5} as={BiStreetView} />}
+                          rightIcon={<Icon h={5} w={5} as={BiStreetView} />}
                         >
                           Street View
                         </Tab>
@@ -421,24 +421,24 @@ export default function Contacts() {
                         flexDirection={{ base: "column", xs: "row" }}
                       >
                         <Tab
-                          w={{ base: "100%", sm: "8em" }}
+                          w={{ base: "100%", md: "8.6em" }}
                           fontWeight="semibold"
-                          _selected={{ bg: "primary.300" }}
+                          _selected={{ color: "white", bg: "primary.500" }}
                           rounded="md"
                           as={Button}
                           variant="solid"
-                          leftIcon={<Icon h={5} w={5} as={BiMap} />}
+                          rightIcon={<Icon h={5} w={5} as={BiMap} />}
                         >
                           Map View
                         </Tab>
                         <Tab
-                          w={{ base: "100%", sm: "8em" }}
+                          w={{ base: "100%", md: "8.6em" }}
                           fontWeight="semibold"
-                          _selected={{ bg: "primary.300" }}
+                          _selected={{ color: "white", bg: "primary.500" }}
                           rounded="md"
                           as={Button}
                           variant="solid"
-                          leftIcon={<Icon h={5} w={5} as={BiStreetView} />}
+                          rightIcon={<Icon h={5} w={5} as={BiStreetView} />}
                         >
                           Street View
                         </Tab>

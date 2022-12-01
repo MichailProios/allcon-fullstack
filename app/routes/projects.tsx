@@ -34,9 +34,17 @@ import {
   TabPanel,
   InputRightElement,
   Kbd,
+  Progress,
+  useToast,
 } from "@chakra-ui/react";
 
-import { redirect, json } from "@remix-run/node";
+import { AnimatePresence, motion } from "framer-motion";
+
+import {
+  redirect,
+  json,
+  unstable_composeUploadHandlers,
+} from "@remix-run/node";
 
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 
@@ -49,10 +57,12 @@ import {
   useSubmit,
   Form,
   useBeforeUnload,
+  useTransition,
 } from "@remix-run/react";
 
 import { CloseIcon, QuestionIcon, Search2Icon } from "@chakra-ui/icons";
 import projects from "~/utils/projects";
+import { useFirstRender, useLoading } from "~/utils/hooks";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - Projects`,
@@ -188,9 +198,17 @@ export async function action({ request }: { request: Request }) {
 
 export default function Index() {
   const [showButton, setShowButton] = useState({ index: null, flag: false });
+  const toast = useToast();
+  const toastIdRef = useRef<any>();
+
   const submit = useSubmit();
   const inputRef = useRef<any>(null);
   const data = useLoaderData();
+  const firstRender = useFirstRender();
+
+  const [inputValue, setInputValue] = useState(data.filter?.search || "");
+
+  const [loadingText, setLoadingText] = useState("Loading");
 
   function onEnter(e: any) {
     if (e.key === "Enter") {
@@ -198,12 +216,43 @@ export default function Index() {
     }
   }
 
-  function handleFormSearch(event: any) {
-    submit(event.currentTarget);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handleFormSearch(inputValue);
+    }, 200);
+
+    return () => clearTimeout(timer);
+  }, [inputValue]);
+
+  function handleFormSearch(input: string) {
+    if (!firstRender) {
+      if (!toast.isActive("search")) {
+        toast({
+          id: "search",
+          title: `Searching Projects`,
+          status: "loading",
+          duration: 800,
+          isClosable: false,
+        });
+      }
+
+      const formData = new FormData();
+      formData.set("search", input);
+      formData.set("type", "search");
+      formData.set("client", checkClient(data.filter?.client).client);
+      submit(formData, { method: "post" });
+    }
   }
 
   function handleFormClient(client: string) {
-    inputRef.current.value = "";
+    toast({
+      title: `Showing ${client.toUpperCase() || "All"} Projects`,
+      status: "loading",
+      duration: 800,
+      isClosable: false,
+    });
+
+    setInputValue("");
     const formData = new FormData();
     formData.set("type", "client");
     formData.set("client", client);
@@ -211,7 +260,14 @@ export default function Index() {
   }
 
   function handleFormSearchClear() {
-    inputRef.current.value = "";
+    toast({
+      title: "Clearing Search",
+      status: "loading",
+      duration: 800,
+      isClosable: false,
+    });
+
+    setInputValue("");
     const formData = new FormData();
     formData.set("type", "clearSearch");
     formData.set("search", "");
@@ -220,7 +276,7 @@ export default function Index() {
   }
 
   function handleFormAllClear() {
-    inputRef.current.value = "";
+    setInputValue("");
     const formData = new FormData();
     formData.set("type", "clearAll");
     submit(formData, { method: "delete" });
@@ -285,6 +341,23 @@ export default function Index() {
     handleTabsChange(checkClient(data.filter?.client).index);
   }, [data.filter?.client]);
 
+  // const transition = useTransition();
+  //
+  // useEffect(() => {
+  //   if (
+
+  //     !firstRender
+
+  //   ) {
+  //     toast({
+  //       title: loadingText,
+  //       status: "loading",
+  //       duration: 800,
+  //       isClosable: false,
+  //     });
+  //   }
+  // }, [transition, toast, loadingText, firstRender, inputValue]);
+
   return (
     <SlideFade in={true} reverse delay={0.1}>
       <Container
@@ -293,7 +366,7 @@ export default function Index() {
         py={14}
         as={Form}
         method="post"
-        onChange={handleFormSearch}
+        // onChange={handleFormSearch}
       >
         <VStack spacing="26px">
           <Heading textAlign="center">Projects</Heading>
@@ -334,7 +407,7 @@ export default function Index() {
                       <Tab
                         w={{ base: "full", md: "8em" }}
                         fontWeight="semibold"
-                        _selected={{ bg: "primary.300" }}
+                        _selected={{ color: "white", bg: "primary.500" }}
                         rounded="md"
                         as={Button}
                         variant="outline"
@@ -351,7 +424,7 @@ export default function Index() {
                       <Tab
                         w={{ base: "full", md: "8em" }}
                         fontWeight="semibold"
-                        _selected={{ bg: "primary.300" }}
+                        _selected={{ color: "white", bg: "primary.500" }}
                         rounded="md"
                         as={Button}
                         variant="outline"
@@ -368,7 +441,7 @@ export default function Index() {
                       <Tab
                         w={{ base: "full", md: "8em" }}
                         fontWeight="semibold"
-                        _selected={{ bg: "primary.300" }}
+                        _selected={{ color: "white", bg: "primary.500" }}
                         rounded="md"
                         as={Button}
                         variant="outline"
@@ -385,7 +458,7 @@ export default function Index() {
                       <Tab
                         w={{ base: "full", md: "8em" }}
                         fontWeight="semibold"
-                        _selected={{ bg: "primary.300" }}
+                        _selected={{ color: "white", bg: "primary.500" }}
                         rounded="md"
                         as={Button}
                         variant="outline"
@@ -429,9 +502,10 @@ export default function Index() {
                     }
                   />
                   <Input
-                    ref={inputRef}
                     type="text"
                     name="search"
+                    onChange={(e) => setInputValue(e.target.value)}
+                    value={inputValue}
                     colorScheme="primary"
                     placeholder={`Search ${
                       checkClient(data.filter?.client).client?.toUpperCase() ||
@@ -439,16 +513,16 @@ export default function Index() {
                     } projects`}
                     w="full"
                     onKeyUp={onEnter}
-                    defaultValue={data.filter?.search}
+                    // defaultValue={data.filter?.search}
                   />
                 </InputGroup>
 
-                <input type="hidden" name="type" value="search" />
+                {/* <input type="hidden" name="type" value="search" />
                 <input
                   type="hidden"
                   name="client"
                   defaultValue={checkClient(data.filter?.client).client}
-                />
+                /> */}
               </Stack>
             </VStack>
             <SimpleGrid
@@ -456,120 +530,143 @@ export default function Index() {
               spacing={4}
               w="full"
             >
-              {data.projects.map((value: any, index: any) => (
-                <Card
-                  key={index}
-                  variant="elevated"
-                  rounded="md"
-                  boxShadow="xl"
-                  position="relative"
-                  onMouseEnter={(e: any) => {
-                    setShowButton({ index: index, flag: true });
-                  }}
-                  onMouseLeave={(e: any) => {
-                    setShowButton({ index: index, flag: false });
-                  }}
-                  transition="transform 0.15s ease-in-out"
-                  _hover={{
-                    transform: { md: "none", lg: "scale3d(1.01, 1.01, 1)" },
-                  }}
-                  as={Link}
-                  to={value.path}
-                  draggable={false}
-                  w="full"
-                  // h="full"
-                >
-                  <AspectRatio key={index} ratio={{ base: 4 / 3, md: 16 / 9 }}>
-                    <Image
-                      roundedTopLeft="md"
-                      roundedTopRight="md"
-                      src={value.thumbnail}
-                      alt={`${value.name} project`}
+              <AnimatePresence>
+                {data.projects.map((value: any, index: any) => (
+                  <motion.div
+                    key={index}
+                    layout
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 20, opacity: 0 }}
+                  >
+                    <Card
+                      variant="elevated"
+                      rounded="md"
                       boxShadow="xl"
-                      draggable={false}
-                      userSelect="none"
-                      w="full"
-                      loading="lazy"
-                      fallback={
-                        <Skeleton h={{ base: "350px", sm: "450px" }} w="full" />
-                      }
-                    />
-                  </AspectRatio>
-                  <CardFooter justifyContent="center" p={2}>
-                    <Text textAlign="center" fontSize="xl">
-                      <Highlight
-                        query={data.filter?.search || ""}
-                        styles={{
-                          px: "4px",
-                          py: "4px",
-                          bg: "primary.100",
-                          borderRadius: "0.375rem",
-                        }}
-                      >
-                        {value.name as string}
-                      </Highlight>
-                    </Text>
-                  </CardFooter>
-
-                  <Box position="absolute" top="8px" right="8px">
-                    <VStack alignItems="flex-end" spacing={2}>
-                      {value.status?.completed === true && (
-                        <Tooltip label={value.status?.text} closeOnScroll>
-                          <Badge colorScheme="green">Completed</Badge>
-                        </Tooltip>
-                      )}
-
-                      {value.status?.completed === false && (
-                        <Tooltip label={value.status?.text} closeOnScroll>
-                          <Badge colorScheme="yellow">in progress</Badge>
-                        </Tooltip>
-                      )}
-                      {value?.categories &&
-                        value.categories.map((value: any, index: any) => (
-                          <Tooltip key={index} label={value.text} closeOnScroll>
-                            <Badge colorScheme="teal">{value.tag}</Badge>
-                          </Tooltip>
-                        ))}
-                      {value.client?.tag && (
-                        <Tooltip label={value.client?.text} closeOnScroll>
-                          <Badge colorScheme="blue">{value.client.tag}</Badge>
-                        </Tooltip>
-                      )}
-                    </VStack>
-                  </Box>
-
-                  <Box display={{ base: "none", lg: "flex" }}>
-                    <SlideFade
-                      in={showButton.index === index ? showButton.flag : false}
-                      reverse
-                      style={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
+                      position="relative"
+                      onMouseEnter={(e: any) => {
+                        setShowButton({ index: index, flag: true });
                       }}
+                      onMouseLeave={(e: any) => {
+                        setShowButton({ index: index, flag: false });
+                      }}
+                      transition="transform 0.15s ease-in-out"
+                      _hover={{
+                        transform: { md: "none", lg: "scale3d(1.01, 1.01, 1)" },
+                      }}
+                      as={Link}
+                      to={value.path}
+                      prefetch="intent"
+                      draggable={false}
+                      w="full"
                     >
-                      <Box
-                        position="absolute"
-                        top="50%"
-                        left="50%"
-                        transform="translate(-50%, -50%)"
+                      <AspectRatio
+                        key={index}
+                        ratio={{ base: 4 / 3, md: 16 / 9 }}
                       >
-                        <Button
-                          variant="solid"
-                          boxShadow="lg"
-                          rounded="md"
-                          bgColor="gray.50"
-                          textColor="black"
-                          _hover={{ bgColor: "gray.200" }}
-                        >
-                          View Project
-                        </Button>
+                        <Image
+                          roundedTopLeft="md"
+                          roundedTopRight="md"
+                          src={value.thumbnail}
+                          alt={`${value.name} project`}
+                          boxShadow="xl"
+                          draggable={false}
+                          userSelect="none"
+                          w="full"
+                          loading="lazy"
+                          fallback={
+                            <Skeleton
+                              h={{ base: "350px", sm: "450px" }}
+                              w="full"
+                            />
+                          }
+                        />
+                      </AspectRatio>
+                      <CardFooter justifyContent="center" p={2}>
+                        <Text textAlign="center" fontSize="xl">
+                          <Highlight
+                            query={data.filter?.search || ""}
+                            styles={{
+                              px: "4px",
+                              py: "4px",
+                              bg: "primary.100",
+                              borderRadius: "0.375rem",
+                            }}
+                          >
+                            {value.name as string}
+                          </Highlight>
+                        </Text>
+                      </CardFooter>
+
+                      <Box position="absolute" top="8px" right="8px">
+                        <VStack alignItems="flex-end" spacing={2}>
+                          {value.status?.completed === true && (
+                            <Tooltip label={value.status?.text} closeOnScroll>
+                              <Badge colorScheme="green">Completed</Badge>
+                            </Tooltip>
+                          )}
+
+                          {value.status?.completed === false && (
+                            <Tooltip label={value.status?.text} closeOnScroll>
+                              <Badge colorScheme="yellow">in progress</Badge>
+                            </Tooltip>
+                          )}
+                          {value?.categories &&
+                            value.categories.map((value: any, index: any) => (
+                              <Tooltip
+                                key={index}
+                                label={value.text}
+                                closeOnScroll
+                              >
+                                <Badge colorScheme="teal">{value.tag}</Badge>
+                              </Tooltip>
+                            ))}
+                          {value.client?.tag && (
+                            <Tooltip label={value.client?.text} closeOnScroll>
+                              <Badge colorScheme="blue">
+                                {value.client.tag}
+                              </Badge>
+                            </Tooltip>
+                          )}
+                        </VStack>
                       </Box>
-                    </SlideFade>
-                  </Box>
-                </Card>
-              ))}
+
+                      <Box display={{ base: "none", lg: "flex" }}>
+                        <SlideFade
+                          in={
+                            showButton.index === index ? showButton.flag : false
+                          }
+                          reverse
+                          style={{
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                          }}
+                        >
+                          <Box
+                            position="absolute"
+                            top="50%"
+                            left="50%"
+                            transform="translate(-50%, -50%)"
+                          >
+                            <Button
+                              variant="solid"
+                              boxShadow="lg"
+                              rounded="md"
+                              bgColor="gray.50"
+                              textColor="black"
+                              _hover={{ bgColor: "gray.200" }}
+                            >
+                              View Project
+                            </Button>
+                          </Box>
+                        </SlideFade>
+                      </Box>
+                    </Card>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </SimpleGrid>
           </VStack>
           {data.projects.length <= 0 && (

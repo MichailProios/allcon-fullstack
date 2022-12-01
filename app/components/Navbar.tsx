@@ -150,7 +150,7 @@ function NavbarHeader({
         maxW={"1600px"}
       >
         <HStack spacing="40px">
-          <NavLink to={"/"} prefetch="render" draggable={false}>
+          <NavLink to={"/"} prefetch="render" rel="prefetch" draggable={false}>
             <Box
               sx={{
                 display: "flex",
@@ -210,6 +210,7 @@ function NavbarHeader({
                 _focus={{ boxShadow: "none" }}
                 draggable={false}
                 prefetch="render"
+                rel="prefetch"
               >
                 {link.label}
               </Tab>
@@ -298,7 +299,7 @@ function NavbarDrawer({
       <DrawerContent>
         <DrawerCloseButton />
         <DrawerHeader p={2} alignSelf="center">
-          <NavLink to={"/"} onClick={onClose} prefetch="render">
+          <NavLink to={"/"} onClick={onClose} prefetch="render" rel="prefetch">
             <Image
               objectFit="contain"
               h={50}
@@ -329,6 +330,7 @@ function NavbarDrawer({
                   _focus={{ boxShadow: "none" }}
                   draggable={false}
                   prefetch="render"
+                  rel="prefetch"
                   fontSize="md"
                   w={"100%"}
                   onClick={onClose}

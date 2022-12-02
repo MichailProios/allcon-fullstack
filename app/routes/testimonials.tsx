@@ -45,7 +45,17 @@ import { Search2Icon } from "@chakra-ui/icons";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - Testimonials`,
-  description: `Allcon Contracting testionies from clients`,
+  description: `Allcon Contracting testionies from clients.`,
+
+  "og:title": "Allcon Contracting - Testimonials",
+  "og:type": "business",
+  "og:site_name": "Allcon Contracting",
+  "og:description": `Allcon Contracting testionies from clients.`,
+  "og:image":
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail",
+  "twitter:card":
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail",
+  "og:url": "https://allconcontracting.com/testimonials",
 });
 
 export const loader: LoaderFunction = async ({ request }: any) => {

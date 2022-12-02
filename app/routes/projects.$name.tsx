@@ -73,6 +73,19 @@ import { BiBuildings, BiMap } from "react-icons/bi";
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - ${projects.get(params.name.toLowerCase()).name}`,
   description: projects.get(params.name.toLowerCase()).description,
+
+  "og:title": `Allcon Contracting - ${
+    projects.get(params.name.toLowerCase()).name
+  }`,
+  "og:type": "business",
+  "og:site_name": "Allcon Contracting",
+  "og:description": projects.get(params.name.toLowerCase()).description,
+  "og:image": projects.get(params.name.toLowerCase()).thumbnail,
+
+  "twitter:card": projects.get(params.name.toLowerCase()).thumbnail,
+  "og:url": `https://allconcontracting.com${
+    projects.get(params.name.toLowerCase()).path
+  }`,
 });
 
 export const loader: LoaderFunction = async ({ request, params }: any) => {

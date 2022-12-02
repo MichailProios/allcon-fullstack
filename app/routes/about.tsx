@@ -29,6 +29,18 @@ export const meta: MetaFunction = ({ params }: any) => ({
   description: `Allcon Contracting is built on a reputation of delivering high
               quality projects serving a variety of private and public clients
               throughout New York State.`,
+
+  "og:title": "Allcon Contracting - About",
+  "og:type": "business",
+  "og:site_name": "Allcon Contracting",
+  "og:description": `Allcon Contracting is built on a reputation of delivering high
+              quality projects serving a variety of private and public clients
+              throughout New York State.`,
+  "og:image":
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail",
+  "twitter:card":
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail",
+  "og:url": "https://allconcontracting.com/about",
 });
 
 export const loader: LoaderFunction = async ({ request }: any) => {

@@ -38,6 +38,7 @@ import {
   useToast,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { animateScroll as scroll } from "react-scroll";
 
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -63,7 +64,17 @@ import { useFirstRender, useLoading } from "~/utils/hooks";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - Projects`,
-  description: "Allcon Contracting projects listing",
+  description: "Allcon Contracting projects listing.",
+
+  "og:title": "Allcon Contracting - Projects",
+  "og:type": "business",
+  "og:site_name": "Allcon Contracting",
+  "og:description": `Allcon Contracting projects listing.`,
+  "og:image":
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail",
+  "twitter:card":
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail",
+  "og:url": "https://allconcontracting.com/projects",
 });
 
 export const loader: LoaderFunction = async ({ request }: any) => {
@@ -251,6 +262,13 @@ export default function Index() {
     return () => clearTimeout(timer);
   }, [toastIdRef.current]);
 
+  useEffect(() => {
+    return () => {
+      toast.closeAll();
+      toastIdRef.current = null;
+    };
+  }, []);
+
   function handleFormSearch(input: string) {
     if (!firstRender) {
       if (!toastIdRef.current) {
@@ -282,14 +300,14 @@ export default function Index() {
   function handleFormClientCategory(clientCategory: string) {
     if (!toastIdRef.current) {
       toastIdRef.current = toast({
-        title: `Showing ${clientCategory || "All"} projects`,
+        title: `Showing ${clientCategory || "all"} projects`,
         status: "loading",
         duration: null,
         isClosable: false,
       });
     } else if (toastIdRef.current) {
       toast.update(toastIdRef.current, {
-        title: `Showing ${clientCategory || "All"} projects`,
+        title: `Showing ${clientCategory || "all"} projects`,
         status: "loading",
         duration: null,
         isClosable: false,
@@ -350,6 +368,11 @@ export default function Index() {
   useEffect(() => {
     if (data.filter) {
       handleFormAllClear();
+      scroll.scrollToTop({
+        duration: 400,
+        delay: 0,
+        smooth: "easeInOutQuart",
+      });
     }
   }, []);
 
@@ -597,8 +620,10 @@ export default function Index() {
                     }
                   />
                   <Input
-                    type="text"
+                    type="search"
                     name="search"
+                    spellCheck="false"
+                    autoComplete="off"
                     onChange={(e) =>
                       setInputValue({
                         text: e.target.value,

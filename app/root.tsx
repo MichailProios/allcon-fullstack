@@ -27,7 +27,17 @@ import global from "app/styles/global.css";
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "Allcon Contracting",
-  description: "Infinite Possibilities through Integrated Solutions",
+  description: "Infinite Possibilities through Integrated Solutions.",
+
+  "og:title": "Allcon Contracting",
+  "og:type": "business",
+  "og:site_name": "Allcon Contracting",
+  "og:description": "Infinite Possibilities through Integrated Solutions.",
+  "og:image":
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail",
+  "twitter:card":
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail",
+  "og:url": "https://allconcontracting.com",
   viewport: "width=device-width,initial-scale=1",
 });
 

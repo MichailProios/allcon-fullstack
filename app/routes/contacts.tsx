@@ -90,7 +90,17 @@ export const validator = withZod(
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - Contacts`,
-  description: `Allcon Contracting contact and office information`,
+  description: `Allcon Contracting contact and office information.`,
+
+  "og:title": "Allcon Contracting - Contacts",
+  "og:type": "business",
+  "og:site_name": "Allcon Contracting",
+  "og:description": `Allcon Contracting contact and office information.`,
+  "og:image":
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail",
+  "twitter:card":
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail",
+  "og:url": "https://allconcontracting.com/contacts",
 });
 
 export async function action({ request }: { request: Request }) {

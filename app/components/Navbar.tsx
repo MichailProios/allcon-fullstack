@@ -39,13 +39,13 @@ import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 // import LogoPlain from "public/logos/Logo-Plain.svg";
 
 const logo_full_dark =
-  "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/public";
+  "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail";
 
 const logo_full_light =
-  "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/aabe8ae8-4716-4d41-f8ab-92df61f51900/public";
+  "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/aabe8ae8-4716-4d41-f8ab-92df61f51900/thumbnail";
 
 const logo_small =
-  "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/fa4b2f8e-d107-45eb-e36d-adbb14f13a00/public";
+  "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/fa4b2f8e-d107-45eb-e36d-adbb14f13a00/thumbnail";
 
 interface NavbarProps {
   navigationLinks: { label: string; url: string }[];

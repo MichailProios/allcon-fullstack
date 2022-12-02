@@ -1,4 +1,14 @@
+import projects from "~/utils/projects";
+
 export const loader = () => {
+  const projectLinks = Array.from(projects.values()).map(
+    (value: any, index: any) => {
+      return `<url>
+                <loc>https://allconcontracting.com${value.path}</loc>
+            </url>`;
+    }
+  );
+
   const content = `
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
             <url>
@@ -8,14 +18,15 @@ export const loader = () => {
                 <loc>https://allconcontracting.com/about</loc>
             </url>
             <url>
-                <loc>https://eucrona.com/projects</loc>
+                <loc>https://allconcontracting.com/projects</loc>
             </url>
              <url>
-                <loc>https://eucrona.com/testimonies</loc>
+                <loc>https://allconcontracting.com/testimonies</loc>
             </url>
              <url>
-                <loc>https://eucrona.com/contacts</loc>
-            </url>          
+                <loc>https://allconcontracting.com/contacts</loc>
+            </url>
+            ${projectLinks.join("")}          
         </urlset>
         `;
   return new Response(content, {

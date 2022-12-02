@@ -347,8 +347,9 @@ projects
     name: "Greatneck Terrace Roofs",
     location: null,
     client: null,
-    status: null,
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    status: { text: "The project is finshed", completed: true },
+
+    // categories: { text: "Miscellaneous", tag: "misc" },
     cost: null,
     designer: null,
     description: null,
@@ -406,7 +407,7 @@ projects
       "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3661.2161386469497!2d-73.638444!3d40.658313!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c27b5b05cac5dd:0x65e61c20263ba48a!2s142%20Maple%20Ave,%20Rockville%20Centre,%20NY%2011570!5e1!3m2!1sen!2sus!4v1669330079249!5m2!1sen!2sus",
     client: { text: "Incorporated Village of Rockville Centre", tag: "" },
     status: { text: "The project was finished in 2022", completed: true },
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    // categories: { text: "Miscellaneous", tag: "misc" },
     cost: "$2,344,107.00",
     designer: "H2M Architects",
     description: `
@@ -511,7 +512,7 @@ projects
     client: { text: "NYC Housing Preservation & Development", tag: "" },
 
     status: { text: "The project was finished in 2019", completed: true },
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    // categories: { text: "Miscellaneous", tag: "misc" },
     cost: "$15M",
     designer: "Purcell Architects P.C.",
     description: `Located along the boardwalk of Brighton Beach Brooklyn and just 300 feet
@@ -557,8 +558,8 @@ projects
     name: "Apartment 724",
     location: null,
     client: null,
-    status: null,
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    status: { text: "The project is finshed", completed: true },
+    category: { text: "Interior work", tag: "interior" },
     cost: null,
     designer: null,
     description: null,
@@ -603,7 +604,7 @@ projects
       tag: "SUNY",
     },
     status: { text: "The project was finished in 2017", completed: true },
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    // categories: { text: "Miscellaneous", tag: "misc" },
 
     cost: "$2.5M",
     designer: "Peter Gisolfi Associates",
@@ -701,7 +702,7 @@ projects
       "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3661.1821115490325!2d-73.547051!3d40.658933!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0xbdb6be6f3ab5dfe5!2sSaint%20Demetrios%20Greek%20Orthodox%20Church!5e1!3m2!1sen!2sus!4v1669344856338!5m2!1sen!2sus",
     client: { text: "South Nassau Hellenic Community Inc.", tag: "" },
     status: { text: "The project was finished in 2016", completed: true },
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    // categories: { text: "Miscellaneous", tag: "misc" },
 
     cost: "$2,500,000.00",
     designer: null,
@@ -738,7 +739,7 @@ projects
     client: { text: "Success Academy Charter Schools", tag: "" },
 
     status: { text: "The project was finished in 2019", completed: true },
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    // categories: { text: "Miscellaneous", tag: "misc" },
     cost: "$5,000,000+",
     designer: null,
     description: `
@@ -797,7 +798,7 @@ projects
 
     client: { text: "Petrus Tzanidakis", tag: "" },
     status: { text: "The project was finished in 2014", completed: true },
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    // categories: { text: "Miscellaneous", tag: "misc" },
 
     cost: "$300,000+",
     designer: "Theta Design",
@@ -864,8 +865,9 @@ projects
     name: "Williston Animal Hospital",
     location: null,
     client: null,
-    status: null,
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    status: { text: "The project is finshed", completed: true },
+
+    // categories: { text: "Miscellaneous", tag: "misc" },
     cost: null,
     designer: null,
     description: `Complete interior renovation. Work included demolition, carpentry,
@@ -875,13 +877,18 @@ projects
   .set("255west", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/9b7c339d-3bef-4f1f-d292-5f092f1de400/thumbnail",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4588a5c7-801b-496e-daa0-f36ae1ad4700/thumbnail",
     path: "/projects/255west",
     media: [
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/9b7c339d-3bef-4f1f-d292-5f092f1de400/public",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4588a5c7-801b-496e-daa0-f36ae1ad4700/public",
         order: 1,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/9b7c339d-3bef-4f1f-d292-5f092f1de400/public",
+        order: 2,
       },
       {
         image:
@@ -891,10 +898,12 @@ projects
     ],
 
     name: "255 West 108th Street",
-    location: null,
+    location:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7306.567293640764!2d-73.97104621504347!3d40.80263854581619!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f63b376163eb:0xb8930d85c5045e73!2s255%20W%20108th%20St,%20New%20York,%20NY%2010025!5e1!3m2!1sen!2sus!4v1669962633393!5m2!1sen!2sus",
     client: null,
-    status: null,
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    status: { text: "The project is finshed", completed: true },
+
+    category: { text: "Exterior work", tag: "exterior" },
     cost: null,
     designer: null,
     description: `Work consisted of exterior renovation Local Law 11.`,
@@ -902,13 +911,18 @@ projects
   .set("20east", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/446b6dfa-5500-4f02-27a5-2db7189c7000/thumbnail",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/221d7b85-c626-4985-e5b4-1cfd9b2af000/thumbnail",
     path: "/projects/20east",
     media: [
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/446b6dfa-5500-4f02-27a5-2db7189c7000/public",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/221d7b85-c626-4985-e5b4-1cfd9b2af000/public",
         order: 1,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/446b6dfa-5500-4f02-27a5-2db7189c7000/public",
+        order: 2,
       },
       {
         image:
@@ -918,10 +932,12 @@ projects
     ],
 
     name: "20 East 9th Street",
-    location: null,
+    location:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7314.333623352545!2d-73.9981533273526!3d40.732040119581896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2599755f45f9b:0x71b84442d6d93d75!2s20%20E%209th%20St,%20New%20York,%20NY%2010003!5e1!3m2!1sen!2sus!4v1669962673919!5m2!1sen!2sus",
     client: null,
-    status: null,
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    status: { text: "The project is finshed", completed: true },
+
+    category: { text: "Exterior work", tag: "exterior" },
     cost: null,
     designer: null,
     description: `Work consisted of exterior renovation Local Law 11.`,
@@ -962,8 +978,9 @@ projects
     name: "Upper East Side Veterinary Hospital",
     location: null,
     client: null,
-    status: null,
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    status: { text: "The project is finshed", completed: true },
+
+    // categories: { text: "Miscellaneous", tag: "misc" },
     cost: null,
     designer: null,
     description: `Complete interior renovation. Work included demolition, carpentry,
@@ -1006,8 +1023,9 @@ projects
     name: "Carle Place UFSD – Auditorium Renovations",
     location: null,
     client: null,
-    status: null,
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    status: { text: "The project is finshed", completed: true },
+
+    // categories: { text: "Miscellaneous", tag: "misc" },
     cost: null,
     designer: null,
     description: `Interior renovation of existing Auditorium, Work included complete
@@ -1044,8 +1062,9 @@ projects
     name: "Carle Place UFSD – Lobby Renovations",
     location: null,
     client: null,
-    status: null,
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    status: { text: "The project is finshed", completed: true },
+
+    // categories: { text: "Miscellaneous", tag: "misc" },
     cost: null,
     designer: null,
     description: null,
@@ -1085,8 +1104,9 @@ projects
     name: "Carle Place UFSD – Library Renovations",
     location: null,
     client: null,
-    status: null,
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    status: { text: "The project is finshed", completed: true },
+
+    // categories: { text: "Miscellaneous", tag: "misc" },
     cost: null,
     designer: null,
     description: null,
@@ -1131,8 +1151,9 @@ projects
     name: "New Jersey Veterinary Hospital",
     location: null,
     client: null,
-    status: null,
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    status: { text: "The project is finshed", completed: true },
+
+    // categories: { text: "Miscellaneous", tag: "misc" },
     cost: null,
     designer: null,
     description: `Complete interior renovation. Work included demolition, carpentry,
@@ -1174,8 +1195,9 @@ projects
     name: "Hudson Animal Hospital",
     location: null,
     client: null,
-    status: null,
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    status: { text: "The project is finshed", completed: true },
+
+    // categories: { text: "Miscellaneous", tag: "misc" },
     cost: null,
     designer: null,
     description: `Complete interior renovation. Work included demolition, carpentry,
@@ -1213,8 +1235,9 @@ projects
     name: "866 Westchester Ave.",
     location: null,
     client: null,
-    status: null,
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    status: { text: "The project is finshed", completed: true },
+
+    // categories: { text: "Miscellaneous", tag: "misc" },
     cost: null,
     designer: null,
     description: `Complete interior renovation of commercial offices. The work included
@@ -1287,8 +1310,7 @@ projects
     name: "55 Pierrpoint Street",
     location: null,
     client: null,
-    status: null,
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    status: { text: "The project is finshed", completed: true },
     cost: null,
     designer: null,
     description: `Complete interior renovation of an existing nursing home containing 189
@@ -1299,13 +1321,18 @@ projects
   .set("164w-79th", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3f30eafb-d4dc-45c5-d722-b89f7d236600/thumbnail",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2d995093-f748-414b-bb83-49474ad3de00/thumbnail",
     path: "/projects/164w-79th",
     media: [
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3f30eafb-d4dc-45c5-d722-b89f7d236600/public",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2d995093-f748-414b-bb83-49474ad3de00/public",
         order: 1,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3f30eafb-d4dc-45c5-d722-b89f7d236600/public",
+        order: 2,
       },
       {
         image:
@@ -1315,10 +1342,11 @@ projects
     ],
 
     name: "164 W79th Street",
-    location: null,
+    location:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7308.8052745164305!2d-73.98046938376761!3d40.7823049265069!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25888c85763b7:0x57f9b317bfaca0ba!2s164%20W%2079th%20St,%20New%20York,%20NY%2010024!5e1!3m2!1sen!2sus!4v1669962722742!5m2!1sen!2sus",
     client: null,
-    status: null,
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    status: { text: "The project is finshed", completed: true },
+    category: { text: "Exterior work", tag: "exterior" },
     cost: null,
     designer: null,
     description: `Work consisted of exterior renovation Local Law 11.`,
@@ -1364,8 +1392,8 @@ projects
     name: "17W 10th St Townhouse",
     location: null,
     client: null,
-    status: null,
-    // categories: [{ text: "Miscellaneous", tag: "misc" }],
+    status: { text: "The project is finshed", completed: true },
+    category: { text: "Interior work", tag: "interior" },
     cost: null,
     designer: null,
     description: `The work consisted of restoration of an existing townhouse. New

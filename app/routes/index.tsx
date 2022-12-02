@@ -145,13 +145,15 @@ export default function Index() {
                 bgColor="#018b8b"
                 textColor="white"
                 as={Link}
+                prefetch="render"
+                rel="prerender"
                 to="projects"
                 boxShadow="dark-lg"
                 rounded="md"
                 size="md"
                 rightIcon={<Icon as={BiBuildings} />}
                 draggable={false}
-                w="12.2em"
+                w="220px"
               >
                 Explore our Projects
               </Button>
@@ -165,9 +167,11 @@ export default function Index() {
                 bgColor="gray.50"
                 _hover={{ bgColor: "gray.300" }}
                 textColor="black"
+                prefetch="render"
+                rel="prerender"
                 rightIcon={<Icon as={BiBook} />}
                 draggable={false}
-                w="8.2em"
+                w="150px"
               >
                 Learn More
               </Button>

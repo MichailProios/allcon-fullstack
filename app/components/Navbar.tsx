@@ -134,7 +134,7 @@ function NavbarHeader({
       alignItems={"center"}
       justifyContent={"center"}
       px={{ base: 4, sm: 6, lg: 8 }}
-      bg={useColorModeValue("gray.50", "gray.800")}
+      bg={useColorModeValue("gray.50", "gray.900")}
       position="sticky"
       top={0}
       zIndex={800}

@@ -36,15 +36,12 @@ import {
   Kbd,
   Progress,
   useToast,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import {
-  redirect,
-  json,
-  unstable_composeUploadHandlers,
-} from "@remix-run/node";
+import { redirect, json } from "@remix-run/node";
 
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 
@@ -74,7 +71,7 @@ export const loader: LoaderFunction = async ({ request }: any) => {
     const session = await cookie.getSession(request.headers.get("Cookie"));
     const filter = session.get("filter") || null;
 
-    if (filter?.search && !filter?.client) {
+    if (filter?.search && !filter?.clientCategory) {
       return json({
         filter: filter,
         projects: Array.from(projects.values()).filter(
@@ -85,14 +82,20 @@ export const loader: LoaderFunction = async ({ request }: any) => {
               .includes(filter?.search.toLowerCase())
         ),
       });
-    } else if (filter?.client && !filter?.search) {
+    } else if (filter?.clientCategory && !filter?.search) {
       return json({
         filter: filter,
-        projects: Array.from(projects.values()).filter((value) =>
-          value.client?.tag.toLowerCase().includes(filter?.client.toLowerCase())
+        projects: Array.from(projects.values()).filter(
+          (value) =>
+            value.client?.tag
+              .toLowerCase()
+              .includes(filter?.clientCategory.toLowerCase()) ||
+            value.category?.tag
+              .toLowerCase()
+              .includes(filter?.clientCategory.toLowerCase())
         ),
       });
-    } else if (filter?.search && filter?.client) {
+    } else if (filter?.search && filter?.clientCategory) {
       return json({
         filter: filter,
         projects: Array.from(projects.values()).filter(
@@ -101,9 +104,12 @@ export const loader: LoaderFunction = async ({ request }: any) => {
               value.client?.tag
                 .toLowerCase()
                 .includes(filter?.search.toLowerCase())) &&
-            value.client?.tag
+            (value.client?.tag
               .toLowerCase()
-              .includes(filter?.client.toLowerCase())
+              .includes(filter?.clientCategory.toLowerCase()) ||
+              value.category?.tag
+                .toLowerCase()
+                .includes(filter?.clientCategory.toLowerCase()))
         ),
       });
     } else {
@@ -127,12 +133,15 @@ export async function action({ request }: { request: Request }) {
   try {
     const type = data.get("type");
     const search = data.get("search") || "";
-    const client = data.get("client") || "";
+    const clientCategory = data.get("clientCategory") || "";
 
     switch (type) {
       case "search": {
         const session = await cookie.getSession(request.headers.get("Cookie"));
-        session.flash("filter", { search: search, client: client });
+        session.flash("filter", {
+          search: search,
+          clientCategory: clientCategory,
+        });
 
         return json(
           { status: "Filtering Projects" },
@@ -144,9 +153,12 @@ export async function action({ request }: { request: Request }) {
         );
       }
 
-      case "client": {
+      case "clientCategory": {
         const session = await cookie.getSession(request.headers.get("Cookie"));
-        session.flash("filter", { search: search, client: client });
+        session.flash("filter", {
+          search: search,
+          clientCategory: clientCategory,
+        });
 
         return json(
           { status: "Filtering Projects" },
@@ -160,7 +172,10 @@ export async function action({ request }: { request: Request }) {
 
       case "clearSearch": {
         const session = await cookie.getSession(request.headers.get("Cookie"));
-        session.flash("filter", { search: search, client: client });
+        session.flash("filter", {
+          search: search,
+          clientCategory: clientCategory,
+        });
 
         return json(
           { status: "Clearing Search" },
@@ -240,14 +255,14 @@ export default function Index() {
     if (!firstRender) {
       if (!toastIdRef.current) {
         toastIdRef.current = toast({
-          title: "Searching Projects",
+          title: "Searching projects",
           status: "loading",
           duration: null,
           isClosable: false,
         });
       } else if (toastIdRef.current) {
         toast.update(toastIdRef.current, {
-          title: "Searching Projects",
+          title: "Searching projects",
           status: "loading",
           duration: null,
           isClosable: false,
@@ -256,22 +271,25 @@ export default function Index() {
       const formData = new FormData();
       formData.set("search", input);
       formData.set("type", "search");
-      formData.set("client", checkClient(data.filter?.client).client);
+      formData.set(
+        "clientCategory",
+        checkClient(data.filter?.clientCategory).clientCategory
+      );
       submit(formData, { method: "post" });
     }
   }
 
-  function handleFormClient(client: string) {
+  function handleFormClientCategory(clientCategory: string) {
     if (!toastIdRef.current) {
       toastIdRef.current = toast({
-        title: `Showing ${client.toUpperCase() || "All"} Projects`,
+        title: `Showing ${clientCategory || "All"} projects`,
         status: "loading",
         duration: null,
         isClosable: false,
       });
     } else if (toastIdRef.current) {
       toast.update(toastIdRef.current, {
-        title: `Showing ${client.toUpperCase() || "All"} Projects`,
+        title: `Showing ${clientCategory || "All"} projects`,
         status: "loading",
         duration: null,
         isClosable: false,
@@ -280,8 +298,8 @@ export default function Index() {
 
     setInputValue({ text: "", type: "clear" });
     const formData = new FormData();
-    formData.set("type", "client");
-    formData.set("client", client);
+    formData.set("type", "clientCategory");
+    formData.set("clientCategory", clientCategory);
     submit(formData, { method: "post" });
   }
 
@@ -290,7 +308,10 @@ export default function Index() {
     const formData = new FormData();
     formData.set("type", "clearSearch");
     formData.set("search", "");
-    formData.set("client", checkClient(data.filter?.client).client || "");
+    formData.set(
+      "clientCategory",
+      checkClient(data.filter?.clientCategory).clientCategory || ""
+    );
     submit(formData, { method: "delete" });
   }
 
@@ -338,27 +359,30 @@ export default function Index() {
     setTabIndex(index);
   }
 
-  function checkClient(client: string) {
-    switch (client) {
+  function checkClient(clientCategory: string) {
+    switch (clientCategory) {
       case "":
-        return { index: 0, client: client };
+        return { index: 0, clientCategory: clientCategory };
+      case "interior":
+        return { index: 1, clientCategory: clientCategory };
+      case "exterior":
+        return { index: 2, clientCategory: clientCategory };
       case "suny":
-        return { index: 1, client: client };
-
+        return { index: 3, clientCategory: clientCategory };
       case "ogs":
-        return { index: 2, client: client };
+        return { index: 4, clientCategory: clientCategory };
 
       case "sca":
-        return { index: 3, client: client };
+        return { index: 5, clientCategory: clientCategory };
 
       default:
-        return { index: 0, client: "" };
+        return { index: 0, clientCategory: "" };
     }
   }
 
   useEffect(() => {
-    handleTabsChange(checkClient(data.filter?.client).index);
-  }, [data.filter?.client]);
+    handleTabsChange(checkClient(data.filter?.clientCategory).index);
+  }, [data.filter?.clientCategory]);
 
   return (
     <SlideFade in={true} reverse delay={0.1}>
@@ -372,14 +396,14 @@ export default function Index() {
           if (!firstRender) {
             if (!toastIdRef.current) {
               toastIdRef.current = toast({
-                title: "Searching Projects",
+                title: "Searching projects",
                 status: "loading",
                 duration: null,
                 isClosable: false,
               });
             } else if (toastIdRef.current) {
               toast.update(toastIdRef.current, {
-                title: "Searching Projects",
+                title: "Searching projects",
                 status: "loading",
                 duration: null,
                 isClosable: false,
@@ -415,9 +439,9 @@ export default function Index() {
                 <TabList justifyContent="center" w="full">
                   <SimpleGrid
                     justifyContent="center"
-                    columns={{ base: 2, sm: 2, md: 4, lg: 4, xl: 4 }}
+                    columns={{ base: 1, xs: 2, sm: 3, md: 3, lg: 6, xl: 6 }}
                     spacing={2}
-                    w={{ base: "full", md: "auto" }}
+                    w={{ base: "full", sm: "auto" }}
                   >
                     <Tooltip
                       label="Show all projects"
@@ -425,15 +449,55 @@ export default function Index() {
                       display={{ base: "none", sm: "flex" }}
                     >
                       <Tab
-                        w={{ base: "full", md: "8em" }}
+                        w={{ base: "full", sm: "8em" }}
+                        fontWeight="semibold"
+                        _selected={{
+                          color: "white",
+                          bg: "primary.500",
+                        }}
+                        rounded="md"
+                        as={Button}
+                        variant="outline"
+                        boxShadow="md"
+                        onClick={() => handleFormClientCategory("")}
+                      >
+                        All Projects
+                      </Tab>
+                    </Tooltip>
+                    <Tooltip
+                      label="Show interior projects"
+                      closeOnScroll
+                      display={{ base: "none", sm: "flex" }}
+                    >
+                      <Tab
+                        w={{ base: "full", sm: "8em" }}
                         fontWeight="semibold"
                         _selected={{ color: "white", bg: "primary.500" }}
                         rounded="md"
                         as={Button}
                         variant="outline"
-                        onClick={() => handleFormClient("")}
+                        boxShadow="md"
+                        onClick={() => handleFormClientCategory("interior")}
                       >
-                        All Projects
+                        Interior
+                      </Tab>
+                    </Tooltip>
+                    <Tooltip
+                      label="Show exterior projects"
+                      closeOnScroll
+                      display={{ base: "none", sm: "flex" }}
+                    >
+                      <Tab
+                        w={{ base: "full", sm: "8em" }}
+                        fontWeight="semibold"
+                        _selected={{ color: "white", bg: "primary.500" }}
+                        rounded="md"
+                        as={Button}
+                        variant="outline"
+                        boxShadow="md"
+                        onClick={() => handleFormClientCategory("exterior")}
+                      >
+                        Exterior
                       </Tab>
                     </Tooltip>
                     <Tooltip
@@ -442,13 +506,14 @@ export default function Index() {
                       display={{ base: "none", sm: "flex" }}
                     >
                       <Tab
-                        w={{ base: "full", md: "8em" }}
+                        w={{ base: "full", sm: "8em" }}
                         fontWeight="semibold"
                         _selected={{ color: "white", bg: "primary.500" }}
                         rounded="md"
                         as={Button}
                         variant="outline"
-                        onClick={() => handleFormClient("suny")}
+                        boxShadow="md"
+                        onClick={() => handleFormClientCategory("suny")}
                       >
                         SUNY
                       </Tab>
@@ -459,13 +524,17 @@ export default function Index() {
                       display={{ base: "none", sm: "flex" }}
                     >
                       <Tab
-                        w={{ base: "full", md: "8em" }}
+                        w={{ base: "full", sm: "8em" }}
                         fontWeight="semibold"
-                        _selected={{ color: "white", bg: "primary.500" }}
+                        _selected={{
+                          color: "white",
+                          bg: "primary.500",
+                        }}
                         rounded="md"
                         as={Button}
                         variant="outline"
-                        onClick={() => handleFormClient("ogs")}
+                        boxShadow="md"
+                        onClick={() => handleFormClientCategory("ogs")}
                       >
                         OGS
                       </Tab>
@@ -476,13 +545,14 @@ export default function Index() {
                       display={{ base: "none", sm: "flex" }}
                     >
                       <Tab
-                        w={{ base: "full", md: "8em" }}
+                        w={{ base: "full", sm: "8em" }}
                         fontWeight="semibold"
                         _selected={{ color: "white", bg: "primary.500" }}
                         rounded="md"
                         as={Button}
                         variant="outline"
-                        onClick={() => handleFormClient("sca")}
+                        boxShadow="md"
+                        onClick={() => handleFormClientCategory("sca")}
                       >
                         SCA
                       </Tab>
@@ -497,7 +567,12 @@ export default function Index() {
                 justifyContent="center"
                 alignItems="center"
               >
-                <InputGroup w="full" colorScheme="primary">
+                <InputGroup
+                  w="full"
+                  colorScheme="primary"
+                  boxShadow="md"
+                  rounded="md"
+                >
                   <InputLeftElement
                     pointerEvents="none"
                     children={<Search2Icon color="gray.300" />}
@@ -533,7 +608,7 @@ export default function Index() {
                     value={inputValue.text}
                     colorScheme="primary"
                     placeholder={`Search ${
-                      checkClient(data.filter?.client).client?.toUpperCase() ||
+                      checkClient(data.filter?.clientCategory).clientCategory ||
                       "all"
                     } projects`}
                     w="full"
@@ -541,13 +616,6 @@ export default function Index() {
                     // defaultValue={data.filter?.search}
                   />
                 </InputGroup>
-
-                {/* <input type="hidden" name="type" value="search" />
-                <input
-                  type="hidden"
-                  name="client"
-                  defaultValue={checkClient(data.filter?.client).client}
-                /> */}
               </Stack>
             </VStack>
             <SimpleGrid
@@ -564,149 +632,164 @@ export default function Index() {
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: 20, opacity: 0 }}
                   >
-                    <Card
-                      variant="elevated"
-                      rounded="md"
-                      boxShadow="xl"
-                      position="relative"
-                      onMouseEnter={(e: any) => {
-                        setShowButton({ index: index, flag: true });
+                    <motion.div
+                      whileHover={{ scale: 1.01 }}
+                      transition={{
+                        type: "tween",
+                        duration: 0.2,
                       }}
-                      onMouseLeave={(e: any) => {
-                        setShowButton({ index: index, flag: false });
-                      }}
-                      transition="transform 0.15s ease-in-out"
-                      _hover={{
-                        transform: { md: "none", lg: "scale3d(1.01, 1.01, 1)" },
-                      }}
-                      as={Link}
-                      to={value.path}
-                      prefetch="intent"
-                      draggable={false}
-                      w="full"
                     >
-                      <AspectRatio
-                        key={index}
-                        ratio={{ base: 4 / 3, md: 16 / 9 }}
+                      <Card
+                        variant="elevated"
+                        rounded="md"
+                        boxShadow="xl"
+                        position="relative"
+                        onMouseEnter={(e: any) => {
+                          setShowButton({ index: index, flag: true });
+                        }}
+                        onMouseLeave={(e: any) => {
+                          setShowButton({ index: index, flag: false });
+                        }}
+                        as={Link}
+                        to={value.path}
+                        prefetch="intent"
+                        rel="prefetch"
+                        draggable={false}
+                        w="full"
                       >
-                        <Image
-                          roundedTopLeft="md"
-                          roundedTopRight="md"
-                          src={value.thumbnail}
-                          alt={`${value.name} project`}
-                          boxShadow="xl"
-                          draggable={false}
-                          userSelect="none"
-                          w="full"
-                          loading="lazy"
-                          fallback={
-                            <Skeleton
-                              h={{ base: "350px", sm: "450px" }}
-                              w="full"
-                            />
-                          }
-                        />
-                      </AspectRatio>
-                      <CardFooter justifyContent="center" p={2}>
-                        <Text textAlign="center" fontSize="xl">
-                          <Highlight
-                            query={data.filter?.search || ""}
-                            styles={{
-                              px: "4px",
-                              py: "4px",
-                              bg: "primary.100",
-                              borderRadius: "0.375rem",
-                            }}
-                          >
-                            {value.name as string}
-                          </Highlight>
-                        </Text>
-                      </CardFooter>
+                        <AspectRatio
+                          key={index}
+                          ratio={{ base: 4 / 3, md: 16 / 9 }}
+                        >
+                          <Image
+                            roundedTopLeft="md"
+                            roundedTopRight="md"
+                            src={value.thumbnail}
+                            alt={`${value.name} project`}
+                            boxShadow="xl"
+                            draggable={false}
+                            userSelect="none"
+                            w="full"
+                            loading="lazy"
+                            fallback={
+                              <Skeleton
+                                h={{ base: "350px", sm: "450px" }}
+                                w="full"
+                              />
+                            }
+                          />
+                        </AspectRatio>
+                        <CardFooter justifyContent="center" p={2}>
+                          <Text textAlign="center" fontSize="xl">
+                            <Highlight
+                              query={data.filter?.search || ""}
+                              styles={{
+                                px: "4px",
+                                py: "4px",
+                                bg: "primary.100",
+                                borderRadius: "0.375rem",
+                              }}
+                            >
+                              {value.name as string}
+                            </Highlight>
+                          </Text>
+                        </CardFooter>
 
-                      <Box position="absolute" top="8px" right="8px">
-                        <VStack alignItems="flex-end" spacing={2}>
-                          {value.status?.completed === true && (
-                            <Tooltip label={value.status?.text} closeOnScroll>
-                              <Badge colorScheme="green">Completed</Badge>
-                            </Tooltip>
-                          )}
+                        <Box position="absolute" top="8px" right="8px">
+                          <VStack alignItems="flex-end" spacing={2}>
+                            {value.status?.completed === true && (
+                              <Tooltip label={value.status?.text} closeOnScroll>
+                                <Badge textColor="#22543D" bgColor="#C6F6D5">
+                                  Completed
+                                </Badge>
+                              </Tooltip>
+                            )}
 
-                          {value.status?.completed === false && (
-                            <Tooltip label={value.status?.text} closeOnScroll>
-                              <Badge colorScheme="yellow">in progress</Badge>
-                            </Tooltip>
-                          )}
-                          {value?.categories &&
-                            value.categories.map((value: any, index: any) => (
+                            {value.status?.completed === false && (
+                              <Tooltip label={value.status?.text} closeOnScroll>
+                                <Badge textColor="#744210" bgColor="#FEFCBF">
+                                  in progress
+                                </Badge>
+                              </Tooltip>
+                            )}
+
+                            {value.category?.tag && (
                               <Tooltip
                                 key={index}
-                                label={value.text}
+                                label={value.category?.text}
                                 closeOnScroll
                               >
-                                <Badge colorScheme="teal">{value.tag}</Badge>
+                                <Badge textColor="#234E52" bgColor="#B2F5EA">
+                                  {value.category.tag}
+                                </Badge>
                               </Tooltip>
-                            ))}
-                          {value.client?.tag && (
-                            <Tooltip label={value.client?.text} closeOnScroll>
-                              <Badge colorScheme="blue">
-                                {value.client.tag}
-                              </Badge>
-                            </Tooltip>
-                          )}
-                        </VStack>
-                      </Box>
+                            )}
 
-                      <Box display={{ base: "none", lg: "flex" }}>
-                        <SlideFade
-                          in={
-                            showButton.index === index ? showButton.flag : false
-                          }
-                          reverse
-                          style={{
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            transform: "translate(-50%, -50%)",
-                          }}
-                        >
-                          <Box
-                            position="absolute"
-                            top="50%"
-                            left="50%"
-                            transform="translate(-50%, -50%)"
+                            {value.client?.tag && (
+                              <Tooltip label={value.client?.text} closeOnScroll>
+                                <Badge textColor="#2A4365" bgColor="#BEE3F8">
+                                  {value.client.tag}
+                                </Badge>
+                              </Tooltip>
+                            )}
+                          </VStack>
+                        </Box>
+
+                        <Box display={{ base: "none", lg: "flex" }}>
+                          <SlideFade
+                            in={
+                              showButton.index === index
+                                ? showButton.flag
+                                : false
+                            }
+                            reverse
+                            style={{
+                              position: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              transform: "translate(-50%, -50%)",
+                            }}
                           >
-                            <Button
-                              variant="solid"
-                              boxShadow="lg"
-                              rounded="md"
-                              bgColor="gray.50"
-                              textColor="black"
-                              _hover={{ bgColor: "gray.200" }}
+                            <Box
+                              position="absolute"
+                              top="50%"
+                              left="50%"
+                              transform="translate(-50%, -50%)"
                             >
-                              View Project
-                            </Button>
-                          </Box>
-                        </SlideFade>
-                      </Box>
-                    </Card>
+                              <Button
+                                variant="solid"
+                                boxShadow="lg"
+                                rounded="md"
+                                bgColor="gray.50"
+                                textColor="black"
+                                _hover={{ bgColor: "gray.200" }}
+                              >
+                                View Project
+                              </Button>
+                            </Box>
+                          </SlideFade>
+                        </Box>
+                      </Card>
+                    </motion.div>
                   </motion.div>
                 ))}
               </AnimatePresence>
             </SimpleGrid>
           </VStack>
-
-          <ScaleFade in={data.projects.length <= 0 ? true : false}>
-            <Box textAlign="center" py={10} px={6}>
-              <QuestionIcon boxSize={"50px"} color="primary.500" />
-              <Heading as="h2" size="lg" mt={6} mb={2}>
-                No Results
-              </Heading>
-              <Text color={"gray.500"}>
-                The search terms you provided did not match any of our records.
-                Please try again using different keywords.
-              </Text>
-            </Box>
-          </ScaleFade>
+          {data.projects.length <= 0 && (
+            <ScaleFade in={true} delay={0.3}>
+              <Box textAlign="center" py={10} px={6}>
+                <QuestionIcon boxSize={"50px"} color="primary.500" />
+                <Heading as="h2" size="lg" mt={6} mb={2}>
+                  No Results
+                </Heading>
+                <Text color={"gray.500"}>
+                  The search terms you provided did not match any of our
+                  records. Please try again using different keywords.
+                </Text>
+              </Box>
+            </ScaleFade>
+          )}
         </VStack>
       </Container>
 

@@ -5,7 +5,7 @@ export const loader = () => {
     User-agent: *
     Allow: /
 
-    Sitemap: https://eucrona.com/sitemap.xml
+    Sitemap: https://allconcontracting.com/sitemap.xml
     `;
   // return the text content, a status 200 success response, and set the content type to text/plain
   return new Response(robotText, {

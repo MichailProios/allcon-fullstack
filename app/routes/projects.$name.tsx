@@ -297,7 +297,7 @@ export default function Project() {
                       </Box>
                     )}
 
-                    {data.project.categories && (
+                    {/* {data.project.categories && (
                       <Box>
                         <Stack
                           alignItems={{ base: "flex-start", sm: "center" }}
@@ -345,6 +345,32 @@ export default function Project() {
                               return text;
                             }
                           )}
+                        </Text>
+                      </Box>
+                    )} */}
+
+                    {data.project.category && (
+                      <Box>
+                        <HStack alignItems="center">
+                          <Tag size="lg" borderRadius="full">
+                            <Icon
+                              h={6}
+                              w={6}
+                              as={AiOutlineTag}
+                              ml={-1}
+                              mr={2}
+                            />
+                            <TagLabel fontSize="lg">Category</TagLabel>
+                          </Tag>
+                          {data.project.category?.tag && (
+                            <Badge colorScheme="blue">
+                              {data.project.category?.tag}
+                            </Badge>
+                          )}
+                        </HStack>
+
+                        <Text pl="1" pt="2" fontSize="xl">
+                          {data.project.category.text}
                         </Text>
                       </Box>
                     )}

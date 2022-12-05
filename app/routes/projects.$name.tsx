@@ -66,7 +66,6 @@ import {
   AiOutlineFileText,
   AiOutlineCheckCircle,
   AiOutlineTag,
-  AiOutlineTags,
 } from "react-icons/ai";
 import { BiBuildings, BiMap } from "react-icons/bi";
 
@@ -80,9 +79,9 @@ export const meta: MetaFunction = ({ params }: any) => ({
   "og:type": "business",
   "og:site_name": "Allcon Contracting",
   "og:description": projects.get(params.name.toLowerCase()).description,
-  "og:image": projects.get(params.name.toLowerCase()).thumbnail,
+  "og:image": projects.get(params.name.toLowerCase()).thumbnail + "/meta",
 
-  "twitter:card": projects.get(params.name.toLowerCase()).thumbnail,
+  "twitter:card": projects.get(params.name.toLowerCase()).thumbnail + "/meta",
   "og:url": `https://allconcontracting.com${
     projects.get(params.name.toLowerCase()).path
   }`,
@@ -128,6 +127,7 @@ export default function Project() {
 
         <Box position={"relative"} w="full">
           <IconButton
+            display={data.project.media.length > 1 ? "flex" : "none"}
             aria-label="left-arrow"
             variant="solid"
             borderRadius="full"
@@ -144,6 +144,7 @@ export default function Project() {
           />
 
           <IconButton
+            display={data.project.media.length > 1 ? "flex" : "none"}
             aria-label="right-arrow"
             variant="solid"
             borderRadius="full"
@@ -168,7 +169,7 @@ export default function Project() {
               keyboard={{
                 enabled: true,
               }}
-              loop={true}
+              loop={data.project.media.length > 1 ? true : false}
               modules={[Keyboard, Pagination, Navigation]}
               effect={"slide"}
               ref={sliderRef}
@@ -182,9 +183,8 @@ export default function Project() {
                       <SwiperSlide key={index}>
                         <AspectRatio ratio={{ base: 1, md: 16 / 9 }}>
                           <Image
-                            src={value.image}
+                            src={value.image + "/public"}
                             alt={`Project Image ${index}`}
-                            // rounded="md"
                             fallback={<Skeleton h="full" w="full" />}
                           />
                         </AspectRatio>

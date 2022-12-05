@@ -117,7 +117,7 @@ export default function Index() {
           w="full"
           zIndex={600}
         >
-          <SlideFade in={true} reverse delay={0.6}>
+          <SlideFade in={true} reverse delay={0.5}>
             <Text
               fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
               fontWeight="medium"
@@ -134,7 +134,7 @@ export default function Index() {
             </Text>
           </SlideFade>
 
-          <SlideFade in={true} reverse delay={1}>
+          <SlideFade in={true} reverse delay={0.8}>
             <Stack
               direction={{ base: "column", sm: "row" }}
               alignItems="center"

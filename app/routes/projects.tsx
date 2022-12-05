@@ -37,7 +37,22 @@ import {
   Progress,
   useToast,
   useColorModeValue,
+  Grid,
+  GridItem,
+  useBreakpoint,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+  useDisclosure,
+  useOutsideClick,
 } from "@chakra-ui/react";
+import { useBreakpointValue } from "@chakra-ui/react";
+
 import { animateScroll as scroll } from "react-scroll";
 
 import { AnimatePresence, motion } from "framer-motion";
@@ -58,7 +73,13 @@ import {
   useTransition,
 } from "@remix-run/react";
 
-import { CloseIcon, QuestionIcon, Search2Icon } from "@chakra-ui/icons";
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  CloseIcon,
+  QuestionIcon,
+  Search2Icon,
+} from "@chakra-ui/icons";
 import projects from "~/utils/projects";
 import { useFirstRender, useLoading } from "~/utils/hooks";
 
@@ -277,6 +298,7 @@ export default function Index() {
           status: "loading",
           duration: null,
           isClosable: false,
+          variant: "solid",
         });
       } else if (toastIdRef.current) {
         toast.update(toastIdRef.current, {
@@ -284,6 +306,7 @@ export default function Index() {
           status: "loading",
           duration: null,
           isClosable: false,
+          variant: "solid",
         });
       }
       const formData = new FormData();
@@ -398,6 +421,9 @@ export default function Index() {
       case "sca":
         return { index: 5, clientCategory: clientCategory };
 
+      case "other":
+        return { index: 6, clientCategory: clientCategory };
+
       default:
         return { index: 0, clientCategory: "" };
     }
@@ -406,6 +432,15 @@ export default function Index() {
   useEffect(() => {
     handleTabsChange(checkClient(data.filter?.clientCategory).index);
   }, [data.filter?.clientCategory]);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const menuRef = useRef<any>();
+
+  useOutsideClick({
+    ref: menuRef,
+    handler: () => onClose(),
+  });
 
   return (
     <SlideFade in={true} reverse delay={0.1}>
@@ -458,131 +493,304 @@ export default function Index() {
                 justifyContent="center"
                 index={tabIndex}
                 onChange={handleTabsChange}
+                display={{ base: "none", md: "flex" }}
               >
-                <TabList justifyContent="center" w="full">
-                  <SimpleGrid
-                    justifyContent="center"
-                    columns={{ base: 1, xs: 2, sm: 3, md: 3, lg: 6, xl: 6 }}
-                    spacing={2}
-                    w={{ base: "full", sm: "auto" }}
+                <TabList
+                  justifyContent="center"
+                  w="full"
+                  display="flex"
+                  gap={{ base: 1, lg: 2 }}
+                >
+                  <Tooltip label="Show all projects" closeOnScroll>
+                    <Tab
+                      w={{ base: "auto", sm: "4em", md: "auto", lg: "8em" }}
+                      fontWeight="semibold"
+                      _selected={{
+                        color: "white",
+                        bg: "primary.500",
+                      }}
+                      rounded="md"
+                      as={Button}
+                      variant="outline"
+                      boxShadow="md"
+                      onClick={() => handleFormClientCategory("")}
+                    >
+                      All Projects
+                    </Tab>
+                  </Tooltip>
+
+                  <Tooltip label="Show interior projects" closeOnScroll>
+                    <Tab
+                      w={{ md: "auto", lg: "8em" }}
+                      fontWeight="semibold"
+                      _selected={{ color: "white", bg: "primary.500" }}
+                      rounded="md"
+                      as={Button}
+                      variant="outline"
+                      boxShadow="md"
+                      onClick={() => handleFormClientCategory("interior")}
+                    >
+                      Interior
+                    </Tab>
+                  </Tooltip>
+
+                  <Tooltip label="Show exterior projects" closeOnScroll>
+                    <Tab
+                      w={{ md: "auto", lg: "8em" }}
+                      fontWeight="semibold"
+                      _selected={{ color: "white", bg: "primary.500" }}
+                      rounded="md"
+                      as={Button}
+                      variant="outline"
+                      boxShadow="md"
+                      onClick={() => handleFormClientCategory("exterior")}
+                    >
+                      Exterior
+                    </Tab>
+                  </Tooltip>
+
+                  <Tooltip
+                    label="Show State University of New York projects"
+                    closeOnScroll
                   >
-                    <Tooltip
-                      label="Show all projects"
-                      closeOnScroll
-                      display={{ base: "none", sm: "flex" }}
+                    <Tab
+                      w={{ md: "auto", lg: "8em" }}
+                      fontWeight="semibold"
+                      _selected={{ color: "white", bg: "primary.500" }}
+                      rounded="md"
+                      as={Button}
+                      variant="outline"
+                      boxShadow="md"
+                      onClick={() => handleFormClientCategory("suny")}
                     >
-                      <Tab
-                        w={{ base: "full", sm: "8em" }}
-                        fontWeight="semibold"
-                        _selected={{
-                          color: "white",
-                          bg: "primary.500",
-                        }}
-                        rounded="md"
-                        as={Button}
-                        variant="outline"
-                        boxShadow="md"
-                        onClick={() => handleFormClientCategory("")}
-                      >
-                        All Projects
-                      </Tab>
-                    </Tooltip>
-                    <Tooltip
-                      label="Show interior projects"
-                      closeOnScroll
-                      display={{ base: "none", sm: "flex" }}
+                      SUNY
+                    </Tab>
+                  </Tooltip>
+
+                  <Tooltip
+                    label="Show NYS Office of General Services projects"
+                    closeOnScroll
+                  >
+                    <Tab
+                      w={{ md: "auto", lg: "8em" }}
+                      fontWeight="semibold"
+                      _selected={{
+                        color: "white",
+                        bg: "primary.500",
+                      }}
+                      rounded="md"
+                      as={Button}
+                      variant="outline"
+                      boxShadow="md"
+                      onClick={() => handleFormClientCategory("ogs")}
                     >
-                      <Tab
-                        w={{ base: "full", sm: "8em" }}
-                        fontWeight="semibold"
-                        _selected={{ color: "white", bg: "primary.500" }}
-                        rounded="md"
-                        as={Button}
-                        variant="outline"
-                        boxShadow="md"
-                        onClick={() => handleFormClientCategory("interior")}
-                      >
-                        Interior
-                      </Tab>
-                    </Tooltip>
-                    <Tooltip
-                      label="Show exterior projects"
-                      closeOnScroll
-                      display={{ base: "none", sm: "flex" }}
+                      OGS
+                    </Tab>
+                  </Tooltip>
+
+                  <Tooltip
+                    label="Show School Construction Authority projects"
+                    closeOnScroll
+                  >
+                    <Tab
+                      w={{ md: "auto", lg: "8em" }}
+                      fontWeight="semibold"
+                      _selected={{ color: "white", bg: "primary.500" }}
+                      rounded="md"
+                      as={Button}
+                      variant="outline"
+                      boxShadow="md"
+                      onClick={() => handleFormClientCategory("sca")}
                     >
-                      <Tab
-                        w={{ base: "full", sm: "8em" }}
-                        fontWeight="semibold"
-                        _selected={{ color: "white", bg: "primary.500" }}
-                        rounded="md"
-                        as={Button}
-                        variant="outline"
-                        boxShadow="md"
-                        onClick={() => handleFormClientCategory("exterior")}
-                      >
-                        Exterior
-                      </Tab>
-                    </Tooltip>
-                    <Tooltip
-                      label="Show State University of New York projects"
-                      closeOnScroll
-                      display={{ base: "none", sm: "flex" }}
+                      SCA
+                    </Tab>
+                  </Tooltip>
+
+                  <Tooltip
+                    label="Show other miscellaneous projects"
+                    closeOnScroll
+                  >
+                    <Tab
+                      w={{ md: "auto", lg: "8em" }}
+                      fontWeight="semibold"
+                      _selected={{ color: "white", bg: "primary.500" }}
+                      rounded="md"
+                      as={Button}
+                      variant="outline"
+                      boxShadow="md"
+                      onClick={() => handleFormClientCategory("other")}
                     >
-                      <Tab
-                        w={{ base: "full", sm: "8em" }}
-                        fontWeight="semibold"
-                        _selected={{ color: "white", bg: "primary.500" }}
-                        rounded="md"
-                        as={Button}
-                        variant="outline"
-                        boxShadow="md"
-                        onClick={() => handleFormClientCategory("suny")}
-                      >
-                        SUNY
-                      </Tab>
-                    </Tooltip>
-                    <Tooltip
-                      label="Show NYS Office of General Services projects"
-                      closeOnScroll
-                      display={{ base: "none", sm: "flex" }}
-                    >
-                      <Tab
-                        w={{ base: "full", sm: "8em" }}
-                        fontWeight="semibold"
-                        _selected={{
-                          color: "white",
-                          bg: "primary.500",
-                        }}
-                        rounded="md"
-                        as={Button}
-                        variant="outline"
-                        boxShadow="md"
-                        onClick={() => handleFormClientCategory("ogs")}
-                      >
-                        OGS
-                      </Tab>
-                    </Tooltip>
-                    <Tooltip
-                      label="Show School Construction Authority projects"
-                      closeOnScroll
-                      display={{ base: "none", sm: "flex" }}
-                    >
-                      <Tab
-                        w={{ base: "full", sm: "8em" }}
-                        fontWeight="semibold"
-                        _selected={{ color: "white", bg: "primary.500" }}
-                        rounded="md"
-                        as={Button}
-                        variant="outline"
-                        boxShadow="md"
-                        onClick={() => handleFormClientCategory("sca")}
-                      >
-                        SCA
-                      </Tab>
-                    </Tooltip>
-                  </SimpleGrid>
+                      Other
+                    </Tab>
+                  </Tooltip>
                 </TabList>
               </Tabs>
+
+              <Box
+                display={{ base: "flex", md: "none" }}
+                w="full"
+                ref={menuRef}
+              >
+                <Menu
+                  autoSelect={false}
+                  matchWidth
+                  placement="bottom"
+                  isOpen={isOpen}
+                >
+                  <MenuButton
+                    as={Button}
+                    w="full"
+                    fontWeight="semibold"
+                    rounded="md"
+                    variant="outline"
+                    boxShadow="md"
+                    rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+                    onClick={isOpen ? onClose : onOpen}
+                  >
+                    Filter Projects
+                  </MenuButton>
+
+                  <MenuList p={1} m={0} boxShadow="2xl" zIndex={500} minW={0}>
+                    <Tabs
+                      variant="unstyled"
+                      colorScheme="gray"
+                      orientation="vertical"
+                      w="full"
+                      index={tabIndex}
+                      onChange={handleTabsChange}
+                    >
+                      <TabList w="full" gap={1}>
+                        <Tab
+                          w="full"
+                          fontWeight="semibold"
+                          _selected={{
+                            color: "white",
+                            bg: "primary.500",
+                          }}
+                          rounded="md"
+                          as={Button}
+                          variant="outline"
+                          boxShadow="md"
+                          onClick={() => {
+                            handleFormClientCategory("");
+                            onClose();
+                          }}
+                        >
+                          All Projects
+                        </Tab>
+                        <Tab
+                          w="full"
+                          fontWeight="semibold"
+                          _selected={{
+                            color: "white",
+                            bg: "primary.500",
+                          }}
+                          rounded="md"
+                          as={Button}
+                          variant="outline"
+                          boxShadow="md"
+                          onClick={() => {
+                            handleFormClientCategory("interior");
+                            onClose();
+                          }}
+                        >
+                          Interior
+                        </Tab>
+                        <Tab
+                          w="full"
+                          fontWeight="semibold"
+                          _selected={{
+                            color: "white",
+                            bg: "primary.500",
+                          }}
+                          rounded="md"
+                          as={Button}
+                          variant="outline"
+                          boxShadow="md"
+                          onClick={() => {
+                            handleFormClientCategory("exterior");
+                            onClose();
+                          }}
+                        >
+                          Exterior
+                        </Tab>
+                        <Tab
+                          w="full"
+                          fontWeight="semibold"
+                          _selected={{
+                            color: "white",
+                            bg: "primary.500",
+                          }}
+                          rounded="md"
+                          as={Button}
+                          variant="outline"
+                          boxShadow="md"
+                          onClick={() => {
+                            handleFormClientCategory("suny");
+                            onClose();
+                          }}
+                        >
+                          SUNY
+                        </Tab>
+                        <Tab
+                          w="full"
+                          fontWeight="semibold"
+                          _selected={{
+                            color: "white",
+                            bg: "primary.500",
+                          }}
+                          rounded="md"
+                          as={Button}
+                          variant="outline"
+                          boxShadow="md"
+                          onClick={() => {
+                            handleFormClientCategory("ogs");
+                            onClose();
+                          }}
+                        >
+                          OGS
+                        </Tab>
+                        <Tab
+                          w="full"
+                          fontWeight="semibold"
+                          _selected={{
+                            color: "white",
+                            bg: "primary.500",
+                          }}
+                          rounded="md"
+                          as={Button}
+                          variant="outline"
+                          boxShadow="md"
+                          onClick={() => {
+                            handleFormClientCategory("sca");
+                            onClose();
+                          }}
+                        >
+                          SCA
+                        </Tab>
+                        <Tab
+                          w="full"
+                          fontWeight="semibold"
+                          _selected={{
+                            color: "white",
+                            bg: "primary.500",
+                          }}
+                          rounded="md"
+                          as={Button}
+                          variant="outline"
+                          boxShadow="md"
+                          onClick={() => {
+                            handleFormClientCategory("other");
+                            onClose();
+                          }}
+                        >
+                          Other
+                        </Tab>
+                      </TabList>
+                    </Tabs>
+                  </MenuList>
+                </Menu>
+              </Box>
 
               <Stack
                 direction={{ base: "column", sm: "row" }}
@@ -620,10 +828,11 @@ export default function Index() {
                     }
                   />
                   <Input
-                    type="search"
+                    type="text"
                     name="search"
                     spellCheck="false"
                     autoComplete="off"
+                    ref={inputRef}
                     onChange={(e) =>
                       setInputValue({
                         text: e.target.value,
@@ -689,7 +898,7 @@ export default function Index() {
                           <Image
                             roundedTopLeft="md"
                             roundedTopRight="md"
-                            src={value.thumbnail}
+                            src={value.thumbnail + "/thumbnail"}
                             alt={`${value.name} project`}
                             boxShadow="xl"
                             draggable={false}

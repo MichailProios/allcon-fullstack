@@ -46,7 +46,7 @@ import {
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Keyboard, Pagination, Navigation } from "swiper";
 
-import type { LoaderFunction, MetaFunction } from "@remix-run/node";
+import { LoaderFunction, MetaFunction, redirect } from "@remix-run/node";
 
 import { json } from "@remix-run/node";
 
@@ -69,28 +69,47 @@ import {
 } from "react-icons/ai";
 import { BiBuildings, BiMap } from "react-icons/bi";
 
-export const meta: MetaFunction = ({ params }: any) => ({
-  title: `Allcon Contracting - ${projects.get(params.name.toLowerCase()).name}`,
-  description: projects.get(params.name.toLowerCase()).description,
+export const meta: MetaFunction = ({ params }: any) =>
+  projects.has(params?.name.toLowerCase())
+    ? {
+        title: `Allcon Contracting - ${
+          projects.get(params.name.toLowerCase()).name
+        }`,
+        description: projects.get(params.name.toLowerCase()).description,
 
-  "og:title": `Allcon Contracting - ${
-    projects.get(params.name.toLowerCase()).name
-  }`,
-  "og:type": "business",
-  "og:site_name": "Allcon Contracting",
-  "og:description": projects.get(params.name.toLowerCase()).description,
-  "og:image": projects.get(params.name.toLowerCase()).thumbnail + "/meta",
+        "og:title": `Allcon Contracting - ${
+          projects.get(params.name.toLowerCase()).name
+        }`,
+        "og:type": "business",
+        "og:site_name": "Allcon Contracting",
+        "og:description": projects.get(params.name.toLowerCase()).description,
+        "og:image": projects.get(params.name.toLowerCase()).thumbnail + "/meta",
 
-  "twitter:card": projects.get(params.name.toLowerCase()).thumbnail + "/meta",
-  "og:url": `https://allconcontracting.com${
-    projects.get(params.name.toLowerCase()).path
-  }`,
-});
+        "twitter:card":
+          projects.get(params.name.toLowerCase()).thumbnail + "/meta",
+        "og:url": `https://allconcontracting.com${
+          projects.get(params.name.toLowerCase()).path
+        }`,
+      }
+    : {
+        title: `Allcon Contracting - Projects`,
+        description: "Allcon Contracting projects listing.",
+
+        "og:title": "Allcon Contracting - Projects",
+        "og:type": "business",
+        "og:site_name": "Allcon Contracting",
+        "og:description": `Allcon Contracting projects listing.`,
+        "og:image":
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400/meta",
+        "twitter:card":
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400/meta",
+        "og:url": "https://allconcontracting.com/projects",
+      };
 
 export const loader: LoaderFunction = async ({ request, params }: any) => {
   try {
-    if (!projects.has(params.name.toLowerCase())) {
-      throw "No Project";
+    if (!projects.has(params?.name.toLowerCase())) {
+      return redirect("/projects");
     }
 
     const project = projects.get(params.name.toLowerCase());

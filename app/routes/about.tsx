@@ -37,9 +37,9 @@ export const meta: MetaFunction = ({ params }: any) => ({
               quality projects serving a variety of private and public clients
               throughout New York State.`,
   "og:image":
-    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail",
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b4fadc27-355f-443d-f1d2-a3efc3905200/meta",
   "twitter:card":
-    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail",
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b4fadc27-355f-443d-f1d2-a3efc3905200/meta",
   "og:url": "https://allconcontracting.com/about",
 });
 

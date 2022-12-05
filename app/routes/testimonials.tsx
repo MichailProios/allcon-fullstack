@@ -52,9 +52,9 @@ export const meta: MetaFunction = ({ params }: any) => ({
   "og:site_name": "Allcon Contracting",
   "og:description": `Allcon Contracting testionies from clients.`,
   "og:image":
-    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail",
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c0ce0238-47bb-4d18-f278-79a57d207b00/meta",
   "twitter:card":
-    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail",
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c0ce0238-47bb-4d18-f278-79a57d207b00/meta",
   "og:url": "https://allconcontracting.com/testimonials",
 });
 

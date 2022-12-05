@@ -231,7 +231,6 @@ projects
           as they arose and maintain both schedule constraints and budgetary
           limitations.`,
   })
-
   .set("sca-fiorello-laguardia-highschool", {
     sector: "public",
     thumbnail:
@@ -546,7 +545,6 @@ projects
     status: { text: "The project is finished", completed: true },
     description: `Provide lobby & security office renovations`,
   })
-
   .set("ogs-army-support-facility", {
     sector: "public",
     thumbnail:

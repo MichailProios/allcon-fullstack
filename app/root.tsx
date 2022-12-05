@@ -34,9 +34,9 @@ export const meta: MetaFunction = () => ({
   "og:site_name": "Allcon Contracting",
   "og:description": "Infinite Possibilities through Integrated Solutions.",
   "og:image":
-    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail",
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4aee4395-0887-4070-980f-427a13fdb400/meta",
   "twitter:card":
-    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail",
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4aee4395-0887-4070-980f-427a13fdb400/meta",
   "og:url": "https://allconcontracting.com",
   viewport: "width=device-width,initial-scale=1",
 });

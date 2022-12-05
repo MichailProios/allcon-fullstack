@@ -407,7 +407,21 @@ projects
     description: `Work Included: <br/> 
            &emsp;	•	Sounding of entire facade
           <br/>
-        
+          &emsp;	•	Masonry
+          <br/>
+           &emsp;	•	Interior partitions and finishes
+          <br/>
+           &emsp;	•	Rough and finished carpentry
+          <br/>
+           &emsp;	•	Springler system
+          <br/>
+           &emsp;	•	Fire alarm system
+          <br/>
+           &emsp;	•	HVAC new units
+          <br/>
+           &emsp;	•	Electrical
+          <br/>
+           &emsp;	•	Plumbing
 `,
   })
   .set("suny-farmingdale-laffin-hall", {

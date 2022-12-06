@@ -116,6 +116,7 @@ export default function Layout({ children }: LayoutProps) {
               position="fixed"
               bottom={12}
               right={16}
+              overflow="hidden"
               colorScheme={"primary"}
             >
               <ChevronUpIcon fontSize="1.5em" />

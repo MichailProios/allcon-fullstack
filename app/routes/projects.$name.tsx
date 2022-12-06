@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useRef, useState } from "react";
+import { Fragment, useCallback, useRef, useEffect } from "react";
 import {
   Text,
   Button,
@@ -41,21 +41,41 @@ import {
   TagLabel,
   TagLeftIcon,
   Badge,
+  useBreakpointValue,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Fade,
+  Tooltip,
 } from "@chakra-ui/react";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Keyboard, Pagination, Navigation } from "swiper";
+// import { motion, useScroll, useSpring } from "framer-motion";
 
-import { LoaderFunction, MetaFunction, redirect } from "@remix-run/node";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Lazy, Thumbs, Pagination, Navigation } from "swiper";
+
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
+
+import { redirect } from "@remix-run/node";
 
 import { json } from "@remix-run/node";
 
 import { useLoaderData } from "@remix-run/react";
-import { useWindowDimensions } from "~/utils/hooks";
+// import { useWindowDimensions } from "~/utils/hooks";
 
 // import { GrNext, GrPrevious } from "react-icons/gr";
 
-import { ChevronRightIcon, ChevronLeftIcon, InfoIcon } from "@chakra-ui/icons";
+import {
+  ChevronRightIcon,
+  ChevronLeftIcon,
+  InfoIcon,
+  CloseIcon,
+} from "@chakra-ui/icons";
 
 // import Slider from "react-slick";
 
@@ -67,7 +87,8 @@ import {
   AiOutlineCheckCircle,
   AiOutlineTag,
 } from "react-icons/ai";
-import { BiBuildings, BiMap } from "react-icons/bi";
+import { BiBuildings, BiMap, BiExpand } from "react-icons/bi";
+import { useWindowDimensions } from "~/utils/hooks";
 
 export const meta: MetaFunction = ({ params }: any) =>
   projects.has(params?.name.toLowerCase())
@@ -137,6 +158,12 @@ export default function Project() {
 
   const data = useLoaderData();
 
+  const media = Object.values(data.project.media).sort(
+    (a: any, b: any) => a.order - b.order
+  );
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <SlideFade in={true} reverse delay={0.1}>
       <Container maxW={"1400px"} px={{ base: 6, md: 10 }} py={14}>
@@ -179,65 +206,163 @@ export default function Project() {
             _hover={{ bgColor: "gray.200" }}
           />
 
+          <IconButton
+            aria-label="right-arrow"
+            variant="solid"
+            size="sm"
+            borderRadius="full"
+            position="absolute"
+            top={{ base: "5px", md: "10px" }}
+            right={{ base: "5px", md: "10px" }}
+            zIndex={2}
+            onClick={onOpen}
+            icon={<Icon w={4} h={4} as={BiExpand} />}
+            bgColor="gray.50"
+            textColor="black"
+            _hover={{ bgColor: "gray.200" }}
+          />
+
           <Box mt={"26px"} boxShadow="xl" w={"full"}>
             <Swiper
               pagination={{
                 clickable: true,
                 dynamicBullets: true,
               }}
-              keyboard={{
-                enabled: true,
-              }}
-              loop={data.project.media.length > 1 ? true : false}
-              modules={[Keyboard, Pagination, Navigation]}
+              lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
+              modules={[Lazy, Pagination, Navigation]}
               effect={"slide"}
               ref={sliderRef}
               style={{ borderRadius: "0.375rem" }}
+              spaceBetween={30}
+              cssMode={true}
             >
-              {Object.values(data.project.media)
-                .sort((a: any, b: any) => a.order - b.order)
-                .map((value: any, index: any) => {
-                  if (value.image) {
-                    return (
-                      <SwiperSlide key={index}>
-                        <AspectRatio ratio={{ base: 1, md: 16 / 9 }}>
-                          <Image
-                            src={value.image + "/public"}
-                            alt={`Project Image ${index}`}
-                            fallback={<Skeleton h="full" w="full" />}
-                          />
-                        </AspectRatio>
-                      </SwiperSlide>
-                    );
-                  } else if (value.video) {
-                    return (
-                      <SwiperSlide key={index}>
-                        <AspectRatio
-                          key={index}
-                          ratio={{ base: 1, md: 16 / 9 }}
-                        >
-                          <iframe
-                            title={`Project Video ${index}`}
-                            src={value.video}
-                            allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                            style={{
-                              border: "none",
-                              height: "100%",
-                              width: "100%",
-
-                              color: "#f3f3f3",
-                            }}
-                          />
-                        </AspectRatio>
-                      </SwiperSlide>
-                    );
-                  } else {
-                    return null;
-                  }
-                })}
+              {media.map((value: any, index: any) => {
+                return (
+                  <SwiperSlide key={index}>
+                    <AspectRatio ratio={{ base: 1, md: 16 / 9 }}>
+                      {value.image ? (
+                        <Image
+                          src={value.image + "/public"}
+                          alt={`Project Image ${index}`}
+                          loading="eager"
+                          fallback={<Skeleton h="full" w="full" />}
+                        />
+                      ) : value.video ? (
+                        <iframe
+                          title={`Project Video ${index}`}
+                          src={value.video}
+                          allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                          style={{
+                            border: "none",
+                            height: "100%",
+                            width: "100%",
+                            color: "#f3f3f3",
+                          }}
+                        />
+                      ) : null}
+                    </AspectRatio>
+                  </SwiperSlide>
+                );
+              })}
             </Swiper>
           </Box>
         </Box>
+
+        <Modal
+          isOpen={isOpen}
+          onClose={onClose}
+          blockScrollOnMount
+          closeOnOverlayClick
+          autoFocus
+          isCentered
+          preserveScrollBarGap
+          motionPreset="slideInBottom"
+          scrollBehavior="inside"
+          // size="full"
+        >
+          <ModalOverlay />
+
+          <ModalContent maxW="1600px" maxH="95vh" ml={4} mr={4}>
+            <ModalHeader textAlign="center" fontSize="3xl">
+              {data.project.name}
+            </ModalHeader>
+            <ModalCloseButton />
+            <ModalBody
+              overflow="overlay"
+              p={"24px"}
+              justifyContent="center"
+              h="full"
+              w="full"
+              maxW="full"
+            >
+              <Container maxW="1500px" maxH="100vh">
+                <Flex flexDirection="column" gap={2}>
+                  {media.map((value: any, index: any) => {
+                    return (
+                      <Flex justifyContent="center" key={index}>
+                        {value.image ? (
+                          <Image
+                            objectFit="contain"
+                            borderRadius="md"
+                            src={value.image + "/public"}
+                            alt={`Project Image ${index}`}
+                            loading="lazy"
+                            fallback={<Skeleton h="full" w="full" />}
+                          />
+                        ) : value.video ? (
+                          <AspectRatio
+                            borderRadius="md"
+                            w="full"
+                            maxW="full"
+                            ratio={16 / 9}
+                          >
+                            <iframe
+                              title={`Project Video ${index}`}
+                              src={value.video}
+                              allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                              style={{
+                                border: "none",
+                                height: "100%",
+                                width: "100%",
+                                color: "#f3f3f3",
+                                borderRadius: "0.375rem",
+                              }}
+                            />
+                          </AspectRatio>
+                        ) : null}
+                      </Flex>
+                    );
+                  })}
+
+                  <HStack
+                    mb="16px"
+                    mt="26px"
+                    alignItems="center"
+                    w="full"
+                    justifyContent="stretch"
+                  >
+                    <Divider w="full" />
+                    <Text
+                      userSelect="none"
+                      decoration="none"
+                      align="center"
+                      whiteSpace="nowrap"
+                    >
+                      End of Project Media
+                    </Text>
+                    <Divider w="full" />
+                  </HStack>
+                </Flex>
+              </Container>
+            </ModalBody>
+
+            <ModalFooter>
+              <Button onClick={onClose} colorScheme="primary" variant="solid">
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
       </Container>
       <Divider />
       <Container maxW={"1400px"} px={{ base: 6, md: 10 }} py={14}>

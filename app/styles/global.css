@@ -4,6 +4,7 @@
 
 * {
   scrollbar-width: auto;
+
   scrollbar-color: #b7b7b7 transparent;
   font-family: "Lato", sans-serif !important;
 }
@@ -39,6 +40,10 @@
 
 *::-webkit-scrollbar-corner {
   background-color: transparent;
+}
+
+html {
+  overflow-y: overlay;
 }
 
 /* .custom-shape-divider-bottom-1658723164 {

@@ -345,6 +345,7 @@ projects
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400",
         order: 2,
       },
+
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/736315aa-97e9-43b3-8ab7-419739e23800",
@@ -357,18 +358,13 @@ projects
       },
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/bd02dac9-0544-4b23-4ca8-f91ed23e7a00",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ed685c0b-cce2-4e23-713f-10f5829e9800",
         order: 5,
       },
       {
         image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ed685c0b-cce2-4e23-713f-10f5829e9800",
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ab572a68-7d98-492f-aced-150ccde1d500",
         order: 6,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ed685c0b-cce2-4e23-713f-10f5829e9800",
-        order: 7,
       },
     ],
 

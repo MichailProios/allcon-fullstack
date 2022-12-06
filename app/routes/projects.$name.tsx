@@ -57,7 +57,15 @@ import {
 // import { motion, useScroll, useSpring } from "framer-motion";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Lazy, Thumbs, Pagination, Navigation } from "swiper";
+import {
+  EffectFade,
+  Lazy,
+  FreeMode,
+  Pagination,
+  Navigation,
+  Scrollbar,
+  Mousewheel,
+} from "swiper";
 
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 
@@ -275,14 +283,15 @@ export default function Project() {
           closeOnOverlayClick
           autoFocus
           isCentered
-          preserveScrollBarGap
+          // preserveScrollBarGap
           motionPreset="slideInBottom"
           scrollBehavior="inside"
-          // size="full"
+          trapFocus
+          size="full"
         >
           <ModalOverlay />
 
-          <ModalContent maxW="1600px" maxH="95vh" ml={4} mr={4}>
+          <ModalContent>
             <ModalHeader textAlign="center" fontSize="3xl">
               {data.project.name}
             </ModalHeader>
@@ -295,7 +304,7 @@ export default function Project() {
               w="full"
               maxW="full"
             >
-              <Container maxW="1500px" maxH="100vh">
+              <Container maxW="1500px">
                 <Flex flexDirection="column" gap={2}>
                   {media.map((value: any, index: any) => {
                     return (

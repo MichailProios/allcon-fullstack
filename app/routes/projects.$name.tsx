@@ -71,6 +71,7 @@ import {
   Navigation,
   Scrollbar,
   Mousewheel,
+  Keyboard,
 } from "swiper";
 
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
@@ -276,7 +277,7 @@ export default function Project() {
             <IconButton
               aria-label="expand-arrow"
               variant="solid"
-              size="sm"
+              size={"md"}
               borderRadius="full"
               position="absolute"
               top={{ base: "5px", md: "10px" }}
@@ -284,7 +285,7 @@ export default function Project() {
               transform={"translate(0%, 0%)"}
               zIndex={2}
               onClick={onOpen}
-              icon={<Icon w={4} h={4} as={BiExpand} />}
+              icon={<Icon w={5} h={5} as={BiExpand} />}
               bgColor="gray.50"
               textColor="black"
               _hover={{ bgColor: "gray.200" }}
@@ -296,8 +297,11 @@ export default function Project() {
                   borderRadius: "0.375rem",
                   // height: "auto",
                 }}
+                keyboard={{
+                  enabled: true,
+                }}
                 lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
-                modules={[Lazy, Navigation, Thumbs]}
+                modules={[Lazy, Navigation, Thumbs, Keyboard]}
                 effect={"slide"}
                 thumbs={{ swiper: thumbsSwiper }}
                 ref={sliderRef}
@@ -439,21 +443,16 @@ export default function Project() {
           onClose={onClose}
           blockScrollOnMount
           closeOnOverlayClick
-          autoFocus
+          // autoFocus
           isCentered
           // preserveScrollBarGap
-          motionPreset="slideInBottom"
+          // motionPreset="slideInBottom"
           scrollBehavior="inside"
-          trapFocus
           size="full"
         >
           <ModalOverlay />
 
           <ModalContent p={0} m={0}>
-            {/* <ModalHeader textAlign="center" fontSize="3xl">
-              {data.project.name}
-            </ModalHeader> */}
-            {/* <ModalCloseButton as={Button} variant="solid" /> */}
             <IconButton
               aria-label="close"
               variant="solid"
@@ -510,7 +509,10 @@ export default function Project() {
                       height: `${height}px`,
                     }}
                     lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
-                    modules={[Lazy, Navigation, Pagination]}
+                    modules={[Lazy, Navigation, Pagination, Keyboard]}
+                    keyboard={{
+                      enabled: true,
+                    }}
                     effect={"slide"}
                     pagination={{
                       type: "progressbar",

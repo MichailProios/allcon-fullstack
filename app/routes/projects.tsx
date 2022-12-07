@@ -644,6 +644,7 @@ export default function Index() {
                     rounded="md"
                     variant="outline"
                     boxShadow="md"
+                    textAlign="start"
                     rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
                     onClick={isOpen ? onClose : onOpen}
                   >

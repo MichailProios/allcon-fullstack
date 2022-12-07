@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useRef, useEffect } from "react";
+import { Fragment, useCallback, useRef, useEffect, useState } from "react";
 import {
   Text,
   Button,
@@ -52,13 +52,19 @@ import {
   ModalCloseButton,
   Fade,
   Tooltip,
+  useBreakpoint,
 } from "@chakra-ui/react";
+
+import { wrap } from "popmotion";
+
+import { motion, AnimatePresence } from "framer-motion";
 
 // import { motion, useScroll, useSpring } from "framer-motion";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   EffectFade,
+  Thumbs,
   Lazy,
   FreeMode,
   Pagination,
@@ -86,6 +92,8 @@ import {
 } from "@chakra-ui/icons";
 
 // import Slider from "react-slick";
+
+import AwesomeSlider from "react-awesome-slider";
 
 import { projects } from "~/utils/projects";
 
@@ -164,117 +172,267 @@ export default function Project() {
     sliderRef.current.swiper.slideNext();
   }, []);
 
+  const sliderRefLarge = useRef<any>(null);
+
+  const handlePrevLarge = useCallback(() => {
+    if (!sliderRefLarge.current) return;
+    sliderRefLarge.current.swiper.slidePrev();
+  }, []);
+
+  const handleNextLarge = useCallback(() => {
+    if (!sliderRefLarge.current) return;
+    sliderRefLarge.current.swiper.slideNext();
+  }, []);
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const sliderRefThumb = useRef<any>(null);
+
+  const updateIndex = useCallback(
+    () => setCurrentSlide(sliderRef.current.swiper.realIndex),
+    []
+  );
+
+  // Add eventlisteners for swiper after initializing
+  useEffect(() => {
+    const swiperInstance = sliderRef.current.swiper;
+
+    if (swiperInstance) {
+      swiperInstance.on("slideChange", updateIndex);
+    }
+
+    return () => {
+      if (swiperInstance) {
+        swiperInstance.off("slideChange", updateIndex);
+      }
+    };
+  }, [updateIndex]);
+
   const data = useLoaderData();
 
-  const media = Object.values(data.project.media).sort(
+  const media: any = Object.values(data.project.media).sort(
     (a: any, b: any) => a.order - b.order
   );
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+
+  const thumbsBreakpoint = useBreakpointValue(
+    { base: 2, xs: 3, sm: 3, md: 4, lg: 6 },
+    { fallback: "md", ssr: true }
+  );
+
+  const cssModeBreakpoint = useBreakpointValue(
+    { base: true, md: false },
+    { ssr: false }
+  );
+
+  const { height } = useWindowDimensions();
+
   return (
     <SlideFade in={true} reverse delay={0.1}>
-      <Container maxW={"1400px"} px={{ base: 6, md: 10 }} py={14}>
+      <Container maxW={"1200px"} px={{ base: 6, md: 10 }} py={14}>
         <VStack spacing="26px" w="full">
           <Heading textAlign="center">{data.project.name}</Heading>
         </VStack>
 
-        <Box position={"relative"} w="full">
-          <IconButton
-            display={data.project.media.length > 1 ? "flex" : "none"}
-            aria-label="left-arrow"
-            variant="solid"
-            borderRadius="full"
-            position="absolute"
-            left={{ base: "5px", md: "10px" }}
-            top="50%"
-            transform={"translate(0%, -50%)"}
-            zIndex={2}
-            onClick={handlePrev}
-            icon={<ChevronLeftIcon w={6} h={6} />}
-            bgColor="gray.50"
-            textColor="black"
-            _hover={{ bgColor: "gray.200" }}
-          />
+        <VStack mt={"26px"} w="full" h="full">
+          <Box position={"relative"} w="full">
+            <IconButton
+              display={data.project.media.length > 1 ? "flex" : "none"}
+              aria-label="left-arrow"
+              variant="solid"
+              borderRadius="full"
+              position="absolute"
+              left={{ base: "5px", md: "10px" }}
+              top="50%"
+              transform={"translate(0%, -50%)"}
+              zIndex={2}
+              onClick={handlePrev}
+              icon={<ChevronLeftIcon w={6} h={6} />}
+              bgColor="gray.50"
+              textColor="black"
+              _hover={{ bgColor: "gray.200" }}
+            />
 
-          <IconButton
-            display={data.project.media.length > 1 ? "flex" : "none"}
-            aria-label="right-arrow"
-            variant="solid"
-            borderRadius="full"
-            position="absolute"
-            right={{ base: "5px", md: "10px" }}
-            top="50%"
-            transform={"translate(0%, -50%)"}
-            zIndex={2}
-            onClick={handleNext}
-            icon={<ChevronRightIcon w={6} h={6} />}
-            bgColor="gray.50"
-            textColor="black"
-            _hover={{ bgColor: "gray.200" }}
-          />
+            <IconButton
+              display={data.project.media.length > 1 ? "flex" : "none"}
+              aria-label="right-arrow"
+              variant="solid"
+              borderRadius="full"
+              position="absolute"
+              right={{ base: "5px", md: "10px" }}
+              top="50%"
+              transform={"translate(0%, -50%)"}
+              zIndex={2}
+              onClick={handleNext}
+              icon={<ChevronRightIcon w={6} h={6} />}
+              bgColor="gray.50"
+              textColor="black"
+              _hover={{ bgColor: "gray.200" }}
+            />
 
-          <IconButton
-            aria-label="right-arrow"
-            variant="solid"
-            size="sm"
-            borderRadius="full"
-            position="absolute"
-            top={{ base: "5px", md: "10px" }}
-            right={{ base: "5px", md: "10px" }}
-            zIndex={2}
-            onClick={onOpen}
-            icon={<Icon w={4} h={4} as={BiExpand} />}
-            bgColor="gray.50"
-            textColor="black"
-            _hover={{ bgColor: "gray.200" }}
-          />
+            <IconButton
+              aria-label="expand-arrow"
+              variant="solid"
+              size="sm"
+              borderRadius="full"
+              position="absolute"
+              top={{ base: "5px", md: "10px" }}
+              right={{ base: "5px", md: "10px" }}
+              transform={"translate(0%, 0%)"}
+              zIndex={2}
+              onClick={onOpen}
+              icon={<Icon w={4} h={4} as={BiExpand} />}
+              bgColor="gray.50"
+              textColor="black"
+              _hover={{ bgColor: "gray.200" }}
+            />
 
-          <Box mt={"26px"} boxShadow="xl" w={"full"}>
-            <Swiper
-              pagination={{
-                clickable: true,
-                dynamicBullets: true,
-              }}
-              lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
-              modules={[Lazy, Pagination, Navigation]}
-              effect={"slide"}
-              ref={sliderRef}
-              style={{ borderRadius: "0.375rem" }}
-              spaceBetween={30}
-              cssMode={true}
-            >
-              {media.map((value: any, index: any) => {
-                return (
-                  <SwiperSlide key={index}>
-                    <AspectRatio ratio={{ base: 1, md: 16 / 9 }}>
-                      {value.image ? (
-                        <Image
-                          src={value.image + "/public"}
-                          alt={`Project Image ${index}`}
-                          loading="eager"
-                          fallback={<Skeleton h="full" w="full" />}
-                        />
-                      ) : value.video ? (
-                        <iframe
-                          title={`Project Video ${index}`}
-                          src={value.video}
-                          allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                          style={{
-                            border: "none",
-                            height: "100%",
-                            width: "100%",
-                            color: "#f3f3f3",
-                          }}
-                        />
-                      ) : null}
-                    </AspectRatio>
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
+            <Box boxShadow="xl" w={"full"}>
+              <Swiper
+                style={{
+                  borderRadius: "0.375rem",
+                  // height: "auto",
+                }}
+                lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
+                modules={[Lazy, Navigation, Thumbs]}
+                effect={"slide"}
+                thumbs={{ swiper: thumbsSwiper }}
+                ref={sliderRef}
+                spaceBetween={30}
+                autoHeight
+                cssMode={cssModeBreakpoint}
+              >
+                {media.map((value: any, index: any) => {
+                  return (
+                    <SwiperSlide key={index}>
+                      <AspectRatio
+                        ratio={{
+                          base: 1,
+                          sm: value.aspectRatio !== 16 / 9 ? 4 / 3 : 16 / 9,
+                        }}
+                        h="full"
+                        w="full"
+                        maxH="full"
+                        maxW="full"
+                      >
+                        {value.image ? (
+                          <Image
+                            src={value.image + "/public"}
+                            alt={`Project Image ${index}`}
+                            loading="eager"
+                            w="full"
+                            h="full"
+                            maxW="full"
+                            maxH="full"
+                            draggable={false}
+                            fallback={<Skeleton h="full" w="full" />}
+                            crossOrigin="anonymous"
+                          />
+                        ) : value.video ? (
+                          <iframe
+                            title={`Project Video ${index}`}
+                            src={value.video}
+                            allowFullScreen
+                            allowTransparency
+                            draggable={false}
+                            allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                            style={{
+                              border: "none",
+                              height: "100%",
+                              width: "100%",
+                              color: "#f3f3f3",
+                            }}
+                          />
+                        ) : null}
+                      </AspectRatio>
+                    </SwiperSlide>
+                  );
+                })}
+              </Swiper>
+            </Box>
           </Box>
-        </Box>
+
+          <Box
+            w="full"
+            display={{ base: "none", xs: media.length > 1 ? "block" : "none" }}
+          >
+            <AnimatePresence>
+              <Swiper
+                onSwiper={setThumbsSwiper}
+                spaceBetween={8}
+                slidesPerView={thumbsBreakpoint}
+                freeMode={true}
+                watchSlidesProgress={true}
+                modules={[FreeMode, Navigation, Thumbs]}
+                style={{
+                  borderRadius: "0.375rem",
+                }}
+                ref={sliderRefThumb}
+                cssMode={cssModeBreakpoint}
+              >
+                {media.map((value: any, index: any) => {
+                  return (
+                    <SwiperSlide key={index}>
+                      <motion.div
+                        whileHover={{ scale: 1.02, cursor: "pointer" }}
+                        transition={{
+                          type: "tween",
+                          duration: 0.2,
+                        }}
+                        key={index}
+                      >
+                        <AspectRatio
+                          ratio={16 / 9}
+                          w="full"
+                          h="full"
+                          maxW="full"
+                          maxH="full"
+                        >
+                          {value.image ? (
+                            <Image
+                              src={value.image + "/meta"}
+                              alt={`Project Image ${index}`}
+                              loading="eager"
+                              fallback={<Skeleton h="full" w="full" />}
+                              borderRadius="md"
+                              zIndex={9000}
+                              opacity={currentSlide === index ? 1 : 0.8}
+                              transition="opacity 200ms"
+                              crossOrigin="anonymous"
+                              w="full"
+                              h="full"
+                              maxW="full"
+                              maxH="full"
+                            />
+                          ) : value.video ? (
+                            <iframe
+                              title={`Project Video ${index}`}
+                              src={value.video}
+                              allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                              style={{
+                                border: "none",
+                                height: "100%",
+                                width: "100%",
+                                color: "#f3f3f3",
+                                borderRadius: "0.375rem",
+                                opacity: currentSlide === index ? 1 : 0.8,
+                                transition: "opacity 200ms",
+                                pointerEvents: "none",
+                              }}
+                            />
+                          ) : null}
+                        </AspectRatio>
+                      </motion.div>
+                    </SwiperSlide>
+                  );
+                })}
+              </Swiper>
+            </AnimatePresence>
+          </Box>
+        </VStack>
 
         <Modal
           isOpen={isOpen}
@@ -291,90 +449,131 @@ export default function Project() {
         >
           <ModalOverlay />
 
-          <ModalContent>
-            <ModalHeader textAlign="center" fontSize="3xl">
+          <ModalContent p={0} m={0}>
+            {/* <ModalHeader textAlign="center" fontSize="3xl">
               {data.project.name}
-            </ModalHeader>
-            <ModalCloseButton />
-            <ModalBody
-              overflow="overlay"
-              p={"24px"}
-              justifyContent="center"
-              h="full"
-              w="full"
-              maxW="full"
-            >
-              <Container maxW="1500px">
-                <Flex flexDirection="column" gap={2}>
-                  {media.map((value: any, index: any) => {
-                    return (
-                      <Flex justifyContent="center" key={index}>
-                        {value.image ? (
-                          <Image
-                            objectFit="contain"
-                            borderRadius="md"
-                            src={value.image + "/public"}
-                            alt={`Project Image ${index}`}
-                            loading="lazy"
-                            fallback={<Skeleton h="full" w="full" />}
-                          />
-                        ) : value.video ? (
-                          <AspectRatio
-                            borderRadius="md"
-                            w="full"
-                            maxW="full"
-                            ratio={16 / 9}
-                          >
-                            <iframe
-                              title={`Project Video ${index}`}
-                              src={value.video}
-                              allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                              style={{
-                                border: "none",
-                                height: "100%",
-                                width: "100%",
-                                color: "#f3f3f3",
-                                borderRadius: "0.375rem",
-                              }}
-                            />
-                          </AspectRatio>
-                        ) : null}
-                      </Flex>
-                    );
-                  })}
+            </ModalHeader> */}
+            {/* <ModalCloseButton as={Button} variant="solid" /> */}
+            <IconButton
+              aria-label="close"
+              variant="solid"
+              size="sm"
+              colorScheme="primary"
+              position="absolute"
+              top={"10px"}
+              right={"10px"}
+              transform={"translate(0%, 0%)"}
+              zIndex={2}
+              onClick={onClose}
+              icon={<CloseIcon />}
+            />
+            <ModalBody overflow="hidden" h={`${height}px`} p={0} m={0}>
+              <Box position={"relative"} w="full" h={`${height}px`}>
+                <IconButton
+                  display={data.project.media.length > 1 ? "flex" : "none"}
+                  aria-label="left-arrow"
+                  variant="solid"
+                  borderRadius="full"
+                  position="absolute"
+                  left={{ base: "5px", md: "10px" }}
+                  top="50%"
+                  transform={"translate(0%, -50%)"}
+                  zIndex={400}
+                  onClick={handlePrevLarge}
+                  icon={<ChevronLeftIcon w={6} h={6} />}
+                  bgColor="gray.50"
+                  textColor="black"
+                  _hover={{ bgColor: "gray.200" }}
+                />
 
-                  <HStack
-                    mb="16px"
-                    mt="26px"
-                    alignItems="center"
-                    w="full"
-                    justifyContent="stretch"
+                <IconButton
+                  display={data.project.media.length > 1 ? "flex" : "none"}
+                  aria-label="right-arrow"
+                  variant="solid"
+                  borderRadius="full"
+                  position="absolute"
+                  right={{ base: "5px", md: "10px" }}
+                  top="50%"
+                  transform={"translate(0%, -50%)"}
+                  zIndex={400}
+                  onClick={handleNextLarge}
+                  icon={<ChevronRightIcon w={6} h={6} />}
+                  bgColor="gray.50"
+                  textColor="black"
+                  _hover={{ bgColor: "gray.200" }}
+                />
+
+                <Box boxShadow="xl" w={"full"}>
+                  <Swiper
+                    style={{
+                      objectFit: "contain",
+                      height: `${height}px`,
+                    }}
+                    lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
+                    modules={[Lazy, Navigation, Pagination]}
+                    effect={"slide"}
+                    pagination={{
+                      type: "progressbar",
+                    }}
+                    ref={sliderRefLarge}
+                    spaceBetween={30}
+                    autoHeight
+                    cssMode={cssModeBreakpoint}
                   >
-                    <Divider w="full" />
-                    <Text
-                      userSelect="none"
-                      decoration="none"
-                      align="center"
-                      whiteSpace="nowrap"
-                    >
-                      End of Project Media
-                    </Text>
-                    <Divider w="full" />
-                  </HStack>
-                </Flex>
-              </Container>
+                    {media.map((value: any, index: any) => {
+                      return (
+                        <SwiperSlide key={index}>
+                          {value.image ? (
+                            <Image
+                              src={value.image + "/hq"}
+                              alt={`Project Image ${index}`}
+                              loading="eager"
+                              w="full"
+                              maxW="full"
+                              maxH="full"
+                              objectFit="contain"
+                              draggable={false}
+                              fallback={<Skeleton h="full" w="full" />}
+                              h={`${height}px`}
+                              crossOrigin="anonymous"
+                            />
+                          ) : value.video ? (
+                            <AspectRatio
+                              ratio={{
+                                base: 1,
+                                sm:
+                                  value.aspectRatio !== 16 / 9 ? 4 / 3 : 16 / 9,
+                              }}
+                              h={`${height}px`}
+                            >
+                              <iframe
+                                title={`Project Video ${index}`}
+                                src={value.video}
+                                allowFullScreen
+                                allowTransparency
+                                draggable={false}
+                                allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                style={{
+                                  border: "none",
+                                  height: "100%",
+                                  width: "100%",
+                                  color: "#f3f3f3",
+                                }}
+                              />
+                            </AspectRatio>
+                          ) : null}
+                        </SwiperSlide>
+                      );
+                    })}
+                  </Swiper>
+                </Box>
+              </Box>
             </ModalBody>
-
-            <ModalFooter>
-              <Button onClick={onClose} colorScheme="primary" variant="solid">
-                Close
-              </Button>
-            </ModalFooter>
           </ModalContent>
         </Modal>
       </Container>
       <Divider />
-      <Container maxW={"1400px"} px={{ base: 6, md: 10 }} py={14}>
+      <Container maxW={"1200px"} px={{ base: 6, md: 10 }} py={14}>
         <VStack spacing="18px">
           {data.project.client ||
           data.project.categories ||

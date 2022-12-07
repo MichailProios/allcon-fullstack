@@ -10,71 +10,85 @@ projects
       {
         video:
           "https://customer-sn71r1ndnen7y1an.cloudflarestream.com/1dbfa8cbc7b88a99a3ca4e0775b3aa29/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-sn71r1ndnen7y1an.cloudflarestream.com%2F1dbfa8cbc7b88a99a3ca4e0775b3aa29%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D36s%26height%3D600&startTime=36s",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4aee4395-0887-4070-980f-427a13fdb400",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/fb31d82d-de7b-4b78-7696-c25a404e7400",
+        aspectRatio: 9 / 16,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/1475bdbd-5d54-464e-e167-ed882dbafe00",
+        aspectRatio: 16 / 9,
         order: 4,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/d5dbe854-6c92-4437-3ea1-10309d307900",
+        aspectRatio: 16 / 9,
         order: 5,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e31c4ddd-e85a-4308-3c95-751fc2679200",
+        aspectRatio: 16 / 9,
         order: 6,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e09765a8-fcf2-4d7e-80b0-0d7736683d00",
+        aspectRatio: 16 / 9,
         order: 7,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5ed56c9f-3769-4491-df95-27c2d4f8b900",
+        aspectRatio: 16 / 9,
         order: 8,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5e9f56da-0023-42fa-7520-397aac25de00",
+        aspectRatio: 16 / 9,
         order: 9,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/509cc521-880b-41e0-2a05-b81da893f800",
+        aspectRatio: 16 / 9,
         order: 10,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3e869efd-9729-41d4-505c-22378c842300",
+        aspectRatio: 16 / 9,
         order: 11,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/8cfe2996-dd43-4959-922a-3b2cf0f18100",
+        aspectRatio: 16 / 9,
         order: 12,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/8d34b330-ea19-458e-bf90-2f6cf6bf5b00",
+        aspectRatio: 16 / 9,
         order: 13,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/7b6136cc-91ee-4ce6-9b8e-6e985405ae00",
+        aspectRatio: 16 / 9,
         order: 14,
       },
     ],
@@ -106,102 +120,121 @@ projects
   .set("ogs-dot-elwood-ny-operation-facility", {
     sector: "public",
     thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c0ce0238-47bb-4d18-f278-79a57d207b00",
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/36387977-1c91-49f6-dfa8-4bc5c6b6c600",
     path: "/projects/ogs-dot-elwood-ny-operation-facility",
     media: [
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ed4adb38-21bf-4b5b-b620-16125cf56700",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/0fd7e300-c2f9-4058-83d9-1b59e1a6d900",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2251a5c0-46c9-46ae-6445-9d0cf6eff900",
+        aspectRatio: 16 / 9,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/69f7dcdc-7243-4b72-98e2-e3509db0cb00",
+        aspectRatio: 16 / 9,
         order: 4,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/79e88004-c5e4-44c6-9472-ebf5b6c5df00",
+        aspectRatio: 16 / 9,
         order: 5,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2fa05c2a-09b1-48b6-b723-520cbaf69000",
+        aspectRatio: 16 / 9,
         order: 6,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/592a2268-127d-43b7-71f5-3116d504d000",
+        aspectRatio: 16 / 9,
         order: 7,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/aba7602f-34dc-4ffd-1cf8-51be7cce0c00",
+        aspectRatio: 16 / 9,
         order: 8,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/36f280e4-143c-442e-bd4c-9ecbfc2ceb00",
+        aspectRatio: 16 / 9,
         order: 9,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/9492136a-ba4e-47a3-a2b7-c5aac0640800",
+        aspectRatio: 16 / 9,
         order: 10,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/36387977-1c91-49f6-dfa8-4bc5c6b6c600",
+        aspectRatio: 16 / 9,
         order: 11,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/91075744-6d21-4f97-84ba-7c50e66ae000",
+        aspectRatio: 16 / 9,
         order: 12,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/86382856-7487-464c-f1bc-03fe5e2e6000",
+        aspectRatio: 16 / 9,
         order: 13,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ae21043e-097f-48a8-6acb-ea5d316b2d00",
+        aspectRatio: 16 / 9,
         order: 14,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3676a5d7-595c-4f95-c0a7-1426c4b67f00",
+        aspectRatio: 16 / 9,
         order: 15,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c0ce0238-47bb-4d18-f278-79a57d207b00",
+        aspectRatio: 16 / 9,
         order: 16,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/f5291a6b-1730-4597-9e13-f2a5c1ce3800",
+        aspectRatio: 16 / 9,
         order: 17,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3092d834-68c3-4760-17ab-2ff5d321ad00",
+        aspectRatio: 16 / 9,
         order: 18,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/9a557653-a5f1-491d-367b-70de65121600",
+        aspectRatio: 16 / 9,
         order: 19,
       },
     ],
@@ -240,6 +273,7 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/51598770-6c6c-49fa-c235-410159bb3700",
+        aspectRatio: 16 / 9,
         order: 1,
       },
     ],
@@ -264,6 +298,7 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b83d58f9-1d62-403a-883d-171d68e3b500",
+        aspectRatio: 16 / 9,
         order: 1,
       },
     ],
@@ -289,6 +324,7 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/27fa0a33-6c79-4021-cab8-f987ff2c7900",
+        aspectRatio: 16 / 9,
         order: 1,
       },
     ],
@@ -313,6 +349,7 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/cf40a4b0-0c6b-4990-31ef-02d0ef82d000",
+        aspectRatio: 16 / 9,
         order: 1,
       },
     ],
@@ -338,32 +375,38 @@ projects
       {
         video:
           "https://customer-sn71r1ndnen7y1an.cloudflarestream.com/1813d1be91c9949d3fc00053953b0c22/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https://customer-sn71r1ndnen7y1an.cloudflarestream.com/1813d1be91c9949d3fc00053953b0c22/thumbnails/thumbnail.jpg%253Ftime=1m9s&height=600&startTime=1m8s",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400",
+        aspectRatio: 16 / 9,
         order: 2,
       },
 
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/736315aa-97e9-43b3-8ab7-419739e23800",
+        aspectRatio: 16 / 9,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e8098e3f-c65b-413d-368b-22b50268b300",
+        aspectRatio: 16 / 9,
         order: 4,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ed685c0b-cce2-4e23-713f-10f5829e9800",
+        aspectRatio: 16 / 9,
         order: 5,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ab572a68-7d98-492f-aced-150ccde1d500",
+        aspectRatio: 16 / 9,
         order: 6,
       },
     ],
@@ -387,6 +430,7 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4fcf5cb0-71bc-4846-bcf2-546c072a9b00",
+        aspectRatio: 16 / 9,
         order: 1,
       },
     ],
@@ -429,11 +473,13 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5c07d788-c233-4909-fad7-99ff2a8ddd00",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/dc4da3ff-05a5-4a33-b2da-ca8cefc16b00",
+        aspectRatio: 16 / 9,
         order: 2,
       },
     ],
@@ -468,41 +514,49 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/dbafdcfc-8e14-4674-d149-34eb4c2c8d00",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b5e300f4-23ef-49e1-3fc6-8b8a5e197500",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/487f8240-09e0-4850-756a-2da7acbf4200",
+        aspectRatio: 16 / 9,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2f27bbb3-2e30-4590-d7c3-66149991d700",
+        aspectRatio: 16 / 9,
         order: 4,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/98dd58bb-0d87-4df8-8de5-7e65c64d7c00",
+        aspectRatio: 16 / 9,
         order: 5,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/61a83c0a-7f6e-4d49-2488-b94aa4168600",
+        aspectRatio: 16 / 9,
         order: 6,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e3d2ab9b-2b03-4a1e-eadb-eba025a3b300",
+        aspectRatio: 16 / 9,
         order: 7,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/96f08191-f50b-4359-f535-6c84ab162000",
+        aspectRatio: 16 / 9,
         order: 8,
       },
     ],
@@ -540,6 +594,7 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/6f2edb66-6990-4e99-3549-eba84349e700",
+        aspectRatio: 16 / 9,
         order: 1,
       },
     ],
@@ -564,6 +619,7 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ee12e850-3ddf-45fe-de6e-05cb7994f400",
+        aspectRatio: 16 / 9,
         order: 1,
       },
     ],
@@ -588,11 +644,13 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/bf9657ee-a363-4ad8-e9cf-d4f04a39c500",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/d1b34973-95e6-4b99-5e5b-8379fabbf800",
+        aspectRatio: 9 / 16,
         order: 2,
       },
     ],
@@ -649,76 +707,90 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/892eba66-2c7f-4bcd-720e-a2eca582ba00",
+        aspectRatio: 9 / 16,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/f80ae0ad-57a4-43aa-af52-16e1e4998d00",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/eb5a093a-9c50-4991-f1a0-6d037f98aa00",
+        aspectRatio: 9 / 16,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/763903ab-172c-4ca0-dcf5-b9391c0ca900",
+        aspectRatio: 9 / 16,
         order: 4,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/116af262-2bd5-4a8d-d55c-c3ad6cdae100",
+        aspectRatio: 9 / 16,
         order: 5,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3b66d146-8477-4ba8-c134-dc2c6818d600",
+        aspectRatio: 9 / 16,
         order: 6,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4a4f6475-73c2-4188-8d16-e9552c2e7e00",
+        aspectRatio: 16 / 9,
         order: 7,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/0ab086b1-d59a-46b2-c037-0dae62543f00",
+        aspectRatio: 16 / 9,
         order: 8,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c8711ede-95ac-46ec-e1b0-0da2b13a3900",
+        aspectRatio: 16 / 9,
         order: 9,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/f3b70054-142f-48da-5494-4f464dde5500",
+        aspectRatio: 16 / 9,
         order: 10,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/aa953b1b-a9f2-4568-09de-821bf7b40800",
+        aspectRatio: 16 / 9,
         order: 11,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/087d8719-a6e9-4aba-8bce-839fa539b100",
+        aspectRatio: 16 / 9,
         order: 12,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4c8ae9e5-fc39-42f2-f6cd-e6445a6c0000",
+        aspectRatio: 16 / 9,
         order: 13,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/dc23515a-d964-439d-c55c-20bfddadf600",
+        aspectRatio: 9 / 16,
         order: 14,
       },
     ],
 
-    name: "Brighton Houses Inc.", // – Alterations Associated to Superstorm SANDY
+    name: "500 Brighton Houses Inc.", // – Alterations Associated to Superstorm SANDY
     location:
       "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3665.7652061803356!2d-73.96214!3d40.575355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c244405e66eb9f:0x1353c628363dc2ab!2s500%20Brightwater%20Ct,%20Brooklyn,%20NY%2011235!5e1!3m2!1sen!2sus!4v1669330118025!5m2!1sen!2sus",
 
@@ -751,11 +823,13 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/fe69ee75-b0cd-44f0-3e4b-d947a4b01500",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/0011583f-5504-4657-74a9-f53aeee70f00",
+        aspectRatio: 16 / 9,
         order: 2,
       },
     ],
@@ -793,21 +867,25 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3e896263-ffee-4f9f-9da7-d3c64ac66300",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/db29887a-b564-4cee-3367-948e7d77d200",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/cce353f0-53a9-4466-3d97-3694b7aa4a00",
+        aspectRatio: 9 / 16,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c71596c6-7bae-47c7-e4fa-868ba422a600",
+        aspectRatio: 16 / 9,
         order: 4,
       },
     ],
@@ -829,22 +907,26 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2ebdeb7e-442b-4443-6cb3-98f6746f2200",
+        aspectRatio: 16 / 9,
         order: 1,
       },
 
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/1cf1069c-71b6-4130-5c4f-ab77b7a71f00",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/430c4a3b-0c36-447f-c81b-f18e83a40400",
+        aspectRatio: 16 / 9,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/722f8507-dcb4-4077-3073-f2444950f600",
+        aspectRatio: 16 / 9,
         order: 4,
       },
     ],
@@ -884,66 +966,79 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/06e3cb6e-13aa-4786-9854-3c5d055d2000",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/1ac4a26e-a32b-4d87-0323-e56f7950e100",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/47bb7306-c89f-40e1-459d-54ab29978900",
+        aspectRatio: 16 / 9,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/519df48f-f50d-4503-9b4f-6cdc6a090100",
+        aspectRatio: 16 / 9,
         order: 4,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/0b9c692a-a3e6-44af-fefa-13c1e0de5700",
+        aspectRatio: 16 / 9,
         order: 5,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/650e23ec-41d6-4037-1fd2-cef5225f4d00",
+        aspectRatio: 16 / 9,
         order: 6,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/417d5d44-497c-40f4-595e-0ecf19ddda00",
+        aspectRatio: 16 / 9,
         order: 7,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/a4ba9dbd-91f2-4f5d-ea69-0447aac4a100",
+        aspectRatio: 16 / 9,
         order: 8,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/89453d3a-7821-43a7-0386-dfea3e3be900",
+        aspectRatio: 16 / 9,
         order: 9,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/9663836a-d95b-478b-551b-6ad723d1f000",
+        aspectRatio: 16 / 9,
         order: 10,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3dd9877b-3d9f-46d6-b08f-466909e95000",
+        aspectRatio: 16 / 9,
         order: 11,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b28fb91c-28df-4244-a9d5-769aeeb72200",
+        aspectRatio: 16 / 9,
         order: 12,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/cda96bd6-41af-4c6f-0a76-55d5d4af6800",
+        aspectRatio: 16 / 9,
         order: 13,
       },
     ],
@@ -972,16 +1067,19 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/dbe0310f-785e-4ee6-d032-5ce2bd7c0f00",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/a42fe716-4b3f-4ac9-a03e-60a0ad158900",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/703bf395-ab27-4383-4dc6-4f784cb2ae00",
+        aspectRatio: 16 / 9,
         order: 3,
       },
     ],
@@ -1019,26 +1117,31 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/0f2702fd-3527-4712-7d6e-a3a24fe49100",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/36953eba-f97c-418b-25f4-841824a8c400",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ff3ead4a-d904-4be2-3364-962338386800",
+        aspectRatio: 16 / 9,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/cd373878-90c9-47db-3548-1463b01cc100",
+        aspectRatio: 16 / 9,
         order: 4,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/59c97422-f001-446d-de7c-714fedb76900",
+        aspectRatio: 16 / 9,
         order: 5,
       },
     ],
@@ -1071,54 +1174,55 @@ projects
         the first of two Bareburger restaurant projects successfully completed
         by Allcon.`,
   })
-  .set("westbury-cultural-arts-center", {
-    sector: "public",
-    thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/481abd74-d161-452e-cbb5-868f524bbe00",
-    path: "/projects/westbury-cultural-arts-center",
-    media: [
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/481abd74-d161-452e-cbb5-868f524bbe00",
-        order: 1,
-      },
-    ],
+  //   .set("westbury-cultural-arts-center", {
+  //     sector: "public",
+  //     thumbnail:
+  //       "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/481abd74-d161-452e-cbb5-868f524bbe00",
+  //     path: "/projects/westbury-cultural-arts-center",
+  //     media: [
+  //       {
+  //         image:
+  //           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/481abd74-d161-452e-cbb5-868f524bbe00",
+  //         aspectRatio: 16 / 9,
+  //         order: 1,
+  //       },
+  //     ],
 
-    name: "Westbury Cultural Arts Center",
-    location:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3655.817085876782!2d-73.59070108435846!3d40.75659044282292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c287731864b50f:0x446b67faf1ce31dd!2sWestbury%20Arts!5e1!3m2!1sen!2sus!4v1670274279577!5m2!1sen!2sus",
-    client: null,
-    status: { text: "The project is finshed", completed: true },
-    category: { text: "Other miscellaneous projects", tag: "other" },
-    cost: "Under $1,500,000.00",
-    designer: null,
-    description: `Work Included: <br/> 
-           &emsp; •	Selective Demolition-two levels
-          <br/>
-           &emsp; •	Cast-In-Place Concrete
-          <br/>
-           &emsp; •	Masonry
-          <br/>
-           &emsp; •	Metal framing
-          <br/>
-           &emsp; •	Structural Steel
-          <br/>
-           &emsp; •	Misc. Roofing repairs
-          <br/>
-           &emsp; •	Interior finished
-          <br/>
-           &emsp; •	Flooring
-          <br/>
-           &emsp; •	Painting
-          <br/>
-           &emsp; •	Millwork
-          <br/>
-           &emsp; •	New Elevator
-          <br/>
-           &emsp; •	MEPs
+  //     name: "Westbury Cultural Arts Center",
+  //     location:
+  //       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3655.817085876782!2d-73.59070108435846!3d40.75659044282292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c287731864b50f:0x446b67faf1ce31dd!2sWestbury%20Arts!5e1!3m2!1sen!2sus!4v1670274279577!5m2!1sen!2sus",
+  //     client: null,
+  //     status: { text: "The project is finshed", completed: true },
+  //     category: { text: "Other miscellaneous projects", tag: "other" },
+  //     cost: "Under $1,500,000.00",
+  //     designer: null,
+  //     description: `Work Included: <br/>
+  //            &emsp; •	Selective Demolition-two levels
+  //           <br/>
+  //            &emsp; •	Cast-In-Place Concrete
+  //           <br/>
+  //            &emsp; •	Masonry
+  //           <br/>
+  //            &emsp; •	Metal framing
+  //           <br/>
+  //            &emsp; •	Structural Steel
+  //           <br/>
+  //            &emsp; •	Misc. Roofing repairs
+  //           <br/>
+  //            &emsp; •	Interior finished
+  //           <br/>
+  //            &emsp; •	Flooring
+  //           <br/>
+  //            &emsp; •	Painting
+  //           <br/>
+  //            &emsp; •	Millwork
+  //           <br/>
+  //            &emsp; •	New Elevator
+  //           <br/>
+  //            &emsp; •	MEPs
 
-`,
-  })
+  // `,
+  //   })
   .set("wilson-animal", {
     sector: "public",
     thumbnail:
@@ -1128,36 +1232,43 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4f82fa0c-14e0-4a36-833f-7d7870759700",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3e772772-db0b-4740-97cb-dc3f41edb100",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/bdbb1904-5a60-4427-5d52-bab021305400",
+        aspectRatio: 16 / 9,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/615fd356-07ea-4c21-0b09-3046378c0d00",
+        aspectRatio: 16 / 9,
         order: 4,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/f2690277-9335-4eaf-00d8-9a3b3336ed00",
+        aspectRatio: 16 / 9,
         order: 5,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/db692866-a02d-4df5-a0ec-50f3d7c3ec00",
+        aspectRatio: 16 / 9,
         order: 6,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/84486c38-26d4-4624-88ba-53b6f6adba00",
+        aspectRatio: 16 / 9,
         order: 7,
       },
     ],
@@ -1182,16 +1293,19 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4588a5c7-801b-496e-daa0-f36ae1ad4700",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/9b7c339d-3bef-4f1f-d292-5f092f1de400",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4c1b61be-6c30-4371-14a3-f02cb7d95a00",
+        aspectRatio: 16 / 9,
         order: 2,
       },
     ],
@@ -1216,16 +1330,19 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/221d7b85-c626-4985-e5b4-1cfd9b2af000",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/446b6dfa-5500-4f02-27a5-2db7189c7000",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/007cc994-36e2-4f75-05f9-37b9a4c75300",
+        aspectRatio: 16 / 9,
         order: 2,
       },
     ],
@@ -1250,26 +1367,31 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/79b0595e-d481-454b-998e-a7025813e400",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/306eaee1-8669-4526-81bc-07bc047f9200",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/8f25afbf-e62e-4594-dfec-9f60e65ab400",
+        aspectRatio: 16 / 9,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/bbc720f9-8451-4a5f-6520-85771386cf00",
+        aspectRatio: 16 / 9,
         order: 4,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/f10de1c8-f36b-40e4-bb69-49e540ad6a00",
+        aspectRatio: 16 / 9,
         order: 5,
       },
     ],
@@ -1295,26 +1417,31 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/29b282c1-a730-4131-8575-2a7c76cb9a00",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e6fd0ebf-aee4-4a96-c445-4281ceccae00",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/8a5deedd-df6b-4a1f-2151-27555ae26300",
+        aspectRatio: 16 / 9,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/edb9b3e9-a7b7-4e1a-7f53-ff0505cc5200",
+        aspectRatio: 16 / 9,
         order: 4,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/81f518f1-6337-4781-fb3e-88f4f3400300",
+        aspectRatio: 16 / 9,
         order: 5,
       },
     ],
@@ -1340,21 +1467,25 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/7d0357a0-47d7-4bea-895f-ba2e2765e600",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/1ad23bae-e3c6-413d-6900-23e5dc567c00",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/95476838-2101-458a-6fe8-99e82ba78000",
+        aspectRatio: 16 / 9,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/d43b1df3-38b2-40bb-6455-d032c9112000",
+        aspectRatio: 16 / 9,
         order: 4,
       },
     ],
@@ -1377,26 +1508,31 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/7add89a7-4a1c-494d-bc52-9a5cc0fda500",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3b0799af-bb68-4eea-07d5-f521e4cf8800",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c9a47ff2-0774-4103-ce95-f2dd22388e00",
+        aspectRatio: 16 / 9,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/13bd85fe-4166-4e89-26cb-762fb4522000",
+        aspectRatio: 16 / 9,
         order: 4,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/0b128d5d-d7dc-45d7-7dd9-723dd4583900",
+        aspectRatio: 16 / 9,
         order: 5,
       },
     ],
@@ -1418,31 +1554,37 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/34825b87-75d4-4762-6c4e-e00821b3e100",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e0d3a66f-7f64-43b0-3f5b-d784e9452d00",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/a68dafd8-e0e5-4fa5-9b1c-268301089e00",
+        aspectRatio: 16 / 9,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e95ecf6f-f68e-4f80-2bc3-575148841000",
+        aspectRatio: 16 / 9,
         order: 4,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/02c31487-adf9-4fe0-3349-6b1313289b00",
+        aspectRatio: 16 / 9,
         order: 5,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/1aa2e7e5-3f55-4d34-42db-cdd143dce500",
+        aspectRatio: 16 / 9,
         order: 6,
       },
     ],
@@ -1467,26 +1609,31 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/1b7601bc-7b65-4ffd-ee76-65ef91619200",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/bd84552d-a9c6-43f8-a78f-c2c6439cd000",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b9719ffe-a53b-42e5-43f1-209efeb4d300",
+        aspectRatio: 16 / 9,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e973e7c7-1f13-45ec-d372-10e418120c00",
+        aspectRatio: 16 / 9,
         order: 4,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/7a76c108-9ab9-4680-a7e0-3aa3799aa900",
+        aspectRatio: 16 / 9,
         order: 5,
       },
     ],
@@ -1511,21 +1658,25 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ab42a9c2-764d-4612-57e0-52ab11909100",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/930ffde8-dd5c-4e12-5971-534ac465f800",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2eb29145-396a-43f8-a519-2b852a2f2100",
+        aspectRatio: 16 / 9,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2c447eb6-f465-475a-d59f-f943da79c200",
+        aspectRatio: 16 / 9,
         order: 4,
       },
     ],
@@ -1551,56 +1702,67 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e2d4bd81-46ee-420e-5351-a179eebcd600",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5ac5f9d0-6987-4c7a-bac9-1fe67e194500",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4dc321d0-f0db-4db2-ea58-5d047f1fac00",
+        aspectRatio: 16 / 9,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4cfaebb6-905b-44c5-895b-bc54c3954100",
+        aspectRatio: 16 / 9,
         order: 4,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/154ed9ea-04c2-43b3-4fcb-d6b8dd6deb00",
+        aspectRatio: 16 / 9,
         order: 5,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/bbbeec75-b846-4618-99ee-444f90c31f00",
+        aspectRatio: 16 / 9,
         order: 6,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c3e125b9-e6e2-4e87-67c6-7a77b708ea00",
+        aspectRatio: 16 / 9,
         order: 7,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c33b991a-791a-48c0-0e80-c8b7ec340a00",
+        aspectRatio: 16 / 9,
         order: 8,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/49966a1e-95e5-4ff2-bca1-d82a3a339100",
+        aspectRatio: 16 / 9,
         order: 9,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ea2d2264-e8ce-46ae-069b-b1a1df37d100",
+        aspectRatio: 16 / 9,
         order: 10,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/1227456a-0114-4793-ca70-0a3be3134f00",
+        aspectRatio: 16 / 9,
         order: 11,
       },
     ],
@@ -1625,16 +1787,19 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2d995093-f748-414b-bb83-49474ad3de00",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3f30eafb-d4dc-45c5-d722-b89f7d236600",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/bfb18127-d8b6-4a25-0279-4b766b817e00",
+        aspectRatio: 16 / 9,
         order: 2,
       },
     ],
@@ -1658,31 +1823,37 @@ projects
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/364d4c94-46cf-4c97-f844-01fbe3679200",
+        aspectRatio: 16 / 9,
         order: 1,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/36a8ed20-1880-4ae0-76c1-6196f34aed00",
+        aspectRatio: 16 / 9,
         order: 2,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/6df6d21b-c411-4562-a4b6-8971b6e78600",
+        aspectRatio: 16 / 9,
         order: 3,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/83eaf1b8-d98d-4453-dce0-688906a2aa00",
+        aspectRatio: 16 / 9,
         order: 4,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/61567da7-2e1e-4331-2503-c2e300cf6d00",
+        aspectRatio: 16 / 9,
         order: 5,
       },
       {
         image:
           "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4da0f7f2-6e80-42b7-999b-5f23dd5bb900",
+        aspectRatio: 16 / 9,
         order: 6,
       },
     ],

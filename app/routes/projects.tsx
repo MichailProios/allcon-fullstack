@@ -3,7 +3,7 @@ import {
   Text,
   Button,
   Center,
-  Image,
+  Img,
   SlideFade,
   ScaleFade,
   Box,
@@ -50,6 +50,7 @@ import {
   MenuDivider,
   useDisclosure,
   useOutsideClick,
+  filter,
 } from "@chakra-ui/react";
 import { useBreakpointValue } from "@chakra-ui/react";
 
@@ -71,6 +72,9 @@ import {
   Form,
   useBeforeUnload,
   useTransition,
+  useFetcher,
+  useMatches,
+  useSearchParams,
 } from "@remix-run/react";
 
 import {
@@ -262,6 +266,20 @@ export default function Index() {
     }
   }
 
+  // const [searchParams] = useSearchParams();
+  // const category = searchParams.getAll("category");
+  // console.log(category);
+
+  // useEffect(() => {
+  //   if (category) {
+  //     scroll.scrollToTop({
+  //       duration: 400,
+  //       delay: 300,
+  //       smooth: "easeInOutQuart",
+  //     });
+  //   }
+  // }, []);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       if (inputValue.type !== "clear") {
@@ -290,6 +308,8 @@ export default function Index() {
     };
   }, []);
 
+  const fetcher = useFetcher();
+
   function handleFormSearch(input: string) {
     if (!firstRender) {
       if (!toastIdRef.current) {
@@ -316,7 +336,7 @@ export default function Index() {
         "clientCategory",
         checkClient(data.filter?.clientCategory).clientCategory
       );
-      submit(formData, { method: "post" });
+      fetcher.submit(formData, { method: "post" });
     }
   }
 
@@ -341,7 +361,9 @@ export default function Index() {
     const formData = new FormData();
     formData.set("type", "clientCategory");
     formData.set("clientCategory", clientCategory);
-    submit(formData, { method: "post" });
+    fetcher.submit(formData, {
+      method: "post",
+    });
   }
 
   function handleFormSearchClear() {
@@ -353,14 +375,16 @@ export default function Index() {
       "clientCategory",
       checkClient(data.filter?.clientCategory).clientCategory || ""
     );
-    submit(formData, { method: "delete" });
+    fetcher.submit(formData, { method: "delete" });
   }
 
   function handleFormAllClear() {
     setInputValue({ text: "", type: "clear" });
     const formData = new FormData();
     formData.set("type", "clearAll");
-    submit(formData, { method: "delete" });
+    fetcher.submit(formData, {
+      method: "delete",
+    });
   }
 
   useEffect(() => {
@@ -388,16 +412,9 @@ export default function Index() {
     };
   }, []);
 
-  useEffect(() => {
-    if (data.filter) {
-      handleFormAllClear();
-      scroll.scrollToTop({
-        duration: 400,
-        delay: 0,
-        smooth: "easeInOutQuart",
-      });
-    }
-  }, []);
+  // useEffect(() => {
+
+  // }, []);
 
   const [tabIndex, setTabIndex] = useState();
 
@@ -433,6 +450,12 @@ export default function Index() {
     handleTabsChange(checkClient(data.filter?.clientCategory).index);
   }, [data.filter?.clientCategory]);
 
+  useEffect(() => {
+    return () => {
+      handleFormAllClear();
+    };
+  }, []);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const menuRef = useRef<any>();
@@ -448,27 +471,8 @@ export default function Index() {
         maxW={"1600px"}
         px={{ base: 6, md: 10 }}
         py={14}
-        as={Form}
-        method="post"
-        onSubmit={() => {
-          if (!firstRender) {
-            if (!toastIdRef.current) {
-              toastIdRef.current = toast({
-                title: "Searching projects",
-                status: "loading",
-                duration: null,
-                isClosable: false,
-              });
-            } else if (toastIdRef.current) {
-              toast.update(toastIdRef.current, {
-                title: "Searching projects",
-                status: "loading",
-                duration: null,
-                isClosable: false,
-              });
-            }
-          }
-        }}
+        // as={Form}
+        // method="post"
       >
         <VStack spacing="26px">
           <Heading textAlign="center">Projects</Heading>
@@ -642,13 +646,32 @@ export default function Index() {
                     w="full"
                     fontWeight="semibold"
                     rounded="md"
-                    variant="outline"
+                    variant={data.filter?.clientCategory ? "solid" : "outline"}
                     boxShadow="md"
                     textAlign="start"
                     rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
                     onClick={isOpen ? onClose : onOpen}
+                    textColor={data.filter?.clientCategory && "white"}
+                    bgColor={data.filter?.clientCategory && "primary.500"}
+                    _hover={
+                      data.filter?.clientCategory && {
+                        bgColor: "primary.600",
+                        textColor: "white",
+                      }
+                    }
+                    _active={
+                      data.filter?.clientCategory && {
+                        bgColor: "primary.700",
+                        textColor: "white",
+                      }
+                    }
                   >
-                    Filter Projects
+                    {data.filter?.clientCategory
+                      ? `${
+                          data.filter?.clientCategory.charAt(0).toUpperCase() +
+                          data.filter?.clientCategory.slice(1)
+                        } Projects`
+                      : "Filter Projects"}
                   </MenuButton>
 
                   <MenuList p={1} m={0} boxShadow="2xl" zIndex={500} minW={0}>
@@ -896,7 +919,7 @@ export default function Index() {
                           key={index}
                           ratio={{ base: 4 / 3, md: 16 / 9 }}
                         >
-                          <Image
+                          <Img
                             roundedTopLeft="md"
                             roundedTopRight="md"
                             src={value.thumbnail + "/thumbnail"}
@@ -906,12 +929,6 @@ export default function Index() {
                             userSelect="none"
                             w="full"
                             loading="lazy"
-                            fallback={
-                              <Skeleton
-                                h={{ base: "350px", sm: "450px" }}
-                                w="full"
-                              />
-                            }
                           />
                         </AspectRatio>
                         <CardFooter justifyContent="center" p={2}>

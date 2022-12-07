@@ -4,7 +4,7 @@ import {
   VStack,
   Text,
   SlideFade,
-  Image,
+  Img,
   Divider,
   Card,
   CardBody,
@@ -93,15 +93,18 @@ export default function About() {
               <br />
             </Text>
             <AspectRatio ratio={{ base: 4 / 3, md: 16 / 9 }} w="full">
-              <Image
+              <Img
                 src={data.allconStaff}
                 alt="Company Group Photo"
-                // objectFit="fit"
                 boxShadow="xl"
                 rounded="md"
                 userSelect="none"
                 draggable={false}
-                fallback={<Skeleton h="full" w="full" />}
+                // fallback={
+                //   <AspectRatio ratio={{ base: 4 / 3, md: 16 / 9 }} w="full">
+                //     <Skeleton h="full" w="full" />
+                //   </AspectRatio>
+                // }
               />
             </AspectRatio>
           </VStack>
@@ -126,7 +129,7 @@ export default function About() {
                   w="340px"
                   display={{ base: "none", xl: "flex" }}
                 >
-                  <Image
+                  <Img
                     roundedTopLeft="md"
                     roundedBottomLeft="md"
                     objectFit="cover"
@@ -135,13 +138,19 @@ export default function About() {
                     boxShadow="xl"
                     draggable={false}
                     userSelect="none"
-                    fallback={
-                      <Skeleton
-                        w={"full"}
-                        h={"full"}
-                        display={{ base: "none", xl: "flex" }}
-                      />
-                    }
+                    // fallback={
+                    //   <AspectRatio
+                    //     ratio={9 / 16}
+                    //     w="340px"
+                    //     display={{ base: "none", xl: "flex" }}
+                    //   >
+                    //     <Skeleton
+                    //       w={"full"}
+                    //       h={"full"}
+                    //       display={{ base: "none", xl: "flex" }}
+                    //     />
+                    //   </AspectRatio>
+                    // }
                   />
                 </AspectRatio>
                 <CardBody

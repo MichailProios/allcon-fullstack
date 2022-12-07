@@ -3,7 +3,7 @@ import {
   Text,
   Button,
   Center,
-  Image,
+  Img,
   SlideFade,
   ScaleFade,
   Box,
@@ -323,7 +323,7 @@ export default function Project() {
                         maxW="full"
                       >
                         {value.image ? (
-                          <Image
+                          <Img
                             src={value.image + "/public"}
                             alt={`Project Image ${index}`}
                             loading="eager"
@@ -332,7 +332,23 @@ export default function Project() {
                             maxW="full"
                             maxH="full"
                             draggable={false}
-                            fallback={<Skeleton h="full" w="full" />}
+                            // fallback={
+                            //   <AspectRatio
+                            //     ratio={{
+                            //       base: 1,
+                            //       sm:
+                            //         value.aspectRatio !== 16 / 9
+                            //           ? 4 / 3
+                            //           : 16 / 9,
+                            //     }}
+                            //     h="full"
+                            //     w="full"
+                            //     maxH="full"
+                            //     maxW="full"
+                            //   >
+                            //     <Skeleton h="full" w="full" />{" "}
+                            //   </AspectRatio>
+                            // }
                             crossOrigin="anonymous"
                           />
                         ) : value.video ? (
@@ -340,7 +356,6 @@ export default function Project() {
                             title={`Project Video ${index}`}
                             src={value.video}
                             allowFullScreen
-                            allowTransparency
                             draggable={false}
                             allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
                             style={{
@@ -396,11 +411,21 @@ export default function Project() {
                           maxH="full"
                         >
                           {value.image ? (
-                            <Image
+                            <Img
                               src={value.image + "/meta"}
                               alt={`Project Image ${index}`}
                               loading="eager"
-                              fallback={<Skeleton h="full" w="full" />}
+                              // fallback={
+                              //   <AspectRatio
+                              //     ratio={16 / 9}
+                              //     w="full"
+                              //     h="full"
+                              //     maxW="full"
+                              //     maxH="full"
+                              //   >
+                              //     <Skeleton h="full" w="full" />
+                              //   </AspectRatio>
+                              // }
                               borderRadius="md"
                               zIndex={9000}
                               opacity={currentSlide === index ? 1 : 0.8}
@@ -443,10 +468,7 @@ export default function Project() {
           onClose={onClose}
           blockScrollOnMount
           closeOnOverlayClick
-          // autoFocus
           isCentered
-          // preserveScrollBarGap
-          // motionPreset="slideInBottom"
           scrollBehavior="inside"
           size="full"
         >
@@ -456,7 +478,8 @@ export default function Project() {
             <IconButton
               aria-label="close"
               variant="solid"
-              size="sm"
+              size="md"
+              borderRadius="full"
               colorScheme="primary"
               position="absolute"
               top={"10px"}
@@ -464,7 +487,7 @@ export default function Project() {
               transform={"translate(0%, 0%)"}
               zIndex={2}
               onClick={onClose}
-              icon={<CloseIcon />}
+              icon={<CloseIcon w={3} h={3} />}
             />
             <ModalBody overflow="hidden" h={`${height}px`} p={0} m={0}>
               <Box position={"relative"} w="full" h={`${height}px`}>
@@ -508,6 +531,7 @@ export default function Project() {
                       objectFit: "contain",
                       height: `${height}px`,
                     }}
+                    initialSlide={sliderRef.current?.swiper.realIndex ?? 0}
                     lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
                     modules={[Lazy, Navigation, Pagination, Keyboard]}
                     keyboard={{
@@ -526,7 +550,7 @@ export default function Project() {
                       return (
                         <SwiperSlide key={index}>
                           {value.image ? (
-                            <Image
+                            <Img
                               src={value.image + "/hq"}
                               alt={`Project Image ${index}`}
                               loading="eager"
@@ -535,7 +559,7 @@ export default function Project() {
                               maxH="full"
                               objectFit="contain"
                               draggable={false}
-                              fallback={<Skeleton h="full" w="full" />}
+                              // fallback={<Skeleton h={`${height}px`} w="full" />}
                               h={`${height}px`}
                               crossOrigin="anonymous"
                             />
@@ -552,7 +576,6 @@ export default function Project() {
                                 title={`Project Video ${index}`}
                                 src={value.video}
                                 allowFullScreen
-                                allowTransparency
                                 draggable={false}
                                 allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
                                 style={{

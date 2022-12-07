@@ -3,7 +3,7 @@ import {
   Text,
   Button,
   Center,
-  Image,
+  Img,
   SlideFade,
   Box,
   HStack,
@@ -95,14 +95,32 @@ export default function Index() {
                 maxW="full"
                 maxH="full"
               >
-                <Image
+                <Img
                   src={img}
                   alt={`Landing Page Image ${index}`}
                   w="full"
                   h="full"
                   maxW="full"
                   maxH="full"
-                  fallback={<Skeleton h="full" w="full" />}
+                  // fallback={
+                  //   <AspectRatio
+                  //     ratio={16 / 9}
+                  //     height={
+                  //       height
+                  //         ? `calc(${height}px - 64px)`
+                  //         : `calc(100vh - 64px)`
+                  //     }
+                  //     overflow="hidden"
+                  //     display="block"
+                  //     lineHeight={0}
+                  //     w="full"
+                  //     h="full"
+                  //     maxW="full"
+                  //     maxH="full"
+                  //   >
+                  //     <Skeleton h="full" w="full" />
+                  //   </AspectRatio>
+                  // }
                   overflow="hidden"
                   display="block"
                   lineHeight={0}

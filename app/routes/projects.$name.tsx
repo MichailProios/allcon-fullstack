@@ -233,7 +233,7 @@ export default function Project() {
 
   return (
     <SlideFade in={true} reverse delay={0.1}>
-      <Container maxW={"1200px"} px={{ base: 6, md: 10 }} py={14}>
+      <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="26px" w="full">
           <Heading textAlign="center">{data.project.name}</Heading>
         </VStack>
@@ -391,6 +391,7 @@ export default function Project() {
                 }}
                 ref={sliderRefThumb}
                 cssMode={cssModeBreakpoint}
+                centerInsufficientSlides
               >
                 {media.map((value: any, index: any) => {
                   return (
@@ -598,7 +599,7 @@ export default function Project() {
         </Modal>
       </Container>
       <Divider />
-      <Container maxW={"1200px"} px={{ base: 6, md: 10 }} py={14}>
+      <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="18px">
           {data.project.client ||
           data.project.categories ||

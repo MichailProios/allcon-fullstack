@@ -206,7 +206,7 @@ export default function Contacts() {
     <SlideFade in={true} reverse delay={0.1}>
       <Container
         maxW={"1200px"}
-        px={{ base: 6, md: 10 }}
+        px={{ base: 3, md: 6 }}
         py={14}
         as={ValidatedForm}
         validator={validator}
@@ -284,37 +284,17 @@ export default function Contacts() {
                   <Stack direction={{ base: "column", md: "row" }}>
                     <Button
                       rightIcon={<PhoneIcon />}
-                      onClick={() => window.open("tel:+1-516-333-3339")}
+                      onClick={() =>
+                        window.open(
+                          "tel:+1-516-333-3339",
+                          "_blank"
+                          // "noopener,noreferrer,resizable"
+                        )
+                      }
                       w="200px"
                     >
                       +1-516-333-3339
                     </Button>
-                    {/* <Button
-                      onClick={() => {
-                        onCopy();
-                        toast({
-                          title: "Fax number copied to clipboard.",
-                          // description: "We've created your account for you.",
-                          status: "success",
-                          duration: 3000,
-                        });
-                      }}
-                      rightIcon={<Icon as={FaFax} />}
-                      w="200px"
-                    >
-                      Fax +1-516-333-3339
-                    </Button> */}
-                    {/* <Button
-                      onClick={() =>
-                        window.open(
-                          "https://www.linkedin.com/company/allcon-contracting"
-                        )
-                      }
-                      rightIcon={<Icon as={FaLinkedin} />}
-                      w="200px"
-                    >
-                      Allcon LinkedIn
-                    </Button> */}
                   </Stack>
                 </VStack>
               </VStack>
@@ -323,7 +303,7 @@ export default function Contacts() {
         </VStack>
       </Container>
       <Divider />
-      <Container maxW={"1200px"} px={{ base: 6, md: 10 }} py={14}>
+      <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="26px">
           <Heading textAlign="center">Office Locations</Heading>
           <Card rounded="md" boxShadow="xl" w={"full"}>

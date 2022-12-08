@@ -33,8 +33,32 @@ interface LayoutProps {
 
 const navigationLinks = [
   { label: "About", url: "about" },
-  { label: "Projects", url: "projects" },
-  { label: "Testimonials", url: "testimonials" },
+  {
+    label: "Projects",
+    url: "projects",
+    subLinks: [
+      { label: "All Projects", url: "/projects" },
+      { label: "Interior", url: "/projects?category=interior" },
+      { label: "Exterior", url: "/projects?category=exterior" },
+      { label: "SUNY", url: "/projects?category=suny" },
+      { label: "OGS", url: "/projects?category=ogs" },
+      { label: "SCA", url: "/projects?category=sca" },
+      { label: "Other", url: "/projects?category=other" },
+    ],
+  },
+  {
+    label: "Testimonials",
+    url: "testimonials",
+  },
+  // {
+  //   label: "Resources",
+  //   url: "resources",
+  //   subLinks: [
+  //     { label: "Awards", url: "/resources/awards" },
+  //     { label: "Community", url: "/resources/community" },
+  //     { label: "Testimonials", url: "/resources/testimonials" },
+  //   ],
+  // },
   { label: "Contacts", url: "contacts" },
 ];
 
@@ -124,7 +148,7 @@ export default function Layout({ children }: LayoutProps) {
           </Tooltip>
         </Fade>
       </Box>
-      <Box>{children}</Box>
+      <Box transition="color 1000ms linear">{children}</Box>
       <Box marginTop={"auto"}></Box>
     </Box>
   );

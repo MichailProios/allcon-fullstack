@@ -139,13 +139,13 @@ export const loader: LoaderFunction = async ({ request }: any) => {
 };
 
 export default function Index() {
-  const { height } = useWindowDimensions();
+  // const { height } = useWindowDimensions();
 
   const data = useLoaderData();
 
   return (
     <SlideFade in={true} reverse delay={0.1}>
-      <Container maxW={"1200px"} px={{ base: 6, md: 10 }} py={14}>
+      <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="26px">
           <Heading textAlign="center">Testimonials</Heading>
 

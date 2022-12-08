@@ -24,6 +24,8 @@ import theme from "app/styles/theme";
 
 import global from "app/styles/global.css";
 
+import swiperStyles from "app/styles/swiper.css";
+
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "Allcon Contracting",
@@ -43,23 +45,9 @@ export const meta: MetaFunction = () => ({
 
 export const links: LinksFunction = () => {
   return [
-    // { rel: "preconnect", href: "https://fonts.googleapis.com" },
-    // { rel: "preconnect", href: "https://fonts.gstatic.com" },
-    // {
-    //   rel: "stylesheet",
-    //   type: "text/css",
-    //   charSet: "UTF-8",
-    //   href: "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css",
-    // },
-    // {
-    //   rel: "stylesheet",
-    //   type: "text/css",
-    //   href: "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css",
-    // },
     {
       rel: "stylesheet",
-      type: "text/css",
-      href: "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css",
+      href: swiperStyles,
     },
 
     {

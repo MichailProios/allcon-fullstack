@@ -62,7 +62,7 @@ export default function About() {
 
   return (
     <SlideFade in={true} reverse delay={0.1}>
-      <Container maxW="1400px" px={{ base: 6, md: 10 }} py={14}>
+      <Container maxW="1400px" px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="26px">
           <Heading textAlign="center">About Us</Heading>
           <VStack>
@@ -111,7 +111,7 @@ export default function About() {
         </VStack>
       </Container>
       <Divider />
-      <Container maxW="1400px" px={{ base: 6, md: 10 }} py={14}>
+      <Container maxW="1400px" px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="18px">
           <Heading textAlign="center"> Executives</Heading>
           <VStack spacing="26px">

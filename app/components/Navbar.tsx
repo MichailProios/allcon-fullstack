@@ -1,4 +1,10 @@
-import { useState, useEffect, useRef, forwardRef } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  forwardRef,
+  useLayoutEffect,
+} from "react";
 
 import { Outlet, useMatches } from "@remix-run/react";
 
@@ -27,13 +33,35 @@ import {
   TabList,
   Tab,
   SlideFade,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor,
+  ButtonGroup,
+  useOutsideClick,
+  Text,
+  TagLabel,
+  TagRightIcon,
+  useTab,
+  useMultiStyleConfig,
 } from "@chakra-ui/react";
 
 import { NavLink } from "@remix-run/react";
 
 // import Footer from "app/components/Footer";
 
-import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
+import {
+  ChevronDownIcon,
+  HamburgerIcon,
+  MoonIcon,
+  SunIcon,
+} from "@chakra-ui/icons";
+import { useContainerDimensions } from "~/utils/hooks";
 
 // import LogoSideways from "public/logos/Logo-Sideways.svg";
 // import LogoPlain from "public/logos/Logo-Plain.svg";
@@ -67,18 +95,18 @@ export default function Navbar({ navigationLinks }: NavbarProps) {
   return (
     <>
       <NavbarHeader
-        isOpen={isOpen}
-        onOpen={onOpen}
-        onClose={onClose}
+        isDrawerOpen={isOpen}
+        onDrawerOpen={onOpen}
+        onDrawerClose={onClose}
         btnRef={btnRef}
         colorMode={colorMode}
         toggleColorMode={toggleColorMode}
         navigationLinks={navigationLinks}
       />
       <NavbarDrawer
-        isOpen={isOpen}
-        onOpen={onOpen}
-        onClose={onClose}
+        isDrawerOpen={isOpen}
+        onDrawerOpen={onOpen}
+        onDrawerClose={onClose}
         btnRef={btnRef}
         colorMode={colorMode}
         toggleColorMode={toggleColorMode}
@@ -88,20 +116,29 @@ export default function Navbar({ navigationLinks }: NavbarProps) {
   );
 }
 
+interface SubLinksProps {
+  label: string;
+  url: string;
+}
+
 interface NavbarHeaderProps {
-  isOpen: any;
-  onOpen: any;
-  onClose: any;
+  isDrawerOpen: any;
+  onDrawerOpen: any;
+  onDrawerClose: any;
   btnRef: any;
   colorMode: any;
   toggleColorMode: any;
-  navigationLinks: { label: string; url: string }[];
+  navigationLinks: {
+    label: string;
+    url: string;
+    subLinks?: Array<SubLinksProps>;
+  }[];
 }
 
 function NavbarHeader({
-  isOpen,
-  onOpen,
-  onClose,
+  isDrawerOpen,
+  onDrawerOpen,
+  onDrawerClose,
   btnRef,
   colorMode,
   toggleColorMode,
@@ -142,6 +179,7 @@ function NavbarHeader({
       as="header"
       boxShadow={"md"}
       opacity={0.95}
+      // onMouseLeave={projectsPopper.onClose}
     >
       <Flex
         alignItems={"center"}
@@ -203,17 +241,70 @@ function NavbarHeader({
         >
           <HStack spacing="16px">
             {navigationLinks.map((link, index) => (
-              <Tab
-                key={index}
-                as={NavLink}
-                to={link.url}
-                _focus={{ boxShadow: "none" }}
-                draggable={false}
-                prefetch="render"
-                rel="prefetch"
-              >
-                {link.label}
-              </Tab>
+              <Box key={index}>
+                {!link.subLinks && (
+                  <Tab
+                    as={NavLink}
+                    to={link.url}
+                    _focus={{ boxShadow: "none" }}
+                    draggable={false}
+                    prefetch="render"
+                    rel="prefetch"
+                  >
+                    {link.label}
+                  </Tab>
+                )}
+
+                {link.subLinks && (
+                  <Popover
+                    trigger="hover"
+                    // closeDelay={200}
+                    // openDelay={200}
+                    isLazy
+                    placement="bottom"
+                    lazyBehavior="unmount"
+                  >
+                    <PopoverTrigger>
+                      <Tab
+                        as={NavLink}
+                        to={link.url}
+                        _focus={{ boxShadow: "none" }}
+                        draggable={false}
+                        prefetch="render"
+                        rel="prefetch"
+                      >
+                        {link.label}
+                      </Tab>
+                    </PopoverTrigger>
+
+                    <PopoverContent w="8em" boxShadow="lg">
+                      <PopoverBody w="full" p={0} m={0}>
+                        <ButtonGroup
+                          orientation="vertical"
+                          variant="ghost"
+                          size="md"
+                          spacing="2px"
+                          w="full"
+                        >
+                          {link.subLinks.map((subLink: any, index: any) => (
+                            <Button
+                              key={index}
+                              as={NavLink}
+                              to={subLink.url}
+                              borderRadius="none"
+                              fontWeight="normal"
+                              prefetch="intent"
+                              // rel="prefetch"
+                            >
+                              {subLink.label}
+                            </Button>
+                          ))}
+                        </ButtonGroup>
+                      </PopoverBody>
+                    </PopoverContent>
+                  </Popover>
+                )}
+              </Box>
             ))}
             <IconButton
               variant={"ghost"}
@@ -237,7 +328,11 @@ function NavbarHeader({
           >
             {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
           </IconButton>
-          <IconButton aria-label="Open Drawer" ref={btnRef} onClick={onOpen}>
+          <IconButton
+            aria-label="Open Drawer"
+            ref={btnRef}
+            onClick={onDrawerOpen}
+          >
             <HamburgerIcon />
           </IconButton>
         </HStack>
@@ -247,19 +342,23 @@ function NavbarHeader({
 }
 
 interface NavbarDrawerProps {
-  isOpen: any;
-  onOpen: any;
-  onClose: any;
+  isDrawerOpen: any;
+  onDrawerOpen: any;
+  onDrawerClose: any;
   btnRef: any;
   colorMode: any;
   toggleColorMode: any;
-  navigationLinks: { label: string; url: string }[];
+  navigationLinks: {
+    label: string;
+    url: string;
+    subLinks?: Array<SubLinksProps>;
+  }[];
 }
 
 function NavbarDrawer({
-  isOpen,
-  onOpen,
-  onClose,
+  isDrawerOpen,
+  onDrawerOpen,
+  onDrawerClose,
   btnRef,
   colorMode,
   toggleColorMode,
@@ -288,10 +387,10 @@ function NavbarDrawer({
 
   return (
     <Drawer
-      isOpen={isOpen}
+      isOpen={isDrawerOpen}
       placement="right"
       size="xs"
-      onClose={onClose}
+      onClose={onDrawerClose}
       finalFocusRef={btnRef}
     >
       <DrawerOverlay />
@@ -299,7 +398,12 @@ function NavbarDrawer({
       <DrawerContent>
         <DrawerCloseButton />
         <DrawerHeader p={2} alignSelf="center">
-          <NavLink to={"/"} onClick={onClose} prefetch="render" rel="prefetch">
+          <NavLink
+            to={"/"}
+            onClick={onDrawerClose}
+            prefetch="render"
+            rel="prefetch"
+          >
             <Image
               objectFit="contain"
               h={50}
@@ -323,20 +427,95 @@ function NavbarDrawer({
           >
             <VStack spacing="12px" w={"100%"}>
               {navigationLinks.map((link, index) => (
-                <Tab
-                  key={index}
-                  as={NavLink}
-                  to={link.url}
-                  _focus={{ boxShadow: "none" }}
-                  draggable={false}
-                  prefetch="render"
-                  rel="prefetch"
-                  fontSize="md"
-                  w={"100%"}
-                  onClick={onClose}
-                >
-                  {link.label}
-                </Tab>
+                <Box key={index} w="full">
+                  {!link.subLinks && (
+                    <Tab
+                      key={index}
+                      as={NavLink}
+                      to={link.url}
+                      _focus={{ boxShadow: "none" }}
+                      draggable={false}
+                      prefetch="render"
+                      rel="prefetch"
+                      fontSize="md"
+                      w={"100%"}
+                      onClick={onDrawerClose}
+                    >
+                      {link.label}
+                    </Tab>
+                  )}
+
+                  {link.subLinks && (
+                    <Popover
+                      trigger="click"
+                      // closeDelay={100}
+                      // openDelay={100}
+                      isLazy
+                      placement="bottom-end"
+                      lazyBehavior="unmount"
+                    >
+                      <Flex>
+                        <Tab
+                          _focus={{ boxShadow: "none" }}
+                          draggable={false}
+                          key={index}
+                          fontSize="md"
+                          w={"100%"}
+                          as={NavLink}
+                          to={link.url}
+                          onClick={onDrawerClose}
+                          prefetch="render"
+                          rel="prefetch"
+                          mr="-40px"
+                        >
+                          {/* <Box ml="40px">  */}
+                          {link.label}
+
+                          {/* </Box> */}
+                        </Tab>
+
+                        <PopoverTrigger>
+                          <IconButton
+                            aria-label="Sublinks"
+                            borderRadius="none"
+                            variant="ghost"
+                            icon={<ChevronDownIcon />}
+                          />
+                        </PopoverTrigger>
+                      </Flex>
+
+                      <PopoverContent
+                        w={{ base: "234px", xs: "274px" }}
+                        boxShadow="lg"
+                      >
+                        <PopoverBody w="full" p={0} m={0}>
+                          <ButtonGroup
+                            orientation="vertical"
+                            variant="ghost"
+                            size="md"
+                            spacing="2px"
+                            w="full"
+                          >
+                            {link.subLinks.map((subLink: any, index: any) => (
+                              <Button
+                                w="full"
+                                key={index}
+                                as={NavLink}
+                                to={subLink.url}
+                                borderRadius="none"
+                                fontWeight="normal"
+                                prefetch="intent"
+                                onClick={onDrawerClose}
+                              >
+                                {subLink.label}
+                              </Button>
+                            ))}
+                          </ButtonGroup>
+                        </PopoverBody>
+                      </PopoverContent>
+                    </Popover>
+                  )}
+                </Box>
               ))}
             </VStack>
           </Tabs>

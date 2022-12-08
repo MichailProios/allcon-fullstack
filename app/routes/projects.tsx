@@ -104,10 +104,15 @@ export const meta: MetaFunction = ({ params }: any) => ({
 
 export const loader: LoaderFunction = async ({ request }: any) => {
   try {
+    const url = new URL(request.url);
+    const category = url.searchParams.get("category") || null;
+
     const session = await cookie.getSession(request.headers.get("Cookie"));
     const filter = session.get("filter") || null;
 
-    if (filter?.search && !filter?.clientCategory) {
+    console.log(category);
+
+    if (filter?.search && !category) {
       return json({
         filter: filter,
         projects: Array.from(projects.values()).filter(
@@ -118,20 +123,16 @@ export const loader: LoaderFunction = async ({ request }: any) => {
               .includes(filter?.search.toLowerCase())
         ),
       });
-    } else if (filter?.clientCategory && !filter?.search) {
+    } else if (category && !filter?.search) {
       return json({
         filter: filter,
         projects: Array.from(projects.values()).filter(
           (value) =>
-            value.client?.tag
-              .toLowerCase()
-              .includes(filter?.clientCategory.toLowerCase()) ||
-            value.category?.tag
-              .toLowerCase()
-              .includes(filter?.clientCategory.toLowerCase())
+            value.client?.tag.toLowerCase().includes(category.toLowerCase()) ||
+            value.category?.tag.toLowerCase().includes(category.toLowerCase())
         ),
       });
-    } else if (filter?.search && filter?.clientCategory) {
+    } else if (filter?.search && category) {
       return json({
         filter: filter,
         projects: Array.from(projects.values()).filter(
@@ -140,12 +141,10 @@ export const loader: LoaderFunction = async ({ request }: any) => {
               value.client?.tag
                 .toLowerCase()
                 .includes(filter?.search.toLowerCase())) &&
-            (value.client?.tag
-              .toLowerCase()
-              .includes(filter?.clientCategory.toLowerCase()) ||
+            (value.client?.tag.toLowerCase().includes(category.toLowerCase()) ||
               value.category?.tag
                 .toLowerCase()
-                .includes(filter?.clientCategory.toLowerCase()))
+                .includes(category.toLowerCase()))
         ),
       });
     } else {
@@ -169,31 +168,12 @@ export async function action({ request }: { request: Request }) {
   try {
     const type = data.get("type");
     const search = data.get("search") || "";
-    const clientCategory = data.get("clientCategory") || "";
 
     switch (type) {
       case "search": {
         const session = await cookie.getSession(request.headers.get("Cookie"));
         session.flash("filter", {
           search: search,
-          clientCategory: clientCategory,
-        });
-
-        return json(
-          { status: "Filtering Projects" },
-          {
-            headers: {
-              "Set-Cookie": await cookie.commitSession(session),
-            },
-          }
-        );
-      }
-
-      case "clientCategory": {
-        const session = await cookie.getSession(request.headers.get("Cookie"));
-        session.flash("filter", {
-          search: search,
-          clientCategory: clientCategory,
         });
 
         return json(
@@ -210,7 +190,6 @@ export async function action({ request }: { request: Request }) {
         const session = await cookie.getSession(request.headers.get("Cookie"));
         session.flash("filter", {
           search: search,
-          clientCategory: clientCategory,
         });
 
         return json(
@@ -250,7 +229,8 @@ export default function Index() {
   const toast = useToast();
   const toastIdRef = useRef<any>();
 
-  const submit = useSubmit();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const clientCategory: any = searchParams.get("category") || "";
   const inputRef = useRef<any>(null);
   const data = useLoaderData();
   const firstRender = useFirstRender();
@@ -332,49 +312,42 @@ export default function Index() {
       const formData = new FormData();
       formData.set("search", input);
       formData.set("type", "search");
-      formData.set(
-        "clientCategory",
-        checkClient(data.filter?.clientCategory).clientCategory
-      );
       fetcher.submit(formData, { method: "post" });
     }
   }
 
-  function handleFormClientCategory(clientCategory: string) {
+  function handleClientCategory(category: string) {
     if (!toastIdRef.current) {
       toastIdRef.current = toast({
-        title: `Showing ${clientCategory || "all"} projects`,
+        title: `Showing ${category || "all"} projects`,
         status: "loading",
         duration: null,
         isClosable: false,
       });
     } else if (toastIdRef.current) {
       toast.update(toastIdRef.current, {
-        title: `Showing ${clientCategory || "all"} projects`,
+        title: `Showing ${category || "all"} projects`,
         status: "loading",
         duration: null,
         isClosable: false,
       });
     }
 
-    setInputValue({ text: "", type: "clear" });
-    const formData = new FormData();
-    formData.set("type", "clientCategory");
-    formData.set("clientCategory", clientCategory);
-    fetcher.submit(formData, {
-      method: "post",
-    });
+    if (category) {
+      setSearchParams({ category: category });
+    } else {
+      setSearchParams({});
+    }
+
+    // handleFormSearchClear();
   }
 
   function handleFormSearchClear() {
     setInputValue({ text: "", type: "clear" });
+
     const formData = new FormData();
     formData.set("type", "clearSearch");
     formData.set("search", "");
-    formData.set(
-      "clientCategory",
-      checkClient(data.filter?.clientCategory).clientCategory || ""
-    );
     fetcher.submit(formData, { method: "delete" });
   }
 
@@ -412,10 +385,6 @@ export default function Index() {
     };
   }, []);
 
-  // useEffect(() => {
-
-  // }, []);
-
   const [tabIndex, setTabIndex] = useState();
 
   function handleTabsChange(index: any) {
@@ -447,14 +416,22 @@ export default function Index() {
   }
 
   useEffect(() => {
-    handleTabsChange(checkClient(data.filter?.clientCategory).index);
-  }, [data.filter?.clientCategory]);
+    handleTabsChange(checkClient(clientCategory).index);
+  }, [clientCategory]);
 
   useEffect(() => {
+    if (data.filter) {
+      handleFormAllClear();
+    }
+
     return () => {
       handleFormAllClear();
     };
   }, []);
+
+  useEffect(() => {
+    handleFormSearchClear();
+  }, [clientCategory]);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -469,7 +446,7 @@ export default function Index() {
     <SlideFade in={true} reverse delay={0.1}>
       <Container
         maxW={"1600px"}
-        px={{ base: 6, md: 10 }}
+        px={{ base: 3, md: 6 }}
         py={14}
         // as={Form}
         // method="post"
@@ -497,7 +474,7 @@ export default function Index() {
                 justifyContent="center"
                 index={tabIndex}
                 onChange={handleTabsChange}
-                display={{ base: "none", md: "flex" }}
+                display={{ base: "none", smd: "flex" }}
               >
                 <TabList
                   justifyContent="center"
@@ -507,7 +484,7 @@ export default function Index() {
                 >
                   <Tooltip label="Show all projects" closeOnScroll>
                     <Tab
-                      w={{ base: "auto", sm: "4em", md: "auto", lg: "8em" }}
+                      w={{ base: "auto", lg: "8em" }}
                       fontWeight="semibold"
                       _selected={{
                         color: "white",
@@ -517,7 +494,7 @@ export default function Index() {
                       as={Button}
                       variant="outline"
                       boxShadow="md"
-                      onClick={() => handleFormClientCategory("")}
+                      onClick={() => handleClientCategory("")}
                     >
                       All Projects
                     </Tab>
@@ -532,7 +509,7 @@ export default function Index() {
                       as={Button}
                       variant="outline"
                       boxShadow="md"
-                      onClick={() => handleFormClientCategory("interior")}
+                      onClick={() => handleClientCategory("interior")}
                     >
                       Interior
                     </Tab>
@@ -547,7 +524,7 @@ export default function Index() {
                       as={Button}
                       variant="outline"
                       boxShadow="md"
-                      onClick={() => handleFormClientCategory("exterior")}
+                      onClick={() => handleClientCategory("exterior")}
                     >
                       Exterior
                     </Tab>
@@ -565,7 +542,7 @@ export default function Index() {
                       as={Button}
                       variant="outline"
                       boxShadow="md"
-                      onClick={() => handleFormClientCategory("suny")}
+                      onClick={() => handleClientCategory("suny")}
                     >
                       SUNY
                     </Tab>
@@ -586,7 +563,7 @@ export default function Index() {
                       as={Button}
                       variant="outline"
                       boxShadow="md"
-                      onClick={() => handleFormClientCategory("ogs")}
+                      onClick={() => handleClientCategory("ogs")}
                     >
                       OGS
                     </Tab>
@@ -604,7 +581,7 @@ export default function Index() {
                       as={Button}
                       variant="outline"
                       boxShadow="md"
-                      onClick={() => handleFormClientCategory("sca")}
+                      onClick={() => handleClientCategory("sca")}
                     >
                       SCA
                     </Tab>
@@ -622,7 +599,7 @@ export default function Index() {
                       as={Button}
                       variant="outline"
                       boxShadow="md"
-                      onClick={() => handleFormClientCategory("other")}
+                      onClick={() => handleClientCategory("other")}
                     >
                       Other
                     </Tab>
@@ -631,7 +608,7 @@ export default function Index() {
               </Tabs>
 
               <Box
-                display={{ base: "flex", md: "none" }}
+                display={{ base: "flex", smd: "none" }}
                 w="full"
                 ref={menuRef}
               >
@@ -646,30 +623,30 @@ export default function Index() {
                     w="full"
                     fontWeight="semibold"
                     rounded="md"
-                    variant={data.filter?.clientCategory ? "solid" : "outline"}
+                    variant={clientCategory ? "solid" : "outline"}
                     boxShadow="md"
                     textAlign="start"
                     rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
                     onClick={isOpen ? onClose : onOpen}
-                    textColor={data.filter?.clientCategory && "white"}
-                    bgColor={data.filter?.clientCategory && "primary.500"}
+                    textColor={clientCategory && "white"}
+                    bgColor={clientCategory && "primary.500"}
                     _hover={
-                      data.filter?.clientCategory && {
+                      clientCategory && {
                         bgColor: "primary.600",
                         textColor: "white",
                       }
                     }
                     _active={
-                      data.filter?.clientCategory && {
+                      clientCategory && {
                         bgColor: "primary.700",
                         textColor: "white",
                       }
                     }
                   >
-                    {data.filter?.clientCategory
+                    {clientCategory
                       ? `${
-                          data.filter?.clientCategory.charAt(0).toUpperCase() +
-                          data.filter?.clientCategory.slice(1)
+                          clientCategory.charAt(0).toUpperCase() +
+                          clientCategory.slice(1)
                         } Projects`
                       : "Filter Projects"}
                   </MenuButton>
@@ -696,7 +673,7 @@ export default function Index() {
                           variant="outline"
                           boxShadow="md"
                           onClick={() => {
-                            handleFormClientCategory("");
+                            handleClientCategory("");
                             onClose();
                           }}
                         >
@@ -714,7 +691,7 @@ export default function Index() {
                           variant="outline"
                           boxShadow="md"
                           onClick={() => {
-                            handleFormClientCategory("interior");
+                            handleClientCategory("interior");
                             onClose();
                           }}
                         >
@@ -732,7 +709,7 @@ export default function Index() {
                           variant="outline"
                           boxShadow="md"
                           onClick={() => {
-                            handleFormClientCategory("exterior");
+                            handleClientCategory("exterior");
                             onClose();
                           }}
                         >
@@ -750,7 +727,7 @@ export default function Index() {
                           variant="outline"
                           boxShadow="md"
                           onClick={() => {
-                            handleFormClientCategory("suny");
+                            handleClientCategory("suny");
                             onClose();
                           }}
                         >
@@ -768,7 +745,7 @@ export default function Index() {
                           variant="outline"
                           boxShadow="md"
                           onClick={() => {
-                            handleFormClientCategory("ogs");
+                            handleClientCategory("ogs");
                             onClose();
                           }}
                         >
@@ -786,7 +763,7 @@ export default function Index() {
                           variant="outline"
                           boxShadow="md"
                           onClick={() => {
-                            handleFormClientCategory("sca");
+                            handleClientCategory("sca");
                             onClose();
                           }}
                         >
@@ -804,7 +781,7 @@ export default function Index() {
                           variant="outline"
                           boxShadow="md"
                           onClick={() => {
-                            handleFormClientCategory("other");
+                            handleClientCategory("other");
                             onClose();
                           }}
                         >
@@ -852,7 +829,7 @@ export default function Index() {
                     }
                   />
                   <Input
-                    type="text"
+                    type="search"
                     name="search"
                     spellCheck="false"
                     autoComplete="off"
@@ -866,8 +843,7 @@ export default function Index() {
                     value={inputValue.text}
                     colorScheme="primary"
                     placeholder={`Search ${
-                      checkClient(data.filter?.clientCategory).clientCategory ||
-                      "all"
+                      checkClient(clientCategory).clientCategory || "all"
                     } projects`}
                     w="full"
                     onKeyUp={onEnter}
@@ -877,7 +853,7 @@ export default function Index() {
               </Stack>
             </VStack>
             <SimpleGrid
-              columns={{ base: 1, md: 1, lg: 2, xl: 2 }}
+              columns={{ base: 1, smd: 1, md: 1, xmd: 2, lg: 2, xl: 2 }}
               spacing={4}
               w="full"
             >
@@ -928,7 +904,7 @@ export default function Index() {
                             draggable={false}
                             userSelect="none"
                             w="full"
-                            loading="lazy"
+                            loading="eager"
                           />
                         </AspectRatio>
                         <CardFooter justifyContent="center" p={2}>

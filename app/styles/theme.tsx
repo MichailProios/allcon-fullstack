@@ -18,7 +18,9 @@ const colors = {
 const breakpoints = {
   xs: "20em",
   sm: "30em",
+  smd: "38em",
   md: "48em",
+  xmd: "52em",
   lg: "62em",
   xl: "80em",
   "2xl": "96em",
@@ -30,6 +32,10 @@ const config = {
 
 const components = {};
 
-const theme = extendTheme({ config, colors, components, breakpoints });
+const styles = {
+  global: {},
+};
+
+const theme = extendTheme({ config, colors, styles, components, breakpoints });
 
 export default theme;

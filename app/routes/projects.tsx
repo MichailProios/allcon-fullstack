@@ -51,6 +51,7 @@ import {
   useDisclosure,
   useOutsideClick,
   filter,
+  Image,
 } from "@chakra-ui/react";
 import { useBreakpointValue } from "@chakra-ui/react";
 
@@ -897,7 +898,7 @@ export default function Index() {
                             key={index}
                             ratio={{ base: 4 / 3, md: 16 / 9 }}
                           >
-                            <Img
+                            <Image
                               roundedTopLeft="md"
                               roundedTopRight="md"
                               src={value.thumbnail + "/thumbnail"}
@@ -907,6 +908,7 @@ export default function Index() {
                               userSelect="none"
                               w="full"
                               loading="lazy"
+                              fallback={<Skeleton w="full" h="full" />}
                             />
                           </AspectRatio>
                           <CardFooter justifyContent="center" p={2}>

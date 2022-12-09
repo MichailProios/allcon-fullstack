@@ -13,6 +13,7 @@ import {
   Box,
   Avatar,
   AspectRatio,
+  Image,
 } from "@chakra-ui/react";
 
 import { Fragment, useEffect } from "react";
@@ -95,7 +96,7 @@ export default function About() {
               <br />
             </Text>
             <AspectRatio ratio={{ base: 4 / 3, md: 16 / 9 }} w="full">
-              <Img
+              <Image
                 src={data.allconStaff}
                 alt="Company Group Photo"
                 boxShadow="xl"
@@ -103,6 +104,7 @@ export default function About() {
                 userSelect="none"
                 draggable={false}
                 loading="lazy"
+                fallback={<Skeleton w="full" h="full" />}
               />
             </AspectRatio>
           </VStack>
@@ -134,7 +136,7 @@ export default function About() {
                         w="340px"
                         display={{ base: "none", xl: "flex" }}
                       >
-                        <Img
+                        <Image
                           roundedTopLeft="md"
                           roundedBottomLeft="md"
                           objectFit="cover"
@@ -144,6 +146,7 @@ export default function About() {
                           draggable={false}
                           userSelect="none"
                           loading="lazy"
+                          fallback={<Skeleton w="full" h="full" />}
                         />
                       </AspectRatio>
                       <CardBody

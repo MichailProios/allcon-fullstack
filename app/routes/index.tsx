@@ -25,6 +25,8 @@ import {
   IconButton,
   useBreakpointValue,
   Avatar,
+  Image,
+  Spinner,
 } from "@chakra-ui/react";
 // import { useDataRefresh } from "remix-utils";
 import { BiBuildings, BiBook } from "react-icons/bi";
@@ -135,7 +137,7 @@ export default function Index() {
                 maxW="full"
                 maxH="full"
               >
-                <Img
+                <Image
                   src={img}
                   alt={`Landing Page Image ${index}`}
                   w={"full"}
@@ -148,7 +150,22 @@ export default function Index() {
                   filter={"brightness(75%)"}
                   draggable={false}
                   loading="lazy"
-                  crossOrigin="anonymous"
+                  fallback={
+                    <Box w="full" h="full" position="relative">
+                      <Flex
+                        alignItems="center"
+                        flexDirection="column"
+                        position="absolute"
+                        top="50%"
+                        left="50%"
+                        transform={"translate(0%, -50%)"}
+                      >
+                        <Spinner color="primary.500" size="xl" />
+
+                        <Text>Loading Image</Text>
+                      </Flex>
+                    </Box>
+                  }
                 />
               </AspectRatio>
             </SwiperSlide>
@@ -250,7 +267,7 @@ export default function Index() {
             >
               <CardBody p={0}>
                 <AspectRatio ratio={16 / 9} w="full">
-                  <Img
+                  <Image
                     src={data.images.companyThumbnail}
                     alt="Company Group Picture"
                     roundedTopLeft="md"
@@ -258,6 +275,7 @@ export default function Index() {
                     w="full"
                     loading="lazy"
                     draggable={false}
+                    fallback={<Skeleton w="full" h="full" />}
                   />
                 </AspectRatio>
               </CardBody>
@@ -296,7 +314,7 @@ export default function Index() {
             >
               <CardBody p={0}>
                 <AspectRatio ratio={16 / 9} w="full">
-                  <Img
+                  <Image
                     src={data.images.greatneckRoofsThumbnail}
                     alt="Company Group Picture"
                     roundedTopLeft="md"
@@ -304,6 +322,7 @@ export default function Index() {
                     w="full"
                     loading="lazy"
                     draggable={false}
+                    fallback={<Skeleton w="full" h="full" />}
                   />
                 </AspectRatio>
               </CardBody>
@@ -343,7 +362,7 @@ export default function Index() {
             >
               <CardBody p={0}>
                 <AspectRatio ratio={16 / 9} w="full">
-                  <Img
+                  <Image
                     src={data.images.officeThumbnail}
                     alt="Company Group Picture"
                     roundedTopLeft="md"
@@ -351,6 +370,7 @@ export default function Index() {
                     w="full"
                     draggable={false}
                     loading="lazy"
+                    fallback={<Skeleton w="full" h="full" />}
                   />
                 </AspectRatio>
               </CardBody>
@@ -377,15 +397,15 @@ export default function Index() {
 
       <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={20}>
         <VStack spacing="40px">
-          <Flex
+          {/* <Flex
             flexDirection="row"
             alignItems="center"
             w="100%"
             justifyContent="center"
             gap={1}
-          >
-            <Heading textAlign="center">Trusted by our Clients</Heading>
-            <IconButton
+          > */}
+          <Heading textAlign="center">Trusted by our Clients</Heading>
+          {/* <IconButton
               variant="ghost"
               borderRadius="full"
               aria-label="Testimonials link"
@@ -393,8 +413,8 @@ export default function Index() {
               as={Link}
               to="/testimonials"
               draggable={false}
-            />
-          </Flex>
+            /> */}
+          {/* </Flex> */}
           <Box
             rounded="md"
             bg="transparent"
@@ -463,37 +483,61 @@ export default function Index() {
           bg={useColorModeValue("white", "gray.700")}
           p={{ base: 8, md: 16 }}
         >
-          <Box>
-            <Heading fontSize="3xl" lineHeight={1.2} fontWeight="bold">
+          <Flex
+            w="full"
+            justifyContent={{ base: "center", md: "flex-start" }}
+            flexDirection="column"
+          >
+            <Heading
+              fontSize="3xl"
+              w="full"
+              textAlign={{ base: "center", md: "start" }}
+            >
               Looking for more information?
             </Heading>
             <Text
               fontSize="2xl"
               lineHeight={1.2}
               fontWeight="bold"
-              bgGradient="linear(to-l, #35a3a3,#018b8b)"
+              bgGradient="linear(to-l, #018b8b,#005f5f)"
               bgClip="text"
+              textAlign={{ base: "center", md: "start" }}
+              w="full"
             >
               Send us a message
             </Text>
-          </Box>
+          </Flex>
           <Stack
             direction={{ base: "column", sm: "row" }}
             spacing={3}
-            w={{ base: "100%", sm: "auto" }}
+            justifyContent="space-between"
+            w="full"
           >
-            <Button
-              variant="solid"
-              colorScheme="primary"
-              as={Link}
-              to="/contacts"
-              draggable={false}
+            <Flex
+              gap={3}
+              w="full"
+              justifyContent={{ base: "center", md: "flex-end" }}
             >
-              Contact Us
-            </Button>
-            <Button variant="solid" as={Link} to="/about" draggable={false}>
-              Learn more
-            </Button>
+              <Button
+                variant="solid"
+                colorScheme="primary"
+                as={Link}
+                to="/contacts"
+                draggable={false}
+                w={{ base: "full", sm: "auto" }}
+              >
+                Contact Us
+              </Button>
+              <Button
+                variant="solid"
+                as={Link}
+                to="/about"
+                draggable={false}
+                w={{ base: "full", sm: "auto" }}
+              >
+                Learn more
+              </Button>
+            </Flex>
           </Stack>
         </Stack>
       </Container>

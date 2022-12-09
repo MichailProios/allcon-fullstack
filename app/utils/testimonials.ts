@@ -23,7 +23,7 @@ testimonials
     position: "Cooperative President - 20 East 9th St.",
     content: `Most contractors I’ve worked with are usually focused on the next
               job as they are working on the current one. This is definitely not
-              the case with ALL CON….anyone who chooses to work with them will
+              the case with Allcon…anyone who chooses to work with them will
               be very happy and extremely satisfied with the experience and
               results.`,
   })
@@ -46,26 +46,26 @@ testimonials
     name: "Roberta Sandemen",
     position: "470 Park Avenue",
     content: `The crew did a wonderful job…promptly, efficiently,
-              helpfully….and exceptionally. I heartily recommend ALLCON
+              helpfully….and exceptionally. I heartily recommend Allcon
               Contracting.`,
   })
   .set("terris.triades", {
     name: "Terri S. Triades",
     initials: "T T",
     position: "MERI TRIADES",
-    content: `The crew did a wonderful job…promptly, efficiently,
-              helpfully….and exceptionally. I heartily recommend ALLCON
-              Contracting.`,
+    content: `The employees are extremely professional. All work performed has
+              been first-rate. I use this company almost exclusively for any
+              construction related work.`,
   })
   .set("alexarker", {
     name: "Alex Arker",
     position: "The Arker Companies Real Estate Development",
-    content: `We found ALLCON to be completely reliable and dependable. They
+    content: `We found Allcon to be completely reliable and dependable. They
               bring projects in on time and on budget.`,
   })
   .set("lenardthylan", {
     name: "Lenard Thylan",
     position: "Thylan Associates Inc. Real Estate and Corporate",
-    content: `I recommend ALLCON Contracting because they are reliable,
+    content: `I recommend Allcon Contracting because they are reliable,
               responsive, and dependable.`,
   });

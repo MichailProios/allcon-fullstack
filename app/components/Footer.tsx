@@ -14,6 +14,8 @@ import {
   SimpleGrid,
   Flex,
   SlideFade,
+  Skeleton,
+  Image,
 } from "@chakra-ui/react";
 import { FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from "react-icons/fa";
 import type { ReactNode } from "react";
@@ -100,18 +102,24 @@ export default function SmallCentered() {
           justify={{ base: "center", md: "space-between" }}
           align={{ base: "center", md: "center" }}
         >
-          <Img h={10} src={logo_small} loading="lazy" draggable={false} />
+          <Image
+            h={10}
+            src={logo_small}
+            loading="eager"
+            draggable={false}
+            fallback={<Skeleton w="full" h="full" />}
+          />
           <Text textAlign="center" w="100%">
             <>
-              © {new Date().getFullYear()} Allcon Contracting. All rights
+              © {new Date().getFullYear()} Allcon Contracting Corp. All rights
               reserved
             </>
           </Text>
 
           <Stack direction={"row"} spacing={6}>
-            <SocialButton label={"Message"} href={"/contacts"} internal>
+            {/* <SocialButton label={"Message"} href={"/contacts"} internal>
               <BiMessage />
-            </SocialButton>
+            </SocialButton> */}
 
             <SocialButton
               label={"LinkedIn"}

@@ -42,6 +42,7 @@ import { useWindowDimensions } from "~/utils/hooks";
 // import { useTransition } from "@remix-run/react";
 // import Slider from "react-slick";
 import { Search2Icon } from "@chakra-ui/icons";
+import { testimonials } from "~/utils/testimonials";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - Testimonials`,
@@ -52,9 +53,9 @@ export const meta: MetaFunction = ({ params }: any) => ({
   "og:site_name": "Allcon Contracting",
   "og:description": `Allcon Contracting testionies from clients.`,
   "og:image":
-    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c0ce0238-47bb-4d18-f278-79a57d207b00/meta",
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/60f073c3-a567-471e-9bc6-9096dcc65500/meta",
   "twitter:card":
-    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c0ce0238-47bb-4d18-f278-79a57d207b00/meta",
+    "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/60f073c3-a567-471e-9bc6-9096dcc65500/meta",
   "og:url": "https://allconcontracting.com/testimonials",
 });
 
@@ -132,7 +133,7 @@ export const loader: LoaderFunction = async ({ request }: any) => {
       },
     ];
 
-    return { testimonies: testimonies };
+    return { testimonies: Array.from(testimonials.values()) };
   } catch (error) {
     throw error;
   }

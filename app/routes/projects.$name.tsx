@@ -57,8 +57,6 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 
-import { wrap } from "popmotion";
-
 import { motion, AnimatePresence } from "framer-motion";
 
 // import { motion, useScroll, useSpring } from "framer-motion";
@@ -297,7 +295,6 @@ export default function Project() {
               <Swiper
                 style={{
                   borderRadius: "0.375rem",
-                  // height: "auto",
                 }}
                 keyboard={{
                   enabled: true,
@@ -325,7 +322,7 @@ export default function Project() {
                         maxW="full"
                       >
                         {value.image ? (
-                          <Img
+                          <Image
                             src={value.image + "/public"}
                             alt={`Project Image ${index}`}
                             loading="eager"
@@ -334,24 +331,7 @@ export default function Project() {
                             maxW="full"
                             maxH="full"
                             draggable={false}
-                            // fallback={
-                            //   <AspectRatio
-                            //     ratio={{
-                            //       base: 1,
-                            //       sm:
-                            //         value.aspectRatio !== 16 / 9
-                            //           ? 4 / 3
-                            //           : 16 / 9,
-                            //     }}
-                            //     h="full"
-                            //     w="full"
-                            //     maxH="full"
-                            //     maxW="full"
-                            //   >
-                            //     <Skeleton h="full" w="full" />{" "}
-                            //   </AspectRatio>
-                            // }
-                            crossOrigin="anonymous"
+                            fallback={<Skeleton w="full" h="full" />}
                           />
                         ) : value.video ? (
                           <iframe
@@ -359,6 +339,7 @@ export default function Project() {
                             src={value.video}
                             allowFullScreen
                             draggable={false}
+                            loading="eager"
                             allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
                             style={{
                               border: "none",
@@ -413,26 +394,15 @@ export default function Project() {
                           maxH="full"
                         >
                           {value.image ? (
-                            <Img
+                            <Image
                               src={value.image + "/meta"}
                               alt={`Project Image ${index}`}
                               loading="eager"
-                              // fallback={
-                              //   <AspectRatio
-                              //     ratio={16 / 9}
-                              //     w="full"
-                              //     h="full"
-                              //     maxW="full"
-                              //     maxH="full"
-                              //   >
-                              //     <Skeleton h="full" w="full" />
-                              //   </AspectRatio>
-                              // }
+                              fallback={<Skeleton w="full" h="full" />}
                               borderRadius="md"
                               zIndex={9000}
                               opacity={currentSlide === index ? 1 : 0.8}
                               transition="opacity 200ms"
-                              crossOrigin="anonymous"
                               w="full"
                               h="full"
                               maxW="full"
@@ -443,6 +413,7 @@ export default function Project() {
                               title={`Project Video ${index}`}
                               src={value.video}
                               allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                              loading="eager"
                               style={{
                                 border: "none",
                                 height: "100%",
@@ -556,7 +527,7 @@ export default function Project() {
                           style={{ height: `${height}px`, width: "100%" }}
                         >
                           {value.image ? (
-                            <Img
+                            <Image
                               src={value.image + "/hq"}
                               alt={`Project Image ${index}`}
                               loading="eager"
@@ -566,7 +537,22 @@ export default function Project() {
                               objectFit="contain"
                               draggable={false}
                               h={`${height}px`}
-                              // crossOrigin="anonymous"
+                              fallback={
+                                <Box w="full" h="full" position="relative">
+                                  <Flex
+                                    alignItems="center"
+                                    flexDirection="column"
+                                    position="absolute"
+                                    top="50%"
+                                    left="50%"
+                                    transform={"translate(0%, -50%)"}
+                                  >
+                                    <Spinner color="primary.500" size="xl" />
+
+                                    <Text>Loading Image</Text>
+                                  </Flex>
+                                </Box>
+                              }
                             />
                           ) : value.video ? (
                             <AspectRatio
@@ -583,6 +569,7 @@ export default function Project() {
                                 allowFullScreen
                                 draggable={false}
                                 allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                loading="eager"
                                 style={{
                                   border: "none",
                                   height: "100%",

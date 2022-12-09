@@ -51,6 +51,8 @@ import {
   useMultiStyleConfig,
   Collapse,
   Divider,
+  Image,
+  Skeleton,
 } from "@chakra-ui/react";
 
 import { NavLink } from "@remix-run/react";
@@ -200,7 +202,7 @@ function NavbarHeader({
                 },
               }}
             >
-              <Img
+              <Image
                 objectFit="contain"
                 h={"50px"}
                 w={"auto"}
@@ -209,6 +211,7 @@ function NavbarHeader({
                 alt="Allcon-Logo"
                 loading="eager"
                 draggable={false}
+                fallback={<Skeleton w="full" h="full" />}
               />
             </Box>
             <Box
@@ -219,7 +222,7 @@ function NavbarHeader({
                 },
               }}
             >
-              <Img
+              <Image
                 objectFit="contain"
                 h={"50px"}
                 w={"auto"}
@@ -227,6 +230,7 @@ function NavbarHeader({
                 alt="Allcon-Logo"
                 draggable={false}
                 loading="eager"
+                fallback={<Skeleton w="full" h="full" />}
               />
             </Box>
           </NavLink>
@@ -407,7 +411,7 @@ function NavbarDrawer({
             prefetch="render"
             rel="prefetch"
           >
-            <Img
+            <Image
               objectFit="contain"
               h={50}
               w={"auto"}
@@ -415,6 +419,7 @@ function NavbarDrawer({
               alt="Allcon-Logo"
               draggable={false}
               loading="eager"
+              fallback={<Skeleton w="full" h="full" />}
             />
           </NavLink>
         </DrawerHeader>

@@ -89,6 +89,7 @@ import {
 } from "@chakra-ui/icons";
 import projects from "~/utils/projects";
 import { useFirstRender, useLoading } from "~/utils/hooks";
+import { BiCategory, BiFilter } from "react-icons/bi";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - Projects`,
@@ -112,8 +113,6 @@ export const loader: LoaderFunction = async ({ request }: any) => {
 
     const session = await cookie.getSession(request.headers.get("Cookie"));
     const filter = session.get("filter") || null;
-
-    console.log(category);
 
     if (filter?.search && !category) {
       return json({
@@ -248,20 +247,6 @@ export default function Index() {
       e.target.blur();
     }
   }
-
-  // const [searchParams] = useSearchParams();
-  // const category = searchParams.getAll("category");
-  // console.log(category);
-
-  // useEffect(() => {
-  //   if (category) {
-  //     scroll.scrollToTop({
-  //       duration: 400,
-  //       delay: 300,
-  //       smooth: "easeInOutQuart",
-  //     });
-  //   }
-  // }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -629,6 +614,7 @@ export default function Index() {
                     variant={clientCategory ? "solid" : "outline"}
                     boxShadow="md"
                     textAlign="start"
+                    leftIcon={<Icon as={BiCategory} h={4} w={4} />}
                     rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
                     onClick={isOpen ? onClose : onOpen}
                     textColor={clientCategory && "white"}
@@ -651,7 +637,7 @@ export default function Index() {
                           clientCategory.charAt(0).toUpperCase() +
                           clientCategory.slice(1)
                         } Projects`
-                      : "Filter Projects"}
+                      : "Category"}
                   </MenuButton>
 
                   <MenuList p={1} m={0} boxShadow="2xl" zIndex={500} minW={0}>

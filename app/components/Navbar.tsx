@@ -6,7 +6,7 @@ import {
   useLayoutEffect,
 } from "react";
 
-import { Outlet, useMatches } from "@remix-run/react";
+import { Link, Outlet, useMatches } from "@remix-run/react";
 
 import {
   Show,
@@ -263,53 +263,54 @@ function NavbarHeader({
                 )}
 
                 {link.subLinks && (
-                  <Popover
-                    trigger="hover"
-                    // closeDelay={200}
-                    // openDelay={200}
-                    isLazy
-                    placement="bottom"
-                    lazyBehavior="unmount"
-                  >
-                    <PopoverTrigger>
-                      <Tab
-                        as={NavLink}
-                        to={link.url}
-                        _focus={{ boxShadow: "none" }}
-                        draggable={false}
-                        prefetch="render"
-                        rel="prefetch"
-                      >
-                        {link.label}
-                      </Tab>
-                    </PopoverTrigger>
+                  <NavbarPopover link={link} index={index} />
+                  // <Popover
+                  //   trigger="hover"
+                  //   closeDelay={200}
+                  //   openDelay={0}
+                  //   isLazy
+                  //   placement="bottom"
+                  //   lazyBehavior="unmount"
+                  // >
+                  //   <PopoverTrigger>
+                  //     <Tab
+                  //       as={NavLink}
+                  //       to={link.url}
+                  //       _focus={{ boxShadow: "none" }}
+                  //       draggable={false}
+                  //       prefetch="render"
+                  //       rel="prefetch"
+                  //     >
+                  //       {link.label}
+                  //     </Tab>
+                  //   </PopoverTrigger>
 
-                    <PopoverContent w="8em" boxShadow="lg">
-                      <PopoverBody w="full" p={0} m={0}>
-                        <ButtonGroup
-                          orientation="vertical"
-                          variant="ghost"
-                          size="md"
-                          spacing="2px"
-                          w="full"
-                        >
-                          {link.subLinks.map((subLink: any, index: any) => (
-                            <Button
-                              key={index}
-                              as={NavLink}
-                              to={subLink.url}
-                              borderRadius="none"
-                              fontWeight="normal"
-                              prefetch="intent"
-                              // rel="prefetch"
-                            >
-                              {subLink.label}
-                            </Button>
-                          ))}
-                        </ButtonGroup>
-                      </PopoverBody>
-                    </PopoverContent>
-                  </Popover>
+                  //   <PopoverContent w="8em" boxShadow="lg">
+                  //     <PopoverBody w="full" p={0} m={0}>
+                  //       <ButtonGroup
+                  //         orientation="vertical"
+                  //         variant="ghost"
+                  //         size="md"
+                  //         spacing="2px"
+                  //         w="full"
+                  //       >
+                  //         {link.subLinks.map((subLink: any, index: any) => (
+                  //           <Button
+                  //             key={index}
+                  //             as={NavLink}
+                  //             to={subLink.url}
+                  //             borderRadius="none"
+                  //             fontWeight="normal"
+                  //             prefetch="intent"
+                  //             // rel="prefetch"
+                  //           >
+                  //             {subLink.label}
+                  //           </Button>
+                  //         ))}
+                  //       </ButtonGroup>
+                  //     </PopoverBody>
+                  //   </PopoverContent>
+                  // </Popover>
                 )}
               </Box>
             ))}
@@ -472,6 +473,89 @@ function NavbarDrawer({
   );
 }
 
+function NavbarPopover({ link, index }: any) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  let timeout: any = null;
+
+  const timer = () => {
+    timeout = setTimeout(() => {
+      onClose();
+    }, 300);
+  };
+
+  function closePopover() {
+    clearTimeout(timeout);
+    timer();
+  }
+
+  function openPopover() {
+    clearTimeout(timeout);
+    onOpen();
+    // timer();
+  }
+
+  return (
+    <Popover
+      // trigger="hover"
+      closeDelay={200}
+      openDelay={0}
+      isLazy
+      placement="bottom"
+      lazyBehavior="unmount"
+      isOpen={isOpen}
+      returnFocusOnClose={false}
+      autoFocus={false}
+    >
+      <PopoverAnchor>
+        <Tab
+          as={NavLink}
+          to={link.url}
+          _focus={{ boxShadow: "none" }}
+          draggable={false}
+          prefetch="render"
+          rel="prefetch"
+          onClick={onClose}
+          onMouseEnter={openPopover}
+          onMouseLeave={closePopover}
+        >
+          {link.label}
+        </Tab>
+      </PopoverAnchor>
+      <PopoverContent
+        w="8em"
+        boxShadow="lg"
+        onMouseEnter={openPopover}
+        onMouseLeave={closePopover}
+      >
+        <PopoverBody w="full" p={0} m={0}>
+          <ButtonGroup
+            orientation="vertical"
+            variant="ghost"
+            size="md"
+            spacing="2px"
+            w="full"
+          >
+            {link.subLinks.map((subLink: any, index: any) => (
+              <Button
+                key={index}
+                as={Link}
+                to={subLink.url}
+                borderRadius="none"
+                fontWeight="normal"
+                onClick={onClose}
+                draggable={false}
+              >
+                {subLink.label}
+              </Button>
+            ))}
+          </ButtonGroup>
+        </PopoverBody>
+      </PopoverContent>
+    </Popover>
+  );
+}
+
 function SubLinks({ link, index, tabIndex, onDrawerClose }: any) {
   const [show, setShow] = useState(tabIndex === index ? true : false);
 
@@ -498,7 +582,7 @@ function SubLinks({ link, index, tabIndex, onDrawerClose }: any) {
 
         <IconButton
           aria-label="Sublinks"
-          variant="solid"
+          variant="ghost"
           icon={show ? <ChevronUpIcon /> : <ChevronDownIcon />}
           onClick={handleToggle}
         />

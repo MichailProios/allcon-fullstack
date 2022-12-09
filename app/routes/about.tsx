@@ -112,88 +112,88 @@ export default function About() {
       </Container>
       <Divider />
       <Container maxW="1400px" px={{ base: 3, md: 6 }} py={14}>
-        <VStack spacing="18px">
+        <VStack spacing="26px">
           <Heading textAlign="center"> Executives</Heading>
-          <VStack spacing="26px">
-            <AnimatePresence>
-              {data.profiles.map((value: any, index: any) => (
-                <RenderIfVisible key={index} defaultHeight={1200}>
-                  <motion.div
-                    layout
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: 20, opacity: 0 }}
-                  >
-                    <Card
-                      variant="elevated"
-                      direction={{ base: "column", xl: "row" }}
-                      rounded="md"
-                      boxShadow="xl"
-                      w="full"
-                    >
-                      <AspectRatio
-                        ratio={9 / 16}
-                        w="340px"
-                        display={{ base: "none", xl: "flex" }}
-                      >
-                        <Image
-                          roundedTopLeft="md"
-                          roundedBottomLeft="md"
-                          objectFit="cover"
-                          src={value.image}
-                          alt={`${value.title} profile`}
-                          boxShadow="xl"
-                          draggable={false}
-                          userSelect="none"
-                          loading="lazy"
-                          fallback={<Skeleton w="full" h="full" />}
-                        />
-                      </AspectRatio>
-                      <CardBody
-                        display="flex"
-                        flexDirection="column"
-                        justifyContent={{ base: "center", xl: "stretch" }}
-                        alignItems={{ base: "center", xl: "stretch" }}
-                        w="100%"
-                      >
-                        <Avatar
-                          h={{ base: "250px", md: "300px", lg: "350px" }}
-                          w={{ base: "250px", md: "300px", lg: "350px" }}
-                          showBorder={true}
-                          borderColor="primary.400"
-                          name={value.name}
-                          src={value.image}
-                          mb="5px"
-                          display={{ base: "flex", xl: "none" }}
-                        />
-                        <Heading fontSize="2xl">{value.title}</Heading>
-                        <Text
-                          fontSize="xl"
-                          textColor="gray"
-                          textAlign={{ base: "center", xl: "start" }}
-                        >
-                          {value.subtitle}
-                        </Text>
 
-                        <Text
-                          py="2"
-                          fontSize="xl"
-                          textAlign={{ base: "start", sm: "justify" }}
-                        >
-                          <span
-                            dangerouslySetInnerHTML={{
-                              __html: value.description,
-                            }}
-                          />
-                        </Text>
-                      </CardBody>
-                    </Card>
-                  </motion.div>
-                </RenderIfVisible>
-              ))}
-            </AnimatePresence>
-          </VStack>
+          <AnimatePresence>
+            {data.profiles.map((value: any, index: any) => (
+              <RenderIfVisible key={index} defaultHeight={1200}>
+                <motion.div
+                  layout
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: 20, opacity: 0 }}
+                >
+                  <Card
+                    variant="elevated"
+                    direction={{ base: "column", xl: "row" }}
+                    rounded="md"
+                    boxShadow="xl"
+                    w="full"
+                  >
+                    <AspectRatio
+                      ratio={9 / 16}
+                      w="340px"
+                      display={{ base: "none", xl: "flex" }}
+                    >
+                      <Image
+                        roundedTopLeft="md"
+                        roundedBottomLeft="md"
+                        objectFit="cover"
+                        src={value.image}
+                        alt={`${value.title} profile`}
+                        boxShadow="xl"
+                        draggable={false}
+                        userSelect="none"
+                        loading="lazy"
+                        fallback={<Skeleton w="full" h="full" />}
+                      />
+                    </AspectRatio>
+                    <CardBody
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent={{ base: "center", xl: "stretch" }}
+                      alignItems={{ base: "center", xl: "stretch" }}
+                      w="100%"
+                    >
+                      <Avatar
+                        h={{ base: "250px", md: "300px", lg: "350px" }}
+                        w={{ base: "250px", md: "300px", lg: "350px" }}
+                        showBorder={true}
+                        borderColor="primary.400"
+                        name={value.name}
+                        src={value.image}
+                        mb="5px"
+                        display={{ base: "flex", xl: "none" }}
+                      />
+                      <Heading fontSize="2xl">{value.title}</Heading>
+                      <Text
+                        fontSize="xl"
+                        textColor="gray"
+                        textAlign={{ base: "center", xl: "start" }}
+                      >
+                        {value.subtitle}
+                      </Text>
+
+                      <Text
+                        py="2"
+                        fontSize="xl"
+                        textAlign={{ base: "start", sm: "justify" }}
+                      >
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: value.description,
+                          }}
+                        />
+                      </Text>
+                    </CardBody>
+                  </Card>
+                </motion.div>
+              </RenderIfVisible>
+            ))}
+          </AnimatePresence>
         </VStack>
+        {/* </VStack> */}
       </Container>
     </SlideFade>
   );

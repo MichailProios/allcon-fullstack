@@ -102,7 +102,7 @@ export default function Index() {
 
   const breakpointSlidesPerView = useBreakpointValue(
     { base: 1, lg: 2 },
-    { fallback: "xmd", ssr: true }
+    { fallback: "lg", ssr: true }
   );
 
   return (
@@ -243,11 +243,7 @@ export default function Index() {
       </Box>
 
       <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={20}>
-        <Stack
-          direction={{ base: "column", lg: "row" }}
-          gap={{ base: 2, xmd: 2, lg: 4 }}
-          w="full"
-        >
+        <Stack direction={{ base: "column", xmd: "row" }} spacing={4} w="full">
           <motion.div
             whileHover={{ scale: 1.01 }}
             transition={{
@@ -397,24 +393,8 @@ export default function Index() {
 
       <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={20}>
         <VStack spacing="40px">
-          {/* <Flex
-            flexDirection="row"
-            alignItems="center"
-            w="100%"
-            justifyContent="center"
-            gap={1}
-          > */}
           <Heading textAlign="center">Trusted by our Clients</Heading>
-          {/* <IconButton
-              variant="ghost"
-              borderRadius="full"
-              aria-label="Testimonials link"
-              icon={<LinkIcon />}
-              as={Link}
-              to="/testimonials"
-              draggable={false}
-            /> */}
-          {/* </Flex> */}
+
           <Box
             rounded="md"
             bg="transparent"
@@ -432,7 +412,6 @@ export default function Index() {
               }}
               modules={[Autoplay, Pagination]}
               loop
-              autoHeight
               slidesPerView={breakpointSlidesPerView}
               style={{
                 borderRadius: "0.375rem",
@@ -443,10 +422,12 @@ export default function Index() {
                   <Card
                     variant="elevated"
                     rounded="none"
-                    h={{ base: "auto", sm: "250px" }}
+                    h={{ base: "348px", sm: "250px" }}
                     w="full"
                   >
-                    <CardBody textAlign="justify">{value.content}</CardBody>
+                    <CardBody textAlign={{ base: "start", sm: "justify" }}>
+                      {value.content}
+                    </CardBody>
 
                     <Divider />
                     <CardFooter justify="space-between" alignItems="center">
@@ -493,7 +474,7 @@ export default function Index() {
               w="full"
               textAlign={{ base: "center", md: "start" }}
             >
-              Looking for more information?
+              Ready to connect?
             </Heading>
             <Text
               fontSize="2xl"

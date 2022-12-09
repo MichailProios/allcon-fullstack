@@ -3,23 +3,16 @@ import {
   chakra,
   Container,
   Divider,
-  Fade,
-  Img,
   Stack,
   Text,
-  useColorMode,
   useColorModeValue,
   VisuallyHidden,
-  Button,
-  SimpleGrid,
-  Flex,
   SlideFade,
   Skeleton,
   Image,
 } from "@chakra-ui/react";
-import { FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
 import type { ReactNode } from "react";
-// import {  } from "react-scroll";
 import { Link } from "@remix-run/react";
 import { BiMessage } from "react-icons/bi";
 
@@ -102,13 +95,16 @@ export default function SmallCentered() {
           justify={{ base: "center", md: "space-between" }}
           align={{ base: "center", md: "center" }}
         >
-          <Image
-            h={10}
-            src={logo_small}
-            loading="eager"
-            draggable={false}
-            fallback={<Skeleton w="full" h="full" />}
-          />
+          <Link to="/" draggable={false}>
+            <Image
+              h={10}
+              src={logo_small}
+              loading="eager"
+              draggable={false}
+              alt="Footer Logo"
+              fallback={<Skeleton w="full" h="full" />}
+            />{" "}
+          </Link>
           <Text textAlign="center" w="100%">
             <>
               © {new Date().getFullYear()} Allcon Contracting Corp. All rights

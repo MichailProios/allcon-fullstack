@@ -305,7 +305,7 @@ export default function Contacts() {
       <Divider />
       <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="26px">
-          <Heading textAlign="center">Office Locations</Heading>
+          <Heading textAlign="center">Our Offices</Heading>
           <Card rounded="md" boxShadow="xl" w={"full"}>
             <CardBody>
               <Tabs isFitted isLazy colorScheme="primary">
@@ -329,7 +329,7 @@ export default function Contacts() {
                         flexDirection={{ base: "column", xs: "row" }}
                       >
                         <Tab
-                          w={{ base: "100%", md: "8.6em" }}
+                          w={{ base: "100%", sm: "8.6em" }}
                           fontWeight="semibold"
                           _selected={{ color: "white", bg: "primary.500" }}
                           rounded="md"
@@ -340,7 +340,7 @@ export default function Contacts() {
                           Map View
                         </Tab>
                         <Tab
-                          w={{ base: "100%", md: "8.6em" }}
+                          w={{ base: "100%", sm: "8.6em" }}
                           fontWeight="semibold"
                           _selected={{ color: "white", bg: "primary.500" }}
                           rounded="md"
@@ -411,7 +411,7 @@ export default function Contacts() {
                         flexDirection={{ base: "column", xs: "row" }}
                       >
                         <Tab
-                          w={{ base: "100%", md: "8.6em" }}
+                          w={{ base: "100%", sm: "8.6em" }}
                           fontWeight="semibold"
                           _selected={{ color: "white", bg: "primary.500" }}
                           rounded="md"
@@ -422,7 +422,7 @@ export default function Contacts() {
                           Map View
                         </Tab>
                         <Tab
-                          w={{ base: "100%", md: "8.6em" }}
+                          w={{ base: "100%", sm: "8.6em" }}
                           fontWeight="semibold"
                           _selected={{ color: "white", bg: "primary.500" }}
                           rounded="md"

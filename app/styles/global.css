@@ -45,6 +45,10 @@
   background-color: #018b8b !important;
 }
 
+.swiper-pagination-progressbar-fill {
+  background-color: #018b8b !important;
+}
+
 /* clears the ‘X’ from Internet Explorer */
 input[type="search"]::-ms-clear {
   display: none;

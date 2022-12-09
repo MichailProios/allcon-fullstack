@@ -12,7 +12,7 @@ import {
   Show,
   Spinner,
   Flex,
-  Image,
+  Img,
   HStack,
   Button,
   IconButton,
@@ -49,6 +49,8 @@ import {
   TagRightIcon,
   useTab,
   useMultiStyleConfig,
+  Collapse,
+  Divider,
 } from "@chakra-ui/react";
 
 import { NavLink } from "@remix-run/react";
@@ -57,6 +59,7 @@ import { NavLink } from "@remix-run/react";
 
 import {
   ChevronDownIcon,
+  ChevronUpIcon,
   HamburgerIcon,
   MoonIcon,
   SunIcon,
@@ -197,15 +200,15 @@ function NavbarHeader({
                 },
               }}
             >
-              <Image
+              <Img
                 objectFit="contain"
                 h={"50px"}
                 w={"auto"}
                 minWidth="230px"
                 src={colorMode === "light" ? logo_full_dark : logo_full_light}
                 alt="Allcon-Logo"
-                draggable="false"
                 loading="eager"
+                draggable={false}
               />
             </Box>
             <Box
@@ -216,13 +219,13 @@ function NavbarHeader({
                 },
               }}
             >
-              <Image
+              <Img
                 objectFit="contain"
                 h={"50px"}
                 w={"auto"}
                 src={logo_small}
                 alt="Allcon-Logo"
-                draggable="false"
+                draggable={false}
                 loading="eager"
               />
             </Box>
@@ -404,13 +407,13 @@ function NavbarDrawer({
             prefetch="render"
             rel="prefetch"
           >
-            <Image
+            <Img
               objectFit="contain"
               h={50}
               w={"auto"}
               src={logo_small}
               alt="Allcon-Logo"
-              draggable="false"
+              draggable={false}
               loading="eager"
             />
           </NavLink>
@@ -446,74 +449,12 @@ function NavbarDrawer({
                   )}
 
                   {link.subLinks && (
-                    <Popover
-                      trigger="click"
-                      // closeDelay={100}
-                      // openDelay={100}
-                      isLazy
-                      placement="bottom-end"
-                      lazyBehavior="unmount"
-                    >
-                      <Flex>
-                        <Tab
-                          _focus={{ boxShadow: "none" }}
-                          draggable={false}
-                          key={index}
-                          fontSize="md"
-                          w={"100%"}
-                          as={NavLink}
-                          to={link.url}
-                          onClick={onDrawerClose}
-                          prefetch="render"
-                          rel="prefetch"
-                          mr="-40px"
-                        >
-                          {/* <Box ml="40px">  */}
-                          {link.label}
-
-                          {/* </Box> */}
-                        </Tab>
-
-                        <PopoverTrigger>
-                          <IconButton
-                            aria-label="Sublinks"
-                            borderRadius="none"
-                            variant="ghost"
-                            icon={<ChevronDownIcon />}
-                          />
-                        </PopoverTrigger>
-                      </Flex>
-
-                      <PopoverContent
-                        w={{ base: "234px", xs: "274px" }}
-                        boxShadow="lg"
-                      >
-                        <PopoverBody w="full" p={0} m={0}>
-                          <ButtonGroup
-                            orientation="vertical"
-                            variant="ghost"
-                            size="md"
-                            spacing="2px"
-                            w="full"
-                          >
-                            {link.subLinks.map((subLink: any, index: any) => (
-                              <Button
-                                w="full"
-                                key={index}
-                                as={NavLink}
-                                to={subLink.url}
-                                borderRadius="none"
-                                fontWeight="normal"
-                                prefetch="intent"
-                                onClick={onDrawerClose}
-                              >
-                                {subLink.label}
-                              </Button>
-                            ))}
-                          </ButtonGroup>
-                        </PopoverBody>
-                      </PopoverContent>
-                    </Popover>
+                    <SubLinks
+                      link={link}
+                      index={index}
+                      tabIndex={tabIndex}
+                      onDrawerClose={onDrawerClose}
+                    />
                   )}
                 </Box>
               ))}
@@ -523,5 +464,69 @@ function NavbarDrawer({
         </DrawerBody>
       </DrawerContent>
     </Drawer>
+  );
+}
+
+function SubLinks({ link, index, tabIndex, onDrawerClose }: any) {
+  const [show, setShow] = useState(tabIndex === index ? true : false);
+
+  const handleToggle = () => setShow(!show);
+
+  return (
+    <>
+      <Flex>
+        <Tab
+          _focus={{ boxShadow: "none" }}
+          draggable={false}
+          key={index}
+          fontSize="md"
+          w={"100%"}
+          as={NavLink}
+          to={link.url}
+          onClick={onDrawerClose}
+          prefetch="render"
+          rel="prefetch"
+          mr="-40px"
+        >
+          {link.label}
+        </Tab>
+
+        <IconButton
+          aria-label="Sublinks"
+          variant="solid"
+          icon={show ? <ChevronUpIcon /> : <ChevronDownIcon />}
+          onClick={handleToggle}
+        />
+      </Flex>
+
+      <Collapse in={show} unmountOnExit>
+        <ButtonGroup
+          orientation="vertical"
+          variant="ghost"
+          size="md"
+          spacing="2px"
+          w="full"
+          mt={2}
+          mb={2}
+        >
+          {/* <Divider /> */}
+          {link.subLinks.map((subLink: any, index: any) => (
+            <Button
+              w="full"
+              key={index}
+              as={NavLink}
+              to={subLink.url}
+              borderRadius="none"
+              fontWeight="normal"
+              prefetch="intent"
+              fontSize="sm"
+              onClick={onDrawerClose}
+            >
+              {subLink.label}
+            </Button>
+          ))}
+        </ButtonGroup>
+      </Collapse>
+    </>
   );
 }

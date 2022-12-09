@@ -183,7 +183,7 @@ function SubmitButton(props: any) {
 export default function Contacts() {
   const actionData = useActionData();
 
-  const { onCopy } = useClipboard("+1-516-333-3344");
+  // const { onCopy } = useClipboard("+1-516-333-3344");
   const toast = useToast();
 
   useEffect(() => {
@@ -203,7 +203,7 @@ export default function Contacts() {
   }, [actionData, toast]);
 
   return (
-    <SlideFade in={true} reverse delay={0.1}>
+    <SlideFade in={true} delay={0.1} unmountOnExit>
       <Container
         maxW={"1200px"}
         px={{ base: 3, md: 6 }}

@@ -58,6 +58,8 @@ import { animateScroll as scroll } from "react-scroll";
 
 import { AnimatePresence, motion } from "framer-motion";
 
+import RenderIfVisible from "react-render-if-visible";
+
 import { redirect, json } from "@remix-run/node";
 
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
@@ -859,147 +861,157 @@ export default function Index() {
             >
               <AnimatePresence>
                 {data.projects.map((value: any, index: any) => (
-                  <motion.div
-                    key={index}
-                    layout
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: 20, opacity: 0 }}
-                  >
+                  <RenderIfVisible key={index} defaultHeight={500}>
                     <motion.div
-                      whileHover={{ scale: 1.01 }}
-                      transition={{
-                        type: "tween",
-                        duration: 0.2,
-                      }}
+                      layout
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: 20, opacity: 0 }}
                     >
-                      <Card
-                        variant="elevated"
-                        rounded="md"
-                        boxShadow="xl"
-                        position="relative"
-                        onMouseEnter={(e: any) => {
-                          setShowButton({ index: index, flag: true });
+                      <motion.div
+                        whileHover={{ scale: 1.01 }}
+                        transition={{
+                          type: "tween",
+                          duration: 0.2,
                         }}
-                        onMouseLeave={(e: any) => {
-                          setShowButton({ index: index, flag: false });
-                        }}
-                        as={Link}
-                        to={value.path}
-                        prefetch="intent"
-                        rel="prefetch"
-                        draggable={false}
-                        w="full"
                       >
-                        <AspectRatio
-                          key={index}
-                          ratio={{ base: 4 / 3, md: 16 / 9 }}
+                        <Card
+                          variant="elevated"
+                          rounded="md"
+                          boxShadow="xl"
+                          position="relative"
+                          onMouseEnter={(e: any) => {
+                            setShowButton({ index: index, flag: true });
+                          }}
+                          onMouseLeave={(e: any) => {
+                            setShowButton({ index: index, flag: false });
+                          }}
+                          as={Link}
+                          to={value.path}
+                          prefetch="intent"
+                          rel="prefetch"
+                          draggable={false}
+                          w="full"
                         >
-                          <Img
-                            roundedTopLeft="md"
-                            roundedTopRight="md"
-                            src={value.thumbnail + "/thumbnail"}
-                            alt={`${value.name} project`}
-                            boxShadow="xl"
-                            draggable={false}
-                            userSelect="none"
-                            w="full"
-                            loading="eager"
-                          />
-                        </AspectRatio>
-                        <CardFooter justifyContent="center" p={2}>
-                          <Text textAlign="center" fontSize="xl">
-                            <Highlight
-                              query={data.filter?.search || ""}
-                              styles={{
-                                px: "4px",
-                                py: "4px",
-                                bg: "primary.100",
-                                borderRadius: "0.375rem",
+                          <AspectRatio
+                            key={index}
+                            ratio={{ base: 4 / 3, md: 16 / 9 }}
+                          >
+                            <Img
+                              roundedTopLeft="md"
+                              roundedTopRight="md"
+                              src={value.thumbnail + "/thumbnail"}
+                              alt={`${value.name} project`}
+                              boxShadow="xl"
+                              draggable={false}
+                              userSelect="none"
+                              w="full"
+                              loading="lazy"
+                            />
+                          </AspectRatio>
+                          <CardFooter justifyContent="center" p={2}>
+                            <Text textAlign="center" fontSize="xl">
+                              <Highlight
+                                query={data.filter?.search || ""}
+                                styles={{
+                                  px: "4px",
+                                  py: "4px",
+                                  bg: "primary.100",
+                                  borderRadius: "0.375rem",
+                                }}
+                              >
+                                {value.name as string}
+                              </Highlight>
+                            </Text>
+                          </CardFooter>
+
+                          <Box position="absolute" top="8px" right="8px">
+                            <VStack alignItems="flex-end" spacing={2}>
+                              {value.status?.completed === true && (
+                                <Tooltip
+                                  label={value.status?.text}
+                                  closeOnScroll
+                                >
+                                  <Badge textColor="#22543D" bgColor="#C6F6D5">
+                                    Completed
+                                  </Badge>
+                                </Tooltip>
+                              )}
+
+                              {value.status?.completed === false && (
+                                <Tooltip
+                                  label={value.status?.text}
+                                  closeOnScroll
+                                >
+                                  <Badge textColor="#744210" bgColor="#FEFCBF">
+                                    in progress
+                                  </Badge>
+                                </Tooltip>
+                              )}
+
+                              {value.category?.tag && (
+                                <Tooltip
+                                  key={index}
+                                  label={value.category?.text}
+                                  closeOnScroll
+                                >
+                                  <Badge textColor="#234E52" bgColor="#B2F5EA">
+                                    {value.category.tag}
+                                  </Badge>
+                                </Tooltip>
+                              )}
+
+                              {value.client?.tag && (
+                                <Tooltip
+                                  label={value.client?.text}
+                                  closeOnScroll
+                                >
+                                  <Badge textColor="#2A4365" bgColor="#BEE3F8">
+                                    {value.client.tag}
+                                  </Badge>
+                                </Tooltip>
+                              )}
+                            </VStack>
+                          </Box>
+
+                          <Box display={{ base: "none", lg: "flex" }}>
+                            <SlideFade
+                              in={
+                                showButton.index === index
+                                  ? showButton.flag
+                                  : false
+                              }
+                              reverse
+                              style={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
                               }}
                             >
-                              {value.name as string}
-                            </Highlight>
-                          </Text>
-                        </CardFooter>
-
-                        <Box position="absolute" top="8px" right="8px">
-                          <VStack alignItems="flex-end" spacing={2}>
-                            {value.status?.completed === true && (
-                              <Tooltip label={value.status?.text} closeOnScroll>
-                                <Badge textColor="#22543D" bgColor="#C6F6D5">
-                                  Completed
-                                </Badge>
-                              </Tooltip>
-                            )}
-
-                            {value.status?.completed === false && (
-                              <Tooltip label={value.status?.text} closeOnScroll>
-                                <Badge textColor="#744210" bgColor="#FEFCBF">
-                                  in progress
-                                </Badge>
-                              </Tooltip>
-                            )}
-
-                            {value.category?.tag && (
-                              <Tooltip
-                                key={index}
-                                label={value.category?.text}
-                                closeOnScroll
+                              <Box
+                                position="absolute"
+                                top="50%"
+                                left="50%"
+                                transform="translate(-50%, -50%)"
                               >
-                                <Badge textColor="#234E52" bgColor="#B2F5EA">
-                                  {value.category.tag}
-                                </Badge>
-                              </Tooltip>
-                            )}
-
-                            {value.client?.tag && (
-                              <Tooltip label={value.client?.text} closeOnScroll>
-                                <Badge textColor="#2A4365" bgColor="#BEE3F8">
-                                  {value.client.tag}
-                                </Badge>
-                              </Tooltip>
-                            )}
-                          </VStack>
-                        </Box>
-
-                        <Box display={{ base: "none", lg: "flex" }}>
-                          <SlideFade
-                            in={
-                              showButton.index === index
-                                ? showButton.flag
-                                : false
-                            }
-                            reverse
-                            style={{
-                              position: "absolute",
-                              top: "50%",
-                              left: "50%",
-                              transform: "translate(-50%, -50%)",
-                            }}
-                          >
-                            <Box
-                              position="absolute"
-                              top="50%"
-                              left="50%"
-                              transform="translate(-50%, -50%)"
-                            >
-                              <Button
-                                variant="solid"
-                                boxShadow="lg"
-                                rounded="md"
-                                bgColor="gray.50"
-                                textColor="black"
-                                _hover={{ bgColor: "gray.200" }}
-                              >
-                                View Project
-                              </Button>
-                            </Box>
-                          </SlideFade>
-                        </Box>
-                      </Card>
+                                <Button
+                                  variant="solid"
+                                  boxShadow="lg"
+                                  rounded="md"
+                                  bgColor="gray.50"
+                                  textColor="black"
+                                  _hover={{ bgColor: "gray.200" }}
+                                >
+                                  View Project
+                                </Button>
+                              </Box>
+                            </SlideFade>
+                          </Box>
+                        </Card>
+                      </motion.div>
                     </motion.div>
-                  </motion.div>
+                  </RenderIfVisible>
                 ))}
               </AnimatePresence>
             </SimpleGrid>
@@ -1020,43 +1032,6 @@ export default function Index() {
           )}
         </VStack>
       </Container>
-
-      {/* <Container maxW={"1600px"} px={2} py={4}>
-        <Flex w="full" alignItems="center" justifyContent="center">
-          <IconButton
-            aria-label="previous"
-            mx={1}
-            px={4}
-            py={2}
-            rounded="md"
-            icon={<ChevronLeftIcon />}
-          />
-          <Button
-            mx={1}
-            px={4}
-            py={2}
-            rounded="md"
-            isActive
-            colorScheme="primary"
-          >
-            1
-          </Button>
-          <Button mx={1} px={4} py={2} rounded="md">
-            2
-          </Button>
-          <Button mx={1} px={4} py={2} rounded="md">
-            3
-          </Button>
-          <IconButton
-            aria-label="next"
-            mx={1}
-            px={4}
-            py={2}
-            rounded="md"
-            icon={<ChevronRightIcon />}
-          />
-        </Flex>
-      </Container> */}
     </SlideFade>
   );
 }

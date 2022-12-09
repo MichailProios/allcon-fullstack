@@ -24,6 +24,7 @@ import { animateScroll as scroll } from "react-scroll";
 import { useScrollButtonVisibility } from "app/utils/hooks";
 import { ChevronUpIcon } from "@chakra-ui/icons";
 import { useTransition } from "@remix-run/react";
+import Footer from "~/components/Footer";
 
 import { useLoading } from "app/utils/hooks";
 
@@ -148,8 +149,10 @@ export default function Layout({ children }: LayoutProps) {
           </Tooltip>
         </Fade>
       </Box>
-      <Box transition="color 1000ms linear">{children}</Box>
-      <Box marginTop={"auto"}></Box>
+      <Box>{children}</Box>
+      <Box marginTop={"auto"}>
+        <Footer />
+      </Box>
     </Box>
   );
 }

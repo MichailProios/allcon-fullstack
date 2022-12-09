@@ -53,6 +53,8 @@ import {
   Fade,
   Tooltip,
   useBreakpoint,
+  Image,
+  Spinner,
 } from "@chakra-ui/react";
 
 import { wrap } from "popmotion";
@@ -94,7 +96,7 @@ import {
 
 // import Slider from "react-slick";
 
-import AwesomeSlider from "react-awesome-slider";
+// import AwesomeSlider from "react-awesome-slider";
 
 import { projects } from "~/utils/projects";
 
@@ -232,7 +234,7 @@ export default function Project() {
   const { height } = useWindowDimensions();
 
   return (
-    <SlideFade in={true} reverse delay={0.1}>
+    <SlideFade in={true} delay={0.1} unmountOnExit>
       <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="26px" w="full">
           <Heading textAlign="center">{data.project.name}</Heading>
@@ -390,7 +392,6 @@ export default function Project() {
                   borderRadius: "0.375rem",
                 }}
                 ref={sliderRefThumb}
-                cssMode={cssModeBreakpoint}
                 centerInsufficientSlides
               >
                 {media.map((value: any, index: any) => {
@@ -531,6 +532,7 @@ export default function Project() {
                     style={{
                       objectFit: "contain",
                       height: `${height}px`,
+                      width: "100%",
                     }}
                     initialSlide={sliderRef.current?.swiper.realIndex ?? 0}
                     lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
@@ -549,7 +551,10 @@ export default function Project() {
                   >
                     {media.map((value: any, index: any) => {
                       return (
-                        <SwiperSlide key={index}>
+                        <SwiperSlide
+                          key={index}
+                          style={{ height: `${height}px`, width: "100%" }}
+                        >
                           {value.image ? (
                             <Img
                               src={value.image + "/hq"}
@@ -560,9 +565,8 @@ export default function Project() {
                               maxH="full"
                               objectFit="contain"
                               draggable={false}
-                              // fallback={<Skeleton h={`${height}px`} w="full" />}
                               h={`${height}px`}
-                              crossOrigin="anonymous"
+                              // crossOrigin="anonymous"
                             />
                           ) : value.video ? (
                             <AspectRatio
@@ -687,58 +691,6 @@ export default function Project() {
                         </Text>
                       </Box>
                     )}
-
-                    {/* {data.project.categories && (
-                      <Box>
-                        <Stack
-                          alignItems={{ base: "flex-start", sm: "center" }}
-                          direction={{ base: "column", sm: "row" }}
-                        >
-                          <Tag size="lg" borderRadius="full">
-                            <Icon
-                              h={6}
-                              w={6}
-                              as={
-                                data.project.categories.length === 1
-                                  ? AiOutlineTag
-                                  : AiOutlineTags
-                              }
-                              ml={-1}
-                              mr={2}
-                            />
-                            <TagLabel fontSize="lg">
-                              {data.project.categories.length === 1
-                                ? "Category"
-                                : "Categories"}
-                            </TagLabel>
-                          </Tag>
-                          {data.project.categories.map(
-                            (value: any, index: any) => (
-                              <Badge key={index} colorScheme="teal">
-                                {value.tag}
-                              </Badge>
-                            )
-                          )}
-                        </Stack>
-
-                        <Text pl="1" pt="2" fontSize="xl">
-                          {data.project.categories.map(
-                            (value: any, index: any) => {
-                              let text = value.text;
-
-                              if (
-                                index + 1 !==
-                                data.project.categories.length
-                              ) {
-                                text += `, `;
-                              }
-
-                              return text;
-                            }
-                          )}
-                        </Text>
-                      </Box>
-                    )} */}
 
                     {data.project.category && (
                       <Box>

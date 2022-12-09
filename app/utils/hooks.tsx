@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export function useScrollButtonVisibility() {
   const [showButton, setShowButton] = useState(false);

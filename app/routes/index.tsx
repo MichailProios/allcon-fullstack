@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useRef, useState } from "react";
 import {
   Text,
   Button,
@@ -14,6 +14,17 @@ import {
   useColorModeValue,
   ButtonGroup,
   Stack,
+  Container,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Flex,
+  Heading,
+  Divider,
+  IconButton,
+  useBreakpointValue,
+  Avatar,
 } from "@chakra-ui/react";
 // import { useDataRefresh } from "remix-utils";
 import { BiBuildings, BiBook } from "react-icons/bi";
@@ -23,9 +34,14 @@ import { Link } from "@remix-run/react";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useWindowDimensions } from "~/utils/hooks";
-
+import { AnimatePresence, motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFade, Autoplay, Pagination } from "swiper";
+import { EffectFade, Autoplay, Pagination, Scrollbar } from "swiper";
+
+import { useInView } from "react-intersection-observer";
+import { ArrowForwardIcon, LinkIcon } from "@chakra-ui/icons";
+import { ImQuotesRight } from "react-icons/im";
+import { testimonials } from "~/utils/testimonials";
 
 export const loader: LoaderFunction = async ({ request }: any) => {
   try {
@@ -49,20 +65,47 @@ export const loader: LoaderFunction = async ({ request }: any) => {
     const greatneckRoofs =
       "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400/hq";
 
-    return [lupton, policeStation, nold, apt724, greatneckRoofs];
+    const companyThumbnail =
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b4fadc27-355f-443d-f1d2-a3efc3905200/thumbnail";
+
+    const greatneckRoofsThumbnail =
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400/thumbnail";
+
+    const officeThumbnail =
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/60f073c3-a567-471e-9bc6-9096dcc65500/thumbnail";
+
+    return {
+      slideShow: [lupton, policeStation, nold, apt724, greatneckRoofs],
+      images: { companyThumbnail, greatneckRoofsThumbnail, officeThumbnail },
+      testimonials: Array.from(testimonials.values()),
+    };
   } catch (error) {
     throw error;
   }
 };
 
 export default function Index() {
-  const { height } = useWindowDimensions();
+  // const { height, width } = useWindowDimensions();
 
-  const images = useLoaderData();
+  const data = useLoaderData();
+
+  const cardsView = useInView();
+
+  const testimonialsView = useInView();
+
+  const breakpointHeight = useBreakpointValue(
+    { base: "calc(100vh - 169px)", md: "calc(100vh - 64px)" },
+    { ssr: true }
+  );
+
+  const breakpointSlidesPerView = useBreakpointValue(
+    { base: 1, lg: 2 },
+    { fallback: "xmd", ssr: true }
+  );
 
   return (
-    <SlideFade in={true} reverse delay={0.1}>
-      <Box>
+    <SlideFade in={true} delay={0.1} unmountOnExit>
+      <Box position="relative">
         <Swiper
           autoplay={{
             delay: 5000,
@@ -74,23 +117,20 @@ export default function Index() {
           lazy={false}
           allowTouchMove={false}
           style={{
-            height: height ? `calc(${height}px - 64px)` : `calc(100vh - 64px)`,
+            height: breakpointHeight,
           }}
           pagination={{
             clickable: true,
           }}
         >
-          {images.map((img: any, index: any) => (
+          {data.slideShow.map((img: any, index: any) => (
             <SwiperSlide key={index}>
               <AspectRatio
                 ratio={16 / 9}
-                height={
-                  height ? `calc(${height}px - 64px)` : `calc(100vh - 64px)`
-                }
+                height={breakpointHeight}
                 overflow="hidden"
                 display="block"
                 lineHeight={0}
-                w="full"
                 h="full"
                 maxW="full"
                 maxH="full"
@@ -98,42 +138,22 @@ export default function Index() {
                 <Img
                   src={img}
                   alt={`Landing Page Image ${index}`}
-                  w="full"
+                  w={"full"}
                   h="full"
                   maxW="full"
                   maxH="full"
-                  // fallback={
-                  //   <AspectRatio
-                  //     ratio={16 / 9}
-                  //     height={
-                  //       height
-                  //         ? `calc(${height}px - 64px)`
-                  //         : `calc(100vh - 64px)`
-                  //     }
-                  //     overflow="hidden"
-                  //     display="block"
-                  //     lineHeight={0}
-                  //     w="full"
-                  //     h="full"
-                  //     maxW="full"
-                  //     maxH="full"
-                  //   >
-                  //     <Skeleton h="full" w="full" />
-                  //   </AspectRatio>
-                  // }
                   overflow="hidden"
                   display="block"
                   lineHeight={0}
                   filter={"brightness(75%)"}
                   draggable={false}
-                  loading="eager"
+                  loading="lazy"
                   crossOrigin="anonymous"
                 />
               </AspectRatio>
             </SwiperSlide>
           ))}
         </Swiper>
-        {/* </Slider> */}
         <VStack
           position="absolute"
           top="50%"
@@ -204,6 +224,279 @@ export default function Index() {
           </SlideFade>
         </VStack>
       </Box>
+
+      <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={20}>
+        <Stack
+          direction={{ base: "column", lg: "row" }}
+          gap={{ base: 2, xmd: 2, lg: 4 }}
+          w="full"
+        >
+          <motion.div
+            whileHover={{ scale: 1.01 }}
+            transition={{
+              type: "tween",
+              duration: 0.2,
+            }}
+            style={{ width: "100%" }}
+          >
+            <Card
+              variant="elevated"
+              rounded="md"
+              boxShadow="xl"
+              w="full"
+              as={Link}
+              to={"/about"}
+              draggable={false}
+            >
+              <CardBody p={0}>
+                <AspectRatio ratio={16 / 9} w="full">
+                  <Img
+                    src={data.images.companyThumbnail}
+                    alt="Company Group Picture"
+                    roundedTopLeft="md"
+                    roundedTopRight="md"
+                    w="full"
+                    loading="lazy"
+                    draggable={false}
+                  />
+                </AspectRatio>
+              </CardBody>
+              <CardFooter
+                w="full"
+                p={4}
+                m={0}
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Stack spacing="1">
+                  <Heading size="md">About</Heading>
+                  <Text>Learn more about our values</Text>
+                </Stack>
+                <ArrowForwardIcon />
+              </CardFooter>
+            </Card>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.01 }}
+            transition={{
+              type: "tween",
+              duration: 0.2,
+            }}
+            style={{ width: "100%" }}
+          >
+            <Card
+              variant="elevated"
+              rounded="md"
+              boxShadow="xl"
+              w="full"
+              as={Link}
+              to={"/projects"}
+              draggable={false}
+            >
+              <CardBody p={0}>
+                <AspectRatio ratio={16 / 9} w="full">
+                  <Img
+                    src={data.images.greatneckRoofsThumbnail}
+                    alt="Company Group Picture"
+                    roundedTopLeft="md"
+                    roundedTopRight="md"
+                    w="full"
+                    loading="lazy"
+                    draggable={false}
+                  />
+                </AspectRatio>
+              </CardBody>
+              <CardFooter
+                w="full "
+                p={4}
+                m={0}
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Stack spacing="1">
+                  <Heading size="md">Projects</Heading>
+                  <Text>Explore our portofolio</Text>
+                </Stack>
+                <ArrowForwardIcon />
+              </CardFooter>
+            </Card>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.01 }}
+            transition={{
+              type: "tween",
+              duration: 0.2,
+            }}
+            style={{ width: "100%" }}
+          >
+            <Card
+              variant="elevated"
+              rounded="md"
+              boxShadow="xl"
+              w="full"
+              h="full"
+              as={Link}
+              to={"/testimonials"}
+              draggable={false}
+            >
+              <CardBody p={0}>
+                <AspectRatio ratio={16 / 9} w="full">
+                  <Img
+                    src={data.images.officeThumbnail}
+                    alt="Company Group Picture"
+                    roundedTopLeft="md"
+                    roundedTopRight="md"
+                    w="full"
+                    draggable={false}
+                    loading="lazy"
+                  />
+                </AspectRatio>
+              </CardBody>
+              <CardFooter
+                w="full "
+                p={4}
+                m={0}
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Stack spacing="1">
+                  <Heading size="md">Resources</Heading>
+                  <Text>View company resources </Text>
+                </Stack>
+
+                <ArrowForwardIcon />
+              </CardFooter>
+            </Card>
+          </motion.div>
+        </Stack>
+      </Container>
+
+      <Divider />
+
+      <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={20}>
+        <VStack spacing="40px">
+          <Flex
+            flexDirection="row"
+            alignItems="center"
+            w="100%"
+            justifyContent="center"
+            gap={1}
+          >
+            <Heading textAlign="center">Trusted by our Clients</Heading>
+            <IconButton
+              variant="ghost"
+              borderRadius="full"
+              aria-label="Testimonials link"
+              icon={<LinkIcon />}
+              as={Link}
+              to="/testimonials"
+              draggable={false}
+            />
+          </Flex>
+          <Box
+            rounded="md"
+            bg="transparent"
+            boxShadow={"lg"}
+            w="full"
+            ref={testimonialsView.ref}
+          >
+            <Swiper
+              autoplay={{
+                delay: 6000,
+                disableOnInteraction: false,
+              }}
+              pagination={{
+                type: "progressbar",
+              }}
+              modules={[Autoplay, Pagination]}
+              loop
+              autoHeight
+              slidesPerView={breakpointSlidesPerView}
+              style={{
+                borderRadius: "0.375rem",
+              }}
+            >
+              {data.testimonials.map((value: any, index: any) => (
+                <SwiperSlide key={index}>
+                  <Card
+                    variant="elevated"
+                    rounded="none"
+                    h={{ base: "auto", sm: "250px" }}
+                    w="full"
+                  >
+                    <CardBody textAlign="justify">{value.content}</CardBody>
+
+                    <Divider />
+                    <CardFooter justify="space-between" alignItems="center">
+                      <HStack spacing={2}>
+                        <Avatar name={value.initials || value.name} />
+                        <Flex direction="column">
+                          <Text fontWeight="bold" fontSize="lg">
+                            {value.name}
+                          </Text>
+                          <Text fontSize="md" color="gray.500">
+                            {value.position}
+                          </Text>
+                        </Flex>
+                      </HStack>
+                      <Icon as={ImQuotesRight} w={8} h={8} />
+                    </CardFooter>
+                  </Card>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Box>
+        </VStack>
+      </Container>
+      <Divider />
+
+      <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={20}>
+        <Stack
+          direction={{ base: "column", md: "row" }}
+          spacing={5}
+          alignItems={{ base: "flex-start", md: "center" }}
+          justifyContent="space-between"
+          rounded="md"
+          boxShadow="xl"
+          bg={useColorModeValue("white", "gray.700")}
+          p={{ base: 8, md: 16 }}
+        >
+          <Box>
+            <Heading fontSize="3xl" lineHeight={1.2} fontWeight="bold">
+              Looking for more information?
+            </Heading>
+            <Text
+              fontSize="2xl"
+              lineHeight={1.2}
+              fontWeight="bold"
+              bgGradient="linear(to-l, #35a3a3,#018b8b)"
+              bgClip="text"
+            >
+              Send us a message
+            </Text>
+          </Box>
+          <Stack
+            direction={{ base: "column", sm: "row" }}
+            spacing={3}
+            w={{ base: "100%", sm: "auto" }}
+          >
+            <Button
+              variant="solid"
+              colorScheme="primary"
+              as={Link}
+              to="/contacts"
+              draggable={false}
+            >
+              Contact Us
+            </Button>
+            <Button variant="solid" as={Link} to="/about" draggable={false}>
+              Learn more
+            </Button>
+          </Stack>
+        </Stack>
+      </Container>
     </SlideFade>
   );
 }

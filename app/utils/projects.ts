@@ -665,38 +665,38 @@ projects
 
     cost: "Under $2,000,000.00",
     // designer: "Peter Gisolfi Associates",
-    description: `Work Included: <br/> 
-           &emsp; •	Demolition-existing kitchen and exterior walls
-          <br/>
-           &emsp; •	Excavation and back fill
-          <br/>
-           &emsp; •	Concrete, curbs, stairs, ramps etc.
-          <br/>
-           &emsp; •	Decorative concrete paving
-          <br/>
-           &emsp; •	Asphalt paving
-          <br/>
-           &emsp; •	Pre-fab steel
-          <br/>
-           &emsp; •	New masonry work
-          <br/>
-           &emsp; •	New windows
-          <br/>
-           &emsp; •	New roofing
-          <br/>
-           &emsp; •	Site and Exterior lighting
-          <br/>
-           &emsp; •	Lawns and grasses
-          <br/>
-           &emsp; •	Planting
-          <br/>
-           &emsp; •	Storm drainage utilities
-          <br/>
-           &emsp; •	Storm drainage piping
-          <br/>
-           &emsp; •	MEPs
+    //     description: `Work Included: <br/>
+    //            &emsp; •	Demolition-existing kitchen and exterior walls
+    //           <br/>
+    //            &emsp; •	Excavation and back fill
+    //           <br/>
+    //            &emsp; •	Concrete, curbs, stairs, ramps etc.
+    //           <br/>
+    //            &emsp; •	Decorative concrete paving
+    //           <br/>
+    //            &emsp; •	Asphalt paving
+    //           <br/>
+    //            &emsp; •	Pre-fab steel
+    //           <br/>
+    //            &emsp; •	New masonry work
+    //           <br/>
+    //            &emsp; •	New windows
+    //           <br/>
+    //            &emsp; •	New roofing
+    //           <br/>
+    //            &emsp; •	Site and Exterior lighting
+    //           <br/>
+    //            &emsp; •	Lawns and grasses
+    //           <br/>
+    //            &emsp; •	Planting
+    //           <br/>
+    //            &emsp; •	Storm drainage utilities
+    //           <br/>
+    //            &emsp; •	Storm drainage piping
+    //           <br/>
+    //            &emsp; •	MEPs
 
-`,
+    // `,
   })
   .set("500bridgewater", {
     sector: "public",

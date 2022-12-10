@@ -46,12 +46,12 @@ import { testimonials } from "~/utils/testimonials";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - Testimonials`,
-  description: `Allcon Contracting testionies from clients.`,
+  description: `Allcon Contracting testimonials from clients.`,
 
   "og:title": "Allcon Contracting - Testimonials",
   "og:type": "business",
   "og:site_name": "Allcon Contracting",
-  "og:description": `Allcon Contracting testionies from clients.`,
+  "og:description": `Allcon Contracting testimonials from clients.`,
   "og:image":
     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/60f073c3-a567-471e-9bc6-9096dcc65500/meta",
   "twitter:card":

@@ -70,15 +70,15 @@ export const loader: LoaderFunction = async ({ request }: any) => {
     const companyThumbnail =
       "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b4fadc27-355f-443d-f1d2-a3efc3905200/thumbnail";
 
-    const greatneckRoofsThumbnail =
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400/thumbnail";
+    const apt724Thumbnail =
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c71596c6-7bae-47c7-e4fa-868ba422a600/thumbnail";
 
     const officeThumbnail =
       "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/60f073c3-a567-471e-9bc6-9096dcc65500/thumbnail";
 
     return {
       slideShow: [lupton, policeStation, nold, apt724, greatneckRoofs],
-      images: { companyThumbnail, greatneckRoofsThumbnail, officeThumbnail },
+      images: { companyThumbnail, apt724Thumbnail, officeThumbnail },
       testimonials: Array.from(testimonials.values()),
     };
   } catch (error) {
@@ -91,8 +91,6 @@ export default function Index() {
 
   const data = useLoaderData();
 
-  const cardsView = useInView();
-
   const testimonialsView = useInView();
 
   const breakpointHeight = useBreakpointValue(
@@ -102,7 +100,17 @@ export default function Index() {
 
   const breakpointSlidesPerView = useBreakpointValue(
     { base: 1, lg: 2 },
+    { fallback: "base", ssr: true }
+  );
+
+  const breakpointInitialSlide = useBreakpointValue(
+    { base: 1, lg: 1 },
     { fallback: "lg", ssr: true }
+  );
+
+  const cssModeBreakpoint = useBreakpointValue(
+    { base: true, md: false },
+    { ssr: false }
   );
 
   return (
@@ -311,7 +319,7 @@ export default function Index() {
               <CardBody p={0}>
                 <AspectRatio ratio={16 / 9} w="full">
                   <Image
-                    src={data.images.greatneckRoofsThumbnail}
+                    src={data.images.apt724Thumbnail}
                     alt="Company Group Picture"
                     roundedTopLeft="md"
                     roundedTopRight="md"
@@ -353,7 +361,7 @@ export default function Index() {
               w="full"
               h="full"
               as={Link}
-              to={"/testimonials"}
+              to={"/resources"}
               draggable={false}
             >
               <CardBody p={0}>
@@ -412,17 +420,19 @@ export default function Index() {
               }}
               modules={[Autoplay, Pagination]}
               loop
+              cssMode={cssModeBreakpoint}
               slidesPerView={breakpointSlidesPerView}
               style={{
                 borderRadius: "0.375rem",
               }}
+              initialSlide={breakpointInitialSlide}
             >
               {data.testimonials.map((value: any, index: any) => (
                 <SwiperSlide key={index}>
                   <Card
                     variant="elevated"
                     rounded="none"
-                    h={{ base: "348px", sm: "250px" }}
+                    h={{ base: "420px", sm: "250px" }}
                     w="full"
                   >
                     <CardBody textAlign={{ base: "start", sm: "justify" }}>
@@ -474,7 +484,7 @@ export default function Index() {
               w="full"
               textAlign={{ base: "center", md: "start" }}
             >
-              Ready to connect?
+              Looking to connect with us?
             </Heading>
             <Text
               fontSize="2xl"
@@ -485,7 +495,7 @@ export default function Index() {
               textAlign={{ base: "center", md: "start" }}
               w="full"
             >
-              Send us a message
+              Visit our contact us page to get in touch
             </Text>
           </Flex>
           <Stack

@@ -162,7 +162,10 @@ function NavbarHeader({
         ? 0
         : location?.pathname.includes("/projects")
         ? 1
-        : location?.pathname.includes("/testimonials")
+        : location?.pathname.includes("/resources") ||
+          location?.pathname.includes("/testimonials") ||
+          location?.pathname.includes("/blog") ||
+          location?.pathname.includes("/awards")
         ? 2
         : location?.pathname.includes("/contacts")
         ? 3
@@ -385,7 +388,10 @@ function NavbarDrawer({
         ? 0
         : location?.pathname.includes("/projects")
         ? 1
-        : location?.pathname.includes("/testimonials")
+        : location?.pathname.includes("/resources") ||
+          location?.pathname.includes("/testimonials") ||
+          location?.pathname.includes("/blog") ||
+          location?.pathname.includes("/awards")
         ? 2
         : location?.pathname.includes("/contacts")
         ? 3
@@ -481,7 +487,7 @@ function NavbarPopover({ link, index }: any) {
   const timer = () => {
     timeout = setTimeout(() => {
       onClose();
-    }, 300);
+    }, 100);
   };
 
   function closePopover() {

@@ -379,10 +379,10 @@ export default function Project() {
                   return (
                     <SwiperSlide key={index}>
                       <motion.div
-                        whileHover={{ scale: 1.02, cursor: "pointer" }}
+                        whileHover={{ scale: 1.01, cursor: "pointer" }}
                         transition={{
                           type: "tween",
-                          duration: 0.2,
+                          duration: 0.1,
                         }}
                         key={index}
                       >

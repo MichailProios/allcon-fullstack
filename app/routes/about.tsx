@@ -68,32 +68,17 @@ export default function About() {
       <Container maxW="1200px" px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="26px">
           <Heading textAlign="center">About Us</Heading>
-          <VStack>
+          <VStack spacing="26px">
             <Text fontSize="xl" textAlign={{ base: "start", sm: "justify" }}>
-              Allcon Contracting is built on a reputation of delivering high
-              quality projects serving a variety of private and public clients
-              throughout New York State.
-              <br />
-              <br /> Our Executive Management understands that teamwork, which
-              includes hands on involvement of the owners, guarantees that all
-              projects are completed on time and on budget. Allcon's staff is
-              always meticulous with the details of each project and they
-              continuously strive to go the extra mile and deliver quality
-              results. From architects, planners, designers, and construction
-              specialists, everyone works in a collaborative environment
-              bringing forth their unique talent and techniques.
-              <br />
-              <br />
-              Our Executive Management understands that teamwork, which includes
-              hands on involvement of the owners, guarantees that all projects
-              are completed on time and on budget. Allcon's staff is always
-              meticulous with the details of each project and they continuously
-              strive to go the extra mile and deliver quality results. From
-              architects, planners, designers, and construction specialists,
-              everyone works in a collaborative environment bringing forth their
-              unique talent and techniques.
-              <br />
-              <br />
+              Allcon Contracting is a renowned provider of high-quality
+              construction services to private and public clients across New
+              York State. Our executive team prioritizes teamwork and hands-on
+              involvement to ensure that all projects are completed efficiently
+              and within budget. Our dedicated staff is meticulous in their
+              attention to detail and consistently goes the extra mile to
+              deliver exceptional results. Our team of architects, planners,
+              designers, and construction specialists work collaboratively to
+              bring their unique talents and expertise to every project.
             </Text>
             <AspectRatio ratio={{ base: 4 / 3, md: 16 / 9 }} w="full">
               <Image

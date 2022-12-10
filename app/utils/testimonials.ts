@@ -34,14 +34,7 @@ testimonials
               professional. I would not hesitate recommending your company to
               others.`,
   })
-  .set("edwardl.rose", {
-    name: "Edward L. Rose",
-    initials: "E R",
-    position: "Apt 53B Client",
-    content: `At the end of the day, I knew exactly what I was paying for –
-              without hidden costs or add-ons – and I was extremely satisfied
-              with the results.`,
-  })
+
   .set("robertasandemen", {
     name: "Roberta Sandemen",
     position: "470 Park Avenue",
@@ -52,7 +45,7 @@ testimonials
   .set("terris.triades", {
     name: "Terri S. Triades",
     initials: "T T",
-    position: "MERI TRIADES",
+    position: "Meri Triades",
     content: `The employees are extremely professional. All work performed has
               been first-rate. I use this company almost exclusively for any
               construction related work.`,
@@ -68,4 +61,12 @@ testimonials
     position: "Thylan Associates Inc. Real Estate and Corporate",
     content: `I recommend Allcon Contracting because they are reliable,
               responsive, and dependable.`,
+  })
+  .set("edwardl.rose", {
+    name: "Edward L. Rose",
+    initials: "E R",
+    position: "Apt 53B Client",
+    content: `At the end of the day, I knew exactly what I was paying for –
+              without hidden costs or add-ons – and I was extremely satisfied
+              with the results.`,
   });

@@ -47,19 +47,16 @@ const navigationLinks = [
       { label: "Other", url: "/projects?category=other" },
     ],
   },
+
   {
-    label: "Testimonials",
-    url: "testimonials",
+    label: "Resources",
+    url: "resources",
+    subLinks: [
+      { label: "Blog", url: "/blog" },
+      { label: "Awards", url: "/awards" },
+      { label: "Testimonials", url: "/testimonials" },
+    ],
   },
-  // {
-  //   label: "Resources",
-  //   url: "resources",
-  //   subLinks: [
-  //     { label: "Awards", url: "/resources/awards" },
-  //     { label: "Community", url: "/resources/community" },
-  //     { label: "Testimonials", url: "/resources/testimonials" },
-  //   ],
-  // },
   { label: "Contacts", url: "contacts" },
 ];
 

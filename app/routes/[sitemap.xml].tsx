@@ -21,6 +21,15 @@ export const loader = () => {
                 <loc>https://allconcontracting.com/projects</loc>
             </url>
              <url>
+                <loc>https://allconcontracting.com/resources</loc>
+            </url>
+            <url>
+                <loc>https://allconcontracting.com/blog</loc>
+            </url>
+             <url>
+                <loc>https://allconcontracting.com/awards</loc>
+            </url>
+             <url>
                 <loc>https://allconcontracting.com/testimonies</loc>
             </url>
              <url>

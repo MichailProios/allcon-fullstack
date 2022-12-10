@@ -102,20 +102,7 @@ projects
     status: { text: "The project was finished in 2022", completed: true },
     cost: "$10,856,274.00",
     designer: "Hoffmann Architects, Inc.",
-    description: `  Allcon constructed this uniquely designed 90,000sf copper roof which now
-        transforms Lupton Hall into a landmark for the SUNY Farmingdale Campus.
-        Allcon proposed and helped developed a distinctive structural design
-        during the initial removal and abatement stages of the project. The
-        structural design included a high gauge metal framing system that
-        bypasses the concrete deck and attaches to the existing framing
-        structure with blind bolts. Craftsmanship is found throughout the roof
-        from the artfully fabricated dormers to the carefully sculpted gutter
-        system designed to withstands wind speed up to 126 mph. Allcon made sure
-        that the copper fabrication was a mix of machine fabrication for the
-        panels to control cost and hard created units for the fine intricate
-        detail work. This inspiration assignment is not just a showcase project
-        for Allcon but a signature piece of work for Farmingdale’s dedication to
-        excellence on campus.`,
+    description: `Allcon constructed a unique 90,000sf copper roof for Lupton Hall on the SUNY Farmingdale Campus. Our team proposed and helped develop a distinctive structural design during the initial removal and abatement stages of the project. The design included a high gauge metal framing system that bypassed the concrete deck and attached to the existing framing structure with blind bolts. The roof features a range of intricate craftsmanship, from the artfully fabricated dormers to the carefully sculpted gutter system designed to withstand wind speeds up to 126 mph. We ensured that the copper fabrication used a mix of machine fabrication for the panels to control costs, along with hand-crafted units for the fine intricate detail work. This project is a showcase of Allcon's capabilities and a signature piece of work for Farmingdale's dedication to excellence on campus.`,
   })
   .set("ogs-dot-elwood-ny-operation-facility", {
     sector: "public",
@@ -249,20 +236,7 @@ projects
     status: { text: "The project was finished in 2022", completed: true },
     cost: "$7,000,000",
     designer: "Kallen & Lemelson, LLP",
-    description: `Allcon Contracting was selected as the general contractor for the
-          construction of a new DOT Operation Facility in Elwood, NY. The project
-          included the restoration of an existing salt shed, the construction of a
-          new heavy timer shed, new vehicle service and storage building as well
-          as the new operations office. Allcon performed more than 60% of the
-          general contracting work on this project which included interior
-          finishes, masonry, millwork, and metal panel installation. We worked
-          closely with Laland Baptiste who served as the CM on the project. Both
-          companies built on a spirit of collaboration to make sure a     building was assembled for both NYS OGS the contract manager and the NYS
-          Department of Transportation. This was the second project collaboration
-          between Allcon and Laland Baptiste and that team spirit proved
-          invaluable at addressing unforeseen field conditions, addressing issues
-          as they arose and maintain both schedule constraints and budgetary
-          limitations.`,
+    description: `Allcon Contracting was selected as the general contractor for the construction of a new DOT Operations Facility in Elwood, NY. The project included the restoration of an existing salt shed, the construction of a new heavy timber shed, and a new vehicle service and storage building, as well as the new operations office. Allcon performed more than 60% of the general contracting work on this project, including interior finishes, masonry, millwork, and metal panel installation. We worked closely with Laland Baptiste, who served as the CM on the project. Our collaborative approach ensured that the building was completed on time and within budget, while addressing any unforeseen field conditions and issues that arose. This was the second project collaboration between Allcon and Laland Baptiste, and our teamwork proved invaluable in delivering a successful project.`,
   })
   .set("sca-fiorello-laguardia-highschool", {
     sector: "public",
@@ -287,7 +261,8 @@ projects
     status: { text: "The project is in progress", completed: false },
     cost: null,
     designer: null,
-    description: "Upgrade of the highschool's theater shop.",
+    description:
+      "Allcon Contracting has been selected by the School Construction Authority as the general contractor for a project involving the upgrade of the Fiorello H. LaGuardia High School's theater shop. Our team is working closely with the school and the construction manager to ensure that the theater shop is modernized and meets the latest standards for performance spaces. This project is an important part of maintaining the school's infrastructure and ensuring that it remains a top-quality learning environment for students. We are committed to completing this project on time and within budget, and to providing the Fiorello H. LaGuardia High School with a state-of-the-art theater shop that will be a valuable resource for the school community.",
   })
   .set("sca-ps146-edward-collins", {
     sector: "public",
@@ -313,7 +288,7 @@ projects
     cost: null,
     designer: null,
     description:
-      "Full program accesibility and low voltage electrical system work.",
+      "Allcon Contracting has been selected by the School Construction Authority as the general contractor for a project involving full program accessibility and low voltage electrical system work at the SCA PS 146 Edward Collins Elementary School. Our team is working closely with the school and the construction manager to ensure that all accessibility requirements are met and that the electrical system is upgraded to meet the latest standards. This project is an important step in making the school more accessible and inclusive for all students, and we are committed to completing it on time and within budget. We are proud to be working with the School Construction Authority on this important project, and to be providing the Edward Collins Elementary School with a modern and functional learning environment.",
   })
   .set("suny-old-westbury-campus-center", {
     sector: "public",
@@ -338,7 +313,7 @@ projects
     status: { text: "The project is in progress", completed: false },
     // cost: "$10,856,274.00",
     // designer: "Hoffmann Architects, Inc.",
-    description: `Campus center ADA upgrades.`,
+    description: `Allcon Contracting has been selected by the State University Construction Fund as the general contractor for a project involving campus center ADA upgrades at the SUNY Old Westbury Campus Center. Our team is working closely with the university and the construction manager to ensure that the campus center is fully accessible to all students, faculty, and staff. This involves a range of upgrades, including the installation of new ramps, elevators, and accessibility features throughout the building. We are committed to completing this project on time and within budget, and to providing the university with a fully accessible campus center that meets the needs of all members of the community. The upgraded SUNY Old Westbury Campus Center will be a state-of-the-art facility that provides accessibility and inclusivity for all.`,
   })
   .set("sca-psis218-rafael-hernandez", {
     sector: "public",
@@ -364,7 +339,7 @@ projects
     cost: null,
     designer: null,
     description:
-      "Roofs, exterior masonry, parapets, and flood elimination work.",
+      "Allcon Contracting has been selected by the School Construction Authority as the general contractor for a project involving roof, exterior masonry, parapet, and flood elimination work at the SCA PS/IS 218 Rafael Hernandez Magnet School. Our team is working closely with the school and the construction manager to ensure that the roof, masonry, and parapets are in good condition and that the building is protected from future flooding. This project is an important part of maintaining the school's infrastructure and ensuring that it remains safe and functional for students and staff. We are committed to completing this project on time and within budget, and to providing the Rafael Hernandez Magnet School with a safe and secure building. The upgraded school will be a state-of-the-art facility that provides a safe and secure learning environment for students.",
   })
   .set("greatneck-terrace-roofs", {
     sector: "public",
@@ -438,31 +413,13 @@ projects
     name: "LIRR Hillside Support Facility Building",
     location:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.5732468037418!2d-73.78051308255615!3d40.70644529999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c261161959744f:0x9faba07c1564d147!2sHillside%20Support%20Facility!5e1!3m2!1sen!2sus!4v1670282230897!5m2!1sen!2sus",
-    client: null,
+    client: { text: "Metropolitan Transportation Authority", tag: "MTA" },
     status: { text: "The project is finshed", completed: true },
 
     category: { text: "Other miscellaneous projects", tag: "other" },
     cost: "Between $2,000,000.00 and $2,800,000.00",
     designer: null,
-    description: `Work Included: <br/> 
-           &emsp;	•	Sounding of entire facade
-          <br/>
-          &emsp;	•	Masonry
-          <br/>
-           &emsp;	•	Interior partitions and finishes
-          <br/>
-           &emsp;	•	Rough and finished carpentry
-          <br/>
-           &emsp;	•	Springler system
-          <br/>
-           &emsp;	•	Fire alarm system
-          <br/>
-           &emsp;	•	HVAC new units
-          <br/>
-           &emsp;	•	Electrical
-          <br/>
-           &emsp;	•	Plumbing
-`,
+    description: `Allcon Contracting was selected to perform a variety of tasks at the LIRR Hillside Support Facility Building for the Metropolitan Transportation Authority. Our team was responsible for sounding of the entire facade, masonry work, installation of interior partitions and finishes, rough and finished carpentry, installation of a sprinkler system, work on the fire alarm, HVAC, electrical, and plumbing systems. We worked closely with the MTA and the construction manager to ensure that our work was completed to the highest standards and met all of the agency's requirements. We were committed to completing our tasks on time and within budget, and we are proud of the final result. `,
   })
   .set("suny-farmingdale-laffin-hall", {
     sector: "public",
@@ -493,17 +450,7 @@ projects
     status: { text: "The project is finished", completed: true },
     cost: "Under $1,000,000.00",
     // designer: "Hoffmann Architects, Inc.",
-    description: `Work Included: <br/> 
-           &emsp;	•	Sounding of entire facade
-          <br/>
-           &emsp; •	Concrete structural repair both columns and overhead (CONPROCO)
-          <br/>
-           &emsp; •	Concrete crack repairs, crack injection all areas (CONPROCO)
-          <br/>
-           &emsp;	•	Existing steel rust treatment (CONPROCO)
-          <br/>
-           &emsp;	•	Power wash
-`,
+    description: `Allcon Contracting was selected to complete a variety of tasks on the renovation of Laffin Hall at SUNY Farmingdale for the State University Construction Fund. Our team was responsible for the sounding of the entire facade, concrete structural repair of columns and overhead, concrete crack repairs, crack injection, rust treatment of existing steel, and power washing. We worked closely with SUNY Farmingdale and the construction manager to ensure that our work met all of the university's requirements and was completed on time and within budget. We are proud of the final result, which has transformed Laffin Hall into a modern and functional building.`,
   })
   .set("rockville-centre-police", {
     sector: "public",
@@ -569,20 +516,7 @@ projects
     cost: "$2,344,107.00",
     designer: "H2M Architects",
     description: `
-          ALLCON’s was selected to construct a new state of the art Police
-          headquarters for the Village of Rockville Center located at the former
-          Municipal Water Dept. building. The new facility replaced the old,
-          outdated, and cramped facility located on Maple Avenue. ALLCON’s work
-          included demolition of all interior components and asbestos abatement.
-          The construction included new CMU walls, stud framed walls, and ACT
-          ceilings. The team also built new secure holding cells and sally ports.
-          Our flooring experts installed a combination of carpet, LVT, and ceramic
-          tiles throughout. The Allcon team manufactured and installed custom
-          millwork counters throughout the facility. New wood doors, wood-clad
-          windows, and roll-up gates were installed to rejuvenate the building’s
-          exterior and provide the necessary security. Lastly, exterior new
-          signage and aluminum metal panels were installed, as well as a handicap
-          lift to provide needed public access to the facilty.
+          Allcon was selected to construct a state-of-the-art police headquarters for the Village of Rockville Center. The new facility replaced the outdated and cramped old building. Allcon's work included demolition and asbestos abatement, as well as the construction of new CMU walls, stud-framed walls, and ACT ceilings. The team also built new secure holding cells and sally ports. Allcon's flooring experts installed a combination of carpet, LVT, and ceramic tiles throughout the facility. Custom millwork counters were also manufactured and installed by the Allcon team. New wood doors, windows, and roll-up gates were installed to improve the building's exterior and provide security. Exterior signage, aluminum metal panels, and a handicap lift were also added to provide needed public access.
         `,
   })
   .set("ogs-creedmoor-psychiatric-center", {
@@ -608,7 +542,7 @@ projects
     },
 
     status: { text: "The project is finished", completed: true },
-    description: `Provide lobby & security office renovations`,
+    description: `Allcon was selected by the NYS Office of General Services to perform lobby and security office renovations at the OGS Creedmoor Psychiatric Center. Our team was responsible for the demolition and removal of existing finishes and fixtures. Additionally, we installed a new security system. The project was completed on time and within budget, resulting in a modern lobby and security office for the facility.`,
   })
   .set("ogs-army-support-facility", {
     sector: "public",
@@ -633,7 +567,7 @@ projects
     },
 
     status: { text: "The project is finished", completed: true },
-    description: `Administrative office repairs`,
+    description: `Allcon Contracting was selected to provide repairs to the administrative offices at the NYS Office of General Services Army Support Facility. Our team worked closely with OGS to complete the project on time and within budget. The end result was a modern and functional workspace for the facility's administrative staff.`,
   })
   .set("suny-farmingdale-nold-hall-entry", {
     sector: "public",
@@ -665,38 +599,7 @@ projects
 
     cost: "Under $2,000,000.00",
     // designer: "Peter Gisolfi Associates",
-    //     description: `Work Included: <br/>
-    //            &emsp; •	Demolition-existing kitchen and exterior walls
-    //           <br/>
-    //            &emsp; •	Excavation and back fill
-    //           <br/>
-    //            &emsp; •	Concrete, curbs, stairs, ramps etc.
-    //           <br/>
-    //            &emsp; •	Decorative concrete paving
-    //           <br/>
-    //            &emsp; •	Asphalt paving
-    //           <br/>
-    //            &emsp; •	Pre-fab steel
-    //           <br/>
-    //            &emsp; •	New masonry work
-    //           <br/>
-    //            &emsp; •	New windows
-    //           <br/>
-    //            &emsp; •	New roofing
-    //           <br/>
-    //            &emsp; •	Site and Exterior lighting
-    //           <br/>
-    //            &emsp; •	Lawns and grasses
-    //           <br/>
-    //            &emsp; •	Planting
-    //           <br/>
-    //            &emsp; •	Storm drainage utilities
-    //           <br/>
-    //            &emsp; •	Storm drainage piping
-    //           <br/>
-    //            &emsp; •	MEPs
-
-    // `,
+    description: `Allcon Contracting was selected to renovate the entryway of Nold Hall at SUNY Farmingdale. The project included installation of new landscaping, including lawns and grasses, as well as planting. The team also installed new storm drainage utilities and piping, as well as new MEPs (mechanical, electrical, and plumbing) systems. The project was completed on time and within budget, resulting in a modern and functional entryway for the building.`,
   })
   .set("500bridgewater", {
     sector: "public",
@@ -800,19 +703,7 @@ projects
     category: { text: "Other miscellaneous projects", tag: "other" },
     cost: "$15M",
     designer: "Purcell Architects P.C.",
-    description: `Located along the boardwalk of Brighton Beach Brooklyn and just 300 feet
-        from the Ocean waters, this project was required as a result of sever
-        damages incurred during Superstorm Sandy. Allcon constructed two 3,000
-        sf infrastructure building additions on top of the existing parking
-        structure/ promenade to house the facilities new boilers, hot water
-        heaters, electrical services, and new generator system. This 18 story,
-        192-unit apartment building for the elderly was fully occupied during
-        construction and required extensive coordination between Allcon and the
-        construction manager. Complete window and balcony door replacement was
-        required as well as over 15,000 sf of built-up roofing and 35,000 sf of
-        unit pavers throughout the building. Through close collaboration with
-        the CM and building occupants Allcon was able to complete this project
-        ahead of schedule.`,
+    description: `Allcon Contracting was selected to construct two 3,000 square foot infrastructure building additions on top of the existing parking structure/promenade at the Brighton Beach Brooklyn boardwalk, located just 300 feet from the ocean. This project was necessary due to severe damages incurred during Superstorm Sandy. Allcon's work included the construction of new facilities to house boilers, hot water heaters, electrical services, and a new generator system. The 18-story, 192-unit apartment building for seniors was fully occupied during construction, requiring extensive coordination between Allcon and the construction manager. The project also included the replacement of all windows and balcony doors, as well as the installation of over 15,000 square feet of built-up roofing and 35,000 square feet of unit pavers throughout the building. Through collaboration and efficient work, Allcon was able to complete the project ahead of schedule.`,
   })
   .set("suny-farmingdale-knapp-hall", {
     sector: "public",
@@ -843,21 +734,7 @@ projects
     status: { text: "The project is finished", completed: true },
     cost: "Under $3,000,000.00",
     // designer: "Hoffmann Architects, Inc.",
-    description: `Work Included: <br/> 
-           &emsp;	•	Demo of existing basement kitchen, and exterior walls
-          <br/>
-           &emsp; •	Concrete
-          <br/>
-           &emsp; •	New masonry walls
-          <br/>
-           &emsp;	•	Structural steel
-          <br/>
-           &emsp;	•	New roofing
-          <br/>
-           &emsp;	•	MEPs
-          <br/>
-           &emsp;	•	Exterior improvements
-`,
+    description: `Allcon Contracting was selected as the general contractor for the construction of the Knapp Hall at SUNY Farmingdale. Our scope of work included the demolition of the existing basement kitchen and exterior walls, as well as the installation of new concrete and masonry walls, structural steel, roofing, MEPs, and exterior improvements. Through careful coordination and collaboration with the construction manager and other project stakeholders, we were able to complete the project on time and to the satisfaction of the client.`,
   })
   .set("apartment724", {
     thumbnail:
@@ -939,23 +816,9 @@ projects
     },
     status: { text: "The project was finished in 2017", completed: true },
 
-    cost: "$2.5M",
+    cost: "$2,500,000.00",
     designer: "Peter Gisolfi Associates",
-    description: `Allcon was selected by the State University Construction Fund to
-        transform Nold Hall’s Gymnasium for the State University of New York
-        College of Technology at Farmingdale. The work was completed within the
-        occupied structure and was sequenced to minimize impact of the schools’
-        operations. Allcon carefully demolished the existing sports floor,
-        bleacher systems, sports equipment and press box as well as removed
-        unsuitable fill materials below the existing slab. They worked with the
-        design team to install a new recessed slab to contain a state-of-the-art
-        wood and urethane sports flooring system. The new floors accommodate the
-        variety of sports that take place in the facility from basketball,
-        volleyball and track. Allcon provided modifications to the existing
-        sprinkler system and electrical upgrade to accommodate the revised gym
-        layout and upgraded sports equipment installed. As part of the contract
-        work Allcon installed native landscaping and a decorative concrete
-        walkway and plaza that rejuvenates Nold Hall’s Main Entry.`,
+    description: `Allcon Contracting was selected by the State University Construction Fund to transform Nold Hall’s Gymnasium for the State University of New York College of Technology at Farmingdale. The project was completed within the occupied structure, carefully executed to minimize the impact on the school’s operations. Allcon demolished the existing sports floor, bleacher systems, sports equipment, and press box as well as removed unsuitable fill materials below the existing slab. Working with the design team, they installed a new recessed slab and state-of-the-art wood and urethane sports flooring system that accommodates a range of sports, including basketball, volleyball, and track. Allcon also provided modifications to the existing sprinkler system and electrical upgrade to support the revised gym layout and upgraded sports equipment. As part of the contract, Allcon installed native landscaping and a decorative concrete walkway and plaza, enhancing the overall aesthetic of Nold Hall’s Main Entry.`,
   })
   .set("saint-demetrios-church", {
     sector: "public",
@@ -1052,11 +915,7 @@ projects
 
     cost: "$2,500,000.00",
     designer: null,
-    description: `As part of a multiphase project for Saint Demetrios Greek Orthodox
-        Church, Allcon was selected as the General Contractor for the first
-        phase. Allcon performed the demolition and site clearing/preparation of
-        existing adjacent houses and garages acquired by the church to expand
-        its site and it service to the South Nassau Hellenic Community.`,
+    description: `Allcon Contracting was selected as the general contractor for the first phase of a multiphase project for Saint Demetrios Greek Orthodox Church. This phase involved the demolition and site clearing/preparation of existing adjacent houses and garages acquired by the church to expand its site and provide services to the South Nassau Hellenic Community. Allcon's team carefully demolished and cleared the site, ensuring minimal impact on the surrounding area and the church's ongoing operations.`,
   })
   .set("success-academy-schools", {
     sector: "public",
@@ -1092,20 +951,7 @@ projects
     cost: "$5,000,000+",
     designer: null,
     description: `
-          Allcon was selected by Success Academy Charter Schools as the General
-          Contractor to complete full renovations of interior spaces throughout
-          the school system. The projects were done at an extremely rapid pace at
-          multiple facilities and required quick mobilization of the work force
-          and constant coordination between Allcon, the owner and design team to
-          meet the 4 week completion schedule. The collaborative approach between
-          these parties was a major component for the programs success. Allcon
-          worked with suppliers to obtain and secure materials in advance of the
-          actual work starting. Allcon was able to secure what are typically long
-          lead items by preplanning the construction and preparing deliveries
-          prior to the summer period when work was required to be completed. Over
-          a period of five years Allcon delivered state of the art classroom
-          spaces which included mechanical, electrical and plumbing systems
-          upgrades.
+          Allcon Contracting was selected by Success Academy Charter Schools as the General Contractor to complete full renovations of interior spaces at multiple facilities throughout the school system. The project required quick mobilization and constant coordination between Allcon, the owner, and the design team to meet the tight four-week completion schedule. Allcon's collaborative approach with suppliers allowed them to secure materials in advance and prepare deliveries prior to the summer period when work was required to be completed. Over a period of five years, Allcon delivered state-of-the-art classroom spaces, including upgrades to mechanical, electrical, and plumbing systems.
         `,
   })
   .set("bareburger", {
@@ -1156,23 +1002,7 @@ projects
 
     cost: "$300,000+",
     designer: "Theta Design",
-    description: `Allcon was selected as the General Contractor to complete this full
-        renovation/interior fit-out for this Bareburger Establishment. Since the
-        project was being conducted along a busy NYC street, pedestrian
-        protection was planned and installed to a secure work site and assure
-        efficient access to complete the work on a tight time schedule. Allcon
-        modified the existing structure by removing a n existing stair and
-        installing new wood joist and subfloor. A decorative tin ceiling was
-        installed by Allcon craftsmen and reclaimed wood planks were fitted
-        throughout the restaurant. Fire rated materials were installed in-order
-        to establish the required fire rating between the first-floor restaurant
-        and residential apartments above. Masonry openings were modified to
-        provide the required access to both the restaurant and apartments above.
-        Allcon provided all the required MEP systems, filtration and Fire
-        Protection required for the fit-out and installed all furniture and
-        equipment through close coordination with the owner. This project was
-        the first of two Bareburger restaurant projects successfully completed
-        by Allcon.`,
+    description: `Allcon was selected as the General Contractor to complete a full renovation/interior fit-out for a Bareburger establishment. In order to complete the work on a tight schedule, Allcon implemented pedestrian protection along a busy NYC street and modified the existing structure by removing an existing stair and installing new wood joists and subfloor. The restaurant was fitted with a decorative tin ceiling and reclaimed wood planks, and fire-rated materials were installed to establish the required fire rating between the first-floor restaurant and residential apartments above. Allcon also provided all the necessary MEP systems, filtration, and fire protection for the fit-out and installed all furniture and equipment through close coordination with the owner. This project was the first of two Bareburger restaurant projects successfully completed by Allcon.`,
   })
   //   .set("westbury-cultural-arts-center", {
   //     sector: "public",
@@ -1280,9 +1110,8 @@ projects
     category: { text: "Other miscellaneous projects", tag: "other" },
     cost: null,
     designer: null,
-    description: `Complete interior renovation. Work included demolition, carpentry,
-        tiles, flooring rough carpentry, painting, electrical, plumbing, and
-        HVAC.`,
+    description: `Allcon Contracting was responsible for the complete interior renovation of the Williston Animal Hospital
+ building. Our scope of work included demolition, carpentry, tiles, flooring, rough carpentry, painting, electrical, plumbing, and HVAC. We worked closely with the client to ensure that the project was completed on time and within budget. The end result was a beautifully renovated space that exceeded the client's expectations.`,
   })
   .set("255west", {
     sector: "public",
@@ -1319,7 +1148,7 @@ projects
     category: { text: "Exterior work", tag: "exterior" },
     cost: null,
     designer: null,
-    description: `Work consisted of exterior renovation Local Law 11.`,
+    description: `Allcon Contracting was selected as the General Contractor for the exterior renovation of the 255 West 108th Street building under the Local Law 11. The project was successfully completed, resulting in a refreshed and modern building exterior.`,
   })
   .set("20east", {
     sector: "public",
@@ -1356,7 +1185,7 @@ projects
     category: { text: "Exterior work", tag: "exterior" },
     cost: null,
     designer: null,
-    description: `Work consisted of exterior renovation Local Law 11.`,
+    description: `Allcon Contracting has been selected as the general contractor for the exterior renovation of the 20 East 9th Street building, in compliance with Local Law 11. The project is underway and will result in a modern and refreshed exterior for the building.`,
   })
   .set("upper-east-veterinary", {
     sector: "public",
@@ -1404,9 +1233,7 @@ projects
     category: { text: "Other miscellaneous projects", tag: "other" },
     cost: null,
     designer: null,
-    description: `Complete interior renovation. Work included demolition, carpentry,
-        tiles, flooring rough carpentry, painting, electrical, plumbing, and
-        HVAC.`,
+    description: `Allcon Contracting was selected for a complete interior renovation project at the Upper East Side Veterinary Hospital. The scope of work included demolition of existing finishes, carpentry work for new framing and trim, installation of tile and flooring, rough carpentry for HVAC and electrical systems, painting of all surfaces, and installation of new plumbing and electrical fixtures. The team at Allcon worked efficiently and effectively to complete the project on time and within budget, resulting in a beautifully updated interior space.`,
   })
   .set("carle-place-auditorium", {
     sector: "public",
@@ -1454,9 +1281,7 @@ projects
     category: { text: "Other miscellaneous projects", tag: "other" },
     cost: null,
     designer: null,
-    description: `Interior renovation of existing Auditorium, Work included complete
-        demolition, carpentry, concrete work, new wall and ceiling paneling and
-        system. Painting and complete finish work.`,
+    description: `Allcon Contracting was selected as the general contractor for the interior renovation of the existing auditorium at Carle Place UFSD. The scope of work included a complete demolition of the space, followed by new carpentry, concrete work, and installation of new wall and ceiling paneling and systems. The team also completed all necessary painting and finish work to complete the project. The end result was a fully renovated auditorium with modern features and finishes.`,
   })
   .set("carle-place-lobby", {
     sector: "public",
@@ -1596,9 +1421,7 @@ projects
     category: { text: "Other miscellaneous projects", tag: "other" },
     cost: null,
     designer: null,
-    description: `Complete interior renovation. Work included demolition, carpentry,
-        tiles, flooring rough carpentry, painting, electrical, plumbing, and
-        HVAC.`,
+    description: `Allcon Contracting was selected as the general contractor for the complete interior renovation of the New Jersey Veterinary Hospital. The scope of work included demolition of existing finishes, carpentry, installation of new tiles and flooring, rough carpentry, painting, electrical work, plumbing, and HVAC. Our team worked closely with the owner and design team to ensure the project was completed on time and within budget, resulting in a modern and refreshed interior space.`,
   })
   .set("hudson-animal-hospital", {
     sector: "public",
@@ -1645,9 +1468,7 @@ projects
     category: { text: "Other miscellaneous projects", tag: "other" },
     cost: null,
     designer: null,
-    description: `Complete interior renovation. Work included demolition, carpentry,
-        tiles, flooring rough carpentry, painting, electrical, plumbing, and
-        HVAC.`,
+    description: `Allcon Contracting was selected as the general contractor for a complete interior renovation at the Hudson Animal Hospital. The scope of work included demolition of existing features and finishes, installation of new carpentry, tiles, and flooring, as well as rough carpentry, painting, electrical, plumbing, and HVAC work. The team at Allcon worked closely with the owner and design team to ensure the project was completed on time and within budget, resulting in a modern and refreshed interior space.`,
   })
   .set("866westchester", {
     sector: "public",
@@ -1689,9 +1510,7 @@ projects
     category: { text: "Other miscellaneous projects", tag: "other" },
     cost: null,
     designer: null,
-    description: `Complete interior renovation of commercial offices. The work included
-        demolition, carpentry, new VCT floors, new carpeting, millwork,
-        carpentry, painting, electric, plumbing and HVAC.`,
+    description: `Allcon Contracting was chosen as the general contractor for the complete interior renovation of commercial office space at 866 Westchester Avenue. The project included a wide range of work, including demolition, carpentry, installation of new VCT floors and carpeting, millwork, painting, and upgrades to the building's electrical, plumbing, and HVAC systems. Throughout the course of the project, Allcon worked closely with the building's owner and design team to ensure that all work was completed to the highest standards and on schedule. The end result was a beautifully renovated office space that met the needs of the building's tenants and provided a modern and welcoming environment.`,
   })
   .set("55pierrepont", {
     sector: "public",
@@ -1773,10 +1592,7 @@ projects
     status: { text: "The project is finshed", completed: true },
     cost: null,
     designer: null,
-    description: `Complete interior renovation of an existing nursing home containing 189
-        apartments. The work included demolition, carpentry, new terrazzo
-        floors, VCT flooring millwork, apartment renovations, hallway
-        renovations and a complete lobby renovation.`,
+    description: `Allcon Contracting was selected to conduct a complete interior renovation of an existing nursing home at 55 Pierrepont Street containing 189 apartments. The scope of work included demolition of existing finishes and structures, installation of new carpentry and millwork, and installation of new terrazzo and VCT flooring. In addition, all apartments and hallways were renovated and the lobby was completely updated. The team also provided new plumbing and HVAC systems, as well as electrical upgrades throughout the building. The project was successfully completed, providing the nursing home with modern and refreshed interiors.`,
   })
   .set("164w-79th", {
     sector: "public",
@@ -1812,7 +1628,7 @@ projects
     category: { text: "Exterior work", tag: "exterior" },
     cost: null,
     designer: null,
-    description: `Work consisted of exterior renovation Local Law 11.`,
+    description: `Allcon Contracting was chosen as the general contractor for the exterior renovation of the 164 W79th Street building, which required compliance with Local Law 11. The project was completed successfully, and the building now boasts a modern and refreshed exterior.`,
   })
   .set("17w-10th-townhouse", {
     sector: "public",
@@ -1865,9 +1681,7 @@ projects
     category: { text: "Interior work", tag: "interior" },
     cost: null,
     designer: null,
-    description: `The work consisted of restoration of an existing townhouse. New
-        bathrooms, new kitchens, costume millwork flooring, painting, HVAC,
-        electric and plumbing.`,
+    description: `Allcon Contracting was selected to restore an existing townhouse at 17W 10th Street. The scope of work included the installation of new bathrooms and kitchens, custom millwork, new flooring, painting, HVAC, electrical and plumbing upgrades. The project was completed successfully, resulting in a beautifully renovated townhouse.`,
   });
 
 export default projects;

@@ -83,7 +83,7 @@ const SocialButton = ({
 
 export default function SmallCentered() {
   return (
-    <SlideFade in={true} delay={0.1}>
+    <>
       <Divider />
       <Box color={useColorModeValue("gray.700", "gray.200")}>
         <Container
@@ -126,6 +126,6 @@ export default function SmallCentered() {
           </Stack>
         </Container>
       </Box>
-    </SlideFade>
+    </>
   );
 }

@@ -232,7 +232,8 @@ export default function Project() {
   const { height } = useWindowDimensions();
 
   return (
-    <SlideFade in={true} delay={0.1} unmountOnExit>
+    // <SlideFade in={true} delay={0.1} unmountOnExit>
+    <>
       <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="26px" w="full">
           <Heading textAlign="center">{data.project.name}</Heading>
@@ -789,6 +790,7 @@ export default function Project() {
           )}
         </VStack>
       </Container>
-    </SlideFade>
+    </>
+    // </SlideFade>
   );
 }

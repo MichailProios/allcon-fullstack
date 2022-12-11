@@ -203,7 +203,8 @@ export default function Contacts() {
   }, [actionData, toast]);
 
   return (
-    <SlideFade in={true} delay={0.1} unmountOnExit>
+    // <SlideFade in={true} delay={0.1} unmountOnExit>
+    <>
       <Container
         maxW={"1200px"}
         px={{ base: 3, md: 6 }}
@@ -270,19 +271,19 @@ export default function Contacts() {
                   placeholder="Enter your message"
                   rounded="md"
                 />
-                <VStack spacing={3} w="full">
-                  <SubmitButton
-                    type="submit"
-                    colorScheme="primary"
-                    label="Send Message"
-                  />
-                  <HStack w="full">
+                {/* <VStack spacing={3} w="full"> */}
+                <SubmitButton
+                  type="submit"
+                  colorScheme="primary"
+                  label="Send Message"
+                />
+                {/* <HStack w="full">
                     <Divider />
                     <Text userSelect="none">or</Text>
                     <Divider />
-                  </HStack>
-                  <Stack direction={{ base: "column", md: "row" }}>
-                    <Button
+                  </HStack> */}
+                {/* <Stack direction={{ base: "column", md: "row" }}> */}
+                {/* <Button
                       rightIcon={<PhoneIcon />}
                       onClick={() =>
                         window.open(
@@ -294,9 +295,9 @@ export default function Contacts() {
                       w="200px"
                     >
                       +1-516-333-3339
-                    </Button>
-                  </Stack>
-                </VStack>
+                    </Button> */}
+                {/* </Stack> */}
+                {/* </VStack> */}
               </VStack>
             </VStack>
           </Stack>
@@ -486,6 +487,7 @@ export default function Contacts() {
           </Card>
         </VStack>
       </Container>
-    </SlideFade>
+    </>
+    // </SlideFade>
   );
 }

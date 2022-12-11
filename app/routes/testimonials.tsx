@@ -143,41 +143,41 @@ export default function Index() {
   const data = useLoaderData();
 
   return (
-    <SlideFade in={true} delay={0.1} unmountOnExit>
-      <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
-        <VStack spacing="26px">
-          <Heading textAlign="center">Testimonials</Heading>
+    // <SlideFade in={true} delay={0.1} unmountOnExit>
+    <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
+      <VStack spacing="26px">
+        <Heading textAlign="center">Testimonials</Heading>
 
-          {data.testimonies.map((value: any, index: any) => (
-            <Fragment key={index}>
-              <VStack spacing={3} pt={1} justify="center">
-                <Avatar
-                  size="xl"
-                  showBorder={true}
-                  borderColor="primary.400"
-                  name={value.initials || value.name}
-                  src={value.image}
-                />
-                <Box textAlign="center">
-                  <Text fontWeight="bold" fontSize="lg">
-                    {value.name}
-                  </Text>
-                  <Text fontWeight="medium" fontSize="sm" color="gray.400">
-                    {value.position} {value.company && <> at </>}
-                    {value.company}
-                  </Text>
-                </Box>
-                <Box textAlign="center" maxW="4xl">
-                  <Text fontSize="md" fontWeight="medium">
-                    {value.content}
-                  </Text>
-                </Box>
-              </VStack>
-              {data.testimonies.length - 1 !== index && <Divider my={6} />}
-            </Fragment>
-          ))}
-        </VStack>
-      </Container>
-    </SlideFade>
+        {data.testimonies.map((value: any, index: any) => (
+          <Fragment key={index}>
+            <VStack spacing={3} pt={1} justify="center">
+              <Avatar
+                size="xl"
+                showBorder={true}
+                borderColor="primary.400"
+                name={value.initials || value.name}
+                src={value.image}
+              />
+              <Box textAlign="center">
+                <Text fontWeight="bold" fontSize="lg">
+                  {value.name}
+                </Text>
+                <Text fontWeight="medium" fontSize="sm" color="gray.400">
+                  {value.position} {value.company && <> at </>}
+                  {value.company}
+                </Text>
+              </Box>
+              <Box textAlign="center" maxW="4xl">
+                <Text fontSize="md" fontWeight="medium">
+                  {value.content}
+                </Text>
+              </Box>
+            </VStack>
+            {data.testimonies.length - 1 !== index && <Divider my={6} />}
+          </Fragment>
+        ))}
+      </VStack>
+    </Container>
+    // </SlideFade>
   );
 }

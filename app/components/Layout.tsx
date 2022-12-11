@@ -23,7 +23,7 @@ import { useWindowDimensions } from "app/utils/hooks";
 import { animateScroll as scroll } from "react-scroll";
 import { useScrollButtonVisibility } from "app/utils/hooks";
 import { ChevronUpIcon } from "@chakra-ui/icons";
-import { useTransition } from "@remix-run/react";
+import { useMatches, useTransition } from "@remix-run/react";
 import Footer from "~/components/Footer";
 
 import { useLoading } from "app/utils/hooks";
@@ -87,6 +87,8 @@ export default function Layout({ children }: LayoutProps) {
     }
   }, [transition, routeLoading]);
 
+  const route = useMatches()[1].pathname;
+
   return (
     <Box
       display={"flex"}
@@ -114,17 +116,6 @@ export default function Layout({ children }: LayoutProps) {
         }}
       />
 
-      {/* )} */}
-
-      {/* <Spinner
-        display={actionLoading.isLoading ? "flex" : "none"}
-        position="fixed"
-        top={"80px"}
-        right={"16px"}
-        backgroundColor="transparent"
-        color="primary.500"
-      /> */}
-
       <Box display={{ base: "none", md: "flex" }}>
         <Fade in={showButton} unmountOnExit style={{ zIndex: 1000 }}>
           <Tooltip label="Scroll to Top" closeOnScroll>
@@ -147,9 +138,11 @@ export default function Layout({ children }: LayoutProps) {
         </Fade>
       </Box>
       <Box>{children}</Box>
-      <Box marginTop={"auto"}>
-        <Footer />
-      </Box>
+      {!route.includes("/login") && !route.includes("/register") && (
+        <Box marginTop={"auto"}>
+          <Footer />
+        </Box>
+      )}
     </Box>
   );
 }

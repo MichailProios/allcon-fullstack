@@ -119,41 +119,41 @@ const Feature = ({ title, text, icon, url }: FeatureProps) => {
 };
 export default function Resources() {
   return (
-    <SlideFade in={true} delay={0.1} unmountOnExit>
-      <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
-        <VStack spacing="26px">
-          <Heading textAlign="center">Resources</Heading>
-          <Box>
-            <SimpleGrid
-              columns={{ base: 1, lg: 3 }}
-              spacing={{ base: 10, lg: 4 }}
-            >
-              <Feature
-                icon={<Icon as={FcTemplate} w={10} h={10} />}
-                title={"Blog"}
-                text={`The Blog section is a valuable resource for anyone interested in the construction industry. It features posts and articles on industry trends, new projects, and events, as well as insights into Allcon Contracting's community involvement. Regular updates ensure access to the latest developments in the construction industry.
+    // <SlideFade in={true} delay={0.1} unmountOnExit>
+    <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
+      <VStack spacing="26px">
+        <Heading textAlign="center">Resources</Heading>
+        <Box>
+          <SimpleGrid
+            columns={{ base: 1, lg: 3 }}
+            spacing={{ base: 10, lg: 4 }}
+          >
+            <Feature
+              icon={<Icon as={FcTemplate} w={10} h={10} />}
+              title={"Blog"}
+              text={`The Blog section is a valuable resource for anyone interested in the construction industry. It features posts and articles on industry trends, new projects, and events, as well as insights into Allcon Contracting's community involvement. Regular updates ensure access to the latest developments in the construction industry.
                 `}
-                url="/blog"
-              />
-              <Feature
-                icon={<Icon as={FcFinePrint} w={10} h={10} />}
-                title={"Awards & Recognitions"}
-                text={`The Awards and Recognitions section highlights the company's commitment to excellence and leadership in the construction industry. This dedication to excellence is further demonstrated by the recognition that Allcon has received from industry organizations, publications, clients, and peers.
+              url="/blog"
+            />
+            <Feature
+              icon={<Icon as={FcFinePrint} w={10} h={10} />}
+              title={"Awards & Recognitions"}
+              text={`The Awards and Recognitions section highlights the company's commitment to excellence and leadership in the construction industry. This dedication to excellence is further demonstrated by the recognition that Allcon has received from industry organizations, publications, clients, and peers.
                 
                 `}
-                url="/awards"
-              />
-              <Feature
-                icon={<Icon as={FcCollaboration} w={10} h={10} />}
-                title={"Testimonials"}
-                text={`The Testimonials section features comments and reviews from past clients. It provides insights into the experiences of others who have worked with Allcon Contracting, offering a glimpse into the quality of their work and customer service. These testimonials also serve as social proof for potential customers.
+              url="/awards"
+            />
+            <Feature
+              icon={<Icon as={FcCollaboration} w={10} h={10} />}
+              title={"Testimonials"}
+              text={`The Testimonials section features comments and reviews from past clients. It provides insights into the experiences of others who have worked with Allcon Contracting, offering a glimpse into the quality of their work and customer service. These testimonials also serve as social proof for potential customers.
                    `}
-                url="/testimonials"
-              />
-            </SimpleGrid>
-          </Box>
-        </VStack>
-      </Container>
-    </SlideFade>
+              url="/testimonials"
+            />
+          </SimpleGrid>
+        </Box>
+      </VStack>
+    </Container>
+    // </SlideFade>
   );
 }

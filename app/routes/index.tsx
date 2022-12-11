@@ -87,15 +87,15 @@ export const loader: LoaderFunction = async ({ request }: any) => {
 };
 
 export default function Index() {
-  // const { height, width } = useWindowDimensions();
+  const { height } = useWindowDimensions();
 
   const data = useLoaderData();
 
   const testimonialsView = useInView();
 
   const breakpointHeight = useBreakpointValue(
-    { base: "calc(100vh - 169px)", md: "calc(100vh - 64px)" },
-    { ssr: true }
+    { base: `calc(${height}px - 64px)`, md: "calc(100vh - 64px)" },
+    { fallback: "md", ssr: true }
   );
 
   const breakpointSlidesPerView = useBreakpointValue(
@@ -114,7 +114,8 @@ export default function Index() {
   );
 
   return (
-    <SlideFade in={true} delay={0.1} unmountOnExit>
+    // <SlideFade in={true} delay={0.1} unmountOnExit>
+    <>
       <Box position="relative">
         <Swiper
           autoplay={{
@@ -187,66 +188,63 @@ export default function Index() {
           w="full"
           zIndex={600}
         >
-          <SlideFade in={true} reverse delay={0.5}>
-            <Text
-              fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
-              fontWeight="medium"
-              letterSpacing={"0.05em"}
-              textTransform="uppercase"
-              wordBreak="break-word"
-              textAlign="center"
-              width="full"
-              userSelect="none"
-              textColor="white"
-              // textShadow="0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)"
-            >
-              Infinite Possibilities through Integrated Solutions
-            </Text>
-          </SlideFade>
+          {/* <SlideFade in={true} reverse delay={0.5}> */}
+          <Text
+            fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
+            fontWeight="medium"
+            letterSpacing={"0.05em"}
+            textTransform="uppercase"
+            wordBreak="break-word"
+            textAlign="center"
+            width="full"
+            userSelect="none"
+            textColor="white"
+            // textShadow="0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)"
+          >
+            Infinite Possibilities through Integrated Solutions
+          </Text>
+          {/* </SlideFade> */}
 
-          <SlideFade in={true} reverse delay={0.8}>
-            <Stack
-              direction={{ base: "column", sm: "row" }}
-              alignItems="center"
+          {/* <SlideFade in={true} reverse delay={0.8}> */}
+          <Stack direction={{ base: "column", sm: "row" }} alignItems="center">
+            <Button
+              colorScheme="primary"
+              variant="solid"
+              bgColor="#018b8b"
+              textColor="white"
+              as={Link}
+              prefetch="render"
+              rel="prerender"
+              to="projects"
+              boxShadow="dark-lg"
+              rounded="md"
+              size="md"
+              rightIcon={<Icon as={BiBuildings} />}
+              draggable={false}
+              w="220px"
             >
-              <Button
-                colorScheme="primary"
-                variant="solid"
-                bgColor="#018b8b"
-                textColor="white"
-                as={Link}
-                prefetch="render"
-                rel="prerender"
-                to="projects"
-                boxShadow="dark-lg"
-                rounded="md"
-                size="md"
-                rightIcon={<Icon as={BiBuildings} />}
-                draggable={false}
-                w="220px"
-              >
-                Explore our Projects
-              </Button>
-              <Button
-                as={Link}
-                to="about"
-                boxShadow="dark-lg"
-                rounded="md"
-                size="md"
-                variant="solid"
-                bgColor="gray.50"
-                _hover={{ bgColor: "gray.300" }}
-                textColor="black"
-                prefetch="render"
-                rel="prerender"
-                rightIcon={<Icon as={BiBook} />}
-                draggable={false}
-                w="150px"
-              >
-                Learn More
-              </Button>
-            </Stack>
-          </SlideFade>
+              Explore our Projects
+            </Button>
+            <Button
+              as={Link}
+              to="about"
+              boxShadow="dark-lg"
+              rounded="md"
+              size="md"
+              variant="solid"
+              bgColor="gray.50"
+              _hover={{ bgColor: "gray.300" }}
+              textColor="black"
+              prefetch="render"
+              rel="prerender"
+              rightIcon={<Icon as={BiBook} />}
+              draggable={false}
+              w="150px"
+            >
+              Learn More
+            </Button>
+          </Stack>
+          {/* </SlideFade> */}
         </VStack>
       </Box>
 
@@ -532,6 +530,7 @@ export default function Index() {
           </Stack>
         </Stack>
       </Container>
-    </SlideFade>
+    </>
+    // </SlideFade>
   );
 }

@@ -53,11 +53,13 @@ import {
   Divider,
   Image,
   Skeleton,
+  Icon,
+  Avatar,
 } from "@chakra-ui/react";
 
 import { NavLink } from "@remix-run/react";
 
-// import Footer from "app/components/Footer";
+import { MdAccountCircle } from "react-icons/md";
 
 import {
   ChevronDownIcon,
@@ -67,9 +69,6 @@ import {
   SunIcon,
 } from "@chakra-ui/icons";
 import { useContainerDimensions } from "~/utils/hooks";
-
-// import LogoSideways from "public/logos/Logo-Sideways.svg";
-// import LogoPlain from "public/logos/Logo-Plain.svg";
 
 const logo_full_dark =
   "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail";
@@ -173,6 +172,15 @@ function NavbarHeader({
     );
   }, [location?.pathname]);
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const ref = useRef<any>();
+
+  useOutsideClick({
+    ref: ref,
+    handler: () => onClose(),
+  });
+
   return (
     <Flex
       h={16}
@@ -239,82 +247,30 @@ function NavbarHeader({
           </NavLink>
         </HStack>
 
-        <Tabs
-          display={{ base: "none", md: "flex" }}
-          colorScheme="primary"
-          orientation="horizontal"
-          isManual
-          align="center"
-          isFitted
-          index={tabIndex}
-          onChange={handleTabsChange}
-        >
-          <HStack spacing="16px">
+        <HStack spacing="8px">
+          <HStack spacing="8px" display={{ base: "none", xmd: "flex" }}>
             {navigationLinks.map((link, index) => (
               <Box key={index}>
                 {!link.subLinks && (
-                  <Tab
-                    as={NavLink}
+                  <NavLink
+                    key={index}
                     to={link.url}
-                    _focus={{ boxShadow: "none" }}
-                    draggable={false}
+                    draggable="false"
                     prefetch="render"
-                    rel="prefetch"
                   >
-                    {link.label}
-                  </Tab>
+                    {({ isActive }) => (
+                      <Button
+                        onClick={onClose}
+                        variant="ghost"
+                        isActive={isActive}
+                      >
+                        {link.label}
+                      </Button>
+                    )}
+                  </NavLink>
                 )}
 
-                {link.subLinks && (
-                  <NavbarPopover link={link} index={index} />
-                  // <Popover
-                  //   trigger="hover"
-                  //   closeDelay={200}
-                  //   openDelay={0}
-                  //   isLazy
-                  //   placement="bottom"
-                  //   lazyBehavior="unmount"
-                  // >
-                  //   <PopoverTrigger>
-                  //     <Tab
-                  //       as={NavLink}
-                  //       to={link.url}
-                  //       _focus={{ boxShadow: "none" }}
-                  //       draggable={false}
-                  //       prefetch="render"
-                  //       rel="prefetch"
-                  //     >
-                  //       {link.label}
-                  //     </Tab>
-                  //   </PopoverTrigger>
-
-                  //   <PopoverContent w="8em" boxShadow="lg">
-                  //     <PopoverBody w="full" p={0} m={0}>
-                  //       <ButtonGroup
-                  //         orientation="vertical"
-                  //         variant="ghost"
-                  //         size="md"
-                  //         spacing="2px"
-                  //         w="full"
-                  //       >
-                  //         {link.subLinks.map((subLink: any, index: any) => (
-                  //           <Button
-                  //             key={index}
-                  //             as={NavLink}
-                  //             to={subLink.url}
-                  //             borderRadius="none"
-                  //             fontWeight="normal"
-                  //             prefetch="intent"
-                  //             // rel="prefetch"
-                  //           >
-                  //             {subLink.label}
-                  //           </Button>
-                  //         ))}
-                  //       </ButtonGroup>
-                  //     </PopoverBody>
-                  //   </PopoverContent>
-                  // </Popover>
-                )}
+                {link.subLinks && <NavbarPopover link={link} index={index} />}
               </Box>
             ))}
             <IconButton
@@ -326,10 +282,60 @@ function NavbarHeader({
             >
               {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
             </IconButton>
+            <Popover
+              closeDelay={200}
+              openDelay={0}
+              isLazy
+              placement="bottom"
+              lazyBehavior="unmount"
+              isOpen={isOpen}
+              returnFocusOnClose={false}
+              autoFocus={false}
+              orientation="vertical"
+              offset={[-50, 8]}
+            >
+              <PopoverAnchor>
+                <IconButton
+                  variant={"ghost"}
+                  aria-label="Account"
+                  icon={<Avatar size="xs" name="" src="" />}
+                  onClick={isOpen ? onClose : onOpen}
+                />
+              </PopoverAnchor>
+              <PopoverContent w="full" boxShadow="lg" ref={ref}>
+                <PopoverBody w="full" p={0} m={0}>
+                  {/* <VStack> */}
+                  <Text p={2} textAlign="center">
+                    No User Signed In
+                  </Text>
+                  <Divider w="full" />
+                  <ButtonGroup p={2} size="sm">
+                    <Button
+                      fontSize="sm"
+                      as={Link}
+                      to="/login"
+                      onClick={onClose}
+                    >
+                      Sign In
+                    </Button>
+                    <Button
+                      fontSize="sm"
+                      colorScheme="primary"
+                      as={Link}
+                      to="/register"
+                      onClick={onClose}
+                    >
+                      Sign Up
+                    </Button>
+                  </ButtonGroup>
+                  {/* </VStack> */}
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
           </HStack>
-        </Tabs>
+        </HStack>
 
-        <HStack spacing="10px" display={{ md: "none" }}>
+        <HStack spacing="8px" display={{ xmd: "none" }}>
           <IconButton
             variant={"ghost"}
             aria-label="Color Scheme"
@@ -440,24 +446,41 @@ function NavbarDrawer({
             onChange={handleTabsChange}
             orientation="vertical"
           >
-            <VStack spacing="12px" w={"100%"}>
+            <VStack spacing="12px" w={"full"}>
               {navigationLinks.map((link, index) => (
                 <Box key={index} w="full">
                   {!link.subLinks && (
-                    <Tab
+                    // <Tab
+                    //   key={index}
+                    //   as={NavLink}
+                    //   to={link.url}
+                    //   _focus={{ boxShadow: "none" }}
+                    //   draggable={false}
+                    //   prefetch="render"
+                    //   rel="prefetch"
+                    //   fontSize="md"
+                    //   w={"100%"}
+                    // >
+                    //   {link.label}
+                    // </Tab>
+
+                    <NavLink
                       key={index}
-                      as={NavLink}
                       to={link.url}
-                      _focus={{ boxShadow: "none" }}
-                      draggable={false}
+                      draggable="false"
                       prefetch="render"
-                      rel="prefetch"
-                      fontSize="md"
-                      w={"100%"}
-                      onClick={onDrawerClose}
                     >
-                      {link.label}
-                    </Tab>
+                      {({ isActive }) => (
+                        <Button
+                          onClick={onDrawerClose}
+                          variant="ghost"
+                          isActive={isActive}
+                          w={"100%"}
+                        >
+                          {link.label}
+                        </Button>
+                      )}
+                    </NavLink>
                   )}
 
                   {link.subLinks && (
@@ -472,7 +495,6 @@ function NavbarDrawer({
               ))}
             </VStack>
           </Tabs>
-          {/* </VStack> */}
         </DrawerBody>
       </DrawerContent>
     </Drawer>
@@ -498,12 +520,10 @@ function NavbarPopover({ link, index }: any) {
   function openPopover() {
     clearTimeout(timeout);
     onOpen();
-    // timer();
   }
 
   return (
     <Popover
-      // trigger="hover"
       closeDelay={200}
       openDelay={0}
       isLazy
@@ -512,24 +532,27 @@ function NavbarPopover({ link, index }: any) {
       isOpen={isOpen}
       returnFocusOnClose={false}
       autoFocus={false}
+      gutter={22}
+      orientation="vertical"
     >
       <PopoverAnchor>
-        <Tab
-          as={NavLink}
-          to={link.url}
-          _focus={{ boxShadow: "none" }}
-          draggable={false}
-          prefetch="render"
-          rel="prefetch"
-          onClick={onClose}
-          onMouseEnter={openPopover}
-          onMouseLeave={closePopover}
-        >
-          {link.label}
-        </Tab>
+        <NavLink key={index} to={link.url} draggable="false" prefetch="render">
+          {({ isActive }) => (
+            <Button
+              onClick={onClose}
+              onMouseEnter={openPopover}
+              onMouseLeave={closePopover}
+              variant="ghost"
+              isActive={isActive}
+              rightIcon={<ChevronDownIcon />}
+            >
+              {link.label}
+            </Button>
+          )}
+        </NavLink>
       </PopoverAnchor>
       <PopoverContent
-        w="8em"
+        w="8.5em"
         boxShadow="lg"
         onMouseEnter={openPopover}
         onMouseLeave={closePopover}
@@ -569,22 +592,25 @@ function SubLinks({ link, index, tabIndex, onDrawerClose }: any) {
 
   return (
     <>
-      <Flex>
-        <Tab
-          _focus={{ boxShadow: "none" }}
-          draggable={false}
+      <Flex w="full">
+        <NavLink
           key={index}
-          fontSize="md"
-          w={"100%"}
-          as={NavLink}
           to={link.url}
-          onClick={onDrawerClose}
+          draggable="false"
           prefetch="render"
-          rel="prefetch"
-          mr="-40px"
+          style={{ width: "100%", marginRight: "-40px" }}
         >
-          {link.label}
-        </Tab>
+          {({ isActive }) => (
+            <Button
+              onClick={onDrawerClose}
+              variant="ghost"
+              isActive={isActive}
+              w={"100%"}
+            >
+              {link.label}
+            </Button>
+          )}
+        </NavLink>
 
         <IconButton
           aria-label="Sublinks"

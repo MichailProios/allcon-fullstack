@@ -237,7 +237,12 @@ export default function Login() {
         variant: "solid",
         status: "error",
         duration: 3000,
-        isClosable: false,
+        isClosable: true,
+        position: "top-right",
+        containerStyle: {
+          mt: "80px",
+          mr: "10px",
+        },
       });
     } else if (actionData?.success) {
       toast({
@@ -245,7 +250,12 @@ export default function Login() {
         variant: "solid",
         status: "success",
         duration: 3000,
-        isClosable: false,
+        isClosable: true,
+        position: "top-right",
+        containerStyle: {
+          mt: "80px",
+          mr: "10px",
+        },
       });
     }
   }, [actionData, toast]);

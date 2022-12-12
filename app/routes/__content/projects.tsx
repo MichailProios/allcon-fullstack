@@ -287,6 +287,11 @@ export default function Index() {
           variant: "solid",
           duration: null,
           isClosable: false,
+          position: "top-right",
+          containerStyle: {
+            mt: "80px",
+            mr: "10px",
+          },
         });
       } else if (toastIdRef.current) {
         toast.update(toastIdRef.current, {
@@ -295,6 +300,11 @@ export default function Index() {
           variant: "solid",
           duration: null,
           isClosable: false,
+          position: "top-right",
+          containerStyle: {
+            mt: "80px",
+            mr: "10px",
+          },
         });
       }
       const formData = new FormData();
@@ -312,6 +322,11 @@ export default function Index() {
         variant: "solid",
         duration: null,
         isClosable: false,
+        position: "top-right",
+        containerStyle: {
+          mt: "80px",
+          mr: "10px",
+        },
       });
     } else if (toastIdRef.current) {
       toast.update(toastIdRef.current, {
@@ -320,6 +335,11 @@ export default function Index() {
         variant: "solid",
         duration: null,
         isClosable: false,
+        position: "top-right",
+        containerStyle: {
+          mt: "80px",
+          mr: "10px",
+        },
       });
     }
 

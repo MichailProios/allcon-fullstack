@@ -16,7 +16,10 @@ import {
   Slide,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { FcTemplate, FcFinePrint, FcCollaboration } from "react-icons/fc";
+
+import { motion } from "framer-motion";
+
+import { FcPicture, FcFinePrint, FcCollaboration } from "react-icons/fc";
 import { Link } from "@remix-run/react";
 import { ArrowForwardIcon, LinkIcon } from "@chakra-ui/icons";
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
@@ -44,15 +47,15 @@ export const meta: MetaFunction = ({ params }: any) => ({
 });
 
 const Feature = ({ title, text, icon, url }: FeatureProps) => {
-  // const showBreakpoint = useBreakpointValue(
-  //   { base: true, md: false },
-  //   { fallback: "base", ssr: true }
-  // );
-
-  const [show, setShow] = useState(false);
-
   return (
-    <>
+    <motion.div
+      whileHover={{ scale: 1.01 }}
+      transition={{
+        type: "tween",
+        duration: 0.1,
+      }}
+      style={{ width: "100%" }}
+    >
       <Stack
         as={Link}
         to={url}
@@ -61,8 +64,6 @@ const Feature = ({ title, text, icon, url }: FeatureProps) => {
         p={4}
         transition="all 150ms"
         position="relative"
-        onMouseEnter={() => setShow(true)}
-        onMouseLeave={() => setShow(false)}
         bgColor={useColorModeValue("white", "gray.700")}
         draggable={false}
       >
@@ -87,34 +88,8 @@ const Feature = ({ title, text, icon, url }: FeatureProps) => {
         </Text>
 
         <LinkIcon position="absolute" top="10px" right="10px" />
-
-        <SlideFade
-          in={show}
-          offsetY={-10}
-          style={{
-            position: "absolute",
-            bottom: "-40px",
-            left: "0",
-            transform: "translate(0%, -50%)",
-            width: "100%",
-          }}
-          unmountOnExit
-        >
-          <Flex
-            w="full"
-            boxShadow="xl"
-            bgColor={useColorModeValue("white", "gray.700")}
-            borderRadius="md"
-            justifyContent="center"
-            pt={0}
-            pb={4}
-            display={{ base: "none", lg: "flex" }}
-          >
-            <Button size="sm">View {title}</Button>
-          </Flex>
-        </SlideFade>
       </Stack>
-    </>
+    </motion.div>
   );
 };
 export default function Resources() {
@@ -129,11 +104,11 @@ export default function Resources() {
             spacing={{ base: 10, lg: 4 }}
           >
             <Feature
-              icon={<Icon as={FcTemplate} w={10} h={10} />}
-              title={"Blog"}
-              text={`The Blog section is a valuable resource for anyone interested in the construction industry. It features posts and articles on industry trends, new projects, and events, as well as insights into Allcon Contracting's community involvement. Regular updates ensure access to the latest developments in the construction industry.
+              icon={<Icon as={FcPicture} w={10} h={10} />}
+              title={"Media"}
+              text={`The media section of our website features a variety of additional content, including videos and images of our accomplishments. You can also see behind-the-scenes footage of our team at work. Explore this section to see even more examples of the high-quality workmanship that sets us apart from other contractors.
                 `}
-              url="/blog"
+              url="/media"
             />
             <Feature
               icon={<Icon as={FcFinePrint} w={10} h={10} />}
@@ -145,10 +120,10 @@ export default function Resources() {
             />
             <Feature
               icon={<Icon as={FcCollaboration} w={10} h={10} />}
-              title={"Testimonials"}
+              title={"References"}
               text={`The Testimonials section features comments and reviews from past clients. It provides insights into the experiences of others who have worked with Allcon Contracting, offering a glimpse into the quality of their work and customer service. These testimonials also serve as social proof for potential customers.
                    `}
-              url="/testimonials"
+              url="/References"
             />
           </SimpleGrid>
         </Box>

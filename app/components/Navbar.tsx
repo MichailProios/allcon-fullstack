@@ -65,7 +65,7 @@ import {
 } from "@chakra-ui/react";
 import { createServerClient } from "~/utils/supabase.server";
 import type { LoaderFunction } from "@remix-run/node";
-
+import { RiAccountCircleFill } from "react-icons/ri";
 import { NavLink } from "@remix-run/react";
 
 import { MdAccountCircle } from "react-icons/md";
@@ -79,7 +79,11 @@ import {
   SunIcon,
 } from "@chakra-ui/icons";
 import { useContainerDimensions } from "~/utils/hooks";
-import { IoLogOutOutline, IoPersonCircleOutline } from "react-icons/io5";
+import {
+  IoLogOutOutline,
+  IoPersonAddSharp,
+  IoPersonCircleOutline,
+} from "react-icons/io5";
 
 const logo_full_dark =
   "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail";
@@ -205,7 +209,12 @@ function NavbarHeader({
       variant: "solid",
       status: "success",
       duration: 3000,
-      isClosable: false,
+      isClosable: true,
+      position: "top-right",
+      containerStyle: {
+        mt: "80px",
+        mr: "10px",
+      },
     });
   }
 
@@ -276,7 +285,7 @@ function NavbarHeader({
         </HStack>
 
         <HStack spacing="8px">
-          <HStack spacing="8px" display={{ base: "none", xmd: "flex" }}>
+          <HStack spacing="8px" display={{ base: "none", lg: "flex" }}>
             {navigationLinks.map((link, index) => (
               <Box key={index}>
                 {!link.subLinks && (
@@ -328,14 +337,18 @@ function NavbarHeader({
                   variant={"ghost"}
                   aria-label="Account"
                   icon={
-                    <Avatar
-                      size="xs"
-                      name={
-                        session &&
-                        `${session?.user.user_metadata.firstName} ${session?.user.user_metadata.lastName}`
-                      }
-                      src=""
-                    />
+                    session ? (
+                      <Avatar
+                        size="xs"
+                        name={
+                          session &&
+                          `${session?.user.user_metadata.firstName} ${session?.user.user_metadata.lastName}`
+                        }
+                        src=""
+                      />
+                    ) : (
+                      <Icon w={6} h={6} as={RiAccountCircleFill} />
+                    )
                   }
                   onClick={onOpen}
                 />
@@ -415,7 +428,7 @@ function NavbarHeader({
           </HStack>
         </HStack>
 
-        <HStack spacing="8px" display={{ xmd: "none" }}>
+        <HStack spacing="8px" display={{ lg: "none" }}>
           <IconButton
             variant={"ghost"}
             aria-label="Color Scheme"

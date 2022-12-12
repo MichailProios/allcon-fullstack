@@ -105,7 +105,7 @@ import {
   AiOutlineTag,
 } from "react-icons/ai";
 import { BiBuildings, BiMap, BiExpand } from "react-icons/bi";
-import { useWindowDimensions } from "~/utils/hooks";
+import { useIsDocumentReady, useWindowDimensions } from "~/utils/hooks";
 
 export const meta: MetaFunction = ({ params }: any) =>
   projects.has(params?.name.toLowerCase())
@@ -221,15 +221,17 @@ export default function Project() {
 
   const thumbsBreakpoint = useBreakpointValue(
     { base: 2, xs: 3, sm: 3, md: 4, lg: 6 },
-    { fallback: "md", ssr: true }
+    { fallback: "lg", ssr: true }
   );
 
   const cssModeBreakpoint = useBreakpointValue(
     { base: true, md: false },
-    { ssr: false }
+    { fallback: "md", ssr: false }
   );
 
   const { height } = useWindowDimensions();
+
+  const { documentReady } = useIsDocumentReady();
 
   return (
     // <SlideFade in={true} delay={0.1} unmountOnExit>
@@ -300,7 +302,7 @@ export default function Project() {
                 keyboard={{
                   enabled: true,
                 }}
-                lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
+                // lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
                 modules={[Lazy, Navigation, Thumbs, Keyboard]}
                 effect={"slide"}
                 thumbs={{ swiper: thumbsSwiper }}
@@ -315,7 +317,7 @@ export default function Project() {
                       <AspectRatio
                         ratio={{
                           base: 1,
-                          sm: value.aspectRatio !== 16 / 9 ? 4 / 3 : 16 / 9,
+                          sm: 16 / 9,
                         }}
                         h="full"
                         w="full"
@@ -326,7 +328,7 @@ export default function Project() {
                           <Image
                             src={value.image + "/public"}
                             alt={`Project Image ${index}`}
-                            loading="eager"
+                            loading="lazy"
                             w="full"
                             h="full"
                             maxW="full"
@@ -340,7 +342,7 @@ export default function Project() {
                             src={value.video}
                             allowFullScreen
                             draggable={false}
-                            loading="eager"
+                            loading="lazy"
                             allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
                             style={{
                               border: "none",
@@ -358,83 +360,85 @@ export default function Project() {
             </Box>
           </Box>
 
-          <Box
-            w="full"
-            display={{ base: "none", xs: media.length > 1 ? "block" : "none" }}
+          <Fade
+            in={true}
+            style={{ width: "100%", maxHeight: "100px" }}
+            unmountOnExit={false}
+            transition={{ enter: { duration: 0 }, exit: { duration: 0 } }}
           >
-            <AnimatePresence>
-              <Swiper
-                onSwiper={setThumbsSwiper}
-                spaceBetween={8}
-                slidesPerView={thumbsBreakpoint}
-                freeMode={true}
-                watchSlidesProgress={true}
-                modules={[FreeMode, Navigation, Thumbs]}
-                style={{
-                  borderRadius: "0.375rem",
-                }}
-                ref={sliderRefThumb}
-                centerInsufficientSlides
-              >
-                {media.map((value: any, index: any) => {
-                  return (
-                    <SwiperSlide key={index}>
-                      <motion.div
-                        whileHover={{ scale: 1.01, cursor: "pointer" }}
-                        transition={{
-                          type: "tween",
-                          duration: 0.1,
-                        }}
-                        key={index}
-                      >
-                        <AspectRatio
-                          ratio={16 / 9}
-                          w="full"
-                          h="full"
-                          maxW="full"
-                          maxH="full"
+            <Box
+              w="full"
+              display={{
+                base: "none",
+                xs: media.length > 1 ? "block" : "none",
+              }}
+            >
+              <AnimatePresence>
+                <Swiper
+                  onSwiper={setThumbsSwiper}
+                  spaceBetween={8}
+                  slidesPerView={thumbsBreakpoint}
+                  freeMode={true}
+                  watchSlidesProgress={true}
+                  modules={[FreeMode, Navigation, Thumbs]}
+                  style={{
+                    borderRadius: "0.375rem",
+                  }}
+                  ref={sliderRefThumb}
+                  centerInsufficientSlides
+                >
+                  {media.map((value: any, index: any) => {
+                    return (
+                      <SwiperSlide key={index}>
+                        <motion.div
+                          whileHover={{ scale: 1.01, cursor: "pointer" }}
+                          transition={{
+                            type: "tween",
+                            duration: 0.1,
+                          }}
+                          key={index}
                         >
-                          {value.image ? (
-                            <Image
-                              src={value.image + "/meta"}
-                              alt={`Project Image ${index}`}
-                              loading="eager"
-                              fallback={<Skeleton w="full" h="full" />}
-                              borderRadius="md"
-                              zIndex={9000}
-                              opacity={currentSlide === index ? 1 : 0.8}
-                              transition="opacity 200ms"
-                              w="full"
-                              h="full"
-                              maxW="full"
-                              maxH="full"
-                            />
-                          ) : value.video ? (
-                            <iframe
-                              title={`Project Video ${index}`}
-                              src={value.video}
-                              allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                              loading="eager"
-                              style={{
-                                border: "none",
-                                height: "100%",
-                                width: "100%",
-                                color: "#f3f3f3",
-                                borderRadius: "0.375rem",
-                                opacity: currentSlide === index ? 1 : 0.8,
-                                transition: "opacity 200ms",
-                                pointerEvents: "none",
-                              }}
-                            />
-                          ) : null}
-                        </AspectRatio>
-                      </motion.div>
-                    </SwiperSlide>
-                  );
-                })}
-              </Swiper>
-            </AnimatePresence>
-          </Box>
+                          <AspectRatio ratio={16 / 9} w="full" h="full">
+                            {value.image ? (
+                              <Image
+                                src={value.image + "/meta"}
+                                alt={`Project Image ${index}`}
+                                loading="lazy"
+                                fallback={<Skeleton w="full" h="full" />}
+                                borderRadius="md"
+                                zIndex={9000}
+                                opacity={currentSlide === index ? 1 : 0.8}
+                                transition="opacity 200ms"
+                                w="full"
+                                h="full"
+                              />
+                            ) : value.video ? (
+                              <iframe
+                                title={`Project Video ${index}`}
+                                src={value.video}
+                                allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                loading="lazy"
+                                style={{
+                                  border: "none",
+                                  height: "100%",
+                                  width: "100%",
+                                  color: "#f3f3f3",
+                                  borderRadius: "0.375rem",
+                                  opacity: currentSlide === index ? 1 : 0.8,
+                                  transition: "opacity 200ms",
+                                  pointerEvents: "none",
+                                }}
+                              />
+                            ) : null}
+                          </AspectRatio>
+                        </motion.div>
+                      </SwiperSlide>
+                    );
+                  })}
+                </Swiper>
+              </AnimatePresence>
+            </Box>
+          </Fade>
         </VStack>
 
         <Modal
@@ -507,7 +511,7 @@ export default function Project() {
                       width: "100%",
                     }}
                     initialSlide={sliderRef.current?.swiper.realIndex ?? 0}
-                    lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
+                    // lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
                     modules={[Lazy, Navigation, Pagination, Keyboard]}
                     keyboard={{
                       enabled: true,
@@ -531,7 +535,7 @@ export default function Project() {
                             <Image
                               src={value.image + "/hq"}
                               alt={`Project Image ${index}`}
-                              loading="eager"
+                              loading="lazy"
                               w="full"
                               maxW="full"
                               maxH="full"
@@ -570,7 +574,7 @@ export default function Project() {
                                 allowFullScreen
                                 draggable={false}
                                 allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                                loading="eager"
+                                loading="lazy"
                                 style={{
                                   border: "none",
                                   height: "100%",

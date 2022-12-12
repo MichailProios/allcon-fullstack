@@ -54,9 +54,9 @@ const navigationLinks = [
     label: "Resources",
     url: "resources",
     subLinks: [
-      { label: "Media", url: "/media" },
-      { label: "Awards", url: "/awards" },
-      { label: "References", url: "/references" },
+      { label: "Media", url: "/resources/media" },
+      { label: "Awards", url: "/resources/awards" },
+      { label: "References", url: "/resources/references" },
     ],
   },
   { label: "Contacts", url: "contacts" },
@@ -89,7 +89,7 @@ export default function Layout({ children }: LayoutProps) {
     }
   }, [transition, routeLoading]);
 
-  const route = useMatches()[1].pathname;
+  const route = useMatches()[1];
 
   return (
     <Box
@@ -140,11 +140,12 @@ export default function Layout({ children }: LayoutProps) {
         </Fade>
       </Box>
       <Box>{children}</Box>
-      {!route.includes("/login") && !route.includes("/register") && (
-        <Box marginTop={"auto"}>
-          <Footer />
-        </Box>
-      )}
+      {!route?.pathname.includes("/login") &&
+        !route?.pathname.includes("/register") && (
+          <Box marginTop={"auto"}>
+            <Footer />
+          </Box>
+        )}
     </Box>
   );
 }

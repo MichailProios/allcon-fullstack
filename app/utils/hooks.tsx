@@ -136,3 +136,15 @@ export function useContainerDimensions(myRef: React.RefObject<any>) {
 
   return dimensions;
 }
+
+export function useIsDocumentReady() {
+  if (
+    typeof window !== "undefined" &&
+    window.document &&
+    window.document.documentElement
+  ) {
+    return { documentReady: true };
+  } else {
+    return { documentReady: false };
+  }
+}

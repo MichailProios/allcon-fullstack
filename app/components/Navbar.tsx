@@ -196,7 +196,7 @@ function NavbarHeader({
     handler: () => onClose(),
   });
 
-  const session = useLoaderData().session || null;
+  const loaderData = useLoaderData();
 
   const fetcher = useFetcher();
   const toast = useToast();
@@ -240,7 +240,7 @@ function NavbarHeader({
         w={"100%"}
         maxW={"1600px"}
       >
-        <HStack spacing="40px">
+        <HStack spacing="20px">
           <NavLink to={"/"} prefetch="render" rel="prefetch" draggable={false}>
             <Box
               sx={{
@@ -282,10 +282,8 @@ function NavbarHeader({
               />
             </Box>
           </NavLink>
-        </HStack>
 
-        <HStack spacing="8px">
-          <HStack spacing="8px" display={{ base: "none", lg: "flex" }}>
+          <HStack spacing={"8px"} display={{ base: "none", lg: "flex" }}>
             {navigationLinks.map((link, index) => (
               <Box key={index}>
                 {!link.subLinks && (
@@ -300,6 +298,7 @@ function NavbarHeader({
                         onClick={onClose}
                         variant="ghost"
                         isActive={isActive}
+                        fontWeight="semibold"
                       >
                         {link.label}
                       </Button>
@@ -310,122 +309,138 @@ function NavbarHeader({
                 {link.subLinks && <NavbarPopover link={link} index={index} />}
               </Box>
             ))}
-            <IconButton
-              variant={"ghost"}
-              aria-label="Color Scheme"
-              onClick={() => {
-                toggleColorMode();
-              }}
-            >
-              {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-            </IconButton>
-            <Popover
-              closeDelay={200}
-              openDelay={0}
-              isLazy
-              placement="bottom"
-              lazyBehavior="unmount"
-              isOpen={isOpen}
-              returnFocusOnClose={false}
-              autoFocus={false}
-              orientation="vertical"
-              offset={[-20, 8]}
-            >
-              <PopoverAnchor>
-                <IconButton
-                  isActive={isOpen}
-                  variant={"ghost"}
-                  aria-label="Account"
-                  icon={
-                    session ? (
-                      <Avatar
-                        size="xs"
-                        name={
-                          session &&
-                          `${session?.user.user_metadata.firstName} ${session?.user.user_metadata.lastName}`
-                        }
-                        src=""
-                      />
-                    ) : (
-                      <Icon w={6} h={6} as={RiAccountCircleFill} />
-                    )
-                  }
-                  onClick={onOpen}
-                />
-              </PopoverAnchor>
-              {session ? (
-                <PopoverContent w="full" boxShadow="lg" ref={ref}>
-                  <PopoverBody w="full" p={0}>
-                    <Text p={2} textAlign="center">
-                      Hi {session?.user.user_metadata.firstName}{" "}
-                      {session?.user.user_metadata.lastName}
-                    </Text>
-                    <Divider w="full" />
-                    <ButtonGroup
-                      size="md"
-                      w="full"
-                      variant="ghost"
-                      orientation="vertical"
-                      spacing={0}
-                    >
-                      <Button
-                        fontSize="sm"
-                        onClick={onClose}
-                        borderRadius="none"
-                        as={Link}
-                        to="/profile"
-                        rightIcon={
-                          <Icon w={5} h={5} as={IoPersonCircleOutline} />
-                        }
-                      >
-                        Profile
-                      </Button>
-
-                      <Button
-                        fontSize="sm"
-                        onClick={() => {
-                          onClose();
-                          handleLogout();
-                        }}
-                        borderRadius="none"
-                        rightIcon={<Icon w={5} h={5} as={IoLogOutOutline} />}
-                      >
-                        Sign Out
-                      </Button>
-                    </ButtonGroup>
-                  </PopoverBody>
-                </PopoverContent>
-              ) : (
-                <PopoverContent w="full" boxShadow="lg" ref={ref}>
-                  <PopoverBody w="full" p={0}>
-                    <Text p={2} textAlign="center">
-                      No User Signed In
-                    </Text>
-                    <Divider w="full" />
-                    <ButtonGroup p={2} size="sm">
-                      <Button
-                        fontSize="sm"
-                        as={Link}
-                        to="/login"
-                        onClick={onClose}
-                      >
-                        Sign In
-                      </Button>
-                      <Button
-                        fontSize="sm"
-                        colorScheme="primary"
-                        as={Link}
-                        to="/register"
-                        onClick={onClose}
-                      >
-                        Sign Up
-                      </Button>
-                    </ButtonGroup>
-                  </PopoverBody>{" "}
-                </PopoverContent>
-              )}
-            </Popover>
           </HStack>
+        </HStack>
+
+        <HStack spacing={"8px"} display={{ base: "none", lg: "flex" }}>
+          <IconButton
+            variant={"ghost"}
+            aria-label="Color Scheme"
+            onClick={() => {
+              toggleColorMode();
+            }}
+            color={useColorModeValue("gray.600", "gray.300")}
+          >
+            {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+          </IconButton>
+          <Popover
+            closeDelay={200}
+            openDelay={0}
+            isLazy
+            placement="bottom"
+            lazyBehavior="unmount"
+            isOpen={isOpen}
+            returnFocusOnClose={false}
+            autoFocus={false}
+            orientation="vertical"
+            matchWidth
+          >
+            <PopoverAnchor>
+              <Button
+                isActive={isOpen}
+                pr={2}
+                pl={2}
+                variant="ghost"
+                onClick={onOpen}
+                leftIcon={
+                  loaderData?.session ? (
+                    <Avatar
+                      size="xs"
+                      name={
+                        loaderData?.session &&
+                        `${loaderData?.session?.user.user_metadata.firstName} ${loaderData?.session?.user.user_metadata.lastName}`
+                      }
+                      src=""
+                    />
+                  ) : (
+                    <Icon
+                      color="gray.600"
+                      _dark={{ color: "gray.300" }}
+                      w={6}
+                      h={6}
+                      as={RiAccountCircleFill}
+                    />
+                  )
+                }
+              >
+                {loaderData?.session
+                  ? `${loaderData?.session?.user.user_metadata.firstName} ${loaderData?.session?.user.user_metadata.lastName}`
+                  : "Join our Community"}
+              </Button>
+            </PopoverAnchor>
+            {loaderData?.session ? (
+              <PopoverContent w="full" boxShadow="lg" ref={ref}>
+                <PopoverBody w="full" p={0}>
+                  <ButtonGroup
+                    size="md"
+                    w="full"
+                    variant="ghost"
+                    orientation="vertical"
+                    spacing={0}
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Button
+                      fontSize="sm"
+                      w="full"
+                      onClick={onClose}
+                      borderRadius="none"
+                      as={Link}
+                      to="/profile"
+                      rightIcon={
+                        <Icon w={5} h={5} as={IoPersonCircleOutline} />
+                      }
+                    >
+                      Profile
+                    </Button>
+
+                    <Button
+                      fontSize="sm"
+                      w="full"
+                      onClick={() => {
+                        onClose();
+                        handleLogout();
+                      }}
+                      borderRadius="none"
+                      rightIcon={<Icon w={5} h={5} as={IoLogOutOutline} />}
+                    >
+                      Sign Out
+                    </Button>
+                  </ButtonGroup>
+                </PopoverBody>
+              </PopoverContent>
+            ) : (
+              <PopoverContent w="full" boxShadow="lg" ref={ref}>
+                <PopoverBody w="full" p={0}>
+                  <Text p={2} textAlign="center">
+                    Become a Member
+                  </Text>
+                  <Divider w="full" />
+                  <ButtonGroup p={2} size="sm" w="full" justifyContent="center">
+                    <Button
+                      fontSize="sm"
+                      w="full"
+                      as={Link}
+                      to="/login"
+                      onClick={onClose}
+                    >
+                      Sign In
+                    </Button>
+                    <Button
+                      fontSize="sm"
+                      w="full"
+                      colorScheme="primary"
+                      as={Link}
+                      to="/register"
+                      onClick={onClose}
+                    >
+                      Sign Up
+                    </Button>
+                  </ButtonGroup>
+                </PopoverBody>{" "}
+              </PopoverContent>
+            )}
+          </Popover>
         </HStack>
 
         <HStack spacing="8px" display={{ lg: "none" }}>
@@ -589,7 +604,6 @@ function NavbarDrawer({
               </Box>
             ))}
           </VStack>
-          {/* </Tabs> */}
         </DrawerBody>
       </DrawerContent>
     </Drawer>
@@ -639,6 +653,7 @@ function NavbarPopover({ link, index }: any) {
               onMouseLeave={closePopover}
               variant="ghost"
               isActive={isActive}
+              fontWeight="semibold"
               rightIcon={<ChevronDownIcon />}
             >
               {link.label}

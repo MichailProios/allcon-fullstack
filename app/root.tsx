@@ -133,7 +133,7 @@ export const loader: LoaderFunction = async ({ request }: any) => {
   } = await supabase.auth.getSession();
 
   return json(
-    { session },
+    { session, supabase },
     {
       headers: response.headers,
     }

@@ -33,7 +33,9 @@ interface LayoutProps {
 }
 
 const navigationLinks = [
-  { label: "About", url: "about" },
+  { label: "About", url: "/about" },
+  { label: "Blog", url: "/blog" },
+
   {
     label: "Projects",
     url: "projects",
@@ -52,9 +54,9 @@ const navigationLinks = [
     label: "Resources",
     url: "resources",
     subLinks: [
-      { label: "Blog", url: "/blog" },
       { label: "Awards", url: "/awards" },
-      { label: "Testimonials", url: "/testimonials" },
+      { label: "Media", url: "/media" },
+      { label: "References", url: "/references" },
     ],
   },
   { label: "Contacts", url: "contacts" },

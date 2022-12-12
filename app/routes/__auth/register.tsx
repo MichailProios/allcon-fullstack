@@ -29,9 +29,15 @@ import {
   ButtonGroup,
   Flex,
 } from "@chakra-ui/react";
-import { SiLinkedin, SiMessenger, SiMicrosoft } from "react-icons/si";
+import {
+  SiLinkedin,
+  SiMessenger,
+  SiMicrosoft,
+  SiMicrosoftazure,
+} from "react-icons/si";
+import { redirect, json } from "@remix-run/node";
 
-import { supabaseClient } from "~/utils/supabase";
+import { createServerClient } from "~/utils/supabase.server";
 
 import type { LoaderFunction } from "@remix-run/node";
 import {
@@ -42,9 +48,6 @@ import {
 } from "remix-validated-form";
 import { withZod } from "@remix-validated-form/with-zod";
 import { z } from "zod";
-
-import { redirect } from "@remix-run/node";
-import { useWindowDimensions } from "~/utils/hooks";
 
 // import * as auth from "app/utils/auth.server";
 // import * as cookie from "app/utils/cookie.server";
@@ -81,6 +84,9 @@ export const validator = withZod(
 );
 
 export async function action({ request }: { request: Request }) {
+  const response = new Response();
+  const supabase = createServerClient({ request, response });
+
   const data = await validator.validate(await request.formData());
 
   if (data.error) {
@@ -89,25 +95,51 @@ export async function action({ request }: { request: Request }) {
 
   const { firstName, lastName, emailAddress, password, agreed } = data.data;
 
-  // const { error } = await supabaseClient.auth.signUp({
-  //   email: emailAddress,
-  //   password: password,
-  //   options: {
-  //     data: {
-  //       firstName: firstName,
-  //       lastName: lastName,
-  //     },
-  //   },
-  // });
+  const { error } = await supabase.auth.signUp({
+    email: emailAddress,
+    password: password,
+    options: {
+      data: {
+        firstName: firstName,
+        lastName: lastName,
+      },
+    },
+  });
 
-  // if (error) return { authError: error?.message };
+  if (error) {
+    return json(
+      { error: error.message },
+      {
+        headers: response.headers,
+      }
+    );
+  }
 
-  // return redirect("/login");
+  return json({ success: "registered" }, { headers: response.headers });
 }
 
 export const loader: LoaderFunction = async ({ request }: any) => {
-  return "";
+  const response = new Response();
+  const supabase = createServerClient({ request, response });
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (session) {
+    return redirect("/resources", {
+      headers: response.headers,
+    });
+  } else {
+    return json(
+      { session },
+      {
+        headers: response.headers,
+      }
+    );
+  }
 };
+
 function TextField(props: any) {
   const { error, getInputProps } = useField(props.name);
   const isSubmitting = useIsSubmitting();
@@ -172,12 +204,20 @@ export default function Register() {
   const toast = useToast();
 
   useEffect(() => {
-    if (actionData?.authError) {
+    if (actionData?.error) {
       toast({
-        title: "Account creation error",
-        description: actionData?.authError,
-        variant: "left-accent",
+        title: actionData?.error,
+        variant: "solid",
         status: "error",
+        duration: 3000,
+        isClosable: false,
+      });
+    } else if (actionData?.success) {
+      toast({
+        title: "Registered & Signed In Successfully",
+        // description: "Check your email to confirm your identity",
+        variant: "solid",
+        status: "success",
         duration: 3000,
         isClosable: false,
       });
@@ -209,13 +249,21 @@ export default function Register() {
 
             <ButtonGroup orientation="vertical" w="full">
               <Button w={"full"} variant={"solid"} leftIcon={<FcGoogle />}>
-                Sign up with Gmail
+                Sign Up with Gmail
               </Button>
-              <Button w={"full"} variant={"solid"} leftIcon={<SiMicrosoft />}>
-                Sign up with Microsoft
+              <Button
+                w={"full"}
+                variant={"solid"}
+                leftIcon={<SiMicrosoftazure color="#0078D4" />}
+              >
+                Sign Up with Microsoft
               </Button>
-              <Button w={"full"} variant={"solid"} leftIcon={<FaFacebook />}>
-                Sign up with Facebook
+              <Button
+                w={"full"}
+                variant={"solid"}
+                leftIcon={<FaFacebook color="#4968ad" />}
+              >
+                Sign Up with Facebook
               </Button>
             </ButtonGroup>
 

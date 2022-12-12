@@ -284,7 +284,7 @@ export default function Index() {
         toastIdRef.current = toast({
           title: "Searching projects",
           status: "loading",
-          variant: "left-accent",
+          variant: "solid",
           duration: null,
           isClosable: false,
         });
@@ -292,7 +292,7 @@ export default function Index() {
         toast.update(toastIdRef.current, {
           title: "Searching projects",
           status: "loading",
-          variant: "left-accent",
+          variant: "solid",
           duration: null,
           isClosable: false,
         });
@@ -309,7 +309,7 @@ export default function Index() {
       toastIdRef.current = toast({
         title: `Showing ${category || "all"} projects`,
         status: "loading",
-        variant: "left-accent",
+        variant: "solid",
         duration: null,
         isClosable: false,
       });
@@ -317,7 +317,7 @@ export default function Index() {
       toast.update(toastIdRef.current, {
         title: `Showing ${category || "all"} projects`,
         status: "loading",
-        variant: "left-accent",
+        variant: "solid",
         duration: null,
         isClosable: false,
       });

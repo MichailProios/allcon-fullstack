@@ -166,22 +166,22 @@ function NavbarHeader({
     setTabIndex(index);
   };
 
-  useEffect(() => {
-    handleTabsChange(
-      location?.pathname.startsWith("/about")
-        ? 0
-        : location?.pathname.includes("/projects")
-        ? 1
-        : location?.pathname.includes("/resources") ||
-          location?.pathname.includes("/testimonials") ||
-          location?.pathname.includes("/blog") ||
-          location?.pathname.includes("/awards")
-        ? 2
-        : location?.pathname.includes("/contacts")
-        ? 3
-        : null
-    );
-  }, [location?.pathname]);
+  // useEffect(() => {
+  //   handleTabsChange(
+  //     location?.pathname.startsWith("/about")
+  //       ? 0
+  //       : location?.pathname.includes("/projects")
+  //       ? 1
+  //       : location?.pathname.includes("/resources") ||
+  //         location?.pathname.includes("/testimonials") ||
+  //         location?.pathname.includes("/media") ||
+  //         location?.pathname.includes("/awards")
+  //       ? 2
+  //       : location?.pathname.includes("/contacts")
+  //       ? 3
+  //       : null
+  //   );
+  // }, [location?.pathname]);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -202,7 +202,7 @@ function NavbarHeader({
 
     toast({
       title: "Signed Out Successfully",
-      variant: "left-accent",
+      variant: "solid",
       status: "success",
       duration: 3000,
       isClosable: false,
@@ -320,10 +320,11 @@ function NavbarHeader({
               returnFocusOnClose={false}
               autoFocus={false}
               orientation="vertical"
-              offset={[-50, 8]}
+              offset={[-20, 8]}
             >
               <PopoverAnchor>
                 <IconButton
+                  isActive={isOpen}
                   variant={"ghost"}
                   aria-label="Account"
                   icon={
@@ -343,7 +344,8 @@ function NavbarHeader({
                 <PopoverContent w="full" boxShadow="lg" ref={ref}>
                   <PopoverBody w="full" p={0}>
                     <Text p={2} textAlign="center">
-                      Hi {session?.user.user_metadata.firstName}
+                      Hi {session?.user.user_metadata.firstName}{" "}
+                      {session?.user.user_metadata.lastName}
                     </Text>
                     <Divider w="full" />
                     <ButtonGroup
@@ -351,6 +353,7 @@ function NavbarHeader({
                       w="full"
                       variant="ghost"
                       orientation="vertical"
+                      spacing={0}
                     >
                       <Button
                         fontSize="sm"
@@ -362,8 +365,9 @@ function NavbarHeader({
                           <Icon w={5} h={5} as={IoPersonCircleOutline} />
                         }
                       >
-                        My Profile
+                        Profile
                       </Button>
+
                       <Button
                         fontSize="sm"
                         onClick={() => {
@@ -460,26 +464,28 @@ function NavbarDrawer({
   const location = useMatches()[1];
   const [tabIndex, setTabIndex] = useState();
 
-  const handleTabsChange = (index: any) => {
-    setTabIndex(index);
-  };
+  // const handleTabsChange = (index: any) => {
+  //   setTabIndex(index);
+  // };
 
-  useEffect(() => {
-    handleTabsChange(
-      location?.pathname.startsWith("/about")
-        ? 0
-        : location?.pathname.includes("/projects")
-        ? 1
-        : location?.pathname.includes("/resources") ||
-          location?.pathname.includes("/testimonials") ||
-          location?.pathname.includes("/blog") ||
-          location?.pathname.includes("/awards")
-        ? 2
-        : location?.pathname.includes("/contacts")
-        ? 3
-        : null
-    );
-  }, [location?.pathname]);
+  // useEffect(() => {
+  //   handleTabsChange(
+  //     location?.pathname.startsWith("/about")
+  //       ? 0
+  //       : location?.pathname.includes("/projects")
+  //       ? 1
+  //       : location?.pathname.includes("/blog")
+  //       ? 2
+  //       : location?.pathname.includes("/resources") ||
+  //         location?.pathname.includes("/testimonials") ||
+  //         location?.pathname.includes("/media") ||
+  //         location?.pathname.includes("/awards")
+  //       ? 3
+  //       : location?.pathname.includes("/contacts")
+  //       ? 4
+  //       : null
+  //   );
+  // }, [location?.pathname]);
 
   return (
     <Drawer
@@ -513,64 +519,64 @@ function NavbarDrawer({
           </NavLink>
         </DrawerHeader>
         <DrawerBody>
-          <Tabs
+          {/* <Tabs
             colorScheme="primary"
             isManual
             align="center"
             isFitted
             index={tabIndex}
-            onChange={handleTabsChange}
+            // onChange={handleTabsChange}
             orientation="vertical"
-          >
-            <VStack spacing="12px" w={"full"}>
-              {navigationLinks.map((link, index) => (
-                <Box key={index} w="full">
-                  {!link.subLinks && (
-                    // <Tab
-                    //   key={index}
-                    //   as={NavLink}
-                    //   to={link.url}
-                    //   _focus={{ boxShadow: "none" }}
-                    //   draggable={false}
-                    //   prefetch="render"
-                    //   rel="prefetch"
-                    //   fontSize="md"
-                    //   w={"100%"}
-                    // >
-                    //   {link.label}
-                    // </Tab>
+          > */}
+          <VStack spacing="12px" w={"full"}>
+            {navigationLinks.map((link, index) => (
+              <Box key={index} w="full">
+                {!link.subLinks && (
+                  // <Tab
+                  //   key={index}
+                  //   as={NavLink}
+                  //   to={link.url}
+                  //   _focus={{ boxShadow: "none" }}
+                  //   draggable={false}
+                  //   prefetch="render"
+                  //   rel="prefetch"
+                  //   fontSize="md"
+                  //   w={"100%"}
+                  // >
+                  //   {link.label}
+                  // </Tab>
 
-                    <NavLink
-                      key={index}
-                      to={link.url}
-                      draggable="false"
-                      prefetch="render"
-                    >
-                      {({ isActive }) => (
-                        <Button
-                          onClick={onDrawerClose}
-                          variant="ghost"
-                          isActive={isActive}
-                          w={"100%"}
-                        >
-                          {link.label}
-                        </Button>
-                      )}
-                    </NavLink>
-                  )}
+                  <NavLink
+                    key={index}
+                    to={link.url}
+                    draggable="false"
+                    prefetch="render"
+                  >
+                    {({ isActive }) => (
+                      <Button
+                        onClick={onDrawerClose}
+                        variant="ghost"
+                        isActive={isActive}
+                        w={"100%"}
+                      >
+                        {link.label}
+                      </Button>
+                    )}
+                  </NavLink>
+                )}
 
-                  {link.subLinks && (
-                    <SubLinks
-                      link={link}
-                      index={index}
-                      tabIndex={tabIndex}
-                      onDrawerClose={onDrawerClose}
-                    />
-                  )}
-                </Box>
-              ))}
-            </VStack>
-          </Tabs>
+                {link.subLinks && (
+                  <SubLinks
+                    link={link}
+                    index={index}
+                    tabIndex={tabIndex}
+                    onDrawerClose={onDrawerClose}
+                  />
+                )}
+              </Box>
+            ))}
+          </VStack>
+          {/* </Tabs> */}
         </DrawerBody>
       </DrawerContent>
     </Drawer>

@@ -29,7 +29,12 @@ import {
   Flex,
   useToast,
 } from "@chakra-ui/react";
-import { SiLinkedin, SiMessenger, SiMicrosoft } from "react-icons/si";
+import {
+  SiLinkedin,
+  SiMessenger,
+  SiMicrosoft,
+  SiMicrosoftazure,
+} from "react-icons/si";
 
 import type { LoaderFunction } from "@remix-run/node";
 import {
@@ -46,11 +51,20 @@ import { redirect, json } from "@remix-run/node";
 // import * as auth from "app/utils/auth.server";
 // import * as cookie from "app/utils/cookie.server";
 
-import { Link, useActionData } from "@remix-run/react";
+import {
+  Link,
+  useActionData,
+  useFetcher,
+  useLoaderData,
+  useMatches,
+  useOutletContext,
+} from "@remix-run/react";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
 import { createServerClient } from "~/utils/supabase.server";
+import { SupabaseClient } from "@supabase/auth-helpers-remix";
+import { Database } from "~/utils/db_types";
 
 export const validator = withZod(
   z.object({
@@ -96,6 +110,9 @@ export async function action({ request }: { request: Request }) {
 export const loader: LoaderFunction = async ({ request }: any) => {
   const response = new Response();
   const supabase = createServerClient({ request, response });
+
+  // const url = new URL(request.url);
+  // const accessToken = url.searchParams.get("auth");
 
   const {
     data: { session },
@@ -201,11 +218,23 @@ export default function Login() {
   const actionData = useActionData();
   const toast = useToast();
 
+  // const test = useOutletContext<{
+  //   supabase: SupabaseClient<Database>;
+  // }>();
+
+  // console.log(test);
+
+  // async function handleGoogleAuth() {
+  //   const { error } = await supabase.auth.signInWithOAuth({
+  //     provider: "google",
+  //   });
+  // }
+
   useEffect(() => {
     if (actionData?.error) {
       toast({
         title: actionData?.error,
-        variant: "left-accent",
+        variant: "solid",
         status: "error",
         duration: 3000,
         isClosable: false,
@@ -213,7 +242,7 @@ export default function Login() {
     } else if (actionData?.success) {
       toast({
         title: "Signed In Successfully",
-        variant: "left-accent",
+        variant: "solid",
         status: "success",
         duration: 3000,
         isClosable: false,
@@ -245,13 +274,26 @@ export default function Login() {
             </Stack>
 
             <ButtonGroup orientation="vertical" w="full">
-              <Button w={"full"} variant={"solid"} leftIcon={<FcGoogle />}>
+              <Button
+                w={"full"}
+                variant={"solid"}
+                leftIcon={<FcGoogle />}
+                // onClick={handleGoogleAuth}
+              >
                 Continue with Gmail
               </Button>
-              <Button w={"full"} variant={"solid"} leftIcon={<SiMicrosoft />}>
+              <Button
+                w={"full"}
+                variant={"solid"}
+                leftIcon={<SiMicrosoftazure color="#0078D4" />}
+              >
                 Continue with Microsoft
               </Button>
-              <Button w={"full"} variant={"solid"} leftIcon={<FaFacebook />}>
+              <Button
+                w={"full"}
+                variant={"solid"}
+                leftIcon={<FaFacebook color="#4968ad" />}
+              >
                 Continue with Facebook
               </Button>
             </ButtonGroup>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, Context } from "react";
 import {
   Container,
   FormControl,
@@ -27,6 +27,7 @@ import {
   useBreakpointValue,
   ButtonGroup,
   Flex,
+  useToast,
 } from "@chakra-ui/react";
 import { SiLinkedin, SiMessenger, SiMicrosoft } from "react-icons/si";
 
@@ -40,8 +41,7 @@ import {
 import { withZod } from "@remix-validated-form/with-zod";
 import { z } from "zod";
 
-import { redirect } from "@remix-run/node";
-import { useWindowDimensions } from "~/utils/hooks";
+import { redirect, json } from "@remix-run/node";
 
 // import * as auth from "app/utils/auth.server";
 // import * as cookie from "app/utils/cookie.server";
@@ -50,75 +50,92 @@ import { Link, useActionData } from "@remix-run/react";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
-const passwordRegex = new RegExp(
-  "(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=]).*$"
-);
+import { createServerClient } from "~/utils/supabase.server";
 
 export const validator = withZod(
   z.object({
-    firstName: z.string().min(1, { message: "First Name is required" }),
-    lastName: z.string().min(1, { message: "Last Name is required" }),
-
     emailAddress: z
       .string()
-      .min(1, { message: "Email Address is required" })
-      .email("Must be a valid email")
-      .trim(),
-    password: z
-      .string()
-      .min(8, { message: "Password must be at least 8 characters" })
-      .regex(passwordRegex, {
-        message:
-          "Password must contain at least one uppercase, one lowercase, one number, and one special character",
-      })
-      .trim(),
-    confirmPassword: z
-      .string()
-      .min(8, { message: "Confirm Password must be at least 8 characters" })
-      .regex(passwordRegex, {
-        message:
-          "Password must contain at least one uppercase, one lowercase, one number, and one special character",
-      })
-      .trim(),
+      // .min(1, { message: "Email is required" })
+      .email("Must be a valid email"),
+    password: z.string(),
 
-    agreed: z.any(),
+    remember: z.any(),
   })
 );
 
 export async function action({ request }: { request: Request }) {
+  const response = new Response();
+  const supabase = createServerClient({ request, response });
+
   const data = await validator.validate(await request.formData());
 
   if (data.error) {
     return validationError(data.error);
   }
 
-  const {
-    firstName,
-    lastName,
-    emailAddress,
-    password,
-    confirmPassword,
-    agreed,
-  } = data.data;
+  const { emailAddress, password, remember } = data.data;
+
+  const { error } = await supabase.auth.signInWithPassword({
+    email: emailAddress,
+    password: password,
+  });
+
+  if (error) {
+    return json(
+      { error: error.message },
+      {
+        headers: response.headers,
+      }
+    );
+  }
+
+  return json({ success: "authenticated" }, { headers: response.headers });
 }
 
 export const loader: LoaderFunction = async ({ request }: any) => {
-  return "";
+  const response = new Response();
+  const supabase = createServerClient({ request, response });
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (session) {
+    return redirect("/resources", {
+      headers: response.headers,
+    });
+  } else {
+    return json(
+      { session },
+      {
+        headers: response.headers,
+      }
+    );
+  }
 };
-function TextField(props: any) {
+
+function EmailTextField(props: any) {
   const { error, getInputProps } = useField(props.name);
   const isSubmitting = useIsSubmitting();
 
   return (
     <FormControl id={props.name} isInvalid={error ? true : false}>
       <FormLabel>{props.label}</FormLabel>
-      <Input {...props} {...getInputProps()} isReadOnly={isSubmitting} />
+      <Input
+        {...props}
+        {...getInputProps()}
+        autoComplete="current-email"
+        readOnly={isSubmitting}
+      />
       <FormErrorMessage>{error}</FormErrorMessage>
     </FormControl>
   );
 }
 
 function PasswordTextField(props: any) {
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
   const { error, getInputProps } = useField(props.name);
   const isSubmitting = useIsSubmitting();
 
@@ -129,9 +146,25 @@ function PasswordTextField(props: any) {
         <Input
           {...props}
           {...getInputProps()}
-          isReadOnly={isSubmitting}
-          type={"password"}
+          readOnly={isSubmitting}
+          autoComplete="current-password"
+          type={show ? "text" : "password"}
         />
+        <InputRightElement width="4.5rem">
+          <Button
+            h="1.75rem"
+            size="sm"
+            rounded="md"
+            bg={useColorModeValue("gray.300", "gray.700")}
+            _hover={{
+              bg: useColorModeValue("gray.400", "gray.800"),
+            }}
+            disabled={isSubmitting}
+            onClick={handleClick}
+          >
+            {show ? "Hide" : "Show"}
+          </Button>
+        </InputRightElement>
       </InputGroup>
       <FormErrorMessage>{error}</FormErrorMessage>
     </FormControl>
@@ -147,7 +180,7 @@ function CheckBox(props: any) {
       {...props}
       {...getInputProps()}
       value={"yes"}
-      isReadOnly={isSubmitting}
+      readOnly={isSubmitting}
     >
       {props.label}
     </Checkbox>
@@ -156,29 +189,45 @@ function CheckBox(props: any) {
 
 function SubmitButton(props: any) {
   const isSubmitting = useIsSubmitting();
-  const actionData = useActionData();
 
   return (
-    <Button {...props} isLoading={isSubmitting} loadingText="Creating Account">
+    <Button {...props} isLoading={isSubmitting} loadingText="Signing In">
       {props.label}
     </Button>
   );
 }
-export default function Register() {
-  const { height } = useWindowDimensions();
 
-  const breakpointHeight = useBreakpointValue(
-    { base: `calc(${height}px - 64px)`, md: "calc(100vh - 64px)" },
-    { fallback: "md", ssr: true }
-  );
+export default function Login() {
+  const actionData = useActionData();
+  const toast = useToast();
+
+  useEffect(() => {
+    if (actionData?.error) {
+      toast({
+        title: actionData?.error,
+        variant: "left-accent",
+        status: "error",
+        duration: 3000,
+        isClosable: false,
+      });
+    } else if (actionData?.success) {
+      toast({
+        title: "Signed In Successfully",
+        variant: "left-accent",
+        status: "success",
+        duration: 3000,
+        isClosable: false,
+      });
+    }
+  }, [actionData, toast]);
 
   return (
-    <Container maxW="7xl" p={{ base: 1, md: 6 }}>
+    <Container maxW="7xl" p={{ base: 1, md: 10 }}>
       <Center
         as={ValidatedForm}
         validator={validator}
         method="post"
-        id="registerForm"
+        id="loginForm"
         replace
       >
         <Stack spacing={4}>
@@ -192,18 +241,18 @@ export default function Register() {
             spacing={8}
           >
             <Stack align="center">
-              <Heading fontSize="2xl">Create Account</Heading>
+              <Heading fontSize="2xl">Sign In</Heading>
             </Stack>
 
             <ButtonGroup orientation="vertical" w="full">
               <Button w={"full"} variant={"solid"} leftIcon={<FcGoogle />}>
-                Sign up with Gmail
+                Continue with Gmail
               </Button>
               <Button w={"full"} variant={"solid"} leftIcon={<SiMicrosoft />}>
-                Sign up with Microsoft
+                Continue with Microsoft
               </Button>
               <Button w={"full"} variant={"solid"} leftIcon={<FaFacebook />}>
-                Sign up with Facebook
+                Continue with Facebook
               </Button>
             </ButtonGroup>
 
@@ -212,24 +261,9 @@ export default function Register() {
               <Text>or</Text>
               <Divider w="full" />
             </Flex>
+
             <VStack spacing={4} w="100%">
-              <Stack direction={{ base: "column", md: "row" }} w="100%">
-                <TextField
-                  label="First Name"
-                  name="firstName"
-                  placeholder="Enter your first name"
-                  rounded="md"
-                  type="text"
-                />
-                <TextField
-                  label="Last Name"
-                  name="lastName"
-                  placeholder="Enter your last name"
-                  rounded="md"
-                  type="text"
-                />
-              </Stack>
-              <TextField
+              <EmailTextField
                 label="Email Address"
                 name="emailAddress"
                 placeholder="Enter your email"
@@ -245,28 +279,35 @@ export default function Register() {
               />
             </VStack>
             <VStack w="100%" spacing={4}>
-              <CheckBox
-                type="checkbox"
-                name="agreed"
-                label=" Agree with Terms & Conditions"
-              />
+              <Stack direction="row" justify="space-between" w="100%">
+                <CheckBox type="checkbox" name="remember" label="Remember me" />
+                <Text
+                  as={Link}
+                  to="/reset"
+                  fontSize={{ base: "md", sm: "md" }}
+                  _hover={{ textDecoration: "underline" }}
+                >
+                  Forgot Password?
+                </Text>
+              </Stack>
 
               <SubmitButton
                 w="100%"
                 colorScheme="primary"
-                label="Create Account"
+                label="Sign In"
                 type="submit"
               />
+
               <Text>
-                Already have an account?&nbsp;
+                Don't have an account?&nbsp;
                 <Text
                   as={Link}
-                  to="/login"
+                  to="/register"
                   fontSize={{ base: "md", sm: "md" }}
                   fontWeight="bold"
                   _hover={{ textDecoration: "underline" }}
                 >
-                  Sign In
+                  Register
                 </Text>
               </Text>
             </VStack>
@@ -274,5 +315,6 @@ export default function Register() {
         </Stack>
       </Center>
     </Container>
+    // </Box>
   );
 }

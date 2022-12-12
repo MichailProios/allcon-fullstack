@@ -1,8 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { withEmotionCache } from "@emotion/react";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
-
+import { createServerClient } from "~/utils/supabase.server";
+import type { LoaderFunction } from "@remix-run/node";
 import { useCatch } from "@remix-run/react";
+import { redirect, json } from "@remix-run/node";
 
 import {
   Links,
@@ -110,6 +112,33 @@ const Document = withEmotionCache(
     );
   }
 );
+
+export async function action({ request }: { request: Request }) {
+  const response = new Response();
+  const supabase = createServerClient({ request, response });
+
+  await supabase.auth.signOut();
+
+  return redirect("/login", {
+    headers: response.headers,
+  });
+}
+
+export const loader: LoaderFunction = async ({ request }: any) => {
+  const response = new Response();
+  const supabase = createServerClient({ request, response });
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  return json(
+    { session },
+    {
+      headers: response.headers,
+    }
+  );
+};
 
 export default function App() {
   return (

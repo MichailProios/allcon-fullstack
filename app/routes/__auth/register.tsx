@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Container,
   FormControl,
@@ -25,10 +25,13 @@ import {
   HStack,
   Box,
   useBreakpointValue,
+  useToast,
   ButtonGroup,
   Flex,
 } from "@chakra-ui/react";
 import { SiLinkedin, SiMessenger, SiMicrosoft } from "react-icons/si";
+
+import { supabaseClient } from "~/utils/supabase";
 
 import type { LoaderFunction } from "@remix-run/node";
 import {
@@ -50,17 +53,30 @@ import { Link, useActionData } from "@remix-run/react";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
+const passwordRegex = new RegExp(
+  "(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=]).*$"
+);
+
 export const validator = withZod(
   z.object({
+    firstName: z.string().min(1, { message: "First Name is required" }),
+    lastName: z.string().min(1, { message: "Last Name is required" }),
+
     emailAddress: z
       .string()
-      .min(1, { message: "Email is required" })
-      .email("Must be a valid email"),
+      .min(1, { message: "Email Address is required" })
+      .email("Must be a valid email")
+      .trim(),
     password: z
       .string()
-      .min(8, { message: "Password must be at least 8 characters" }),
+      .min(8, { message: "Password must be at least 8 characters" })
+      .regex(passwordRegex, {
+        message:
+          "Password must contain at least one uppercase, one lowercase, one number, and one special character",
+      })
+      .trim(),
 
-    remember: z.any(),
+    agreed: z.any(),
   })
 );
 
@@ -71,29 +87,41 @@ export async function action({ request }: { request: Request }) {
     return validationError(data.error);
   }
 
-  const { emailAddress, password, remember } = data.data;
+  const { firstName, lastName, emailAddress, password, agreed } = data.data;
+
+  // const { error } = await supabaseClient.auth.signUp({
+  //   email: emailAddress,
+  //   password: password,
+  //   options: {
+  //     data: {
+  //       firstName: firstName,
+  //       lastName: lastName,
+  //     },
+  //   },
+  // });
+
+  // if (error) return { authError: error?.message };
+
+  // return redirect("/login");
 }
 
 export const loader: LoaderFunction = async ({ request }: any) => {
   return "";
 };
-
-function EmailTextField(props: any) {
+function TextField(props: any) {
   const { error, getInputProps } = useField(props.name);
   const isSubmitting = useIsSubmitting();
 
   return (
     <FormControl id={props.name} isInvalid={error ? true : false}>
       <FormLabel>{props.label}</FormLabel>
-      <Input {...props} {...getInputProps()} readOnly={isSubmitting} />
+      <Input {...props} {...getInputProps()} isReadOnly={isSubmitting} />
       <FormErrorMessage>{error}</FormErrorMessage>
     </FormControl>
   );
 }
 
 function PasswordTextField(props: any) {
-  const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
   const { error, getInputProps } = useField(props.name);
   const isSubmitting = useIsSubmitting();
 
@@ -104,24 +132,9 @@ function PasswordTextField(props: any) {
         <Input
           {...props}
           {...getInputProps()}
-          readOnly={isSubmitting}
-          type={show ? "text" : "password"}
+          isReadOnly={isSubmitting}
+          type={"password"}
         />
-        <InputRightElement width="4.5rem">
-          <Button
-            h="1.75rem"
-            size="sm"
-            rounded="md"
-            bg={useColorModeValue("gray.300", "gray.700")}
-            _hover={{
-              bg: useColorModeValue("gray.400", "gray.800"),
-            }}
-            disabled={isSubmitting}
-            onClick={handleClick}
-          >
-            {show ? "Hide" : "Show"}
-          </Button>
-        </InputRightElement>
       </InputGroup>
       <FormErrorMessage>{error}</FormErrorMessage>
     </FormControl>
@@ -137,44 +150,47 @@ function CheckBox(props: any) {
       {...props}
       {...getInputProps()}
       value={"yes"}
-      readOnly={isSubmitting}
+      isReadOnly={isSubmitting}
     >
       {props.label}
     </Checkbox>
   );
 }
 
-export default function Register() {
-  const { height } = useWindowDimensions();
+function SubmitButton(props: any) {
+  const isSubmitting = useIsSubmitting();
+  const actionData = useActionData();
 
-  const breakpointHeight = useBreakpointValue(
-    { base: `calc(${height}px - 64px)`, md: "calc(100vh - 64px)" },
-    { fallback: "md", ssr: true }
-  );
-
-  function SubmitButton(props: any) {
-    const isSubmitting = useIsSubmitting();
-
-    return (
-      <Button {...props} isLoading={isSubmitting} loadingText="Signing In">
-        {props.label}
-      </Button>
-    );
-  }
   return (
-    // <Box
-    //   bgImage="https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/60f073c3-a567-471e-9bc6-9096dcc65500/hq"
-    //   bgRepeat="no-repeat"
-    //   bgPos="center"
-    //   bgSize="cover"
-    //   h={breakpointHeight}
-    // >
-    <Container maxW="7xl" p={{ base: 1, md: 10 }}>
+    <Button {...props} isLoading={isSubmitting} loadingText="Creating Account">
+      {props.label}
+    </Button>
+  );
+}
+export default function Register() {
+  const actionData = useActionData();
+  const toast = useToast();
+
+  useEffect(() => {
+    if (actionData?.authError) {
+      toast({
+        title: "Account creation error",
+        description: actionData?.authError,
+        variant: "left-accent",
+        status: "error",
+        duration: 3000,
+        isClosable: false,
+      });
+    }
+  }, [actionData, toast]);
+
+  return (
+    <Container maxW="7xl" p={{ base: 1, md: 6 }}>
       <Center
         as={ValidatedForm}
         validator={validator}
         method="post"
-        id="loginForm"
+        id="registerForm"
         replace
       >
         <Stack spacing={4}>
@@ -188,18 +204,18 @@ export default function Register() {
             spacing={8}
           >
             <Stack align="center">
-              <Heading fontSize="2xl">Sign In</Heading>
+              <Heading fontSize="2xl">Create Account</Heading>
             </Stack>
 
             <ButtonGroup orientation="vertical" w="full">
               <Button w={"full"} variant={"solid"} leftIcon={<FcGoogle />}>
-                Continue with Gmail
+                Sign up with Gmail
               </Button>
               <Button w={"full"} variant={"solid"} leftIcon={<SiMicrosoft />}>
-                Continue with Microsoft
+                Sign up with Microsoft
               </Button>
               <Button w={"full"} variant={"solid"} leftIcon={<FaFacebook />}>
-                Continue with Facebook
+                Sign up with Facebook
               </Button>
             </ButtonGroup>
 
@@ -208,9 +224,24 @@ export default function Register() {
               <Text>or</Text>
               <Divider w="full" />
             </Flex>
-
             <VStack spacing={4} w="100%">
-              <EmailTextField
+              <Stack direction={{ base: "column", md: "row" }} w="100%">
+                <TextField
+                  label="First Name"
+                  name="firstName"
+                  placeholder="Enter your first name"
+                  rounded="md"
+                  type="text"
+                />
+                <TextField
+                  label="Last Name"
+                  name="lastName"
+                  placeholder="Enter your last name"
+                  rounded="md"
+                  type="text"
+                />
+              </Stack>
+              <TextField
                 label="Email Address"
                 name="emailAddress"
                 placeholder="Enter your email"
@@ -224,54 +255,30 @@ export default function Register() {
                 placeholder="Enter your password"
                 rounded="md"
               />
-
-              {/* {actionData?.res && (
-                  <Alert status="error" rounded="md">
-                    <AlertIcon />
-                    <AlertTitle>{actionData?.res?.message}</AlertTitle>
-                  </Alert>
-                )}
-
-                {verificationStatus && (
-                  <Alert status="success" rounded="md">
-                    <AlertIcon />
-                    <AlertTitle>
-                      Account verification successful! Please login with your
-                      credentials.
-                    </AlertTitle>
-                  </Alert>
-                )} */}
             </VStack>
             <VStack w="100%" spacing={4}>
-              <Stack direction="row" justify="space-between" w="100%">
-                <CheckBox type="checkbox" name="remember" label="Remember me" />
-                <Text
-                  as={Link}
-                  to="/forgot"
-                  fontSize={{ base: "md", sm: "md" }}
-                  _hover={{ textDecoration: "underline" }}
-                >
-                  Forgot Password?
-                </Text>
-              </Stack>
+              <CheckBox
+                type="checkbox"
+                name="agreed"
+                label=" Agree with Terms & Conditions"
+              />
 
               <SubmitButton
                 w="100%"
                 colorScheme="primary"
-                label="Sign In"
+                label="Create Account"
                 type="submit"
               />
-
               <Text>
-                Don't have an account?&nbsp;
+                Already have an account?&nbsp;
                 <Text
                   as={Link}
-                  to="/register"
+                  to="/login"
                   fontSize={{ base: "md", sm: "md" }}
                   fontWeight="bold"
                   _hover={{ textDecoration: "underline" }}
                 >
-                  Register
+                  Sign In
                 </Text>
               </Text>
             </VStack>
@@ -279,6 +286,5 @@ export default function Register() {
         </Stack>
       </Center>
     </Container>
-    // </Box>
   );
 }

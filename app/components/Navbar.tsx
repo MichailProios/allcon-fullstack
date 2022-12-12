@@ -6,7 +6,13 @@ import {
   useLayoutEffect,
 } from "react";
 
-import { Link, Outlet, useMatches } from "@remix-run/react";
+import {
+  Link,
+  Outlet,
+  useFetcher,
+  useLoaderData,
+  useMatches,
+} from "@remix-run/react";
 
 import {
   Show,
@@ -55,11 +61,15 @@ import {
   Skeleton,
   Icon,
   Avatar,
+  useToast,
 } from "@chakra-ui/react";
+import { createServerClient } from "~/utils/supabase.server";
+import type { LoaderFunction } from "@remix-run/node";
 
 import { NavLink } from "@remix-run/react";
 
 import { MdAccountCircle } from "react-icons/md";
+import { redirect, json } from "@remix-run/node";
 
 import {
   ChevronDownIcon,
@@ -69,6 +79,7 @@ import {
   SunIcon,
 } from "@chakra-ui/icons";
 import { useContainerDimensions } from "~/utils/hooks";
+import { IoLogOutOutline, IoPersonCircleOutline } from "react-icons/io5";
 
 const logo_full_dark =
   "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail";
@@ -180,6 +191,23 @@ function NavbarHeader({
     ref: ref,
     handler: () => onClose(),
   });
+
+  const session = useLoaderData().session || null;
+
+  const fetcher = useFetcher();
+  const toast = useToast();
+
+  function handleLogout() {
+    fetcher.submit(null, { method: "delete" });
+
+    toast({
+      title: "Signed Out Successfully",
+      variant: "left-accent",
+      status: "success",
+      duration: 3000,
+      isClosable: false,
+    });
+  }
 
   return (
     <Flex
@@ -298,39 +326,87 @@ function NavbarHeader({
                 <IconButton
                   variant={"ghost"}
                   aria-label="Account"
-                  icon={<Avatar size="xs" name="" src="" />}
-                  onClick={isOpen ? onClose : onOpen}
+                  icon={
+                    <Avatar
+                      size="xs"
+                      name={
+                        session &&
+                        `${session?.user.user_metadata.firstName} ${session?.user.user_metadata.lastName}`
+                      }
+                      src=""
+                    />
+                  }
+                  onClick={onOpen}
                 />
               </PopoverAnchor>
-              <PopoverContent w="full" boxShadow="lg" ref={ref}>
-                <PopoverBody w="full" p={0} m={0}>
-                  {/* <VStack> */}
-                  <Text p={2} textAlign="center">
-                    No User Signed In
-                  </Text>
-                  <Divider w="full" />
-                  <ButtonGroup p={2} size="sm">
-                    <Button
-                      fontSize="sm"
-                      as={Link}
-                      to="/login"
-                      onClick={onClose}
+              {session ? (
+                <PopoverContent w="full" boxShadow="lg" ref={ref}>
+                  <PopoverBody w="full" p={0}>
+                    <Text p={2} textAlign="center">
+                      Hi {session?.user.user_metadata.firstName}
+                    </Text>
+                    <Divider w="full" />
+                    <ButtonGroup
+                      size="md"
+                      w="full"
+                      variant="ghost"
+                      orientation="vertical"
                     >
-                      Sign In
-                    </Button>
-                    <Button
-                      fontSize="sm"
-                      colorScheme="primary"
-                      as={Link}
-                      to="/register"
-                      onClick={onClose}
-                    >
-                      Sign Up
-                    </Button>
-                  </ButtonGroup>
-                  {/* </VStack> */}
-                </PopoverBody>
-              </PopoverContent>
+                      <Button
+                        fontSize="sm"
+                        onClick={onClose}
+                        borderRadius="none"
+                        as={Link}
+                        to="/profile"
+                        rightIcon={
+                          <Icon w={5} h={5} as={IoPersonCircleOutline} />
+                        }
+                      >
+                        My Profile
+                      </Button>
+                      <Button
+                        fontSize="sm"
+                        onClick={() => {
+                          onClose();
+                          handleLogout();
+                        }}
+                        borderRadius="none"
+                        rightIcon={<Icon w={5} h={5} as={IoLogOutOutline} />}
+                      >
+                        Sign Out
+                      </Button>
+                    </ButtonGroup>
+                  </PopoverBody>
+                </PopoverContent>
+              ) : (
+                <PopoverContent w="full" boxShadow="lg" ref={ref}>
+                  <PopoverBody w="full" p={0}>
+                    <Text p={2} textAlign="center">
+                      No User Signed In
+                    </Text>
+                    <Divider w="full" />
+                    <ButtonGroup p={2} size="sm">
+                      <Button
+                        fontSize="sm"
+                        as={Link}
+                        to="/login"
+                        onClick={onClose}
+                      >
+                        Sign In
+                      </Button>
+                      <Button
+                        fontSize="sm"
+                        colorScheme="primary"
+                        as={Link}
+                        to="/register"
+                        onClick={onClose}
+                      >
+                        Sign Up
+                      </Button>
+                    </ButtonGroup>
+                  </PopoverBody>{" "}
+                </PopoverContent>
+              )}
             </Popover>
           </HStack>
         </HStack>
@@ -557,7 +633,7 @@ function NavbarPopover({ link, index }: any) {
         onMouseEnter={openPopover}
         onMouseLeave={closePopover}
       >
-        <PopoverBody w="full" p={0} m={0}>
+        <PopoverBody w="full" p={0}>
           <ButtonGroup
             orientation="vertical"
             variant="ghost"
@@ -640,7 +716,7 @@ function SubLinks({ link, index, tabIndex, onDrawerClose }: any) {
               borderRadius="none"
               fontWeight="normal"
               prefetch="intent"
-              fontSize="sm"
+              // fontSize="md"
               onClick={onDrawerClose}
             >
               {subLink.label}

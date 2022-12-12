@@ -284,17 +284,17 @@ export default function Index() {
         toastIdRef.current = toast({
           title: "Searching projects",
           status: "loading",
+          variant: "left-accent",
           duration: null,
           isClosable: false,
-          variant: "solid",
         });
       } else if (toastIdRef.current) {
         toast.update(toastIdRef.current, {
           title: "Searching projects",
           status: "loading",
+          variant: "left-accent",
           duration: null,
           isClosable: false,
-          variant: "solid",
         });
       }
       const formData = new FormData();
@@ -309,6 +309,7 @@ export default function Index() {
       toastIdRef.current = toast({
         title: `Showing ${category || "all"} projects`,
         status: "loading",
+        variant: "left-accent",
         duration: null,
         isClosable: false,
       });
@@ -316,6 +317,7 @@ export default function Index() {
       toast.update(toastIdRef.current, {
         title: `Showing ${category || "all"} projects`,
         status: "loading",
+        variant: "left-accent",
         duration: null,
         isClosable: false,
       });

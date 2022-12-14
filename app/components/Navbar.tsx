@@ -15,10 +15,7 @@ import {
 } from "@remix-run/react";
 
 import {
-  Show,
-  Spinner,
   Flex,
-  Img,
   HStack,
   Button,
   IconButton,
@@ -26,7 +23,6 @@ import {
   useColorMode,
   Drawer,
   DrawerBody,
-  DrawerFooter,
   VStack,
   DrawerOverlay,
   DrawerContent,
@@ -35,26 +31,12 @@ import {
   DrawerCloseButton,
   useBreakpoint,
   Box,
-  Tabs,
-  TabList,
-  Tab,
-  SlideFade,
   Popover,
-  PopoverTrigger,
   PopoverContent,
-  PopoverHeader,
   PopoverBody,
-  PopoverFooter,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverAnchor,
   ButtonGroup,
   useOutsideClick,
   Text,
-  TagLabel,
-  TagRightIcon,
-  useTab,
-  useMultiStyleConfig,
   Collapse,
   Divider,
   Image,
@@ -62,6 +44,8 @@ import {
   Icon,
   Avatar,
   useToast,
+  PopoverAnchor,
+  DrawerFooter,
 } from "@chakra-ui/react";
 import { createServerClient } from "~/utils/supabase.server";
 import type { LoaderFunction } from "@remix-run/node";
@@ -170,23 +154,6 @@ function NavbarHeader({
     setTabIndex(index);
   };
 
-  // useEffect(() => {
-  //   handleTabsChange(
-  //     location?.pathname.startsWith("/about")
-  //       ? 0
-  //       : location?.pathname.includes("/projects")
-  //       ? 1
-  //       : location?.pathname.includes("/resources") ||
-  //         location?.pathname.includes("/testimonials") ||
-  //         location?.pathname.includes("/media") ||
-  //         location?.pathname.includes("/awards")
-  //       ? 2
-  //       : location?.pathname.includes("/contacts")
-  //       ? 3
-  //       : null
-  //   );
-  // }, [location?.pathname]);
-
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const ref = useRef<any>();
@@ -197,6 +164,37 @@ function NavbarHeader({
   });
 
   const loaderData = useLoaderData();
+
+  const getUserFullName = () => {
+    if (loaderData?.user) {
+      if (
+        loaderData?.user.user_metadata?.firstName &&
+        loaderData?.user.user_metadata?.lastName
+      ) {
+        return `${loaderData?.user.user_metadata?.firstName} ${loaderData?.user.user_metadata?.lastName}`;
+      } else if (loaderData?.user.user_metadata?.full_name) {
+        return `${loaderData?.user.user_metadata?.full_name}`;
+      }
+    }
+  };
+
+  const getUserAvatar = () => {
+    if (loaderData?.user) {
+      if (loaderData?.user.user_metadata?.avatar_url) {
+        return loaderData?.user.user_metadata?.avatar_url;
+      }
+    }
+  };
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    if (loaderData?.user) {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+  }, [loaderData?.user]);
 
   const fetcher = useFetcher();
   const toast = useToast();
@@ -210,11 +208,6 @@ function NavbarHeader({
       status: "success",
       duration: 3000,
       isClosable: true,
-      position: "top-right",
-      containerStyle: {
-        mt: "80px",
-        mr: "10px",
-      },
     });
   }
 
@@ -283,7 +276,7 @@ function NavbarHeader({
             </Box>
           </NavLink>
 
-          <HStack spacing={"8px"} display={{ base: "none", lg: "flex" }}>
+          <HStack spacing={"8px"} display={{ base: "none", xlg: "flex" }}>
             {navigationLinks.map((link, index) => (
               <Box key={index}>
                 {!link.subLinks && (
@@ -312,7 +305,7 @@ function NavbarHeader({
           </HStack>
         </HStack>
 
-        <HStack spacing={"8px"} display={{ base: "none", lg: "flex" }}>
+        <HStack spacing={"8px"} display={{ base: "none", xlg: "flex" }}>
           <IconButton
             variant={"ghost"}
             aria-label="Color Scheme"
@@ -323,127 +316,129 @@ function NavbarHeader({
           >
             {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
           </IconButton>
-          <Popover
-            closeDelay={200}
-            openDelay={0}
-            isLazy
-            placement="bottom"
-            lazyBehavior="unmount"
-            isOpen={isOpen}
-            returnFocusOnClose={false}
-            autoFocus={false}
-            orientation="vertical"
-            matchWidth
-          >
-            <PopoverAnchor>
-              <Button
-                isActive={isOpen}
-                pr={2}
-                pl={2}
-                variant="ghost"
-                onClick={onOpen}
-                leftIcon={
-                  loaderData?.session ? (
-                    <Avatar
-                      size="xs"
-                      name={
-                        loaderData?.session &&
-                        `${loaderData?.session?.user.user_metadata.firstName} ${loaderData?.session?.user.user_metadata.lastName}`
-                      }
-                      src=""
-                    />
-                  ) : (
-                    <Icon
-                      color="gray.600"
-                      _dark={{ color: "gray.300" }}
-                      w={6}
-                      h={6}
-                      as={RiAccountCircleFill}
-                    />
-                  )
-                }
-              >
-                {loaderData?.session
-                  ? `${loaderData?.session?.user.user_metadata.firstName} ${loaderData?.session?.user.user_metadata.lastName}`
-                  : "Join our Community"}
-              </Button>
-            </PopoverAnchor>
-            {loaderData?.session ? (
-              <PopoverContent w="full" boxShadow="lg" ref={ref}>
-                <PopoverBody w="full" p={0}>
-                  <ButtonGroup
-                    size="md"
-                    w="full"
-                    variant="ghost"
-                    orientation="vertical"
-                    spacing={0}
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <Button
-                      fontSize="sm"
+          <Box>
+            <Popover
+              closeDelay={200}
+              openDelay={0}
+              isLazy
+              placement="bottom"
+              lazyBehavior="unmount"
+              isOpen={isOpen}
+              returnFocusOnClose={false}
+              autoFocus={false}
+              orientation="vertical"
+              matchWidth
+            >
+              <PopoverAnchor>
+                <Button
+                  isActive={isOpen}
+                  pr={2}
+                  pl={2}
+                  variant="ghost"
+                  onClick={onOpen}
+                  leftIcon={
+                    isAuthenticated ? (
+                      <Avatar
+                        size="xs"
+                        name={getUserFullName()}
+                        src={getUserAvatar()}
+                      />
+                    ) : (
+                      <Icon
+                        color="gray.600"
+                        _dark={{ color: "gray.300" }}
+                        w={6}
+                        h={6}
+                        as={RiAccountCircleFill}
+                      />
+                    )
+                  }
+                >
+                  {isAuthenticated ? getUserFullName() : "Join our Community"}
+                </Button>
+              </PopoverAnchor>
+              {isAuthenticated ? (
+                <PopoverContent w="full" boxShadow="lg" ref={ref}>
+                  <PopoverBody w="full" p={0}>
+                    <ButtonGroup
+                      size="md"
                       w="full"
-                      onClick={onClose}
-                      borderRadius="none"
-                      as={Link}
-                      to="/profile"
-                      rightIcon={
-                        <Icon w={5} h={5} as={IoPersonCircleOutline} />
-                      }
+                      variant="ghost"
+                      orientation="vertical"
+                      spacing={0}
+                      alignItems="center"
+                      justifyContent="center"
                     >
-                      Profile
-                    </Button>
+                      <Button
+                        fontSize="sm"
+                        w="full"
+                        onClick={onClose}
+                        borderRadius="none"
+                        as={Link}
+                        to="/profile"
+                        rightIcon={
+                          <Icon w={5} h={5} as={IoPersonCircleOutline} />
+                        }
+                      >
+                        Profile
+                      </Button>
 
-                    <Button
-                      fontSize="sm"
+                      <Button
+                        fontSize="sm"
+                        w="full"
+                        onClick={() => {
+                          onClose();
+                          handleLogout();
+                        }}
+                        borderRadius="none"
+                        rightIcon={<Icon w={5} h={5} as={IoLogOutOutline} />}
+                      >
+                        Sign Out
+                      </Button>
+                    </ButtonGroup>
+                  </PopoverBody>
+                </PopoverContent>
+              ) : (
+                <PopoverContent w="full" boxShadow="lg" ref={ref}>
+                  <PopoverBody w="full" p={0}>
+                    <Text p={2} textAlign="center">
+                      Become a Member
+                    </Text>
+                    <Divider w="full" />
+                    <ButtonGroup
+                      p={2}
+                      size="sm"
                       w="full"
-                      onClick={() => {
-                        onClose();
-                        handleLogout();
-                      }}
-                      borderRadius="none"
-                      rightIcon={<Icon w={5} h={5} as={IoLogOutOutline} />}
+                      justifyContent="center"
                     >
-                      Sign Out
-                    </Button>
-                  </ButtonGroup>
-                </PopoverBody>
-              </PopoverContent>
-            ) : (
-              <PopoverContent w="full" boxShadow="lg" ref={ref}>
-                <PopoverBody w="full" p={0}>
-                  <Text p={2} textAlign="center">
-                    Become a Member
-                  </Text>
-                  <Divider w="full" />
-                  <ButtonGroup p={2} size="sm" w="full" justifyContent="center">
-                    <Button
-                      fontSize="sm"
-                      w="full"
-                      as={Link}
-                      to="/login"
-                      onClick={onClose}
-                    >
-                      Sign In
-                    </Button>
-                    <Button
-                      fontSize="sm"
-                      w="full"
-                      colorScheme="primary"
-                      as={Link}
-                      to="/register"
-                      onClick={onClose}
-                    >
-                      Sign Up
-                    </Button>
-                  </ButtonGroup>
-                </PopoverBody>{" "}
-              </PopoverContent>
-            )}
-          </Popover>
+                      <Button
+                        fontSize="sm"
+                        w="full"
+                        as={Link}
+                        to="/login"
+                        onClick={onClose}
+                      >
+                        Sign In
+                      </Button>
+                      <Button
+                        fontSize="sm"
+                        w="full"
+                        colorScheme="primary"
+                        as={Link}
+                        to="/register"
+                        onClick={onClose}
+                      >
+                        Sign Up
+                      </Button>
+                    </ButtonGroup>
+                  </PopoverBody>
+                </PopoverContent>
+              )}
+            </Popover>
+          </Box>
         </HStack>
 
-        <HStack spacing="8px" display={{ lg: "none" }}>
+        <HStack spacing="8px" display={{ xlg: "none" }}>
           <IconButton
             variant={"ghost"}
             aria-label="Color Scheme"
@@ -489,31 +484,62 @@ function NavbarDrawer({
   toggleColorMode,
   navigationLinks,
 }: NavbarDrawerProps) {
-  const location = useMatches()[1];
-  const [tabIndex, setTabIndex] = useState();
+  const loaderData = useLoaderData();
 
-  // const handleTabsChange = (index: any) => {
-  //   setTabIndex(index);
-  // };
+  const getUserFullName = () => {
+    if (loaderData?.user) {
+      if (
+        loaderData?.user.user_metadata?.firstName &&
+        loaderData?.user.user_metadata?.lastName
+      ) {
+        return `${loaderData?.user.user_metadata?.firstName} ${loaderData?.user.user_metadata?.lastName}`;
+      } else if (loaderData?.user.user_metadata?.full_name) {
+        return `${loaderData?.user.user_metadata?.full_name}`;
+      }
+    }
+  };
 
-  // useEffect(() => {
-  //   handleTabsChange(
-  //     location?.pathname.startsWith("/about")
-  //       ? 0
-  //       : location?.pathname.includes("/projects")
-  //       ? 1
-  //       : location?.pathname.includes("/blog")
-  //       ? 2
-  //       : location?.pathname.includes("/resources") ||
-  //         location?.pathname.includes("/testimonials") ||
-  //         location?.pathname.includes("/media") ||
-  //         location?.pathname.includes("/awards")
-  //       ? 3
-  //       : location?.pathname.includes("/contacts")
-  //       ? 4
-  //       : null
-  //   );
-  // }, [location?.pathname]);
+  const getUserAvatar = () => {
+    if (loaderData?.user) {
+      if (loaderData?.user.user_metadata?.avatar_url) {
+        return loaderData?.user.user_metadata?.avatar_url;
+      }
+    }
+  };
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const ref = useRef<any>();
+
+  useOutsideClick({
+    ref: ref,
+    handler: () => onClose(),
+  });
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    if (loaderData?.user) {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+  }, [loaderData?.user]);
+
+  const fetcher = useFetcher();
+  const toast = useToast();
+
+  function handleLogout() {
+    fetcher.submit(null, { method: "delete" });
+
+    toast({
+      title: "Signed Out Successfully",
+      variant: "solid",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+  }
 
   return (
     <Drawer
@@ -547,33 +573,10 @@ function NavbarDrawer({
           </NavLink>
         </DrawerHeader>
         <DrawerBody>
-          {/* <Tabs
-            colorScheme="primary"
-            isManual
-            align="center"
-            isFitted
-            index={tabIndex}
-            // onChange={handleTabsChange}
-            orientation="vertical"
-          > */}
           <VStack spacing="12px" w={"full"}>
             {navigationLinks.map((link, index) => (
               <Box key={index} w="full">
                 {!link.subLinks && (
-                  // <Tab
-                  //   key={index}
-                  //   as={NavLink}
-                  //   to={link.url}
-                  //   _focus={{ boxShadow: "none" }}
-                  //   draggable={false}
-                  //   prefetch="render"
-                  //   rel="prefetch"
-                  //   fontSize="md"
-                  //   w={"100%"}
-                  // >
-                  //   {link.label}
-                  // </Tab>
-
                   <NavLink
                     key={index}
                     to={link.url}
@@ -597,7 +600,6 @@ function NavbarDrawer({
                   <SubLinks
                     link={link}
                     index={index}
-                    tabIndex={tabIndex}
                     onDrawerClose={onDrawerClose}
                   />
                 )}
@@ -605,6 +607,135 @@ function NavbarDrawer({
             ))}
           </VStack>
         </DrawerBody>
+        <DrawerFooter w="full" justifyContent="center" alignItems="center">
+          <Box>
+            <Popover
+              closeDelay={200}
+              openDelay={0}
+              isLazy
+              placement="bottom"
+              lazyBehavior="unmount"
+              isOpen={isOpen}
+              returnFocusOnClose={false}
+              autoFocus={false}
+              orientation="vertical"
+              matchWidth
+            >
+              <PopoverAnchor>
+                <Button
+                  isActive={isOpen}
+                  pr={2}
+                  pl={2}
+                  variant="ghost"
+                  onClick={onOpen}
+                  leftIcon={
+                    isAuthenticated ? (
+                      <Avatar
+                        size="xs"
+                        name={getUserFullName()}
+                        src={getUserAvatar()}
+                      />
+                    ) : (
+                      <Icon
+                        color="gray.600"
+                        _dark={{ color: "gray.300" }}
+                        w={6}
+                        h={6}
+                        as={RiAccountCircleFill}
+                      />
+                    )
+                  }
+                >
+                  {isAuthenticated ? getUserFullName() : "Join our Community"}
+                </Button>
+              </PopoverAnchor>
+              {isAuthenticated ? (
+                <PopoverContent w="full" boxShadow="lg" ref={ref}>
+                  <PopoverBody w="full" p={0}>
+                    <ButtonGroup
+                      size="md"
+                      w="full"
+                      variant="ghost"
+                      orientation="vertical"
+                      spacing={0}
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <Button
+                        fontSize="sm"
+                        w="full"
+                        onClick={onClose}
+                        borderRadius="none"
+                        as={Link}
+                        to="/profile"
+                        rightIcon={
+                          <Icon w={5} h={5} as={IoPersonCircleOutline} />
+                        }
+                      >
+                        Profile
+                      </Button>
+
+                      <Button
+                        fontSize="sm"
+                        w="full"
+                        onClick={() => {
+                          onClose();
+                          handleLogout();
+                        }}
+                        borderRadius="none"
+                        rightIcon={<Icon w={5} h={5} as={IoLogOutOutline} />}
+                      >
+                        Sign Out
+                      </Button>
+                    </ButtonGroup>
+                  </PopoverBody>
+                </PopoverContent>
+              ) : (
+                <PopoverContent w="full" boxShadow="lg" ref={ref}>
+                  <PopoverBody w="full" p={0}>
+                    <Text p={2} textAlign="center">
+                      Become a Member
+                    </Text>
+                    <Divider w="full" />
+                    <ButtonGroup
+                      p={2}
+                      size="md"
+                      w="full"
+                      justifyContent="center"
+                      orientation="vertical"
+                    >
+                      <Button
+                        fontSize="sm"
+                        w="full"
+                        as={Link}
+                        to="/login"
+                        onClick={() => {
+                          onClose();
+                          onDrawerClose();
+                        }}
+                      >
+                        Sign In
+                      </Button>
+                      <Button
+                        fontSize="sm"
+                        w="full"
+                        colorScheme="primary"
+                        as={Link}
+                        to="/register"
+                        onClick={() => {
+                          onClose();
+                          onDrawerClose();
+                        }}
+                      >
+                        Sign Up
+                      </Button>
+                    </ButtonGroup>
+                  </PopoverBody>
+                </PopoverContent>
+              )}
+            </Popover>
+          </Box>
+        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );
@@ -695,8 +826,8 @@ function NavbarPopover({ link, index }: any) {
   );
 }
 
-function SubLinks({ link, index, tabIndex, onDrawerClose }: any) {
-  const [show, setShow] = useState(tabIndex === index ? true : false);
+function SubLinks({ link, index, onDrawerClose }: any) {
+  const [show, setShow] = useState(false);
 
   const handleToggle = () => setShow(!show);
 

@@ -203,8 +203,7 @@ export default function Contacts() {
   }, [actionData, toast]);
 
   return (
-    // <SlideFade in={true} delay={0.1} unmountOnExit>
-    <>
+    <SlideFade in={true} unmountOnExit reverse delay={0.1}>
       <Container
         maxW={"1200px"}
         px={{ base: 3, md: 6 }}
@@ -487,7 +486,6 @@ export default function Contacts() {
           </Card>
         </VStack>
       </Container>
-    </>
-    // </SlideFade>
+    </SlideFade>
   );
 }

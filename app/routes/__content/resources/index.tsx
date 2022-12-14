@@ -16,8 +16,10 @@ import {
   Slide,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { Database } from "~/utils/db_types";
 
 import { motion } from "framer-motion";
+import { SupabaseClient } from "@supabase/auth-helpers-remix";
 
 import {
   FcGallery,
@@ -25,8 +27,9 @@ import {
   FcCollaboration,
   FcRules,
   FcConferenceCall,
+  FcDiploma1,
 } from "react-icons/fc";
-import { Link } from "@remix-run/react";
+import { Link, useOutletContext } from "@remix-run/react";
 import { ArrowForwardIcon, LinkIcon } from "@chakra-ui/icons";
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 
@@ -100,64 +103,62 @@ const Feature = ({ title, text, icon, url }: FeatureProps) => {
 };
 export default function Index() {
   return (
-    // <SlideFade in={true} delay={0.1} unmountOnExit>
-    <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
-      <VStack spacing="26px">
-        <Heading textAlign="center">Resources</Heading>
-        <Box>
-          <SimpleGrid
-            columns={{ base: 1, lg: 3 }}
-            spacing={{ base: 10, lg: 4 }}
-          >
-            <Feature
-              icon={<Icon as={FcFinePrint} w={10} h={10} />}
-              title={"Awards & Recognitions"}
-              text={`The Awards and Recognitions section highlights the company's commitment to excellence and leadership in the construction industry. This dedication to excellence is further demonstrated by the recognition that Allcon has received from industry organizations, publications, clients, and peers.
+    <SlideFade in={true} unmountOnExit reverse delay={0.1}>
+      <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
+        <VStack spacing="26px">
+          <Heading textAlign="center">Resources</Heading>
+          <Box>
+            <SimpleGrid
+              columns={{ base: 1, lg: 3 }}
+              spacing={{ base: 10, lg: 4 }}
+            >
+              <Feature
+                icon={<Icon as={FcFinePrint} w={10} h={10} />}
+                title={"Awards & Recognitions"}
+                text={`The Awards and Recognitions section highlights the company's commitment to excellence and leadership in the construction industry. This dedication to excellence is further demonstrated by the recognition that Allcon has received from industry organizations, publications, clients, and peers.
                 
                 `}
-              url="/resources/awards"
-            />
-            <Feature
-              icon={<Icon as={FcConferenceCall} w={10} h={10} />}
-              title={"Diversity & Equality"}
-              text={`The References section features comments and reviews from past clients. It provides insights into the experiences of others who have worked with Allcon Contracting, offering a glimpse into the quality of their work and customer service. These References also serve as social proof for potential customers.
+                url="/resources/awards"
+              />
+              <Feature
+                icon={<Icon as={FcConferenceCall} w={10} h={10} />}
+                title={"Diversity & Equality"}
+                text={`The Diversity & Equality section is dedicated to showcasing the company's commitment to promoting diversity and inclusion in the workplace. This section features information on the company's policies and initiatives aimed at promoting equal opportunities and fostering a positive, inclusive work environment. 
                    `}
-              url="/resources/references"
-            />
-            <Feature
-              icon={<Icon as={FcCollaboration} w={10} h={10} />}
-              title={"References"}
-              text={`The References section features comments and reviews from past clients. It provides insights into the experiences of others who have worked with Allcon Contracting, offering a glimpse into the quality of their work and customer service. These References also serve as social proof for potential customers.
+                url="/resources/diversity"
+              />
+              <Feature
+                icon={<Icon as={FcCollaboration} w={10} h={10} />}
+                title={"References"}
+                text={`The References section features comments and reviews from past clients. It provides insights into the experiences of others who have worked with Allcon Contracting, offering a glimpse into the quality of their work and customer service. These References also serve as social proof for potential customers.
                    `}
-              url="/resources/references"
-            />
-            <Feature
-              icon={<Icon as={FcGallery} w={10} h={10} />}
-              title={"Media"}
-              text={`The media section of our website features a variety of additional content, including videos and images of our accomplishments. You can also see behind-the-scenes footage of our team at work. Explore this section to see even more examples of the high-quality workmanship that sets us apart from other contractors.
+                url="/resources/references"
+              />
+              <Feature
+                icon={<Icon as={FcDiploma1} w={10} h={10} />}
+                title={"Certifications"}
+                text={`The Certifications section displays the professional certifications that Allcon has earned. This section provides insight into our work and customer service quality. These certifications also serve as social proof for potential clients, showing that we have met industry standards.`}
+                url="/resources/certifications"
+              />
+              <Feature
+                icon={<Icon as={FcGallery} w={10} h={10} />}
+                title={"Media"}
+                text={`The Media section features a variety of additional content, including videos and images of our accomplishments. You can also see behind-the-scenes footage of our team at work. Explore this section to see even more examples of the high-quality workmanship that sets us apart from other contractors.
                 `}
-              url="/resources/media"
-            />
+                url="/resources/media"
+              />
 
-            <Feature
-              icon={<Icon as={FcRules} w={10} h={10} />}
-              title={"Brochures"}
-              text={`The References section features comments and reviews from past clients. It provides insights into the experiences of others who have worked with Allcon Contracting, offering a glimpse into the quality of their work and customer service. These References also serve as social proof for potential customers.
+              <Feature
+                icon={<Icon as={FcRules} w={10} h={10} />}
+                title={"Brochures"}
+                text={`The Brochures section features a collection of PDF brochures that provide detailed information on the company's services and capabilities. These brochures offer potential customers a convenient and easy-to-access way to learn more about the company and the types of projects we have successfully completed in the past.
                    `}
-              url="/resources/references"
-            />
-
-            <Feature
-              icon={<Icon as={FcCollaboration} w={10} h={10} />}
-              title={"References"}
-              text={`The References section features comments and reviews from past clients. It provides insights into the experiences of others who have worked with Allcon Contracting, offering a glimpse into the quality of their work and customer service. These References also serve as social proof for potential customers.
-                   `}
-              url="/resources/references"
-            />
-          </SimpleGrid>
-        </Box>
-      </VStack>
-    </Container>
-    // </SlideFade>
+                url="/resources/brochures"
+              />
+            </SimpleGrid>
+          </Box>
+        </VStack>
+      </Container>
+    </SlideFade>
   );
 }

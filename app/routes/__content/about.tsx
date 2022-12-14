@@ -64,8 +64,7 @@ export default function About() {
   const data = useLoaderData();
 
   return (
-    // <SlideFade in={true} delay={0.1} unmountOnExit>
-    <>
+    <SlideFade in={true} unmountOnExit reverse delay={0.1}>
       <Container maxW="1200px" px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="26px">
           <Heading textAlign="center">About Us</Heading>
@@ -181,7 +180,6 @@ export default function About() {
         </VStack>
         {/* </VStack> */}
       </Container>
-    </>
-    // </SlideFade>
+    </SlideFade>
   );
 }

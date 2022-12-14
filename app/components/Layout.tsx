@@ -54,9 +54,12 @@ const navigationLinks = [
     label: "Resources",
     url: "resources",
     subLinks: [
-      { label: "Media", url: "/resources/media" },
       { label: "Awards", url: "/resources/awards" },
+      { label: "Diversity", url: "/resources/diversity" },
       { label: "References", url: "/resources/references" },
+      { label: "Certifications", url: "/resources/certifications" },
+      { label: "Media", url: "/resources/media" },
+      { label: "Brochures", url: "/resources/brochures" },
     ],
   },
   { label: "Contacts", url: "contacts" },

@@ -22,6 +22,7 @@ const breakpoints = {
   md: "48em",
   xmd: "52em",
   lg: "62em",
+  xlg: "68em",
   xl: "80em",
   "2xl": "96em",
 };

@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { withEmotionCache } from "@emotion/react";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import { createBrowserClient } from "@supabase/auth-helpers-remix";
 import { createServerClient } from "~/utils/supabase.server";
 import type { LoaderFunction } from "@remix-run/node";
-import { useCatch } from "@remix-run/react";
+import { useCatch, useFetcher, useLoaderData } from "@remix-run/react";
 import { redirect, json } from "@remix-run/node";
 
 import {
@@ -27,6 +28,17 @@ import theme from "app/styles/theme";
 import global from "app/styles/global.css";
 
 import swiperStyles from "app/styles/swiper.css";
+import type { SupabaseClient, Session } from "@supabase/auth-helpers-remix";
+import type { Database } from "~/utils/db_types";
+import type { LoaderArgs } from "@remix-run/node";
+
+export type TypedSupabaseClient = SupabaseClient<Database>;
+export type MaybeSession = Session | null;
+
+export type SupabaseContext = {
+  supabase: TypedSupabaseClient;
+  session: MaybeSession;
+};
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -132,8 +144,17 @@ export const loader: LoaderFunction = async ({ request }: any) => {
     data: { session },
   } = await supabase.auth.getSession();
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const env = {
+    SUPABASE_URL: process.env.SUPABASE_URL!,
+    SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY!,
+  };
+
   return json(
-    { session, supabase },
+    { session, user, env, supabase },
     {
       headers: response.headers,
     }
@@ -141,10 +162,36 @@ export const loader: LoaderFunction = async ({ request }: any) => {
 };
 
 export default function App() {
+  const { env, session, user } = useLoaderData<typeof loader>();
+  const fetcher = useFetcher();
+
+  const [supabase] = useState(() =>
+    createBrowserClient<Database>(env.SUPABASE_URL, env.SUPABASE_ANON_KEY)
+  );
+
+  const serverAccessToken = session?.access_token;
+
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session?.access_token !== serverAccessToken) {
+        fetcher.submit(null, {
+          method: "post",
+          action: "/handle-supabase-auth",
+        });
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [serverAccessToken, supabase, fetcher]);
+
   return (
     <Document>
       <Layout>
-        <Outlet />
+        <Outlet context={{ supabase, session, user }} />
       </Layout>
     </Document>
   );

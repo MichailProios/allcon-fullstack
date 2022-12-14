@@ -95,7 +95,7 @@ export default function Index() {
   const testimonialsView = useInView();
 
   const breakpointHeight = useBreakpointValue(
-    { base: `calc(${height}px - 64px)`, md: "calc(100vh - 64px)" },
+    { base: `calc(100vh - 164px)`, md: "calc(100vh - 64px)" },
     { fallback: "md", ssr: true }
   );
 
@@ -115,144 +115,141 @@ export default function Index() {
   );
 
   return (
-    <>
-      <Fade
+    <SlideFade in={true} unmountOnExit reverse delay={0.1}>
+      {/* <Fade
         in={true}
         style={{ width: "100%" }}
         transition={{ enter: { duration: 0.2 }, exit: { duration: 0.2 } }}
-      >
-        <Box position="relative">
-          <Swiper
-            autoplay={{
-              delay: 5000,
-              disableOnInteraction: false,
-            }}
-            centeredSlides={true}
-            modules={[Autoplay, Pagination, EffectFade]}
-            effect={"fade"}
-            lazy={false}
-            allowTouchMove={false}
-            style={{
-              height: breakpointHeight,
-            }}
-            pagination={{
-              clickable: true,
-            }}
-          >
-            {data.slideShow.map((img: any, index: any) => (
-              <SwiperSlide key={index}>
-                <AspectRatio
-                  ratio={16 / 9}
-                  height={breakpointHeight}
-                  overflow="hidden"
-                  display="block"
-                  lineHeight={0}
+      > */}
+      <Box position="relative">
+        <Swiper
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          centeredSlides={true}
+          modules={[Autoplay, Pagination, EffectFade]}
+          effect={"fade"}
+          lazy={false}
+          allowTouchMove={false}
+          style={{
+            height: breakpointHeight,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+        >
+          {data.slideShow.map((img: any, index: any) => (
+            <SwiperSlide key={index}>
+              <AspectRatio
+                ratio={16 / 9}
+                height={breakpointHeight}
+                overflow="hidden"
+                display="block"
+                lineHeight={0}
+                h="full"
+                maxW="full"
+                maxH="full"
+              >
+                <Image
+                  src={img}
+                  alt={`Landing Page Image ${index}`}
+                  w={"full"}
                   h="full"
                   maxW="full"
                   maxH="full"
-                >
-                  <Image
-                    src={img}
-                    alt={`Landing Page Image ${index}`}
-                    w={"full"}
-                    h="full"
-                    maxW="full"
-                    maxH="full"
-                    overflow="hidden"
-                    display="block"
-                    lineHeight={0}
-                    filter={"brightness(75%)"}
-                    draggable={false}
-                    loading="lazy"
-                    fallback={
-                      <Box w="full" h="full" position="relative">
-                        <Flex
-                          alignItems="center"
-                          flexDirection="column"
-                          position="absolute"
-                          top="50%"
-                          left="50%"
-                          transform={"translate(0%, -50%)"}
-                        >
-                          <Spinner color="primary.500" size="xl" />
+                  overflow="hidden"
+                  display="block"
+                  lineHeight={0}
+                  filter={"brightness(75%)"}
+                  draggable={false}
+                  loading="lazy"
+                  fallback={
+                    <Box w="full" h="full" position="relative">
+                      <Flex
+                        alignItems="center"
+                        flexDirection="column"
+                        position="absolute"
+                        top="50%"
+                        left="50%"
+                        transform={"translate(0%, -50%)"}
+                      >
+                        <Spinner color="primary.500" size="xl" />
 
-                          <Text>Loading Image</Text>
-                        </Flex>
-                      </Box>
-                    }
-                  />
-                </AspectRatio>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                        <Text>Loading Image</Text>
+                      </Flex>
+                    </Box>
+                  }
+                />
+              </AspectRatio>
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
-          <VStack
-            position="absolute"
-            top="50%"
-            left="50%"
-            transform="translate(-50%, -50%)"
-            w="full"
-            zIndex={600}
+        <VStack
+          position="absolute"
+          top="50%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          w="full"
+          zIndex={600}
+        >
+          <Text
+            fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
+            fontWeight="medium"
+            letterSpacing={"0.05em"}
+            textTransform="uppercase"
+            wordBreak="break-word"
+            textAlign="center"
+            width="full"
+            userSelect="none"
+            textColor="white"
           >
-            <Text
-              fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
-              fontWeight="medium"
-              letterSpacing={"0.05em"}
-              textTransform="uppercase"
-              wordBreak="break-word"
-              textAlign="center"
-              width="full"
-              userSelect="none"
-              textColor="white"
-            >
-              Infinite Possibilities through Integrated Solutions
-            </Text>
+            Infinite Possibilities through Integrated Solutions
+          </Text>
 
-            <Stack
-              direction={{ base: "column", sm: "row" }}
-              alignItems="center"
+          <Stack direction={{ base: "column", sm: "row" }} alignItems="center">
+            <Button
+              colorScheme="primary"
+              variant="solid"
+              bgColor="#018b8b"
+              textColor="white"
+              as={Link}
+              prefetch="render"
+              rel="prerender"
+              to="projects"
+              boxShadow="dark-lg"
+              rounded="md"
+              size="md"
+              rightIcon={<Icon as={BiBuildings} />}
+              draggable={false}
+              w="220px"
             >
-              <Button
-                colorScheme="primary"
-                variant="solid"
-                bgColor="#018b8b"
-                textColor="white"
-                as={Link}
-                prefetch="render"
-                rel="prerender"
-                to="projects"
-                boxShadow="dark-lg"
-                rounded="md"
-                size="md"
-                rightIcon={<Icon as={BiBuildings} />}
-                draggable={false}
-                w="220px"
-              >
-                Explore our Projects
-              </Button>
-              <Button
-                as={Link}
-                to="about"
-                boxShadow="dark-lg"
-                rounded="md"
-                size="md"
-                variant="solid"
-                bgColor="gray.50"
-                _hover={{ bgColor: "gray.300" }}
-                textColor="black"
-                prefetch="render"
-                rel="prerender"
-                rightIcon={<Icon as={BiBook} />}
-                draggable={false}
-                w="150px"
-              >
-                Learn More
-              </Button>
-            </Stack>
-            {/* </SlideFade> */}
-          </VStack>
-        </Box>
-      </Fade>
+              Explore our Projects
+            </Button>
+            <Button
+              as={Link}
+              to="about"
+              boxShadow="dark-lg"
+              rounded="md"
+              size="md"
+              variant="solid"
+              bgColor="gray.50"
+              _hover={{ bgColor: "gray.300" }}
+              textColor="black"
+              prefetch="render"
+              rel="prerender"
+              rightIcon={<Icon as={BiBook} />}
+              draggable={false}
+              w="150px"
+            >
+              Learn More
+            </Button>
+          </Stack>
+          {/* </SlideFade> */}
+        </VStack>
+      </Box>
+      {/* </Fade> */}
 
       <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={20}>
         <Stack direction={{ base: "column", xmd: "row" }} spacing={4} w="full">
@@ -536,7 +533,7 @@ export default function Index() {
           </Stack>
         </Stack>
       </Container>
-    </>
+    </SlideFade>
     // </SlideFade>
   );
 }

@@ -29,16 +29,12 @@ import {
   ButtonGroup,
   Flex,
 } from "@chakra-ui/react";
-import {
-  SiLinkedin,
-  SiMessenger,
-  SiMicrosoft,
-  SiMicrosoftazure,
-} from "react-icons/si";
+import { SiMicrosoftazure } from "react-icons/si";
 import { redirect, json } from "@remix-run/node";
 
 import { createServerClient } from "~/utils/supabase.server";
-
+import type { SupabaseClient } from "@supabase/auth-helpers-remix";
+import type { Database } from "~/utils/db_types";
 import type { LoaderFunction } from "@remix-run/node";
 import {
   ValidatedForm,
@@ -52,8 +48,7 @@ import { z } from "zod";
 // import * as auth from "app/utils/auth.server";
 // import * as cookie from "app/utils/cookie.server";
 
-import { Link, useActionData } from "@remix-run/react";
-import { FaFacebook } from "react-icons/fa";
+import { Link, useActionData, useOutletContext } from "@remix-run/react";
 import { FcGoogle } from "react-icons/fc";
 
 const passwordRegex = new RegExp(
@@ -202,6 +197,43 @@ function SubmitButton(props: any) {
 export default function Register() {
   const actionData = useActionData();
   const toast = useToast();
+  const { supabase } = useOutletContext<{
+    supabase: SupabaseClient<Database>;
+  }>();
+
+  async function handleGoogleAuth() {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo:
+          process.env.NODE_ENV === "development"
+            ? "http://192.168.1.62:3000/resources"
+            : "https://allconcontracting.com/resources",
+      },
+    });
+
+    if (error) {
+      console.log(error);
+    }
+  }
+
+  async function handleMicrosoftAuth() {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "azure",
+      options: {
+        redirectTo:
+          process.env.NODE_ENV === "development"
+            ? "http://192.168.1.62:3000/resources"
+            : "https://allconcontracting.com/resources",
+
+        scopes: "email",
+      },
+    });
+
+    if (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     if (actionData?.error) {
@@ -211,11 +243,11 @@ export default function Register() {
         status: "error",
         duration: 3000,
         isClosable: true,
-        position: "top-right",
-        containerStyle: {
-          mt: "80px",
-          mr: "10px",
-        },
+        // position: "top-right",
+        // containerStyle: {
+        // mt: "80px",
+        // mr: "10px",
+        // },
       });
     } else if (actionData?.success) {
       toast({
@@ -225,124 +257,130 @@ export default function Register() {
         status: "success",
         duration: 3000,
         isClosable: true,
-        position: "top-right",
-        containerStyle: {
-          mt: "80px",
-          mr: "10px",
-        },
+        // position: "top-right",
+        // containerStyle: {
+        // mt: "80px",
+        // mr: "10px",
+        // },
       });
     }
   }, [actionData, toast]);
 
   return (
-    <Container maxW="7xl" p={{ base: 1, md: 6 }}>
-      <Center
-        as={ValidatedForm}
-        validator={validator}
-        method="post"
-        id="registerForm"
-        replace
-      >
-        <Stack spacing={4}>
-          <VStack
-            boxSize={{ base: "auto", xs: "xs", sm: "sm", md: "md" }}
-            h="max-content !important"
-            bg={useColorModeValue("white", "gray.700")}
-            rounded="xl"
-            boxShadow={"2xl"}
-            p={{ base: 5, sm: 10 }}
-            spacing={8}
-          >
-            <Stack align="center">
-              <Heading fontSize="2xl">Create Account</Heading>
-            </Stack>
-
-            <ButtonGroup orientation="vertical" w="full">
-              <Button w={"full"} variant={"solid"} leftIcon={<FcGoogle />}>
-                Sign Up with Gmail
-              </Button>
-              <Button
-                w={"full"}
-                variant={"solid"}
-                leftIcon={<SiMicrosoftazure color="#0078D4" />}
-              >
-                Sign Up with Microsoft
-              </Button>
-              <Button
-                w={"full"}
-                variant={"solid"}
-                leftIcon={<FaFacebook color="#4968ad" />}
-              >
-                Sign Up with Facebook
-              </Button>
-            </ButtonGroup>
-
-            <Flex w="full" justifyContent="stretch" alignItems="center" gap={2}>
-              <Divider w="full" />
-              <Text>or</Text>
-              <Divider w="full" />
-            </Flex>
-            <VStack spacing={4} w="100%">
-              <Stack direction={{ base: "column", md: "row" }} w="100%">
-                <TextField
-                  label="First Name"
-                  name="firstName"
-                  placeholder="Enter your first name"
-                  rounded="md"
-                  type="text"
-                />
-                <TextField
-                  label="Last Name"
-                  name="lastName"
-                  placeholder="Enter your last name"
-                  rounded="md"
-                  type="text"
-                />
+    <SlideFade in={true} unmountOnExit reverse delay={0.1}>
+      <Container maxW="7xl" p={{ base: 1, md: 6 }}>
+        <Center
+          as={ValidatedForm}
+          validator={validator}
+          method="post"
+          id="registerForm"
+          replace
+        >
+          <Stack spacing={4}>
+            <VStack
+              boxSize={{ base: "auto", xs: "xs", sm: "sm", md: "md" }}
+              h="max-content !important"
+              bg={useColorModeValue("white", "gray.700")}
+              rounded="xl"
+              boxShadow={"2xl"}
+              p={{ base: 5, sm: 10 }}
+              spacing={4}
+            >
+              <Stack align="center">
+                <Heading fontSize="2xl">Create Account</Heading>
               </Stack>
-              <TextField
-                label="Email Address"
-                name="emailAddress"
-                placeholder="Enter your email"
-                rounded="md"
-                type="email"
-              />
 
-              <PasswordTextField
-                label="Password"
-                name="password"
-                placeholder="Enter your password"
-                rounded="md"
-              />
-            </VStack>
-            <VStack w="100%" spacing={4}>
-              <CheckBox
-                type="checkbox"
-                name="agreed"
-                label=" Agree with Terms & Conditions"
-              />
-
-              <SubmitButton
-                w="100%"
-                colorScheme="primary"
-                label="Create Account"
-                type="submit"
-              />
-              <Text>
-                Already have an account?&nbsp;
-                <Text
-                  as={Link}
-                  to="/login"
-                  fontSize={{ base: "md", sm: "md" }}
-                  fontWeight="bold"
-                  _hover={{ textDecoration: "underline" }}
+              <ButtonGroup orientation="vertical" w="full">
+                <Button
+                  w={"full"}
+                  variant={"solid"}
+                  leftIcon={<FcGoogle />}
+                  onClick={handleGoogleAuth}
                 >
-                  Sign In
+                  Sign Up with Gmail
+                </Button>
+                <Button
+                  w={"full"}
+                  variant={"solid"}
+                  leftIcon={<SiMicrosoftazure color="#0078D4" />}
+                  onClick={handleMicrosoftAuth}
+                >
+                  Sign Up with Microsoft
+                </Button>
+              </ButtonGroup>
+
+              <Flex
+                w="full"
+                justifyContent="stretch"
+                alignItems="center"
+                gap={2}
+              >
+                <Divider w="full" />
+                <Text>or</Text>
+                <Divider w="full" />
+              </Flex>
+              <VStack spacing={4} w="100%">
+                <Stack direction={{ base: "column", md: "row" }} w="100%">
+                  <TextField
+                    label="First Name"
+                    name="firstName"
+                    placeholder="Enter your first name"
+                    rounded="md"
+                    type="text"
+                  />
+                  <TextField
+                    label="Last Name"
+                    name="lastName"
+                    placeholder="Enter your last name"
+                    rounded="md"
+                    type="text"
+                  />
+                </Stack>
+                <TextField
+                  label="Email Address"
+                  name="emailAddress"
+                  placeholder="Enter your email"
+                  rounded="md"
+                  type="email"
+                />
+
+                <PasswordTextField
+                  label="Password"
+                  name="password"
+                  placeholder="Enter your password"
+                  rounded="md"
+                />
+              </VStack>
+              <VStack w="100%" spacing={4}>
+                <CheckBox
+                  type="checkbox"
+                  name="agreed"
+                  label=" Agree with Terms & Conditions"
+                />
+
+                <SubmitButton
+                  w="100%"
+                  colorScheme="primary"
+                  label="Create Account"
+                  type="submit"
+                />
+                <Text>
+                  Already have an account?&nbsp;
+                  <Text
+                    as={Link}
+                    to="/login"
+                    fontSize={{ base: "md", sm: "md" }}
+                    fontWeight="bold"
+                    _hover={{ textDecoration: "underline" }}
+                  >
+                    Sign In
+                  </Text>
                 </Text>
-              </Text>
+              </VStack>
             </VStack>
-          </VStack>
-        </Stack>
-      </Center>
-    </Container>
+          </Stack>
+        </Center>
+      </Container>
+    </SlideFade>
   );
 }

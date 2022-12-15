@@ -163,11 +163,12 @@ export default function Index() {
               >
                 <ClientOnly>
                   {() => (
-                    <Suspense fallback={<Skeleton w="full" h="full" />}>
+                    <Suspense
+                      fallback={<Skeleton w="full" h={breakpointHeight} />}
+                    >
                       <ErrorBoundary FallbackComponent={ErrorFallback}>
                         <RemixImage
                           image={img}
-                          // alt={`Landing Page Image ${index}`}
                           w={"full"}
                           h="full"
                           maxW="full"
@@ -187,73 +188,80 @@ export default function Index() {
             </SwiperSlide>
           ))}
         </Swiper>
-
-        <VStack
-          position="absolute"
-          top="50%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-          w="full"
-          zIndex={600}
-        >
-          <Text
-            fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
-            fontWeight="medium"
-            letterSpacing={"0.05em"}
-            textTransform="uppercase"
-            wordBreak="break-word"
-            textAlign="center"
-            width="full"
-            userSelect="none"
-            textColor="white"
-          >
-            Infinite Possibilities through Integrated Solutions
-          </Text>
-
-          <Stack direction={{ base: "column", sm: "row" }} alignItems="center">
-            <Button
-              colorScheme="primary"
-              variant="solid"
-              bgColor="primary.500"
-              _hover={{ bgColor: "primary.600" }}
-              _active={{ bgColor: "primary.700" }}
-              textColor="white"
-              as={Link}
-              prefetch="render"
-              rel="prerender"
-              to="projects"
-              boxShadow="dark-lg"
-              rounded="md"
-              size="md"
-              rightIcon={<Icon as={BiBuildings} />}
-              draggable={false}
-              w="220px"
+        <ClientOnly>
+          {() => (
+            <VStack
+              position="absolute"
+              top="50%"
+              left="50%"
+              transform="translate(-50%, -50%)"
+              w="full"
+              zIndex={600}
             >
-              Explore our Projects
-            </Button>
-            <Button
-              as={Link}
-              to="about"
-              boxShadow="dark-lg"
-              rounded="md"
-              size="md"
-              variant="solid"
-              bgColor="gray.50"
-              _hover={{ bgColor: "gray.300" }}
-              _active={{ bgColor: "gray.400" }}
-              textColor="black"
-              prefetch="render"
-              rel="prerender"
-              rightIcon={<Icon as={BiBook} />}
-              draggable={false}
-              w="150px"
-            >
-              Learn More
-            </Button>
-          </Stack>
-          {/* </SlideFade> */}
-        </VStack>
+              <Text
+                fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
+                fontWeight="medium"
+                letterSpacing={"0.05em"}
+                textTransform="uppercase"
+                wordBreak="break-word"
+                textAlign="center"
+                width="full"
+                userSelect="none"
+                textColor="white"
+              >
+                Infinite Possibilities through Integrated Solutions
+              </Text>
+
+              <Stack
+                direction={{ base: "column", sm: "row" }}
+                alignItems="center"
+              >
+                <Button
+                  colorScheme="primary"
+                  variant="solid"
+                  bgColor="primary.500"
+                  _hover={{ bgColor: "primary.600" }}
+                  _active={{ bgColor: "primary.700" }}
+                  textColor="white"
+                  as={Link}
+                  prefetch="render"
+                  rel="prerender"
+                  to="projects"
+                  boxShadow="dark-lg"
+                  rounded="md"
+                  size="md"
+                  rightIcon={<Icon as={BiBuildings} />}
+                  draggable={false}
+                  w="220px"
+                >
+                  Explore our Projects
+                </Button>
+                <Button
+                  as={Link}
+                  to="about"
+                  boxShadow="dark-lg"
+                  rounded="md"
+                  size="md"
+                  variant="solid"
+                  bgColor="gray.50"
+                  _hover={{ bgColor: "gray.300" }}
+                  _active={{ bgColor: "gray.400" }}
+                  textColor="black"
+                  prefetch="render"
+                  rel="prerender"
+                  rightIcon={<Icon as={BiBook} />}
+                  draggable={false}
+                  w="150px"
+                >
+                  Learn More
+                </Button>
+              </Stack>
+              {/* </SlideFade> */}
+            </VStack>
+          )}
+        </ClientOnly>
       </Box>
+
       {/* </Fade> */}
 
       <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={20}>

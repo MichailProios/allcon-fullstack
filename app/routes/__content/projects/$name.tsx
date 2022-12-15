@@ -1,11 +1,7 @@
-import { Fragment, useCallback, useRef, useEffect, useState } from "react";
+import { Suspense, useCallback, useRef, useEffect, useState } from "react";
 import {
   Text,
-  Button,
-  Center,
-  Img,
   SlideFade,
-  ScaleFade,
   Box,
   HStack,
   VStack,
@@ -14,26 +10,11 @@ import {
   Heading,
   Card,
   CardBody,
-  CardHeader,
-  SimpleGrid,
-  CardFooter,
-  Input,
-  InputLeftElement,
-  InputGroup,
   Flex,
   Stack,
-  Select,
-  useColorMode,
-  useColorModeValue,
   Avatar,
   Divider,
   IconButton,
-  Stat,
-  StatLabel,
-  StatNumber,
-  StatHelpText,
-  StatArrow,
-  StatGroup,
   StackDivider,
   Skeleton,
   AspectRatio,
@@ -58,6 +39,7 @@ import {
 } from "@chakra-ui/react";
 
 import { motion, AnimatePresence } from "framer-motion";
+import { ErrorBoundary } from "react-error-boundary";
 
 // import { motion, useScroll, useSpring } from "framer-motion";
 
@@ -106,7 +88,10 @@ import {
 } from "react-icons/ai";
 import { BiBuildings, BiMap, BiExpand } from "react-icons/bi";
 import { useIsDocumentReady, useWindowDimensions } from "~/utils/hooks";
-
+import { createServerClient } from "~/utils/supabase.server";
+import RemixImage from "~/components/RemixImage";
+import ErrorFallback from "~/components/ErrorFallback";
+import { ClientOnly } from "remix-utils/build/react";
 export const meta: MetaFunction = ({ params }: any) =>
   projects.has(params?.name.toLowerCase())
     ? {
@@ -146,11 +131,20 @@ export const meta: MetaFunction = ({ params }: any) =>
 
 export const loader: LoaderFunction = async ({ request, params }: any) => {
   try {
-    if (!projects.has(params?.name.toLowerCase())) {
+    const response = new Response();
+    const supabase = createServerClient({ request, response });
+    const { data: project } = await supabase
+      .from("projects")
+      .select(
+        `name, thumbnail, url,location, cost  , description, status, completed, show_category_tag, show_client_tag, project_clients(name, tag), project_designers(name, initials),
+      project_categories(name, tag), project_media(source, aspect_ratio, type, order)`
+      )
+      .eq(`url`, params?.name.toLowerCase())
+      .single();
+
+    if (!project) {
       return redirect("/projects");
     }
-
-    const project = projects.get(params.name.toLowerCase());
 
     return json({
       project: project,
@@ -211,7 +205,7 @@ export default function Project() {
 
   const data = useLoaderData();
 
-  const media: any = Object.values(data.project.media).sort(
+  const media: any = Object.values(data.project.project_media).sort(
     (a: any, b: any) => a.order - b.order
   );
 
@@ -231,8 +225,6 @@ export default function Project() {
 
   const { height } = useWindowDimensions();
 
-  const { documentReady } = useIsDocumentReady();
-
   return (
     <SlideFade in={true} unmountOnExit reverse delay={0.1}>
       <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
@@ -243,7 +235,7 @@ export default function Project() {
         <VStack mt={"26px"} w="full" h="full">
           <Box position={"relative"} w="full">
             <IconButton
-              display={data.project.media.length > 1 ? "flex" : "none"}
+              display={media.length > 1 ? "flex" : "none"}
               aria-label="left-arrow"
               variant="solid"
               borderRadius="full"
@@ -260,7 +252,7 @@ export default function Project() {
             />
 
             <IconButton
-              display={data.project.media.length > 1 ? "flex" : "none"}
+              display={media.length > 1 ? "flex" : "none"}
               aria-label="right-arrow"
               variant="solid"
               borderRadius="full"
@@ -301,7 +293,7 @@ export default function Project() {
                 keyboard={{
                   enabled: true,
                 }}
-                // lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
+                lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
                 modules={[Lazy, Navigation, Thumbs, Keyboard]}
                 effect={"slide"}
                 thumbs={{ swiper: thumbsSwiper }}
@@ -323,34 +315,39 @@ export default function Project() {
                         maxH="full"
                         maxW="full"
                       >
-                        {value.image ? (
-                          <Image
-                            src={value.image + "/public"}
-                            alt={`Project Image ${index}`}
-                            loading="lazy"
-                            w="full"
-                            h="full"
-                            maxW="full"
-                            maxH="full"
-                            draggable={false}
-                            fallback={<Skeleton w="full" h="full" />}
-                          />
-                        ) : value.video ? (
-                          <iframe
-                            title={`Project Video ${index}`}
-                            src={value.video}
-                            allowFullScreen
-                            draggable={false}
-                            loading="lazy"
-                            allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                            style={{
-                              border: "none",
-                              height: "100%",
-                              width: "100%",
-                              color: "#f3f3f3",
-                            }}
-                          />
-                        ) : null}
+                        <ClientOnly fallback={<Skeleton w="full" h="full" />}>
+                          {() => (
+                            <Suspense fallback={<Skeleton w="full" h="full" />}>
+                              <ErrorBoundary FallbackComponent={ErrorFallback}>
+                                {value.type === "image" ? (
+                                  <RemixImage
+                                    image={value.source + "/public"}
+                                    // alt={`Project Image ${index}`}
+                                    loading="lazy"
+                                    w="full"
+                                    h="full"
+                                    draggable={false}
+                                  />
+                                ) : value.type === "video" ? (
+                                  <iframe
+                                    title={`Project Video ${index}`}
+                                    src={value.source}
+                                    allowFullScreen
+                                    draggable={false}
+                                    loading="lazy"
+                                    allow="gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                    style={{
+                                      border: "none",
+                                      height: "100%",
+                                      width: "100%",
+                                      color: "#f3f3f3",
+                                    }}
+                                  />
+                                ) : null}
+                              </ErrorBoundary>
+                            </Suspense>
+                          )}
+                        </ClientOnly>
                       </AspectRatio>
                     </SwiperSlide>
                   );
@@ -398,37 +395,54 @@ export default function Project() {
                           key={index}
                         >
                           <AspectRatio ratio={16 / 9} w="full" h="full">
-                            {value.image ? (
-                              <Image
-                                src={value.image + "/meta"}
-                                alt={`Project Image ${index}`}
-                                loading="lazy"
-                                fallback={<Skeleton w="full" h="full" />}
-                                borderRadius="md"
-                                zIndex={9000}
-                                opacity={currentSlide === index ? 1 : 0.8}
-                                transition="opacity 200ms"
-                                w="full"
-                                h="full"
-                              />
-                            ) : value.video ? (
-                              <iframe
-                                title={`Project Video ${index}`}
-                                src={value.video}
-                                allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                                loading="lazy"
-                                style={{
-                                  border: "none",
-                                  height: "100%",
-                                  width: "100%",
-                                  color: "#f3f3f3",
-                                  borderRadius: "0.375rem",
-                                  opacity: currentSlide === index ? 1 : 0.8,
-                                  transition: "opacity 200ms",
-                                  pointerEvents: "none",
-                                }}
-                              />
-                            ) : null}
+                            <ClientOnly
+                              fallback={<Skeleton w="full" h="full" />}
+                            >
+                              {() => (
+                                <Suspense
+                                  fallback={<Skeleton w="full" h="full" />}
+                                >
+                                  <ErrorBoundary
+                                    FallbackComponent={ErrorFallback}
+                                  >
+                                    {value.type === "image" ? (
+                                      <RemixImage
+                                        image={value.source + "/meta"}
+                                        // alt={`Project Image ${index}`}
+                                        loading="lazy"
+                                        // fallback={<Skeleton w="full" h="full" />}
+                                        borderRadius="md"
+                                        zIndex={9000}
+                                        opacity={
+                                          currentSlide === index ? 1 : 0.8
+                                        }
+                                        transition="opacity 200ms"
+                                        w="full"
+                                        h="full"
+                                      />
+                                    ) : value.type === "video" ? (
+                                      <iframe
+                                        title={`Project Video ${index}`}
+                                        src={value.source}
+                                        allow="gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                        loading="lazy"
+                                        style={{
+                                          border: "none",
+                                          height: "100%",
+                                          width: "100%",
+                                          color: "#f3f3f3",
+                                          borderRadius: "0.375rem",
+                                          opacity:
+                                            currentSlide === index ? 1 : 0.8,
+                                          transition: "opacity 200ms",
+                                          pointerEvents: "none",
+                                        }}
+                                      />
+                                    ) : null}
+                                  </ErrorBoundary>
+                                </Suspense>
+                              )}
+                            </ClientOnly>
                           </AspectRatio>
                         </motion.div>
                       </SwiperSlide>
@@ -469,7 +483,7 @@ export default function Project() {
             <ModalBody overflow="hidden" h={`${height}px`} p={0} m={0}>
               <Box position={"relative"} w="full" h={`${height}px`}>
                 <IconButton
-                  display={data.project.media.length > 1 ? "flex" : "none"}
+                  display={media.length > 1 ? "flex" : "none"}
                   aria-label="left-arrow"
                   variant="solid"
                   borderRadius="full"
@@ -486,7 +500,7 @@ export default function Project() {
                 />
 
                 <IconButton
-                  display={data.project.media.length > 1 ? "flex" : "none"}
+                  display={media.length > 1 ? "flex" : "none"}
                   aria-label="right-arrow"
                   variant="solid"
                   borderRadius="full"
@@ -510,7 +524,7 @@ export default function Project() {
                       width: "100%",
                     }}
                     initialSlide={sliderRef.current?.swiper.realIndex ?? 0}
-                    // lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
+                    lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
                     modules={[Lazy, Navigation, Pagination, Keyboard]}
                     keyboard={{
                       enabled: true,
@@ -530,59 +544,72 @@ export default function Project() {
                           key={index}
                           style={{ height: `${height}px`, width: "100%" }}
                         >
-                          {value.image ? (
-                            <Image
-                              src={value.image + "/hq"}
-                              alt={`Project Image ${index}`}
-                              loading="lazy"
-                              w="full"
-                              maxW="full"
-                              maxH="full"
-                              objectFit="contain"
-                              draggable={false}
-                              h={`${height}px`}
-                              fallback={
-                                <Box w="full" h="full" position="relative">
-                                  <Flex
-                                    alignItems="center"
-                                    flexDirection="column"
-                                    position="absolute"
-                                    top="50%"
-                                    left="50%"
-                                    transform={"translate(0%, -50%)"}
-                                  >
-                                    <Spinner color="primary.500" size="xl" />
+                          <ClientOnly fallback={<Skeleton w="full" h="full" />}>
+                            {() => (
+                              <Suspense
+                                fallback={
+                                  <Box w="full" h="full" position="relative">
+                                    <Flex
+                                      alignItems="center"
+                                      flexDirection="column"
+                                      position="absolute"
+                                      top="50%"
+                                      left="50%"
+                                      transform={"translate(0%, -50%)"}
+                                    >
+                                      <Spinner color="primary.500" size="xl" />
 
-                                    <Text>Loading Image</Text>
-                                  </Flex>
-                                </Box>
-                              }
-                            />
-                          ) : value.video ? (
-                            <AspectRatio
-                              ratio={{
-                                base: 1,
-                                sm:
-                                  value.aspectRatio !== 16 / 9 ? 4 / 3 : 16 / 9,
-                              }}
-                              h={`${height}px`}
-                            >
-                              <iframe
-                                title={`Project Video ${index}`}
-                                src={value.video}
-                                allowFullScreen
-                                draggable={false}
-                                allow="accelerometer, gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                                loading="lazy"
-                                style={{
-                                  border: "none",
-                                  height: "100%",
-                                  width: "100%",
-                                  color: "#f3f3f3",
-                                }}
-                              />
-                            </AspectRatio>
-                          ) : null}
+                                      <Text>Loading Image</Text>
+                                    </Flex>
+                                  </Box>
+                                }
+                              >
+                                <ErrorBoundary
+                                  FallbackComponent={ErrorFallback}
+                                >
+                                  {value.type === "image" ? (
+                                    <RemixImage
+                                      image={value.source + "/hq"}
+                                      // alt={`Project Image ${index}`}
+                                      loading="lazy"
+                                      w="full"
+                                      maxW="full"
+                                      maxH="full"
+                                      objectFit="contain"
+                                      draggable={false}
+                                      h={`${height}px`}
+                                    />
+                                  ) : value.type === "video" ? (
+                                    <AspectRatio
+                                      ratio={{
+                                        base: 1,
+                                        sm:
+                                          value.aspect_ratio !== 16 / 9
+                                            ? 4 / 3
+                                            : 16 / 9,
+                                      }}
+                                      h={`${height}px`}
+                                    >
+                                      <iframe
+                                        title={`Project Video ${index}`}
+                                        src={value.source}
+                                        allowFullScreen
+                                        draggable={false}
+                                        allow="gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                        loading="lazy"
+                                        style={{
+                                          border: "none",
+                                          height: "100%",
+                                          width: "100%",
+                                          color: "#f3f3f3",
+                                        }}
+                                      />
+                                    </AspectRatio>
+                                  ) : null}
+                                </ErrorBoundary>
+                              </Suspense>
+                            )}
+                          </ClientOnly>
                         </SwiperSlide>
                       );
                     })}
@@ -596,12 +623,13 @@ export default function Project() {
       <Divider />
       <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="18px">
-          {data.project.client ||
-          data.project.categories ||
+          {data.project.name ||
+          data.project.project_categories ||
+          data.project.project_clients ||
           data.project.location ||
           data.project.status ||
           data.project.cost ||
-          data.project.designer ||
+          data.project.project_designers ||
           data.project.description ? (
             <>
               <Heading textAlign="center">Project Information</Heading>
@@ -622,7 +650,7 @@ export default function Project() {
                           mt={4}
                         >
                           <iframe
-                            title={`Project ${data.project.title} location`}
+                            title={`Project ${data.project.name} location`}
                             src={data.project.location}
                             style={{
                               border: "none",
@@ -638,22 +666,22 @@ export default function Project() {
                         </AspectRatio>
                       </Box>
                     )}
-                    {data.project.client && (
+                    {data.project.project_clients && (
                       <Box>
                         <HStack alignItems="center">
                           <Tag size="lg" borderRadius="full">
                             <Icon h={6} w={6} as={BiBuildings} ml={-1} mr={2} />
                             <TagLabel fontSize="lg">Client</TagLabel>
                           </Tag>
-                          {data.project.client?.tag && (
+                          {data.project.project_clients.tag && (
                             <Badge colorScheme="blue">
-                              {data.project.client?.tag}
+                              {data.project.project_clients.tag}
                             </Badge>
                           )}
                         </HStack>
 
                         <Text pl="1" pt="2" fontSize="xl">
-                          {data.project.client.text}
+                          {data.project.project_clients.name}
                         </Text>
                       </Box>
                     )}
@@ -671,19 +699,19 @@ export default function Project() {
                             />
                             <TagLabel fontSize="lg">Status</TagLabel>
                           </Tag>
-                          {data.project.status.completed ? (
+                          {data.project.completed ? (
                             <Badge colorScheme="green">completed</Badge>
                           ) : (
                             <Badge colorScheme="yellow">in progress</Badge>
                           )}
                         </HStack>
                         <Text pl="1" pt="2" fontSize="xl">
-                          {data.project.status.text}
+                          {data.project.status}
                         </Text>
                       </Box>
                     )}
 
-                    {data.project.category && (
+                    {data.project.project_categories && (
                       <Box>
                         <HStack alignItems="center">
                           <Tag size="lg" borderRadius="full">
@@ -696,15 +724,15 @@ export default function Project() {
                             />
                             <TagLabel fontSize="lg">Category</TagLabel>
                           </Tag>
-                          {data.project.category?.tag && (
+                          {data.project.project_categories.tag && (
                             <Badge colorScheme="blue">
-                              {data.project.category?.tag}
+                              {data.project.project_categories.name}
                             </Badge>
                           )}
                         </HStack>
 
                         <Text pl="1" pt="2" fontSize="xl">
-                          {data.project.category.text}
+                          {data.project.project_categories.name}
                         </Text>
                       </Box>
                     )}
@@ -727,19 +755,19 @@ export default function Project() {
                       </Box>
                     )}
 
-                    {data.project.designer && (
+                    {data.project.project_designers && (
                       <Box>
                         <Tag size="lg" borderRadius="full">
                           <Avatar
                             size="xs"
-                            name={data.project.designer}
+                            name={data.project.project_designers.initials}
                             ml={-1}
                             mr={2}
                           />
                           <TagLabel fontSize="lg">Designer</TagLabel>
                         </Tag>
                         <Text pl="1" pt="2" fontSize="xl">
-                          {data.project.designer}
+                          {data.project.project_designers.name}
                         </Text>
                       </Box>
                     )}

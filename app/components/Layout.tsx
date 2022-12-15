@@ -27,14 +27,19 @@ import { useMatches, useTransition } from "@remix-run/react";
 import Footer from "~/components/Footer";
 
 import { useLoading } from "app/utils/hooks";
+import profiles from "~/utils/profiles";
 
 interface LayoutProps {
   children: ReactNode;
+  context?: any;
 }
 
 const navigationLinks = [
   { label: "About", url: "/about" },
-  { label: "Blog", url: "/blog" },
+  {
+    label: "Blog",
+    url: "/blog",
+  },
 
   {
     label: "Projects",
@@ -54,6 +59,7 @@ const navigationLinks = [
     label: "Resources",
     url: "resources",
     subLinks: [
+      { label: "All Resources", url: "/resources" },
       { label: "Awards", url: "/resources/awards" },
       { label: "Diversity", url: "/resources/diversity" },
       { label: "References", url: "/resources/references" },
@@ -65,10 +71,9 @@ const navigationLinks = [
   { label: "Contacts", url: "contacts" },
 ];
 
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({ children, context }: LayoutProps) {
   const { height } = useWindowDimensions();
   const showButton = useScrollButtonVisibility();
-  const transition = useTransition();
 
   const handleScrollToTop = () => {
     scroll.scrollToTop({
@@ -78,77 +83,50 @@ export default function Layout({ children }: LayoutProps) {
     });
   };
 
-  const routeLoading = useLoading();
-
-  useEffect(() => {
-    if (transition.state === "loading" && transition.type === "normalLoad") {
-      routeLoading.startLoading();
-    }
-
-    if (transition.state === "idle") {
-      setTimeout(() => {
-        routeLoading.finishLoading();
-      }, 1);
-    }
-  }, [transition, routeLoading]);
-
   const route = useMatches()[1];
 
-  return (
-    <Box
-      display={"flex"}
-      width={"100%"}
-      minHeight={height || "100vh"}
-      flexDirection={"column"}
-      justifyContent="flex-start"
-    >
-      <Navbar navigationLinks={navigationLinks} />
+  if (!route?.pathname.includes("/privacy")) {
+    return (
+      <Box
+        display={"flex"}
+        width={"100%"}
+        minHeight={height || "100vh"}
+        flexDirection={"column"}
+        justifyContent="flex-start"
+      >
+        <Navbar navigationLinks={navigationLinks} context={context} />
 
-      <Progress
-        display={routeLoading.isLoading ? "flex" : "none"}
-        value={routeLoading.loadingValue}
-        height="3px"
-        position="fixed"
-        top={"64px"}
-        zIndex={800}
-        width="full"
-        backgroundColor="transparent"
-        colorScheme={"primary"}
-        sx={{
-          "& > div:first-of-type": {
-            transitionProperty: "width",
-          },
-        }}
-      />
-
-      <Box display={{ base: "none", md: "flex" }}>
-        <Fade in={showButton} unmountOnExit style={{ zIndex: 1000 }}>
-          <Tooltip label="Scroll to Top" closeOnScroll>
-            <IconButton
-              onClick={handleScrollToTop}
-              aria-label="top"
-              zIndex={1000}
-              shadow="lg"
-              size="lg"
-              rounded={"full"}
-              position="fixed"
-              bottom={12}
-              right={16}
-              overflow="hidden"
-              colorScheme={"primary"}
-            >
-              <ChevronUpIcon fontSize="1.5em" />
-            </IconButton>
-          </Tooltip>
-        </Fade>
+        <Box display={{ base: "none", md: "flex" }}>
+          <Fade in={showButton} unmountOnExit style={{ zIndex: 1000 }}>
+            <Tooltip label="Scroll to Top" closeOnScroll>
+              <IconButton
+                onClick={handleScrollToTop}
+                aria-label="top"
+                zIndex={1000}
+                shadow="lg"
+                size="lg"
+                rounded={"full"}
+                position="fixed"
+                bottom={12}
+                right={16}
+                overflow="hidden"
+                colorScheme={"primary"}
+              >
+                <ChevronUpIcon fontSize="1.5em" />
+              </IconButton>
+            </Tooltip>
+          </Fade>
+        </Box>
+        <Box>{children}</Box>
+        {!route?.pathname.includes("/login") &&
+          !route?.pathname.includes("/register") && (
+            <Box marginTop={"auto"}>
+              <Footer />
+            </Box>
+          )}
       </Box>
-      <Box>{children}</Box>
-      {!route?.pathname.includes("/login") &&
-        !route?.pathname.includes("/register") && (
-          <Box marginTop={"auto"}>
-            <Footer />
-          </Box>
-        )}
-    </Box>
-  );
+    );
+  } else {
+    return <>{children}</>;
+  }
 }

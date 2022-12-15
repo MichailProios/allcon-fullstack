@@ -15,8 +15,9 @@ import {
   AspectRatio,
   Image,
 } from "@chakra-ui/react";
+import { ClientOnly } from "remix-utils";
 
-import { Fragment, useEffect } from "react";
+import { Suspense, Fragment, useEffect } from "react";
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import RenderIfVisible from "react-render-if-visible";
 import { AnimatePresence, motion } from "framer-motion";
@@ -26,6 +27,9 @@ import { useLoaderData } from "@remix-run/react";
 
 import { profiles } from "~/utils/profiles";
 import { any } from "zod";
+import RemixImage from "~/components/RemixImage";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "~/components/ErrorFallback";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - About`,
@@ -81,16 +85,23 @@ export default function About() {
               bring their unique talents and expertise to every project.
             </Text>
             <AspectRatio ratio={{ base: 4 / 3, md: 16 / 9 }} w="full">
-              <Image
-                src={data.allconStaff}
-                alt="Company Group Photo"
-                boxShadow="xl"
-                rounded="md"
-                userSelect="none"
-                draggable={false}
-                loading="lazy"
-                fallback={<Skeleton w="full" h="full" />}
-              />
+              <ClientOnly>
+                {() => (
+                  <Suspense fallback={<Skeleton w="full" h="full" />}>
+                    <ErrorBoundary FallbackComponent={ErrorFallback}>
+                      <RemixImage
+                        image={data.allconStaff}
+                        // alt="Company Group Photo"
+                        boxShadow="xl"
+                        rounded="md"
+                        userSelect="none"
+                        draggable={false}
+                        loading="lazy"
+                      />
+                    </ErrorBoundary>
+                  </Suspense>
+                )}
+              </ClientOnly>
             </AspectRatio>
           </VStack>
         </VStack>
@@ -98,7 +109,7 @@ export default function About() {
       <Divider />
       <Container maxW="1200px" px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="26px">
-          <Heading textAlign="center"> Executives</Heading>
+          <Heading textAlign="center">Executives</Heading>
 
           <AnimatePresence>
             {data.profiles.map((value: any, index: any) => (
@@ -121,18 +132,25 @@ export default function About() {
                       w="340px"
                       display={{ base: "none", xl: "flex" }}
                     >
-                      <Image
-                        roundedTopLeft="md"
-                        roundedBottomLeft="md"
-                        objectFit="cover"
-                        src={value.image}
-                        alt={`${value.title} profile`}
-                        boxShadow="xl"
-                        draggable={false}
-                        userSelect="none"
-                        loading="lazy"
-                        fallback={<Skeleton w="full" h="full" />}
-                      />
+                      <ClientOnly>
+                        {() => (
+                          <Suspense fallback={<Skeleton w="full" h="full" />}>
+                            <ErrorBoundary FallbackComponent={ErrorFallback}>
+                              <RemixImage
+                                roundedTopLeft="md"
+                                roundedBottomLeft="md"
+                                objectFit="cover"
+                                image={value.image}
+                                // alt={`${value.title} profile`}
+                                boxShadow="xl"
+                                draggable={false}
+                                userSelect="none"
+                                loading="lazy"
+                              />
+                            </ErrorBoundary>
+                          </Suspense>
+                        )}
+                      </ClientOnly>
                     </AspectRatio>
                     <CardBody
                       display="flex"
@@ -178,7 +196,6 @@ export default function About() {
             ))}
           </AnimatePresence>
         </VStack>
-        {/* </VStack> */}
       </Container>
     </SlideFade>
   );

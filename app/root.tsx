@@ -1,6 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { withEmotionCache } from "@emotion/react";
-import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import {
+  ChakraProvider,
+  ColorModeScript,
+  cookieStorageManagerSSR,
+  localStorageManager,
+} from "@chakra-ui/react";
 import { createBrowserClient } from "@supabase/auth-helpers-remix";
 import { createServerClient } from "~/utils/supabase.server";
 import type { LoaderFunction } from "@remix-run/node";
@@ -81,50 +86,6 @@ interface DocumentProps {
   children: React.ReactNode;
 }
 
-const Document = withEmotionCache(
-  ({ children }: DocumentProps, emotionCache) => {
-    const serverStyleData = useContext(ServerStyleContext);
-    const clientStyleData = useContext(ClientStyleContext);
-
-    // Only executed on client
-    useEffect(() => {
-      // re-link sheet container
-      emotionCache.sheet.container = document.head;
-      // re-inject tags
-      const tags = emotionCache.sheet.tags;
-      emotionCache.sheet.flush();
-      tags.forEach((tag) => {
-        (emotionCache.sheet as any)._insertTag(tag);
-      });
-      // reset cache to reapply global styles
-      clientStyleData?.reset();
-    }, []);
-
-    return (
-      <html lang="en">
-        <head>
-          <Meta />
-          <Links />
-          {serverStyleData?.map(({ key, ids, css }) => (
-            <style
-              key={key}
-              data-emotion={`${key} ${ids.join(" ")}`}
-              dangerouslySetInnerHTML={{ __html: css }}
-            />
-          ))}
-        </head>
-
-        <body style={{ height: "100%", overflow: "overlay" }}>
-          <ChakraProvider theme={theme}>{children}</ChakraProvider>
-          <ScrollRestoration />
-          <Scripts />
-          {process.env.NODE_ENV === "development" ? <LiveReload /> : null}
-        </body>
-      </html>
-    );
-  }
-);
-
 export async function action({ request }: { request: Request }) {
   const response = new Response();
   const supabase = createServerClient({ request, response });
@@ -148,21 +109,85 @@ export const loader: LoaderFunction = async ({ request }: any) => {
     data: { user },
   } = await supabase.auth.getUser();
 
+  const { data: profile, error } = await supabase
+    .from("profiles")
+    .select()
+    .eq("id", user?.id)
+    .limit(1)
+    .single();
+
   const env = {
     SUPABASE_URL: process.env.SUPABASE_URL!,
     SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY!,
   };
 
+  const cookies = request.headers.get("cookie") ?? "";
+
   return json(
-    { session, user, env, supabase },
+    { session, user, profile, env, supabase, cookies },
     {
       headers: response.headers,
     }
   );
 };
 
+const Document = withEmotionCache(
+  ({ children }: DocumentProps, emotionCache) => {
+    const serverStyleData = useContext(ServerStyleContext);
+    const clientStyleData = useContext(ClientStyleContext);
+
+    // Only executed on client
+    useEffect(() => {
+      // re-link sheet container
+      emotionCache.sheet.container = document.head;
+      // re-inject tags
+      const tags = emotionCache.sheet.tags;
+      emotionCache.sheet.flush();
+      tags.forEach((tag) => {
+        (emotionCache.sheet as any)._insertTag(tag);
+      });
+      // reset cache to reapply global styles
+      clientStyleData?.reset();
+    }, []);
+
+    const { cookies } = useLoaderData();
+
+    return (
+      <html lang="en">
+        <head>
+          <Meta />
+          <Links />
+          {serverStyleData?.map(({ key, ids, css }) => (
+            <style
+              key={key}
+              data-emotion={`${key} ${ids.join(" ")}`}
+              dangerouslySetInnerHTML={{ __html: css }}
+            />
+          ))}
+        </head>
+
+        <body style={{ height: "100%", overflow: "overlay" }}>
+          <ChakraProvider
+            colorModeManager={
+              typeof cookies === "string"
+                ? cookieStorageManagerSSR(cookies)
+                : localStorageManager
+            }
+            theme={theme}
+          >
+            {children}
+          </ChakraProvider>
+          <ScrollRestoration />
+          <Scripts />
+          {process.env.NODE_ENV === "development" ? <LiveReload /> : null}
+        </body>
+      </html>
+    );
+  }
+);
+
 export default function App() {
-  const { env, session, user } = useLoaderData<typeof loader>();
+  const { env, session, user, profile } = useLoaderData<typeof loader>();
   const fetcher = useFetcher();
 
   const [supabase] = useState(() =>
@@ -190,8 +215,8 @@ export default function App() {
 
   return (
     <Document>
-      <Layout>
-        <Outlet context={{ supabase, session, user }} />
+      <Layout context={{ supabase, session, user, profile }}>
+        <Outlet context={{ supabase, session, user, profile }} />
       </Layout>
     </Document>
   );

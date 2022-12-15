@@ -63,7 +63,7 @@ function Card({
         templateColumns={{ base: "1fr", sm: "max-content 1fr" }}
         gap={2}
         p={4}
-        bg={useColorModeValue("gray.100", "gray.800")}
+        bg={useColorModeValue("gray.100", "gray.700")}
       >
         <HStack display={{ base: "flex", sm: "block" }}>
           <Image

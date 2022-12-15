@@ -90,6 +90,22 @@ export async function action({ request }: { request: Request }) {
 
   const { firstName, lastName, emailAddress, password, agreed } = data.data;
 
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select()
+    .eq("email", emailAddress)
+    .limit(1)
+    .single();
+
+  if (profile) {
+    return json(
+      { error: "Account already registered" },
+      {
+        headers: response.headers,
+      }
+    );
+  }
+
   const { error } = await supabase.auth.signUp({
     email: emailAddress,
     password: password,
@@ -97,6 +113,8 @@ export async function action({ request }: { request: Request }) {
       data: {
         firstName: firstName,
         lastName: lastName,
+        full_name: `${firstName} ${lastName}`,
+        email: emailAddress,
       },
     },
   });
@@ -207,7 +225,7 @@ export default function Register() {
       options: {
         redirectTo:
           process.env.NODE_ENV === "development"
-            ? "http://192.168.1.62:3000/resources"
+            ? "http://localhost:3000/resources"
             : "https://allconcontracting.com/resources",
       },
     });
@@ -223,7 +241,7 @@ export default function Register() {
       options: {
         redirectTo:
           process.env.NODE_ENV === "development"
-            ? "http://192.168.1.62:3000/resources"
+            ? "http://localhost:3000/resources"
             : "https://allconcontracting.com/resources",
 
         scopes: "email",
@@ -243,25 +261,16 @@ export default function Register() {
         status: "error",
         duration: 3000,
         isClosable: true,
-        // position: "top-right",
-        // containerStyle: {
-        // mt: "80px",
-        // mr: "10px",
-        // },
       });
     } else if (actionData?.success) {
       toast({
-        title: "Registered & Signed In Successfully",
-        // description: "Check your email to confirm your identity",
+        title: "Registered Successfully",
+        description:
+          "Please check your mailbox to confirm your email address before signing in.",
         variant: "solid",
         status: "success",
-        duration: 3000,
+        duration: null,
         isClosable: true,
-        // position: "top-right",
-        // containerStyle: {
-        // mt: "80px",
-        // mr: "10px",
-        // },
       });
     }
   }, [actionData, toast]);

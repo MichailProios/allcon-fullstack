@@ -1,4 +1,11 @@
-import { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import {
+  Fragment,
+  Suspense,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   Text,
   Button,
@@ -87,9 +94,17 @@ import {
   QuestionIcon,
   Search2Icon,
 } from "@chakra-ui/icons";
-import projects from "~/utils/projects";
+// import projects from "~/utils/projects";
 import { useFirstRender, useLoading } from "~/utils/hooks";
 import { BiCategory, BiFilter } from "react-icons/bi";
+
+import { createServerClient } from "~/utils/supabase.server";
+import type { SupabaseClient } from "@supabase/auth-helpers-remix";
+import type { Database } from "~/utils/db_types";
+import RemixImage from "~/components/RemixImage";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "~/components/ErrorFallback";
+import { ClientOnly } from "remix-utils";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - Projects`,
@@ -107,6 +122,10 @@ export const meta: MetaFunction = ({ params }: any) => ({
 });
 
 export const loader: LoaderFunction = async ({ request }: any) => {
+  const response = new Response();
+
+  const supabase = createServerClient({ request, response }) as any;
+
   try {
     const url = new URL(request.url);
     const category = url.searchParams.get("category") || null;
@@ -114,44 +133,48 @@ export const loader: LoaderFunction = async ({ request }: any) => {
     const session = await cookie.getSession(request.headers.get("Cookie"));
     const filter = session.get("filter") || null;
 
+    const { data: projects } = await supabase.rpc("unfiltered_projects");
+
     if (filter?.search && !category) {
       return json({
         filter: filter,
-        projects: Array.from(projects.values()).filter(
+        projects: projects.filter(
           (value) =>
-            value.name.toLowerCase().includes(filter?.search.toLowerCase()) ||
-            value.client?.tag
-              .toLowerCase()
+            value?.name?.toLowerCase().includes(filter?.search.toLowerCase()) ||
+            value?.client_tag
+              ?.toLowerCase()
               .includes(filter?.search.toLowerCase())
         ),
       });
     } else if (category && !filter?.search) {
       return json({
         filter: filter,
-        projects: Array.from(projects.values()).filter(
+        projects: projects.filter(
           (value) =>
-            value.client?.tag.toLowerCase().includes(category.toLowerCase()) ||
-            value.category?.tag.toLowerCase().includes(category.toLowerCase())
+            value?.client_tag?.toLowerCase().includes(category.toLowerCase()) ||
+            value?.category_tag?.toLowerCase().includes(category.toLowerCase())
         ),
       });
     } else if (filter?.search && category) {
       return json({
         filter: filter,
-        projects: Array.from(projects.values()).filter(
+        projects: projects.filter(
           (value) =>
-            (value.name.toLowerCase().includes(filter?.search.toLowerCase()) ||
-              value.client?.tag
-                .toLowerCase()
+            (value?.name.toLowerCase().includes(filter?.search.toLowerCase()) ||
+              value?.client_tag
+                ?.toLowerCase()
                 .includes(filter?.search.toLowerCase())) &&
-            (value.client?.tag.toLowerCase().includes(category.toLowerCase()) ||
-              value.category?.tag
-                .toLowerCase()
+            (value?.client_tag
+              ?.toLowerCase()
+              .includes(category.toLowerCase()) ||
+              value?.category_tag
+                ?.toLowerCase()
                 .includes(category.toLowerCase()))
         ),
       });
     } else {
       return json(
-        { projects: Array.from(projects.values()) },
+        { projects: projects },
         {
           headers: {
             "Set-Cookie": await cookie.destroySession(session),
@@ -890,9 +913,8 @@ export default function Index() {
                             setShowButton({ index: index, flag: false });
                           }}
                           as={Link}
-                          to={value.path}
-                          prefetch="intent"
-                          rel="prefetch"
+                          to={value.url}
+                          prefetch="none"
                           draggable={false}
                           w="full"
                         >
@@ -900,18 +922,31 @@ export default function Index() {
                             key={index}
                             ratio={{ base: 4 / 3, md: 16 / 9 }}
                           >
-                            <Image
-                              roundedTopLeft="md"
-                              roundedTopRight="md"
-                              src={value.thumbnail + "/thumbnail"}
-                              alt={`${value.name} project`}
-                              boxShadow="xl"
-                              draggable={false}
-                              userSelect="none"
-                              w="full"
-                              loading="lazy"
+                            <ClientOnly
                               fallback={<Skeleton w="full" h="full" />}
-                            />
+                            >
+                              {() => (
+                                <Suspense
+                                  fallback={<Skeleton w="full" h="full" />}
+                                >
+                                  <ErrorBoundary
+                                    FallbackComponent={ErrorFallback}
+                                  >
+                                    <RemixImage
+                                      roundedTopLeft="md"
+                                      roundedTopRight="md"
+                                      image={value.thumbnail + "/thumbnail"}
+                                      // alt={`${value.name} project`}
+                                      boxShadow="xl"
+                                      draggable={false}
+                                      userSelect="none"
+                                      w="full"
+                                      loading="lazy"
+                                    />
+                                  </ErrorBoundary>
+                                </Suspense>
+                              )}
+                            </ClientOnly>
                           </AspectRatio>
                           <CardFooter justifyContent="center" p={2}>
                             <Text textAlign="center" fontSize="xl">
@@ -931,47 +966,41 @@ export default function Index() {
 
                           <Box position="absolute" top="8px" right="8px">
                             <VStack alignItems="flex-end" spacing={2}>
-                              {value.status?.completed === true && (
-                                <Tooltip
-                                  label={value.status?.text}
-                                  closeOnScroll
-                                >
+                              {value.completed && value.status && (
+                                <Tooltip label={value.status} closeOnScroll>
                                   <Badge textColor="#22543D" bgColor="#C6F6D5">
                                     Completed
                                   </Badge>
                                 </Tooltip>
                               )}
 
-                              {value.status?.completed === false && (
-                                <Tooltip
-                                  label={value.status?.text}
-                                  closeOnScroll
-                                >
+                              {value.completed === false && value.status && (
+                                <Tooltip label={value.status} closeOnScroll>
                                   <Badge textColor="#744210" bgColor="#FEFCBF">
                                     in progress
                                   </Badge>
                                 </Tooltip>
                               )}
 
-                              {value.category?.tag && (
+                              {value.show_category_tag && value.category_tag && (
                                 <Tooltip
                                   key={index}
-                                  label={value.category?.text}
+                                  label={value.category_name}
                                   closeOnScroll
                                 >
                                   <Badge textColor="#234E52" bgColor="#B2F5EA">
-                                    {value.category.tag}
+                                    {value.category_tag}
                                   </Badge>
                                 </Tooltip>
                               )}
 
-                              {value.client?.tag && (
+                              {value.show_client_tag && value.client_tag && (
                                 <Tooltip
-                                  label={value.client?.text}
+                                  label={value.client_name}
                                   closeOnScroll
                                 >
                                   <Badge textColor="#2A4365" bgColor="#BEE3F8">
-                                    {value.client.tag}
+                                    {value.client_tag}
                                   </Badge>
                                 </Tooltip>
                               )}
@@ -1021,7 +1050,7 @@ export default function Index() {
             </SimpleGrid>
           </VStack>
           {data.projects.length <= 0 && (
-            <ScaleFade in={true} delay={0.5}>
+            <ScaleFade in={true} delay={0.5} unmountOnExit>
               <Box textAlign="center" py={10} px={6}>
                 <QuestionIcon boxSize={"50px"} color="primary.500" />
                 <Heading as="h2" size="lg" mt={6} mb={2}>

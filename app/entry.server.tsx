@@ -1,5 +1,5 @@
 // entry.server.tsx
-import { renderToString } from "react-dom/server";
+import { renderToPipeableStream, renderToString } from "react-dom/server";
 import { CacheProvider } from "@emotion/react";
 import createEmotionServer from "@emotion/server/create-instance";
 import { RemixServer } from "@remix-run/react";

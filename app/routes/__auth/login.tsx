@@ -162,21 +162,21 @@ function PasswordTextField(props: any) {
   );
 }
 
-function CheckBox(props: any) {
-  const { getInputProps } = useField(props.name);
-  const isSubmitting = useIsSubmitting();
+// function CheckBox(props: any) {
+//   const { getInputProps } = useField(props.name);
+//   const isSubmitting = useIsSubmitting();
 
-  return (
-    <Checkbox
-      {...props}
-      {...getInputProps()}
-      value={"yes"}
-      readOnly={isSubmitting}
-    >
-      {props.label}
-    </Checkbox>
-  );
-}
+//   return (
+//     <Checkbox
+//       {...props}
+//       {...getInputProps()}
+//       value={"yes"}
+//       readOnly={isSubmitting}
+//     >
+//       {props.label}
+//     </Checkbox>
+//   );
+// }
 
 function SubmitButton(props: any) {
   const isSubmitting = useIsSubmitting();
@@ -202,7 +202,7 @@ export default function Login() {
       options: {
         redirectTo:
           process.env.NODE_ENV === "development"
-            ? "http://192.168.1.62:3000/resources"
+            ? "http://localhost:3000/resources"
             : "https://allconcontracting.com/resources",
       },
     });
@@ -218,7 +218,7 @@ export default function Login() {
       options: {
         redirectTo:
           process.env.NODE_ENV === "development"
-            ? "http://192.168.1.62:3000/resources"
+            ? "http://localhost:3000/resources"
             : "https://allconcontracting.com/resources",
 
         scopes: "email",

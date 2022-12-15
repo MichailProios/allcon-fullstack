@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from "react";
+import { Suspense, Fragment, useRef, useState } from "react";
 import {
   Text,
   Button,
@@ -39,12 +39,16 @@ import { useLoaderData } from "@remix-run/react";
 import { useWindowDimensions } from "~/utils/hooks";
 import { AnimatePresence, motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFade, Autoplay, Pagination, Scrollbar } from "swiper";
+import { EffectFade, Autoplay, Pagination, Scrollbar, Lazy } from "swiper";
 
 import { useInView } from "react-intersection-observer";
 import { ArrowForwardIcon, LinkIcon } from "@chakra-ui/icons";
 import { ImQuotesRight } from "react-icons/im";
 import { testimonials } from "~/utils/testimonials";
+import { ClientOnly } from "remix-utils/build/react/client-only";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "~/components/ErrorFallback";
+import RemixImage from "~/components/RemixImage";
 
 export const loader: LoaderFunction = async ({ request }: any) => {
   try {
@@ -128,9 +132,9 @@ export default function Index() {
             disableOnInteraction: false,
           }}
           centeredSlides={true}
-          modules={[Autoplay, Pagination, EffectFade]}
+          modules={[Lazy, Autoplay, Pagination, EffectFade]}
           effect={"fade"}
-          lazy={false}
+          lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
           allowTouchMove={false}
           style={{
             height: breakpointHeight,
@@ -151,36 +155,28 @@ export default function Index() {
                 maxW="full"
                 maxH="full"
               >
-                <Image
-                  src={img}
-                  alt={`Landing Page Image ${index}`}
-                  w={"full"}
-                  h="full"
-                  maxW="full"
-                  maxH="full"
-                  overflow="hidden"
-                  display="block"
-                  lineHeight={0}
-                  filter={"brightness(75%)"}
-                  draggable={false}
-                  loading="lazy"
-                  fallback={
-                    <Box w="full" h="full" position="relative">
-                      <Flex
-                        alignItems="center"
-                        flexDirection="column"
-                        position="absolute"
-                        top="50%"
-                        left="50%"
-                        transform={"translate(0%, -50%)"}
-                      >
-                        <Spinner color="primary.500" size="xl" />
-
-                        <Text>Loading Image</Text>
-                      </Flex>
-                    </Box>
-                  }
-                />
+                <ClientOnly>
+                  {() => (
+                    <Suspense fallback={<Skeleton w="full" h="full" />}>
+                      <ErrorBoundary FallbackComponent={ErrorFallback}>
+                        <RemixImage
+                          image={img}
+                          // alt={`Landing Page Image ${index}`}
+                          w={"full"}
+                          h="full"
+                          maxW="full"
+                          maxH="full"
+                          overflow="hidden"
+                          display="block"
+                          lineHeight={0}
+                          filter={"brightness(75%)"}
+                          draggable={false}
+                          loading="lazy"
+                        />
+                      </ErrorBoundary>
+                    </Suspense>
+                  )}
+                </ClientOnly>
               </AspectRatio>
             </SwiperSlide>
           ))}
@@ -272,16 +268,23 @@ export default function Index() {
             >
               <CardBody p={0}>
                 <AspectRatio ratio={16 / 9} w="full">
-                  <Image
-                    src={data.images.companyThumbnail}
-                    alt="Company Group Picture"
-                    roundedTopLeft="md"
-                    roundedTopRight="md"
-                    w="full"
-                    loading="lazy"
-                    draggable={false}
-                    fallback={<Skeleton w="full" h="full" />}
-                  />
+                  <ClientOnly>
+                    {() => (
+                      <Suspense fallback={<Skeleton w="full" h="full" />}>
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                          <RemixImage
+                            image={data.images.companyThumbnail}
+                            // alt="Company Group Picture"
+                            roundedTopLeft="md"
+                            roundedTopRight="md"
+                            w="full"
+                            loading="lazy"
+                            draggable={false}
+                          />
+                        </ErrorBoundary>
+                      </Suspense>
+                    )}
+                  </ClientOnly>
                 </AspectRatio>
               </CardBody>
               <CardFooter
@@ -319,16 +322,23 @@ export default function Index() {
             >
               <CardBody p={0}>
                 <AspectRatio ratio={16 / 9} w="full">
-                  <Image
-                    src={data.images.apt724Thumbnail}
-                    alt="Company Group Picture"
-                    roundedTopLeft="md"
-                    roundedTopRight="md"
-                    w="full"
-                    loading="lazy"
-                    draggable={false}
-                    fallback={<Skeleton w="full" h="full" />}
-                  />
+                  <ClientOnly>
+                    {() => (
+                      <Suspense fallback={<Skeleton w="full" h="full" />}>
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                          <RemixImage
+                            image={data.images.apt724Thumbnail}
+                            // alt="Company Group Picture"
+                            roundedTopLeft="md"
+                            roundedTopRight="md"
+                            w="full"
+                            loading="lazy"
+                            draggable={false}
+                          />
+                        </ErrorBoundary>
+                      </Suspense>
+                    )}
+                  </ClientOnly>
                 </AspectRatio>
               </CardBody>
               <CardFooter
@@ -367,16 +377,23 @@ export default function Index() {
             >
               <CardBody p={0}>
                 <AspectRatio ratio={16 / 9} w="full">
-                  <Image
-                    src={data.images.officeThumbnail}
-                    alt="Company Group Picture"
-                    roundedTopLeft="md"
-                    roundedTopRight="md"
-                    w="full"
-                    draggable={false}
-                    loading="lazy"
-                    fallback={<Skeleton w="full" h="full" />}
-                  />
+                  <ClientOnly>
+                    {() => (
+                      <Suspense fallback={<Skeleton w="full" h="full" />}>
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                          <RemixImage
+                            image={data.images.officeThumbnail}
+                            // alt="Company Group Picture"
+                            roundedTopLeft="md"
+                            roundedTopRight="md"
+                            w="full"
+                            loading="lazy"
+                            draggable={false}
+                          />
+                        </ErrorBoundary>
+                      </Suspense>
+                    )}
+                  </ClientOnly>
                 </AspectRatio>
               </CardBody>
               <CardFooter

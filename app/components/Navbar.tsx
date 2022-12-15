@@ -1,18 +1,6 @@
-import {
-  useState,
-  useEffect,
-  useRef,
-  forwardRef,
-  useLayoutEffect,
-} from "react";
+import { useState, useEffect, useRef } from "react";
 
-import {
-  Link,
-  Outlet,
-  useFetcher,
-  useLoaderData,
-  useMatches,
-} from "@remix-run/react";
+import { Link, useFetcher } from "@remix-run/react";
 
 import {
   Flex,
@@ -47,13 +35,9 @@ import {
   PopoverAnchor,
   DrawerFooter,
 } from "@chakra-ui/react";
-import { createServerClient } from "~/utils/supabase.server";
-import type { LoaderFunction } from "@remix-run/node";
+
 import { RiAccountCircleFill } from "react-icons/ri";
 import { NavLink } from "@remix-run/react";
-
-import { MdAccountCircle } from "react-icons/md";
-import { redirect, json } from "@remix-run/node";
 
 import {
   ChevronDownIcon,
@@ -62,12 +46,7 @@ import {
   MoonIcon,
   SunIcon,
 } from "@chakra-ui/icons";
-import { useContainerDimensions } from "~/utils/hooks";
-import {
-  IoLogOutOutline,
-  IoPersonAddSharp,
-  IoPersonCircleOutline,
-} from "react-icons/io5";
+import { IoLogOutOutline, IoPersonCircleOutline } from "react-icons/io5";
 
 const logo_full_dark =
   "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e81be543-83e6-4173-3254-77df4d1ff900/thumbnail";
@@ -80,9 +59,10 @@ const logo_small =
 
 interface NavbarProps {
   navigationLinks: { label: string; url: string }[];
+  context: any;
 }
 
-export default function Navbar({ navigationLinks }: NavbarProps) {
+export default function Navbar({ navigationLinks, context }: NavbarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
   const { colorMode, toggleColorMode } = useColorMode();
@@ -95,6 +75,22 @@ export default function Navbar({ navigationLinks }: NavbarProps) {
     }
   }, [breakpoint, onClose]);
 
+  const [profile, setProfile] = useState({
+    authenticated: false,
+    values: {},
+  });
+
+  useEffect(() => {
+    if (context?.profile) {
+      setProfile({
+        authenticated: true,
+        values: { ...context?.profile },
+      });
+    } else {
+      setProfile({ authenticated: false, values: {} });
+    }
+  }, [context?.profile]);
+
   return (
     <>
       <NavbarHeader
@@ -105,6 +101,8 @@ export default function Navbar({ navigationLinks }: NavbarProps) {
         colorMode={colorMode}
         toggleColorMode={toggleColorMode}
         navigationLinks={navigationLinks}
+        context={context}
+        profile={profile}
       />
       <NavbarDrawer
         isDrawerOpen={isOpen}
@@ -114,6 +112,8 @@ export default function Navbar({ navigationLinks }: NavbarProps) {
         colorMode={colorMode}
         toggleColorMode={toggleColorMode}
         navigationLinks={navigationLinks}
+        profile={profile}
+        context={context}
       />
     </>
   );
@@ -136,6 +136,8 @@ interface NavbarHeaderProps {
     url: string;
     subLinks?: Array<SubLinksProps>;
   }[];
+  profile: any;
+  context: any;
 }
 
 function NavbarHeader({
@@ -146,14 +148,9 @@ function NavbarHeader({
   colorMode,
   toggleColorMode,
   navigationLinks,
+  profile,
+  context,
 }: NavbarHeaderProps) {
-  const location = useMatches()[1];
-  const [tabIndex, setTabIndex] = useState();
-
-  const handleTabsChange = (index: any) => {
-    setTabIndex(index);
-  };
-
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const ref = useRef<any>();
@@ -163,41 +160,8 @@ function NavbarHeader({
     handler: () => onClose(),
   });
 
-  const loaderData = useLoaderData();
-
-  const getUserFullName = () => {
-    if (loaderData?.user) {
-      if (
-        loaderData?.user.user_metadata?.firstName &&
-        loaderData?.user.user_metadata?.lastName
-      ) {
-        return `${loaderData?.user.user_metadata?.firstName} ${loaderData?.user.user_metadata?.lastName}`;
-      } else if (loaderData?.user.user_metadata?.full_name) {
-        return `${loaderData?.user.user_metadata?.full_name}`;
-      }
-    }
-  };
-
-  const getUserAvatar = () => {
-    if (loaderData?.user) {
-      if (loaderData?.user.user_metadata?.avatar_url) {
-        return loaderData?.user.user_metadata?.avatar_url;
-      }
-    }
-  };
-
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    if (loaderData?.user) {
-      setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
-    }
-  }, [loaderData?.user]);
-
-  const fetcher = useFetcher();
   const toast = useToast();
+  const fetcher = useFetcher();
 
   function handleLogout() {
     fetcher.submit(null, { method: "delete" });
@@ -225,7 +189,6 @@ function NavbarHeader({
       as="header"
       boxShadow={"md"}
       opacity={0.95}
-      // onMouseLeave={projectsPopper.onClose}
     >
       <Flex
         alignItems={"center"}
@@ -337,11 +300,11 @@ function NavbarHeader({
                   variant="ghost"
                   onClick={onOpen}
                   leftIcon={
-                    isAuthenticated ? (
+                    profile.authenticated ? (
                       <Avatar
                         size="xs"
-                        name={getUserFullName()}
-                        src={getUserAvatar()}
+                        name={profile.values.full_name}
+                        src={profile.values.avatar_url}
                       />
                     ) : (
                       <Icon
@@ -354,10 +317,12 @@ function NavbarHeader({
                     )
                   }
                 >
-                  {isAuthenticated ? getUserFullName() : "Join our Community"}
+                  {profile.authenticated
+                    ? profile.values.full_name
+                    : "Join our Community"}
                 </Button>
               </PopoverAnchor>
-              {isAuthenticated ? (
+              {profile.authenticated ? (
                 <PopoverContent w="full" boxShadow="lg" ref={ref}>
                   <PopoverBody w="full" p={0}>
                     <ButtonGroup
@@ -473,6 +438,8 @@ interface NavbarDrawerProps {
     url: string;
     subLinks?: Array<SubLinksProps>;
   }[];
+  profile: any;
+  context: any;
 }
 
 function NavbarDrawer({
@@ -483,30 +450,9 @@ function NavbarDrawer({
   colorMode,
   toggleColorMode,
   navigationLinks,
+  profile,
+  context,
 }: NavbarDrawerProps) {
-  const loaderData = useLoaderData();
-
-  const getUserFullName = () => {
-    if (loaderData?.user) {
-      if (
-        loaderData?.user.user_metadata?.firstName &&
-        loaderData?.user.user_metadata?.lastName
-      ) {
-        return `${loaderData?.user.user_metadata?.firstName} ${loaderData?.user.user_metadata?.lastName}`;
-      } else if (loaderData?.user.user_metadata?.full_name) {
-        return `${loaderData?.user.user_metadata?.full_name}`;
-      }
-    }
-  };
-
-  const getUserAvatar = () => {
-    if (loaderData?.user) {
-      if (loaderData?.user.user_metadata?.avatar_url) {
-        return loaderData?.user.user_metadata?.avatar_url;
-      }
-    }
-  };
-
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const ref = useRef<any>();
@@ -516,18 +462,9 @@ function NavbarDrawer({
     handler: () => onClose(),
   });
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    if (loaderData?.user) {
-      setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
-    }
-  }, [loaderData?.user]);
+  const toast = useToast();
 
   const fetcher = useFetcher();
-  const toast = useToast();
 
   function handleLogout() {
     fetcher.submit(null, { method: "delete" });
@@ -629,11 +566,11 @@ function NavbarDrawer({
                   variant="ghost"
                   onClick={onOpen}
                   leftIcon={
-                    isAuthenticated ? (
+                    profile.authenticated ? (
                       <Avatar
                         size="xs"
-                        name={getUserFullName()}
-                        src={getUserAvatar()}
+                        name={profile.values.full_name}
+                        src={profile.values.avatar_url}
                       />
                     ) : (
                       <Icon
@@ -646,10 +583,12 @@ function NavbarDrawer({
                     )
                   }
                 >
-                  {isAuthenticated ? getUserFullName() : "Join our Community"}
+                  {profile.authenticated
+                    ? profile.values.full_name
+                    : "Join our Community"}
                 </Button>
               </PopoverAnchor>
-              {isAuthenticated ? (
+              {profile.authenticated ? (
                 <PopoverContent w="full" boxShadow="lg" ref={ref}>
                   <PopoverBody w="full" p={0}>
                     <ButtonGroup
@@ -664,7 +603,10 @@ function NavbarDrawer({
                       <Button
                         fontSize="sm"
                         w="full"
-                        onClick={onClose}
+                        onClick={() => {
+                          onClose();
+                          onDrawerClose();
+                        }}
                         borderRadius="none"
                         as={Link}
                         to="/profile"
@@ -674,12 +616,12 @@ function NavbarDrawer({
                       >
                         Profile
                       </Button>
-
                       <Button
                         fontSize="sm"
                         w="full"
                         onClick={() => {
                           onClose();
+                          onDrawerClose();
                           handleLogout();
                         }}
                         borderRadius="none"

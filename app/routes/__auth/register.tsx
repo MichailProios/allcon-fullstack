@@ -276,7 +276,7 @@ export default function Register() {
   }, [actionData, toast]);
 
   return (
-    <SlideFade in={true} unmountOnExit reverse delay={0.1}>
+    <SlideFade in={true} unmountOnExit reverse delay={0.05}>
       <Container maxW="7xl" p={{ base: 1, md: 6 }}>
         <Center
           as={ValidatedForm}

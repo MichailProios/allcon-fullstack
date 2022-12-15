@@ -71,7 +71,7 @@ export default function Index() {
   const data = useLoaderData();
 
   return (
-    <SlideFade in={true} unmountOnExit reverse delay={0.1}>
+    <SlideFade in={true} unmountOnExit reverse delay={0.05}>
       <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="26px">
           <Heading textAlign="center">References</Heading>

@@ -1,4 +1,4 @@
-import { extendTheme } from "@chakra-ui/react";
+import { extendTheme, useColorModeValue } from "@chakra-ui/react";
 
 const colors = {
   primary: {
@@ -34,7 +34,12 @@ const config = {
 const components = {};
 
 const styles = {
-  global: {},
+  global: (props) => ({
+    "html, body": {
+      backgroundColor: props.colorMode === "dark" ? "gray.800" : "white",
+      transition: "background-color 0.5s linear",
+    },
+  }),
 };
 
 const theme = extendTheme({ config, colors, styles, components, breakpoints });

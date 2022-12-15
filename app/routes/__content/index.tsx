@@ -92,8 +92,6 @@ export const loader: LoaderFunction = async ({ request }: any) => {
 };
 
 export default function Index() {
-  const { height } = useWindowDimensions();
-
   const data = useLoaderData();
 
   const testimonialsView = useInView();
@@ -119,7 +117,7 @@ export default function Index() {
   );
 
   return (
-    <SlideFade in={true} unmountOnExit reverse delay={0.1}>
+    <SlideFade in={true} unmountOnExit reverse delay={0.05}>
       {/* <Fade
         in={true}
         style={{ width: "100%" }}

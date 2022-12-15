@@ -150,8 +150,6 @@ const Document = withEmotionCache(
       clientStyleData?.reset();
     }, []);
 
-    const { cookies } = useLoaderData();
-
     return (
       <html lang="en">
         <head>
@@ -169,9 +167,9 @@ const Document = withEmotionCache(
         <body style={{ height: "100%", overflow: "overlay" }}>
           <ChakraProvider
             colorModeManager={
-              typeof cookies === "string"
-                ? cookieStorageManagerSSR(cookies)
-                : localStorageManager
+              // cookieStorageManagerSSR(cookies)
+              // typeof cookies === "string" && cookieStorageManagerSSR(cookies)
+              localStorageManager
             }
             theme={theme}
           >

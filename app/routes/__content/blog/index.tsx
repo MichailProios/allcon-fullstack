@@ -22,7 +22,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import RenderIfVisible from "react-render-if-visible";
 const Index = () => {
   return (
-    <SlideFade in={true} unmountOnExit reverse delay={0.1}>
+    <SlideFade in={true} unmountOnExit reverse delay={0.05}>
       <Container maxW="1200px" px={{ base: 5, md: 8 }} py={16} mx="auto">
         <VStack spacing="26px" w="full">
           <Heading textAlign="center">Blog Posts</Heading>

@@ -20,7 +20,7 @@ export const meta: MetaFunction = ({ params }: any) => ({
 
 export default function Media() {
   return (
-    <SlideFade in={true} unmountOnExit reverse delay={0.1}>
+    <SlideFade in={true} unmountOnExit reverse delay={0.05}>
       <Container maxW="1200px" px={{ base: 3, md: 6 }} py={14}>
         <Box textAlign="center" py={10} px={6}>
           <WarningTwoIcon boxSize={"50px"} color={"orange.300"} />

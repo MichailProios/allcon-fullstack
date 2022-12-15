@@ -335,7 +335,7 @@ export default function Project() {
                                   <RemixImage
                                     image={value.source + "/public"}
                                     // alt={`Project Image ${index}`}
-                                    loading="lazy"
+                                    loading="eager"
                                     w="full"
                                     h="full"
                                     draggable={false}
@@ -421,7 +421,7 @@ export default function Project() {
                                       <RemixImage
                                         image={value.source + "/meta"}
                                         // alt={`Project Image ${index}`}
-                                        loading="lazy"
+                                        loading="eager"
                                         // fallback={<Skeleton w="full" h="full" />}
                                         borderRadius="md"
                                         zIndex={9000}
@@ -586,7 +586,7 @@ export default function Project() {
                                     <RemixImage
                                       image={value.source + "/hq"}
                                       // alt={`Project Image ${index}`}
-                                      loading="lazy"
+                                      loading="eager"
                                       w="full"
                                       maxW="full"
                                       maxH="full"

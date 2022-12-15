@@ -140,7 +140,7 @@ export const loader: LoaderFunction = async ({ request }: any) => {
   } = await supabase.auth.getSession();
 
   if (session) {
-    return redirect("/resources", {
+    return redirect("/blog", {
       headers: response.headers,
     });
   } else {
@@ -225,8 +225,8 @@ export default function Register() {
       options: {
         redirectTo:
           process.env.NODE_ENV === "development"
-            ? "http://localhost:3000/resources"
-            : "https://allconcontracting.com/resources",
+            ? "http://localhost:3000/blog"
+            : "https://allconcontracting.com/blog",
       },
     });
 
@@ -241,8 +241,8 @@ export default function Register() {
       options: {
         redirectTo:
           process.env.NODE_ENV === "development"
-            ? "http://localhost:3000/resources"
-            : "https://allconcontracting.com/resources",
+            ? "http://localhost:3000/blog"
+            : "https://allconcontracting.com/blog",
 
         scopes: "email",
       },
@@ -276,120 +276,115 @@ export default function Register() {
   }, [actionData, toast]);
 
   return (
-    <SlideFade in={true} unmountOnExit reverse delay={0.05}>
-      <Container maxW="7xl" p={{ base: 1, md: 6 }}>
-        <Center
-          as={ValidatedForm}
-          validator={validator}
-          method="post"
-          id="registerForm"
-          replace
-        >
-          <Stack spacing={4}>
-            <VStack
-              boxSize={{ base: "auto", xs: "xs", sm: "sm", md: "md" }}
-              h="max-content !important"
-              bg={useColorModeValue("white", "gray.700")}
-              rounded="xl"
-              boxShadow={"2xl"}
-              p={{ base: 5, sm: 10 }}
-              spacing={4}
-            >
-              <Stack align="center">
-                <Heading fontSize="2xl">Create Account</Heading>
-              </Stack>
+    // <SlideFade in={true} unmountOnExit reverse delay={0.05}>
+    <Container maxW="7xl" p={{ base: 1, md: 6 }}>
+      <Center
+        as={ValidatedForm}
+        validator={validator}
+        method="post"
+        id="registerForm"
+        replace
+      >
+        <Stack spacing={4}>
+          <VStack
+            boxSize={{ base: "auto", xs: "xs", sm: "sm", md: "md" }}
+            h="max-content !important"
+            bg={useColorModeValue("white", "gray.700")}
+            rounded="xl"
+            boxShadow={"2xl"}
+            p={{ base: 5, sm: 10 }}
+            spacing={4}
+          >
+            <Stack align="center">
+              <Heading fontSize="2xl">Create Account</Heading>
+            </Stack>
 
-              <ButtonGroup orientation="vertical" w="full">
-                <Button
-                  w={"full"}
-                  variant={"solid"}
-                  leftIcon={<FcGoogle />}
-                  onClick={handleGoogleAuth}
-                >
-                  Sign Up with Gmail
-                </Button>
-                <Button
-                  w={"full"}
-                  variant={"solid"}
-                  leftIcon={<SiMicrosoftazure color="#0078D4" />}
-                  onClick={handleMicrosoftAuth}
-                >
-                  Sign Up with Microsoft
-                </Button>
-              </ButtonGroup>
-
-              <Flex
-                w="full"
-                justifyContent="stretch"
-                alignItems="center"
-                gap={2}
+            <ButtonGroup orientation="vertical" w="full">
+              <Button
+                w={"full"}
+                variant={"solid"}
+                leftIcon={<FcGoogle />}
+                onClick={handleGoogleAuth}
               >
-                <Divider w="full" />
-                <Text>or</Text>
-                <Divider w="full" />
-              </Flex>
-              <VStack spacing={4} w="100%">
-                <Stack direction={{ base: "column", md: "row" }} w="100%">
-                  <TextField
-                    label="First Name"
-                    name="firstName"
-                    placeholder="Enter your first name"
-                    rounded="md"
-                    type="text"
-                  />
-                  <TextField
-                    label="Last Name"
-                    name="lastName"
-                    placeholder="Enter your last name"
-                    rounded="md"
-                    type="text"
-                  />
-                </Stack>
+                Sign Up with Gmail
+              </Button>
+              <Button
+                w={"full"}
+                variant={"solid"}
+                leftIcon={<SiMicrosoftazure color="#0078D4" />}
+                onClick={handleMicrosoftAuth}
+              >
+                Sign Up with Microsoft
+              </Button>
+            </ButtonGroup>
+
+            <Flex w="full" justifyContent="stretch" alignItems="center" gap={2}>
+              <Divider w="full" />
+              <Text>or</Text>
+              <Divider w="full" />
+            </Flex>
+            <VStack spacing={4} w="100%">
+              <Stack direction={{ base: "column", md: "row" }} w="100%">
                 <TextField
-                  label="Email Address"
-                  name="emailAddress"
-                  placeholder="Enter your email"
+                  label="First Name"
+                  name="firstName"
+                  placeholder="Enter your first name"
                   rounded="md"
-                  type="email"
+                  type="text"
                 />
-
-                <PasswordTextField
-                  label="Password"
-                  name="password"
-                  placeholder="Enter your password"
+                <TextField
+                  label="Last Name"
+                  name="lastName"
+                  placeholder="Enter your last name"
                   rounded="md"
+                  type="text"
                 />
-              </VStack>
-              <VStack w="100%" spacing={4}>
-                <CheckBox
-                  type="checkbox"
-                  name="agreed"
-                  label=" Agree with Terms & Conditions"
-                />
+              </Stack>
+              <TextField
+                label="Email Address"
+                name="emailAddress"
+                placeholder="Enter your email"
+                rounded="md"
+                type="email"
+              />
 
-                <SubmitButton
-                  w="100%"
-                  colorScheme="primary"
-                  label="Create Account"
-                  type="submit"
-                />
-                <Text>
-                  Already have an account?&nbsp;
-                  <Text
-                    as={Link}
-                    to="/login"
-                    fontSize={{ base: "md", sm: "md" }}
-                    fontWeight="bold"
-                    _hover={{ textDecoration: "underline" }}
-                  >
-                    Sign In
-                  </Text>
-                </Text>
-              </VStack>
+              <PasswordTextField
+                label="Password"
+                name="password"
+                placeholder="Enter your password"
+                rounded="md"
+              />
             </VStack>
-          </Stack>
-        </Center>
-      </Container>
-    </SlideFade>
+            <VStack w="100%" spacing={4}>
+              <CheckBox
+                type="checkbox"
+                name="agreed"
+                label=" Agree with Terms & Conditions"
+              />
+
+              <SubmitButton
+                w="100%"
+                colorScheme="primary"
+                label="Create Account"
+                type="submit"
+              />
+              <Text>
+                Already have an account?&nbsp;
+                <Text
+                  as={Link}
+                  to="/login"
+                  fontSize={{ base: "md", sm: "md" }}
+                  fontWeight="bold"
+                  _hover={{ textDecoration: "underline" }}
+                >
+                  Sign In
+                </Text>
+              </Text>
+            </VStack>
+          </VStack>
+        </Stack>
+      </Center>
+    </Container>
+    // </SlideFade>
   );
 }

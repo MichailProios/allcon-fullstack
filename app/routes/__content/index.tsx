@@ -49,6 +49,7 @@ import { ClientOnly } from "remix-utils/build/react/client-only";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "~/components/ErrorFallback";
 import RemixImage from "~/components/RemixImage";
+import { createServerClient } from "~/utils/supabase.server";
 
 export const loader: LoaderFunction = async ({ request }: any) => {
   try {
@@ -81,11 +82,23 @@ export const loader: LoaderFunction = async ({ request }: any) => {
     const officeThumbnail =
       "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/60f073c3-a567-471e-9bc6-9096dcc65500/thumbnail";
 
-    return {
-      slideShow: [lupton, policeStation, nold, apt724, greatneckRoofs],
-      images: { companyThumbnail, apt724Thumbnail, officeThumbnail },
-      testimonials: Array.from(testimonials.values()),
-    };
+    const response = new Response();
+    const supabase = createServerClient({ request, response });
+
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    return json(
+      {
+        slideShow: [lupton, policeStation, nold, apt724, greatneckRoofs],
+        images: { companyThumbnail, apt724Thumbnail, officeThumbnail },
+        testimonials: Array.from(testimonials.values()),
+      },
+      {
+        headers: response.headers,
+      }
+    );
   } catch (error) {
     throw error;
   }
@@ -117,12 +130,7 @@ export default function Index() {
   );
 
   return (
-    <SlideFade in={true} unmountOnExit reverse delay={0.05}>
-      {/* <Fade
-        in={true}
-        style={{ width: "100%" }}
-        transition={{ enter: { duration: 0.2 }, exit: { duration: 0.2 } }}
-      > */}
+    <>
       <Box position="relative">
         <Swiper
           autoplay={{
@@ -206,7 +214,9 @@ export default function Index() {
             <Button
               colorScheme="primary"
               variant="solid"
-              bgColor="#018b8b"
+              bgColor="primary.500"
+              _hover={{ bgColor: "primary.600" }}
+              _active={{ bgColor: "primary.700" }}
               textColor="white"
               as={Link}
               prefetch="render"
@@ -230,6 +240,7 @@ export default function Index() {
               variant="solid"
               bgColor="gray.50"
               _hover={{ bgColor: "gray.300" }}
+              _active={{ bgColor: "gray.400" }}
               textColor="black"
               prefetch="render"
               rel="prerender"
@@ -548,7 +559,6 @@ export default function Index() {
           </Stack>
         </Stack>
       </Container>
-    </SlideFade>
-    // </SlideFade>
+    </>
   );
 }

@@ -19,23 +19,23 @@ export const meta: MetaFunction = ({ params }: any) => ({
 
 export default function Awards() {
   return (
-    <SlideFade in={true} unmountOnExit reverse delay={0.05}>
-      <Container maxW="1200px" px={{ base: 3, md: 6 }} py={14}>
-        <Box textAlign="center" py={10} px={6}>
-          <WarningTwoIcon boxSize={"50px"} color={"orange.300"} />
-          <Heading as="h2" size="xl" mt={6} mb={2}>
-            This page is under construction
-          </Heading>
-          <Text color={"gray.500"}>
-            Currently, the section of our website that you are trying to access
-            is undergoing construction. We apologize for any inconvenience this
-            may cause and ask for your patience as we work to improve this part
-            of the website. We appreciate your understanding and thank you for
-            visiting our website. Please check back soon for updates on the
-            progress of this new development.
-          </Text>
-        </Box>
-      </Container>
-    </SlideFade>
+    // <SlideFade in={true} unmountOnExit reverse delay={0.05}>
+    <Container maxW="1200px" px={{ base: 3, md: 6 }} py={14}>
+      <Box textAlign="center" py={10} px={6}>
+        <WarningTwoIcon boxSize={"50px"} color={"orange.300"} />
+        <Heading as="h2" size="xl" mt={6} mb={2}>
+          This page is under construction
+        </Heading>
+        <Text color={"gray.500"}>
+          Currently, the section of our website that you are trying to access is
+          undergoing construction. We apologize for any inconvenience this may
+          cause and ask for your patience as we work to improve this part of the
+          website. We appreciate your understanding and thank you for visiting
+          our website. Please check back soon for updates on the progress of
+          this new development.
+        </Text>
+      </Box>
+    </Container>
+    // </SlideFade>
   );
 }

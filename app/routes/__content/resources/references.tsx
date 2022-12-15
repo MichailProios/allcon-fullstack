@@ -43,6 +43,7 @@ import { useWindowDimensions } from "~/utils/hooks";
 // import Slider from "react-slick";
 import { Search2Icon } from "@chakra-ui/icons";
 import { testimonials } from "~/utils/testimonials";
+import { createServerClient } from "~/utils/supabase.server";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - Testimonials`,
@@ -61,7 +62,19 @@ export const meta: MetaFunction = ({ params }: any) => ({
 
 export const loader: LoaderFunction = async ({ request }: any) => {
   try {
-    return { references: Array.from(testimonials.values()) };
+    const response = new Response();
+    const supabase = createServerClient({ request, response });
+
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    return json(
+      { references: Array.from(testimonials.values()) },
+      {
+        headers: response.headers,
+      }
+    );
   } catch (error) {
     throw error;
   }
@@ -71,43 +84,43 @@ export default function Index() {
   const data = useLoaderData();
 
   return (
-    <SlideFade in={true} unmountOnExit reverse delay={0.05}>
-      <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
-        <VStack spacing="26px">
-          <Heading textAlign="center">References</Heading>
+    // <SlideFade in={true} unmountOnExit reverse delay={0.05}>
+    <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
+      <VStack spacing="26px">
+        <Heading textAlign="center">References</Heading>
 
-          {data.references.map((value: any, index: any) => (
-            <Fragment key={index}>
-              <VStack spacing={3} pt={1} justify="center">
-                <Avatar
-                  size="xl"
-                  showBorder={true}
-                  borderColor="primary.400"
-                  name={value.initials || value.name}
-                  src={value.image}
-                />
-                <Box textAlign="center">
-                  <Text fontWeight="bold" fontSize="lg">
-                    {value.name}
-                  </Text>
-                  <Text fontWeight="medium" fontSize="sm" color="gray.400">
-                    {value.position} {value.company && <> at </>}
-                    {value.company}
-                  </Text>
-                </Box>
-                <Box textAlign="center" maxW="4xl">
-                  <Text fontSize="md" fontWeight="medium">
-                    {value.content}
-                  </Text>
-                </Box>
-              </VStack>
-              {data.references.length - 1 !== index && (
-                <Divider my={6} w="100vw" />
-              )}
-            </Fragment>
-          ))}
-        </VStack>
-      </Container>
-    </SlideFade>
+        {data.references.map((value: any, index: any) => (
+          <Fragment key={index}>
+            <VStack spacing={3} pt={1} justify="center">
+              <Avatar
+                size="xl"
+                showBorder={true}
+                borderColor="primary.400"
+                name={value.initials || value.name}
+                src={value.image}
+              />
+              <Box textAlign="center">
+                <Text fontWeight="bold" fontSize="lg">
+                  {value.name}
+                </Text>
+                <Text fontWeight="medium" fontSize="sm" color="gray.400">
+                  {value.position} {value.company && <> at </>}
+                  {value.company}
+                </Text>
+              </Box>
+              <Box textAlign="center" maxW="4xl">
+                <Text fontSize="md" fontWeight="medium">
+                  {value.content}
+                </Text>
+              </Box>
+            </VStack>
+            {data.references.length - 1 !== index && (
+              <Divider my={6} w="100vw" />
+            )}
+          </Fragment>
+        ))}
+      </VStack>
+    </Container>
+    // </SlideFade>
   );
 }

@@ -146,9 +146,16 @@ export const loader: LoaderFunction = async ({ request, params }: any) => {
       return redirect("/projects");
     }
 
-    return json({
-      project: project,
-    });
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    return json(
+      {
+        project: project,
+      },
+      { headers: response.headers }
+    );
   } catch (error) {
     throw error;
   }
@@ -226,7 +233,8 @@ export default function Project() {
   const { height } = useWindowDimensions();
 
   return (
-    <SlideFade in={true} unmountOnExit reverse delay={0.05}>
+    // <SlideFade in={true} unmountOnExit reverse delay={0.05}>
+    <>
       <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="26px" w="full">
           <Heading textAlign="center">{data.project.name}</Heading>
@@ -248,7 +256,8 @@ export default function Project() {
               icon={<ChevronLeftIcon w={6} h={6} />}
               bgColor="gray.50"
               textColor="black"
-              _hover={{ bgColor: "gray.200" }}
+              _hover={{ bgColor: "gray.300" }}
+              _active={{ bgColor: "gray.400" }}
             />
 
             <IconButton
@@ -265,7 +274,8 @@ export default function Project() {
               icon={<ChevronRightIcon w={6} h={6} />}
               bgColor="gray.50"
               textColor="black"
-              _hover={{ bgColor: "gray.200" }}
+              _hover={{ bgColor: "gray.300" }}
+              _active={{ bgColor: "gray.400" }}
             />
 
             <IconButton
@@ -282,7 +292,8 @@ export default function Project() {
               icon={<Icon w={5} h={5} as={BiExpand} />}
               bgColor="gray.50"
               textColor="black"
-              _hover={{ bgColor: "gray.200" }}
+              _hover={{ bgColor: "gray.300" }}
+              _active={{ bgColor: "gray.400" }}
             />
 
             <Box boxShadow="xl" w={"full"}>
@@ -293,7 +304,7 @@ export default function Project() {
                 keyboard={{
                   enabled: true,
                 }}
-                lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
+                lazy={{ loadPrevNext: true, loadPrevNextAmount: 2 }}
                 modules={[Lazy, Navigation, Thumbs, Keyboard]}
                 effect={"slide"}
                 thumbs={{ swiper: thumbsSwiper }}
@@ -496,7 +507,8 @@ export default function Project() {
                   icon={<ChevronLeftIcon w={6} h={6} />}
                   bgColor="gray.50"
                   textColor="black"
-                  _hover={{ bgColor: "gray.200" }}
+                  _active={{ bgColor: "gray.400" }}
+                  _hover={{ bgColor: "gray.300" }}
                 />
 
                 <IconButton
@@ -513,7 +525,8 @@ export default function Project() {
                   icon={<ChevronRightIcon w={6} h={6} />}
                   bgColor="gray.50"
                   textColor="black"
-                  _hover={{ bgColor: "gray.200" }}
+                  _active={{ bgColor: "gray.400" }}
+                  _hover={{ bgColor: "gray.300" }}
                 />
 
                 <Box boxShadow="xl" w={"full"}>
@@ -524,7 +537,7 @@ export default function Project() {
                       width: "100%",
                     }}
                     initialSlide={sliderRef.current?.swiper.realIndex ?? 0}
-                    lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
+                    lazy={{ loadPrevNext: true, loadPrevNextAmount: 2 }}
                     modules={[Lazy, Navigation, Pagination, Keyboard]}
                     keyboard={{
                       enabled: true,
@@ -555,7 +568,7 @@ export default function Project() {
                                       position="absolute"
                                       top="50%"
                                       left="50%"
-                                      transform={"translate(0%, -50%)"}
+                                      transform={"translate(-50%, -50%)"}
                                     >
                                       <Spinner color="primary.500" size="xl" />
 
@@ -821,6 +834,7 @@ export default function Project() {
           )}
         </VStack>
       </Container>
-    </SlideFade>
+    </>
+    // </SlideFade>
   );
 }

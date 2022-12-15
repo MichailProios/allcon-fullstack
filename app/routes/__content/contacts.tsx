@@ -44,12 +44,14 @@ import {
 } from "remix-validated-form";
 import { withZod } from "@remix-validated-form/with-zod";
 import { z } from "zod";
-import type { MetaFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { PhoneIcon } from "@chakra-ui/icons";
 import { FaFax, FaLinkedin } from "react-icons/fa";
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 
 import * as mailer from "~/utils/email.server";
 import { BiSend, BiMap, BiStreetView } from "react-icons/bi";
+import { createServerClient } from "~/utils/supabase.server";
 
 const phoneRegExp = new RegExp(
   /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/
@@ -128,6 +130,23 @@ export async function action({ request }: { request: Request }) {
   }
 }
 
+export const loader: LoaderFunction = async ({ request }: any) => {
+  try {
+    const response = new Response();
+    const supabase = createServerClient({ request, response });
+
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    return json(null, {
+      headers: response.headers,
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
 function TextField(props: any) {
   const { error, getInputProps } = useField(props.name);
   const actionData = useActionData();
@@ -203,7 +222,8 @@ export default function Contacts() {
   }, [actionData, toast]);
 
   return (
-    <SlideFade in={true} unmountOnExit reverse delay={0.05}>
+    // <SlideFade in={true} unmountOnExit reverse delay={0.05}>
+    <>
       <Container
         maxW={"1200px"}
         px={{ base: 3, md: 6 }}
@@ -486,6 +506,7 @@ export default function Contacts() {
           </Card>
         </VStack>
       </Container>
-    </SlideFade>
+    </>
+    // </SlideFade>
   );
 }

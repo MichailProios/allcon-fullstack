@@ -30,6 +30,7 @@ import { any } from "zod";
 import RemixImage from "~/components/RemixImage";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "~/components/ErrorFallback";
+import { createServerClient } from "~/utils/supabase.server";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - About`,
@@ -55,10 +56,22 @@ export const loader: LoaderFunction = async ({ request }: any) => {
     const company =
       "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b4fadc27-355f-443d-f1d2-a3efc3905200/public";
 
-    return json({
-      allconStaff: company,
-      profiles: Array.from(profiles.values()),
-    });
+    const response = new Response();
+    const supabase = createServerClient({ request, response });
+
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    return json(
+      {
+        allconStaff: company,
+        profiles: Array.from(profiles.values()),
+      },
+      {
+        headers: response.headers,
+      }
+    );
   } catch (error) {
     throw error;
   }
@@ -68,7 +81,8 @@ export default function About() {
   const data = useLoaderData();
 
   return (
-    <SlideFade in={true} unmountOnExit reverse delay={0.05}>
+    // <SlideFade in={true} unmountOnExit reverse delay={0.05}>
+    <>
       <Container maxW="1200px" px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="26px">
           <Heading textAlign="center">About Us</Heading>
@@ -197,6 +211,7 @@ export default function About() {
           </AnimatePresence>
         </VStack>
       </Container>
-    </SlideFade>
+    </>
+    // </SlideFade>
   );
 }

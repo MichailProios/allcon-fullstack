@@ -133,51 +133,71 @@ export const loader: LoaderFunction = async ({ request }: any) => {
     const session = await cookie.getSession(request.headers.get("Cookie"));
     const filter = session.get("filter") || null;
 
+    await supabase.auth.getSession();
+
     const { data: projects } = await supabase.rpc("unfiltered_projects");
 
     if (filter?.search && !category) {
-      return json({
-        filter: filter,
-        projects: projects.filter(
-          (value) =>
-            value?.name?.toLowerCase().includes(filter?.search.toLowerCase()) ||
-            value?.client_tag
-              ?.toLowerCase()
-              .includes(filter?.search.toLowerCase())
-        ),
-      });
-    } else if (category && !filter?.search) {
-      return json({
-        filter: filter,
-        projects: projects.filter(
-          (value) =>
-            value?.client_tag?.toLowerCase().includes(category.toLowerCase()) ||
-            value?.category_tag?.toLowerCase().includes(category.toLowerCase())
-        ),
-      });
-    } else if (filter?.search && category) {
-      return json({
-        filter: filter,
-        projects: projects.filter(
-          (value) =>
-            (value?.name.toLowerCase().includes(filter?.search.toLowerCase()) ||
+      return json(
+        {
+          filter: filter,
+          projects: projects.filter(
+            (value) =>
+              value?.name
+                ?.toLowerCase()
+                .includes(filter?.search.toLowerCase()) ||
               value?.client_tag
                 ?.toLowerCase()
-                .includes(filter?.search.toLowerCase())) &&
-            (value?.client_tag
-              ?.toLowerCase()
-              .includes(category.toLowerCase()) ||
+                .includes(filter?.search.toLowerCase())
+          ),
+        },
+        { headers: response.headers }
+      );
+    } else if (category && !filter?.search) {
+      return json(
+        {
+          filter: filter,
+          projects: projects.filter(
+            (value) =>
+              value?.client_tag
+                ?.toLowerCase()
+                .includes(category.toLowerCase()) ||
               value?.category_tag
                 ?.toLowerCase()
-                .includes(category.toLowerCase()))
-        ),
-      });
+                .includes(category.toLowerCase())
+          ),
+        },
+        { headers: response.headers }
+      );
+    } else if (filter?.search && category) {
+      return json(
+        {
+          filter: filter,
+          projects: projects.filter(
+            (value) =>
+              (value?.name
+                .toLowerCase()
+                .includes(filter?.search.toLowerCase()) ||
+                value?.client_tag
+                  ?.toLowerCase()
+                  .includes(filter?.search.toLowerCase())) &&
+              (value?.client_tag
+                ?.toLowerCase()
+                .includes(category.toLowerCase()) ||
+                value?.category_tag
+                  ?.toLowerCase()
+                  .includes(category.toLowerCase()))
+          ),
+        },
+        { headers: response.headers }
+      );
     } else {
       return json(
         { projects: projects },
         {
           headers: {
             "Set-Cookie": await cookie.destroySession(session),
+            ...response.headers,
           },
         }
       );
@@ -476,595 +496,586 @@ export default function Index() {
   });
 
   return (
-    <SlideFade in={true} unmountOnExit reverse delay={0.05}>
-      <Container maxW={"1600px"} px={{ base: 3, md: 6 }} py={14}>
-        <VStack spacing="26px">
-          <Heading textAlign="center">Projects</Heading>
+    // <SlideFade in={true} unmountOnExit reverse delay={0.05}>
+    <Container maxW={"1600px"} px={{ base: 3, md: 6 }} py={14}>
+      <VStack spacing="26px">
+        <Heading textAlign="center">Projects</Heading>
 
+        <VStack
+          spacing={"16px"}
+          justifyContent="center"
+          alignItems="center"
+          w="full"
+        >
           <VStack
-            spacing={"16px"}
+            spacing={2}
             justifyContent="center"
             alignItems="center"
             w="full"
           >
-            <VStack
-              spacing={2}
+            <Tabs
+              variant="unstyled"
+              colorScheme="gray"
+              orientation="horizontal"
+              w="full"
               justifyContent="center"
-              alignItems="center"
-              w="full"
+              index={tabIndex}
+              onChange={handleTabsChange}
+              display={{ base: "none", smd: "flex" }}
             >
-              <Tabs
-                variant="unstyled"
-                colorScheme="gray"
-                orientation="horizontal"
-                w="full"
+              <TabList
                 justifyContent="center"
-                index={tabIndex}
-                onChange={handleTabsChange}
-                display={{ base: "none", smd: "flex" }}
-              >
-                <TabList
-                  justifyContent="center"
-                  w="full"
-                  display="flex"
-                  gap={{ base: 1, lg: 2 }}
-                >
-                  <Tooltip label="Show all projects" closeOnScroll>
-                    <Tab
-                      w={{ base: "auto", lg: "8em" }}
-                      fontWeight="semibold"
-                      _selected={{
-                        color: "white",
-                        bg: "primary.500",
-                      }}
-                      rounded="md"
-                      as={Button}
-                      variant="outline"
-                      boxShadow="md"
-                      onClick={() => handleClientCategory("")}
-                    >
-                      All Projects
-                    </Tab>
-                  </Tooltip>
-
-                  <Tooltip label="Show interior projects" closeOnScroll>
-                    <Tab
-                      w={{ md: "auto", lg: "8em" }}
-                      fontWeight="semibold"
-                      _selected={{ color: "white", bg: "primary.500" }}
-                      rounded="md"
-                      as={Button}
-                      variant="outline"
-                      boxShadow="md"
-                      onClick={() => handleClientCategory("interior")}
-                    >
-                      Interior
-                    </Tab>
-                  </Tooltip>
-
-                  <Tooltip label="Show exterior projects" closeOnScroll>
-                    <Tab
-                      w={{ md: "auto", lg: "8em" }}
-                      fontWeight="semibold"
-                      _selected={{ color: "white", bg: "primary.500" }}
-                      rounded="md"
-                      as={Button}
-                      variant="outline"
-                      boxShadow="md"
-                      onClick={() => handleClientCategory("exterior")}
-                    >
-                      Exterior
-                    </Tab>
-                  </Tooltip>
-
-                  <Tooltip
-                    label="Show State University of New York projects"
-                    closeOnScroll
-                  >
-                    <Tab
-                      w={{ md: "auto", lg: "8em" }}
-                      fontWeight="semibold"
-                      _selected={{ color: "white", bg: "primary.500" }}
-                      rounded="md"
-                      as={Button}
-                      variant="outline"
-                      boxShadow="md"
-                      onClick={() => handleClientCategory("suny")}
-                    >
-                      SUNY
-                    </Tab>
-                  </Tooltip>
-
-                  <Tooltip
-                    label="Show NYS Office of General Services projects"
-                    closeOnScroll
-                  >
-                    <Tab
-                      w={{ md: "auto", lg: "8em" }}
-                      fontWeight="semibold"
-                      _selected={{
-                        color: "white",
-                        bg: "primary.500",
-                      }}
-                      rounded="md"
-                      as={Button}
-                      variant="outline"
-                      boxShadow="md"
-                      onClick={() => handleClientCategory("ogs")}
-                    >
-                      OGS
-                    </Tab>
-                  </Tooltip>
-
-                  <Tooltip
-                    label="Show School Construction Authority projects"
-                    closeOnScroll
-                  >
-                    <Tab
-                      w={{ md: "auto", lg: "8em" }}
-                      fontWeight="semibold"
-                      _selected={{ color: "white", bg: "primary.500" }}
-                      rounded="md"
-                      as={Button}
-                      variant="outline"
-                      boxShadow="md"
-                      onClick={() => handleClientCategory("sca")}
-                    >
-                      SCA
-                    </Tab>
-                  </Tooltip>
-
-                  <Tooltip
-                    label="Show other miscellaneous projects"
-                    closeOnScroll
-                  >
-                    <Tab
-                      w={{ md: "auto", lg: "8em" }}
-                      fontWeight="semibold"
-                      _selected={{ color: "white", bg: "primary.500" }}
-                      rounded="md"
-                      as={Button}
-                      variant="outline"
-                      boxShadow="md"
-                      onClick={() => handleClientCategory("other")}
-                    >
-                      Other
-                    </Tab>
-                  </Tooltip>
-                </TabList>
-              </Tabs>
-
-              <Box
-                display={{ base: "flex", smd: "none" }}
                 w="full"
-                ref={menuRef}
+                display="flex"
+                gap={{ base: 1, lg: 2 }}
               >
-                <Menu
-                  autoSelect={false}
-                  matchWidth
-                  placement="bottom"
-                  isOpen={isOpen}
-                >
-                  <MenuButton
-                    as={Button}
-                    w="full"
+                <Tooltip label="Show all projects" closeOnScroll>
+                  <Tab
+                    w={{ base: "auto", lg: "8em" }}
                     fontWeight="semibold"
+                    _selected={{
+                      color: "white",
+                      bg: "primary.500",
+                    }}
                     rounded="md"
-                    variant={clientCategory ? "solid" : "outline"}
+                    as={Button}
+                    variant="outline"
                     boxShadow="md"
-                    textAlign="start"
-                    leftIcon={<Icon as={BiCategory} h={4} w={4} />}
-                    rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
-                    onClick={isOpen ? onClose : onOpen}
-                    textColor={clientCategory && "white"}
-                    bgColor={clientCategory && "primary.500"}
-                    _hover={
-                      clientCategory && {
-                        bgColor: "primary.600",
-                        textColor: "white",
-                      }
-                    }
-                    _active={
-                      clientCategory && {
-                        bgColor: "primary.700",
-                        textColor: "white",
-                      }
-                    }
+                    onClick={() => handleClientCategory("")}
                   >
-                    {clientCategory
-                      ? `${
-                          clientCategory.charAt(0).toUpperCase() +
-                          clientCategory.slice(1)
-                        } Projects`
-                      : "Category"}
-                  </MenuButton>
+                    All Projects
+                  </Tab>
+                </Tooltip>
 
-                  <MenuList p={1} m={0} boxShadow="2xl" zIndex={500} minW={0}>
-                    <Tabs
-                      variant="unstyled"
-                      colorScheme="gray"
-                      orientation="vertical"
-                      w="full"
-                      index={tabIndex}
-                      onChange={handleTabsChange}
-                    >
-                      <TabList w="full" gap={1}>
-                        <Tab
-                          w="full"
-                          fontWeight="semibold"
-                          _selected={{
-                            color: "white",
-                            bg: "primary.500",
-                          }}
-                          rounded="md"
-                          as={Button}
-                          variant="outline"
-                          boxShadow="md"
-                          onClick={() => {
-                            handleClientCategory("");
-                            onClose();
-                          }}
-                        >
-                          All Projects
-                        </Tab>
-                        <Tab
-                          w="full"
-                          fontWeight="semibold"
-                          _selected={{
-                            color: "white",
-                            bg: "primary.500",
-                          }}
-                          rounded="md"
-                          as={Button}
-                          variant="outline"
-                          boxShadow="md"
-                          onClick={() => {
-                            handleClientCategory("interior");
-                            onClose();
-                          }}
-                        >
-                          Interior
-                        </Tab>
-                        <Tab
-                          w="full"
-                          fontWeight="semibold"
-                          _selected={{
-                            color: "white",
-                            bg: "primary.500",
-                          }}
-                          rounded="md"
-                          as={Button}
-                          variant="outline"
-                          boxShadow="md"
-                          onClick={() => {
-                            handleClientCategory("exterior");
-                            onClose();
-                          }}
-                        >
-                          Exterior
-                        </Tab>
-                        <Tab
-                          w="full"
-                          fontWeight="semibold"
-                          _selected={{
-                            color: "white",
-                            bg: "primary.500",
-                          }}
-                          rounded="md"
-                          as={Button}
-                          variant="outline"
-                          boxShadow="md"
-                          onClick={() => {
-                            handleClientCategory("suny");
-                            onClose();
-                          }}
-                        >
-                          SUNY
-                        </Tab>
-                        <Tab
-                          w="full"
-                          fontWeight="semibold"
-                          _selected={{
-                            color: "white",
-                            bg: "primary.500",
-                          }}
-                          rounded="md"
-                          as={Button}
-                          variant="outline"
-                          boxShadow="md"
-                          onClick={() => {
-                            handleClientCategory("ogs");
-                            onClose();
-                          }}
-                        >
-                          OGS
-                        </Tab>
-                        <Tab
-                          w="full"
-                          fontWeight="semibold"
-                          _selected={{
-                            color: "white",
-                            bg: "primary.500",
-                          }}
-                          rounded="md"
-                          as={Button}
-                          variant="outline"
-                          boxShadow="md"
-                          onClick={() => {
-                            handleClientCategory("sca");
-                            onClose();
-                          }}
-                        >
-                          SCA
-                        </Tab>
-                        <Tab
-                          w="full"
-                          fontWeight="semibold"
-                          _selected={{
-                            color: "white",
-                            bg: "primary.500",
-                          }}
-                          rounded="md"
-                          as={Button}
-                          variant="outline"
-                          boxShadow="md"
-                          onClick={() => {
-                            handleClientCategory("other");
-                            onClose();
-                          }}
-                        >
-                          Other
-                        </Tab>
-                      </TabList>
-                    </Tabs>
-                  </MenuList>
-                </Menu>
-              </Box>
+                <Tooltip label="Show interior projects" closeOnScroll>
+                  <Tab
+                    w={{ md: "auto", lg: "8em" }}
+                    fontWeight="semibold"
+                    _selected={{ color: "white", bg: "primary.500" }}
+                    rounded="md"
+                    as={Button}
+                    variant="outline"
+                    boxShadow="md"
+                    onClick={() => handleClientCategory("interior")}
+                  >
+                    Interior
+                  </Tab>
+                </Tooltip>
 
-              <Stack
-                direction={{ base: "column", sm: "row" }}
-                w="full"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <InputGroup
-                  w="full"
-                  colorScheme="primary"
-                  boxShadow="md"
-                  rounded="md"
+                <Tooltip label="Show exterior projects" closeOnScroll>
+                  <Tab
+                    w={{ md: "auto", lg: "8em" }}
+                    fontWeight="semibold"
+                    _selected={{ color: "white", bg: "primary.500" }}
+                    rounded="md"
+                    as={Button}
+                    variant="outline"
+                    boxShadow="md"
+                    onClick={() => handleClientCategory("exterior")}
+                  >
+                    Exterior
+                  </Tab>
+                </Tooltip>
+
+                <Tooltip
+                  label="Show State University of New York projects"
+                  closeOnScroll
                 >
-                  <InputLeftElement
-                    pointerEvents="none"
-                    children={<Search2Icon color="gray.300" />}
-                  />
-                  <InputRightElement
-                    mr={{ base: 0, md: 8 }}
-                    children={
-                      <Flex gap={1} justifyContent="center" alignItems="center">
-                        <Box display={{ base: "none", md: "flex" }} gap={1}>
-                          <Kbd>Ctrl</Kbd>
-                          <Kbd>K</Kbd>
-                        </Box>
-                        <Tooltip label="Clear Search" closeOnScroll>
-                          <IconButton
-                            aria-label="Clear Search"
-                            size="xs"
-                            onClick={handleFormSearchClear}
-                            icon={<CloseIcon />}
-                          />
-                        </Tooltip>
-                      </Flex>
+                  <Tab
+                    w={{ md: "auto", lg: "8em" }}
+                    fontWeight="semibold"
+                    _selected={{ color: "white", bg: "primary.500" }}
+                    rounded="md"
+                    as={Button}
+                    variant="outline"
+                    boxShadow="md"
+                    onClick={() => handleClientCategory("suny")}
+                  >
+                    SUNY
+                  </Tab>
+                </Tooltip>
+
+                <Tooltip
+                  label="Show NYS Office of General Services projects"
+                  closeOnScroll
+                >
+                  <Tab
+                    w={{ md: "auto", lg: "8em" }}
+                    fontWeight="semibold"
+                    _selected={{
+                      color: "white",
+                      bg: "primary.500",
+                    }}
+                    rounded="md"
+                    as={Button}
+                    variant="outline"
+                    boxShadow="md"
+                    onClick={() => handleClientCategory("ogs")}
+                  >
+                    OGS
+                  </Tab>
+                </Tooltip>
+
+                <Tooltip
+                  label="Show School Construction Authority projects"
+                  closeOnScroll
+                >
+                  <Tab
+                    w={{ md: "auto", lg: "8em" }}
+                    fontWeight="semibold"
+                    _selected={{ color: "white", bg: "primary.500" }}
+                    rounded="md"
+                    as={Button}
+                    variant="outline"
+                    boxShadow="md"
+                    onClick={() => handleClientCategory("sca")}
+                  >
+                    SCA
+                  </Tab>
+                </Tooltip>
+
+                <Tooltip
+                  label="Show other miscellaneous projects"
+                  closeOnScroll
+                >
+                  <Tab
+                    w={{ md: "auto", lg: "8em" }}
+                    fontWeight="semibold"
+                    _selected={{ color: "white", bg: "primary.500" }}
+                    rounded="md"
+                    as={Button}
+                    variant="outline"
+                    boxShadow="md"
+                    onClick={() => handleClientCategory("other")}
+                  >
+                    Other
+                  </Tab>
+                </Tooltip>
+              </TabList>
+            </Tabs>
+
+            <Box display={{ base: "flex", smd: "none" }} w="full" ref={menuRef}>
+              <Menu
+                autoSelect={false}
+                matchWidth
+                placement="bottom"
+                isOpen={isOpen}
+              >
+                <MenuButton
+                  as={Button}
+                  w="full"
+                  fontWeight="semibold"
+                  rounded="md"
+                  variant={clientCategory ? "solid" : "outline"}
+                  boxShadow="md"
+                  textAlign="start"
+                  leftIcon={<Icon as={BiCategory} h={4} w={4} />}
+                  rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+                  onClick={isOpen ? onClose : onOpen}
+                  textColor={clientCategory && "white"}
+                  bgColor={clientCategory && "primary.500"}
+                  _hover={
+                    clientCategory && {
+                      bgColor: "primary.600",
+                      textColor: "white",
                     }
-                  />
-                  <Input
-                    type="search"
-                    name="search"
-                    spellCheck="false"
-                    autoComplete="off"
-                    ref={inputRef}
-                    onChange={(e) =>
-                      setInputValue({
-                        text: e.target.value,
-                        type: "input-change",
-                      })
+                  }
+                  _active={
+                    clientCategory && {
+                      bgColor: "primary.700",
+                      textColor: "white",
                     }
-                    value={inputValue.text}
-                    colorScheme="primary"
-                    placeholder={`Search ${
-                      checkClient(clientCategory).clientCategory || "all"
-                    } projects`}
+                  }
+                >
+                  {clientCategory
+                    ? `${
+                        clientCategory.charAt(0).toUpperCase() +
+                        clientCategory.slice(1)
+                      } Projects`
+                    : "Category"}
+                </MenuButton>
+
+                <MenuList p={1} m={0} boxShadow="2xl" zIndex={500} minW={0}>
+                  <Tabs
+                    variant="unstyled"
+                    colorScheme="gray"
+                    orientation="vertical"
                     w="full"
-                    onKeyUp={onEnter}
-                    // defaultValue={data.filter?.search}
-                  />
-                </InputGroup>
-              </Stack>
-            </VStack>
-            <SimpleGrid
-              columns={{ base: 1, smd: 1, md: 1, xmd: 2, lg: 2, xl: 2 }}
-              spacing={4}
-              w="full"
-            >
-              <AnimatePresence>
-                {data.projects.map((value: any, index: any) => (
-                  <RenderIfVisible key={index} defaultHeight={500}>
-                    <motion.div
-                      layout
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: 20, opacity: 0 }}
-                    >
-                      <motion.div
-                        whileHover={{ scale: 1.01 }}
-                        transition={{
-                          type: "tween",
-                          duration: 0.2,
+                    index={tabIndex}
+                    onChange={handleTabsChange}
+                  >
+                    <TabList w="full" gap={1}>
+                      <Tab
+                        w="full"
+                        fontWeight="semibold"
+                        _selected={{
+                          color: "white",
+                          bg: "primary.500",
+                        }}
+                        rounded="md"
+                        as={Button}
+                        variant="outline"
+                        boxShadow="md"
+                        onClick={() => {
+                          handleClientCategory("");
+                          onClose();
                         }}
                       >
-                        <Card
-                          variant="elevated"
-                          rounded="md"
-                          boxShadow="xl"
-                          position="relative"
-                          onMouseEnter={(e: any) => {
-                            setShowButton({ index: index, flag: true });
-                          }}
-                          onMouseLeave={(e: any) => {
-                            setShowButton({ index: index, flag: false });
-                          }}
-                          as={Link}
-                          to={value.url}
-                          prefetch="none"
-                          draggable={false}
-                          w="full"
+                        All Projects
+                      </Tab>
+                      <Tab
+                        w="full"
+                        fontWeight="semibold"
+                        _selected={{
+                          color: "white",
+                          bg: "primary.500",
+                        }}
+                        rounded="md"
+                        as={Button}
+                        variant="outline"
+                        boxShadow="md"
+                        onClick={() => {
+                          handleClientCategory("interior");
+                          onClose();
+                        }}
+                      >
+                        Interior
+                      </Tab>
+                      <Tab
+                        w="full"
+                        fontWeight="semibold"
+                        _selected={{
+                          color: "white",
+                          bg: "primary.500",
+                        }}
+                        rounded="md"
+                        as={Button}
+                        variant="outline"
+                        boxShadow="md"
+                        onClick={() => {
+                          handleClientCategory("exterior");
+                          onClose();
+                        }}
+                      >
+                        Exterior
+                      </Tab>
+                      <Tab
+                        w="full"
+                        fontWeight="semibold"
+                        _selected={{
+                          color: "white",
+                          bg: "primary.500",
+                        }}
+                        rounded="md"
+                        as={Button}
+                        variant="outline"
+                        boxShadow="md"
+                        onClick={() => {
+                          handleClientCategory("suny");
+                          onClose();
+                        }}
+                      >
+                        SUNY
+                      </Tab>
+                      <Tab
+                        w="full"
+                        fontWeight="semibold"
+                        _selected={{
+                          color: "white",
+                          bg: "primary.500",
+                        }}
+                        rounded="md"
+                        as={Button}
+                        variant="outline"
+                        boxShadow="md"
+                        onClick={() => {
+                          handleClientCategory("ogs");
+                          onClose();
+                        }}
+                      >
+                        OGS
+                      </Tab>
+                      <Tab
+                        w="full"
+                        fontWeight="semibold"
+                        _selected={{
+                          color: "white",
+                          bg: "primary.500",
+                        }}
+                        rounded="md"
+                        as={Button}
+                        variant="outline"
+                        boxShadow="md"
+                        onClick={() => {
+                          handleClientCategory("sca");
+                          onClose();
+                        }}
+                      >
+                        SCA
+                      </Tab>
+                      <Tab
+                        w="full"
+                        fontWeight="semibold"
+                        _selected={{
+                          color: "white",
+                          bg: "primary.500",
+                        }}
+                        rounded="md"
+                        as={Button}
+                        variant="outline"
+                        boxShadow="md"
+                        onClick={() => {
+                          handleClientCategory("other");
+                          onClose();
+                        }}
+                      >
+                        Other
+                      </Tab>
+                    </TabList>
+                  </Tabs>
+                </MenuList>
+              </Menu>
+            </Box>
+
+            <Stack
+              direction={{ base: "column", sm: "row" }}
+              w="full"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <InputGroup
+                w="full"
+                colorScheme="primary"
+                boxShadow="md"
+                rounded="md"
+              >
+                <InputLeftElement
+                  pointerEvents="none"
+                  children={<Search2Icon color="gray.300" />}
+                />
+                <InputRightElement
+                  mr={{ base: 0, md: 8 }}
+                  children={
+                    <Flex gap={1} justifyContent="center" alignItems="center">
+                      <Box display={{ base: "none", md: "flex" }} gap={1}>
+                        <Kbd>Ctrl</Kbd>
+                        <Kbd>K</Kbd>
+                      </Box>
+                      <Tooltip label="Clear Search" closeOnScroll>
+                        <IconButton
+                          aria-label="Clear Search"
+                          size="xs"
+                          onClick={handleFormSearchClear}
+                          icon={<CloseIcon />}
+                        />
+                      </Tooltip>
+                    </Flex>
+                  }
+                />
+                <Input
+                  type="search"
+                  name="search"
+                  spellCheck="false"
+                  autoComplete="off"
+                  ref={inputRef}
+                  onChange={(e) =>
+                    setInputValue({
+                      text: e.target.value,
+                      type: "input-change",
+                    })
+                  }
+                  value={inputValue.text}
+                  colorScheme="primary"
+                  placeholder={`Search ${
+                    checkClient(clientCategory).clientCategory || "all"
+                  } projects`}
+                  w="full"
+                  onKeyUp={onEnter}
+                  // defaultValue={data.filter?.search}
+                />
+              </InputGroup>
+            </Stack>
+          </VStack>
+          <SimpleGrid
+            columns={{ base: 1, smd: 1, md: 1, xmd: 2, lg: 2, xl: 2 }}
+            spacing={4}
+            w="full"
+          >
+            <AnimatePresence>
+              {data.projects.map((value: any, index: any) => (
+                <RenderIfVisible key={index} defaultHeight={500}>
+                  <motion.div
+                    layout
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 20, opacity: 0 }}
+                  >
+                    <motion.div
+                      whileHover={{ scale: 1.01 }}
+                      transition={{
+                        type: "tween",
+                        duration: 0.2,
+                      }}
+                    >
+                      <Card
+                        variant="elevated"
+                        rounded="md"
+                        boxShadow="xl"
+                        position="relative"
+                        onMouseEnter={(e: any) => {
+                          setShowButton({ index: index, flag: true });
+                        }}
+                        onMouseLeave={(e: any) => {
+                          setShowButton({ index: index, flag: false });
+                        }}
+                        as={Link}
+                        to={value.url}
+                        prefetch="none"
+                        draggable={false}
+                        w="full"
+                      >
+                        <AspectRatio
+                          key={index}
+                          ratio={{ base: 4 / 3, md: 16 / 9 }}
                         >
-                          <AspectRatio
-                            key={index}
-                            ratio={{ base: 4 / 3, md: 16 / 9 }}
-                          >
-                            <ClientOnly
-                              fallback={<Skeleton w="full" h="full" />}
-                            >
-                              {() => (
-                                <Suspense
-                                  fallback={<Skeleton w="full" h="full" />}
-                                >
-                                  <ErrorBoundary
-                                    FallbackComponent={ErrorFallback}
-                                  >
-                                    <RemixImage
-                                      roundedTopLeft="md"
-                                      roundedTopRight="md"
-                                      image={value.thumbnail + "/thumbnail"}
-                                      // alt={`${value.name} project`}
-                                      boxShadow="xl"
-                                      draggable={false}
-                                      userSelect="none"
-                                      w="full"
-                                      loading="lazy"
-                                    />
-                                  </ErrorBoundary>
-                                </Suspense>
-                              )}
-                            </ClientOnly>
-                          </AspectRatio>
-                          <CardFooter justifyContent="center" p={2}>
-                            <Text textAlign="center" fontSize="xl">
-                              <Highlight
-                                query={data.filter?.search || ""}
-                                styles={{
-                                  px: "4px",
-                                  py: "4px",
-                                  bg: "primary.100",
-                                  borderRadius: "0.375rem",
-                                }}
+                          <ClientOnly fallback={<Skeleton w="full" h="full" />}>
+                            {() => (
+                              <Suspense
+                                fallback={<Skeleton w="full" h="full" />}
                               >
-                                {value.name as string}
-                              </Highlight>
-                            </Text>
-                          </CardFooter>
-
-                          <Box position="absolute" top="8px" right="8px">
-                            <VStack alignItems="flex-end" spacing={2}>
-                              {value.completed && value.status && (
-                                <Tooltip label={value.status} closeOnScroll>
-                                  <Badge textColor="#22543D" bgColor="#C6F6D5">
-                                    Completed
-                                  </Badge>
-                                </Tooltip>
-                              )}
-
-                              {value.completed === false && value.status && (
-                                <Tooltip label={value.status} closeOnScroll>
-                                  <Badge textColor="#744210" bgColor="#FEFCBF">
-                                    in progress
-                                  </Badge>
-                                </Tooltip>
-                              )}
-
-                              {value.show_category_tag && value.category_tag && (
-                                <Tooltip
-                                  key={index}
-                                  label={value.category_name}
-                                  closeOnScroll
+                                <ErrorBoundary
+                                  FallbackComponent={ErrorFallback}
                                 >
-                                  <Badge textColor="#234E52" bgColor="#B2F5EA">
-                                    {value.category_tag}
-                                  </Badge>
-                                </Tooltip>
-                              )}
-
-                              {value.show_client_tag && value.client_tag && (
-                                <Tooltip
-                                  label={value.client_name}
-                                  closeOnScroll
-                                >
-                                  <Badge textColor="#2A4365" bgColor="#BEE3F8">
-                                    {value.client_tag}
-                                  </Badge>
-                                </Tooltip>
-                              )}
-                            </VStack>
-                          </Box>
-
-                          <Box display={{ base: "none", lg: "flex" }}>
-                            <SlideFade
-                              in={
-                                showButton.index === index
-                                  ? showButton.flag
-                                  : false
-                              }
-                              reverse
-                              style={{
-                                position: "absolute",
-                                top: "50%",
-                                left: "50%",
-                                transform: "translate(-50%, -50%)",
+                                  <RemixImage
+                                    roundedTopLeft="md"
+                                    roundedTopRight="md"
+                                    image={value.thumbnail + "/thumbnail"}
+                                    // alt={`${value.name} project`}
+                                    boxShadow="xl"
+                                    draggable={false}
+                                    userSelect="none"
+                                    w="full"
+                                    loading="lazy"
+                                  />
+                                </ErrorBoundary>
+                              </Suspense>
+                            )}
+                          </ClientOnly>
+                        </AspectRatio>
+                        <CardFooter justifyContent="center" p={2}>
+                          <Text textAlign="center" fontSize="xl">
+                            <Highlight
+                              query={data.filter?.search || ""}
+                              styles={{
+                                px: "4px",
+                                py: "4px",
+                                bg: "primary.100",
+                                borderRadius: "0.375rem",
                               }}
                             >
-                              <Box
-                                position="absolute"
-                                top="50%"
-                                left="50%"
-                                transform="translate(-50%, -50%)"
+                              {value.name as string}
+                            </Highlight>
+                          </Text>
+                        </CardFooter>
+
+                        <Box position="absolute" top="8px" right="8px">
+                          <VStack alignItems="flex-end" spacing={2}>
+                            {value.completed && value.status && (
+                              <Tooltip label={value.status} closeOnScroll>
+                                <Badge textColor="#22543D" bgColor="#C6F6D5">
+                                  Completed
+                                </Badge>
+                              </Tooltip>
+                            )}
+
+                            {value.completed === false && value.status && (
+                              <Tooltip label={value.status} closeOnScroll>
+                                <Badge textColor="#744210" bgColor="#FEFCBF">
+                                  in progress
+                                </Badge>
+                              </Tooltip>
+                            )}
+
+                            {value.show_category_tag && value.category_tag && (
+                              <Tooltip
+                                key={index}
+                                label={value.category_name}
+                                closeOnScroll
                               >
-                                <Button
-                                  variant="solid"
-                                  boxShadow="lg"
-                                  rounded="md"
-                                  bgColor="gray.50"
-                                  textColor="black"
-                                  _hover={{ bgColor: "gray.200" }}
-                                >
-                                  View Project
-                                </Button>
-                              </Box>
-                            </SlideFade>
-                          </Box>
-                        </Card>
-                      </motion.div>
+                                <Badge textColor="#234E52" bgColor="#B2F5EA">
+                                  {value.category_tag}
+                                </Badge>
+                              </Tooltip>
+                            )}
+
+                            {value.show_client_tag && value.client_tag && (
+                              <Tooltip label={value.client_name} closeOnScroll>
+                                <Badge textColor="#2A4365" bgColor="#BEE3F8">
+                                  {value.client_tag}
+                                </Badge>
+                              </Tooltip>
+                            )}
+                          </VStack>
+                        </Box>
+
+                        <Box display={{ base: "none", lg: "flex" }}>
+                          <SlideFade
+                            in={
+                              showButton.index === index
+                                ? showButton.flag
+                                : false
+                            }
+                            reverse
+                            style={{
+                              position: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              transform: "translate(-50%, -50%)",
+                            }}
+                          >
+                            <Box
+                              position="absolute"
+                              top="50%"
+                              left="50%"
+                              transform="translate(-50%, -50%)"
+                            >
+                              <Button
+                                variant="solid"
+                                boxShadow="lg"
+                                rounded="md"
+                                bgColor="gray.50"
+                                textColor="black"
+                                _hover={{ bgColor: "gray.200" }}
+                              >
+                                View Project
+                              </Button>
+                            </Box>
+                          </SlideFade>
+                        </Box>
+                      </Card>
                     </motion.div>
-                  </RenderIfVisible>
-                ))}
-              </AnimatePresence>
-            </SimpleGrid>
-          </VStack>
-          {data.projects.length <= 0 && (
-            <ScaleFade in={true} delay={0.5} unmountOnExit>
-              <Box textAlign="center" py={10} px={6}>
-                <QuestionIcon boxSize={"50px"} color="primary.500" />
-                <Heading as="h2" size="lg" mt={6} mb={2}>
-                  No Results
-                </Heading>
-                <Text color={"gray.500"}>
-                  The search terms you provided did not match any of our
-                  records. Please try again using different keywords.
-                </Text>
-              </Box>
-            </ScaleFade>
-          )}
+                  </motion.div>
+                </RenderIfVisible>
+              ))}
+            </AnimatePresence>
+          </SimpleGrid>
         </VStack>
-      </Container>
-    </SlideFade>
+        {data.projects.length <= 0 && (
+          <ScaleFade in={true} delay={0.5} unmountOnExit>
+            <Box textAlign="center" py={10} px={6}>
+              <QuestionIcon boxSize={"50px"} color="primary.500" />
+              <Heading as="h2" size="lg" mt={6} mb={2}>
+                No Results
+              </Heading>
+              <Text color={"gray.500"}>
+                The search terms you provided did not match any of our records.
+                Please try again using different keywords.
+              </Text>
+            </Box>
+          </ScaleFade>
+        )}
+      </VStack>
+    </Container>
+    // </SlideFade>
   );
 }

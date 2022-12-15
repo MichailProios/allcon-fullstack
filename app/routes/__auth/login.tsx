@@ -93,7 +93,7 @@ export const loader: LoaderFunction = async ({ request }: any) => {
   } = await supabase.auth.getSession();
 
   if (session) {
-    return redirect("/resources", {
+    return redirect("/blog", {
       headers: response.headers,
     });
   } else {
@@ -202,8 +202,8 @@ export default function Login() {
       options: {
         redirectTo:
           process.env.NODE_ENV === "development"
-            ? "http://localhost:3000/resources"
-            : "https://allconcontracting.com/resources",
+            ? "http://localhost:3000/blog"
+            : "https://allconcontracting.com/blog",
       },
     });
 
@@ -218,8 +218,8 @@ export default function Login() {
       options: {
         redirectTo:
           process.env.NODE_ENV === "development"
-            ? "http://localhost:3000/resources"
-            : "https://allconcontracting.com/resources",
+            ? "http://localhost:3000/blog"
+            : "https://allconcontracting.com/blog",
 
         scopes: "email",
       },
@@ -251,117 +251,112 @@ export default function Login() {
   }, [actionData, toast]);
 
   return (
-    <SlideFade in={true} unmountOnExit reverse delay={0.05}>
-      <Container maxW="7xl" p={{ base: 1, md: 10 }}>
-        <Center
-          as={ValidatedForm}
-          validator={validator}
-          method="post"
-          id="loginForm"
-          replace
-        >
-          <Stack spacing={4}>
-            <VStack
-              boxSize={{ base: "auto", xs: "xs", sm: "sm", md: "md" }}
-              h="max-content !important"
-              bg={useColorModeValue("white", "gray.700")}
-              rounded="xl"
-              boxShadow={"2xl"}
-              p={{ base: 5, sm: 10 }}
-              spacing={4}
-            >
-              <Stack align="center">
-                <Heading fontSize="2xl">Sign In</Heading>
-              </Stack>
+    // <SlideFade in={true} unmountOnExit reverse delay={0.05}>
+    <Container maxW="7xl" p={{ base: 1, md: 10 }}>
+      <Center
+        as={ValidatedForm}
+        validator={validator}
+        method="post"
+        id="loginForm"
+        replace
+      >
+        <Stack spacing={4}>
+          <VStack
+            boxSize={{ base: "auto", xs: "xs", sm: "sm", md: "md" }}
+            h="max-content !important"
+            bg={useColorModeValue("white", "gray.700")}
+            rounded="xl"
+            boxShadow={"2xl"}
+            p={{ base: 5, sm: 10 }}
+            spacing={4}
+          >
+            <Stack align="center">
+              <Heading fontSize="2xl">Sign In</Heading>
+            </Stack>
 
-              <ButtonGroup orientation="vertical" w="full">
-                <Button
-                  w={"full"}
-                  variant={"solid"}
-                  leftIcon={<FcGoogle />}
-                  onClick={handleGoogleAuth}
-                >
-                  Continue with Gmail
-                </Button>
-                <Button
-                  w={"full"}
-                  variant={"solid"}
-                  leftIcon={<SiMicrosoftazure color="#0078D4" />}
-                  onClick={handleMicrosoftAuth}
-                >
-                  Continue with Microsoft
-                </Button>
-                {/* <Button
+            <ButtonGroup orientation="vertical" w="full">
+              <Button
+                w={"full"}
+                variant={"solid"}
+                leftIcon={<FcGoogle />}
+                onClick={handleGoogleAuth}
+              >
+                Continue with Gmail
+              </Button>
+              <Button
+                w={"full"}
+                variant={"solid"}
+                leftIcon={<SiMicrosoftazure color="#0078D4" />}
+                onClick={handleMicrosoftAuth}
+              >
+                Continue with Microsoft
+              </Button>
+              {/* <Button
                   w={"full"}
                   variant={"solid"}
                   leftIcon={<FaFacebook color="#4968ad" />}
                 >
                   Continue with Facebook
                 </Button> */}
-              </ButtonGroup>
+            </ButtonGroup>
 
-              <Flex
-                w="full"
-                justifyContent="stretch"
-                alignItems="center"
-                gap={2}
+            <Flex w="full" justifyContent="stretch" alignItems="center" gap={2}>
+              <Divider w="full" />
+              <Text>or</Text>
+              <Divider w="full" />
+            </Flex>
+
+            <VStack spacing={4} w="100%">
+              <EmailTextField
+                label="Email Address"
+                name="emailAddress"
+                placeholder="Enter your email"
+                rounded="md"
+                type="email"
+              />
+
+              <PasswordTextField
+                label="Password"
+                name="password"
+                placeholder="Enter your password"
+                rounded="md"
+              />
+            </VStack>
+            <VStack w="100%" spacing={4}>
+              <Text
+                as={Link}
+                to="/reset"
+                fontSize={{ base: "md", sm: "md" }}
+                _hover={{ textDecoration: "underline" }}
               >
-                <Divider w="full" />
-                <Text>or</Text>
-                <Divider w="full" />
-              </Flex>
+                Forgot Password?
+              </Text>
+              {/* </Flex> */}
 
-              <VStack spacing={4} w="100%">
-                <EmailTextField
-                  label="Email Address"
-                  name="emailAddress"
-                  placeholder="Enter your email"
-                  rounded="md"
-                  type="email"
-                />
+              <SubmitButton
+                w="100%"
+                colorScheme="primary"
+                label="Sign In"
+                type="submit"
+              />
 
-                <PasswordTextField
-                  label="Password"
-                  name="password"
-                  placeholder="Enter your password"
-                  rounded="md"
-                />
-              </VStack>
-              <VStack w="100%" spacing={4}>
+              <Text>
+                Don't have an account?&nbsp;
                 <Text
                   as={Link}
-                  to="/reset"
+                  to="/register"
                   fontSize={{ base: "md", sm: "md" }}
+                  fontWeight="bold"
                   _hover={{ textDecoration: "underline" }}
                 >
-                  Forgot Password?
+                  Register
                 </Text>
-                {/* </Flex> */}
-
-                <SubmitButton
-                  w="100%"
-                  colorScheme="primary"
-                  label="Sign In"
-                  type="submit"
-                />
-
-                <Text>
-                  Don't have an account?&nbsp;
-                  <Text
-                    as={Link}
-                    to="/register"
-                    fontSize={{ base: "md", sm: "md" }}
-                    fontWeight="bold"
-                    _hover={{ textDecoration: "underline" }}
-                  >
-                    Register
-                  </Text>
-                </Text>
-              </VStack>
+              </Text>
             </VStack>
-          </Stack>
-        </Center>
-      </Container>
-    </SlideFade>
+          </VStack>
+        </Stack>
+      </Center>
+    </Container>
+    // </SlideFade>
   );
 }

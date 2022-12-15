@@ -37,7 +37,6 @@ const styles = {
   global: (props) => ({
     "html, body": {
       backgroundColor: props.colorMode === "dark" ? "gray.800" : "white",
-      transition: "background-color 0.5s linear",
     },
   }),
 };

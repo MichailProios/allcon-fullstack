@@ -9,5 +9,5 @@ export default function RemixImage(props) {
 
   const { ...rest } = props;
 
-  return <Img src={src} {...rest} />;
+  return <Img src={src} loading="lazy" alt="" {...rest} />;
 }

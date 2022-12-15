@@ -310,6 +310,7 @@ export default function Project() {
                 thumbs={{ swiper: thumbsSwiper }}
                 ref={sliderRef}
                 spaceBetween={30}
+                loop={media.length > 1 ? true : false}
                 autoHeight
                 cssMode={cssModeBreakpoint}
               >
@@ -548,6 +549,7 @@ export default function Project() {
                     }}
                     ref={sliderRefLarge}
                     spaceBetween={30}
+                    loop={media.length > 1 ? true : false}
                     autoHeight
                     cssMode={cssModeBreakpoint}
                   >

@@ -89,12 +89,12 @@ export default function Brochures() {
               <RenderIfVisible key={index} defaultHeight={1000}>
                 <motion.div
                   layout
-                  initial={{ y: 10, opacity: 0 }}
+                  initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: 10, opacity: 0 }}
+                  exit={{ y: 20, opacity: 0 }}
                   transition={{
-                    y: { duration: 0.2 },
-                    default: { ease: "linear" },
+                    type: "spring",
+                    mass: 0.5,
                   }}
                 >
                   <motion.div

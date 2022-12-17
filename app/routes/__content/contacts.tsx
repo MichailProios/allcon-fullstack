@@ -24,6 +24,7 @@ import {
 } from "@chakra-ui/react";
 import { useActionData } from "@remix-run/react";
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 import {
   ValidatedForm,
   validationError,
@@ -218,67 +219,80 @@ export default function Contacts() {
       >
         <VStack spacing="26px">
           <Heading textAlign="center">Contact Us</Heading>
+
           <Stack spacing={10} w="full">
-            <VStack
-              spacing={8}
-              w="100%"
-              bg={useColorModeValue("white", "gray.700")}
-              rounded="lg"
-              boxShadow="lg"
-              p={{ base: 5, sm: 10 }}
+            <motion.div
+              layout
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 20, opacity: 0 }}
+              transition={{
+                type: "spring",
+                mass: 0.5,
+              }}
             >
-              <VStack spacing={6} w="full">
-                <Stack
-                  w="100%"
-                  spacing={3}
-                  direction={{ base: "column", md: "row" }}
-                >
-                  <TextField
-                    label="Name"
-                    name="fullName"
-                    placeholder="Enter your full name"
-                    rounded="md"
-                    type="text"
-                  />
-                  <TextField
-                    label="Email"
-                    type="email"
-                    name="emailAddress"
-                    placeholder="Enter your email address"
-                    rounded="md"
-                  />
-                  <TextField
-                    label="Phone Number"
-                    type="text"
-                    name="phoneNumber"
-                    placeholder="Enter your phone number"
-                    rounded="md"
-                  />
-                </Stack>
+              {" "}
+              <VStack
+                spacing={8}
+                w="100%"
+                bg={useColorModeValue("white", "gray.700")}
+                rounded="lg"
+                boxShadow="lg"
+                p={{ base: 5, sm: 10 }}
+              >
+                <VStack spacing={6} w="full">
+                  <Stack
+                    w="100%"
+                    spacing={3}
+                    direction={{ base: "column", md: "row" }}
+                  >
+                    <TextField
+                      label="Name"
+                      name="fullName"
+                      placeholder="Enter your full name"
+                      rounded="md"
+                      type="text"
+                    />
+                    <TextField
+                      label="Email"
+                      type="email"
+                      name="emailAddress"
+                      placeholder="Enter your email address"
+                      rounded="md"
+                    />
+                    <TextField
+                      label="Phone Number"
+                      type="text"
+                      name="phoneNumber"
+                      placeholder="Enter your phone number"
+                      rounded="md"
+                    />
+                  </Stack>
 
-                <TextField
-                  label="Subject"
-                  type="text"
-                  name="subject"
-                  placeholder="Enter the subject"
-                  rounded="md"
-                />
+                  <TextField
+                    label="Subject"
+                    type="text"
+                    name="subject"
+                    placeholder="Enter the subject"
+                    rounded="md"
+                  />
 
-                <TextArea
-                  label="Message"
-                  type="text"
-                  size="lg"
-                  name="message"
-                  placeholder="Enter your message"
-                  rounded="md"
-                />
-                <SubmitButton
-                  type="submit"
-                  colorScheme="primary"
-                  label="Send Message"
-                />
+                  <TextArea
+                    label="Message"
+                    type="text"
+                    size="lg"
+                    name="message"
+                    placeholder="Enter your message"
+                    rounded="md"
+                  />
+                  <SubmitButton
+                    type="submit"
+                    colorScheme="primary"
+                    label="Send Message"
+                  />
+                </VStack>
               </VStack>
-            </VStack>
+            </motion.div>
           </Stack>
         </VStack>
       </Container>
@@ -286,178 +300,190 @@ export default function Contacts() {
       <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="26px">
           <Heading textAlign="center">Our Offices</Heading>
-          <Card rounded="md" boxShadow="xl" w={"full"}>
-            <CardBody>
-              <Tabs isFitted isLazy colorScheme="primary">
-                <TabList>
-                  <Tab>New York Office</Tab>
-                  <Tab>New Jersey Office</Tab>
-                </TabList>
+          <motion.div
+            layout
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 20, opacity: 0 }}
+            transition={{
+              type: "spring",
+              mass: 0.5,
+            }}
+            style={{ width: "100%" }}
+          >
+            <Card rounded="md" boxShadow="xl" w={"full"}>
+              <CardBody>
+                <Tabs isFitted isLazy colorScheme="primary">
+                  <TabList>
+                    <Tab>New York Office</Tab>
+                    <Tab>New Jersey Office</Tab>
+                  </TabList>
 
-                <TabPanels>
-                  <TabPanel p={0} pt={6}>
-                    <Tabs isLazy size="sm" variant="unstyled">
-                      <TabList
-                        gap={2}
-                        justifyContent="center"
-                        flexDirection={{ base: "column", xs: "row" }}
+                  <TabPanels>
+                    <TabPanel p={0} pt={6}>
+                      <Tabs isLazy size="sm" variant="unstyled">
+                        <TabList
+                          gap={2}
+                          justifyContent="center"
+                          flexDirection={{ base: "column", xs: "row" }}
+                        >
+                          <Tab
+                            w={{ base: "100%", sm: "8.6em" }}
+                            fontWeight="semibold"
+                            _selected={{ color: "white", bg: "primary.500" }}
+                            rounded="md"
+                            as={Button}
+                            variant="solid"
+                            rightIcon={<Icon h={5} w={5} as={BiMap} />}
+                          >
+                            Map View
+                          </Tab>
+                          <Tab
+                            w={{ base: "100%", sm: "8.6em" }}
+                            fontWeight="semibold"
+                            _selected={{ color: "white", bg: "primary.500" }}
+                            rounded="md"
+                            as={Button}
+                            variant="solid"
+                            rightIcon={<Icon h={5} w={5} as={BiStreetView} />}
+                          >
+                            Street View
+                          </Tab>
+                        </TabList>
+
+                        <TabPanels>
+                          <TabPanel p={0} pt={2}>
+                            <AspectRatio
+                              ratio={{ base: 1, md: 16 / 9 }}
+                              maxW="100%"
+                            >
+                              <iframe
+                                title="Westbury Office Map"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3655.8116696361553!2d-73.56175772352869!3d40.75668893487772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c280cb33822bf3:0x68442c7cd931282c!2s66%20Brooklyn%20Ave,%20Westbury,%20NY%2011590!5e1!3m2!1sen!2sus!4v1669765457161!5m2!1sen!2sus"
+                                style={{
+                                  border: "none",
+                                  height: "100%",
+                                  width: "100%",
+                                  borderRadius: "0.375rem",
+                                  color: "#f3f3f3",
+                                }}
+                                allowFullScreen={false}
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                              />
+                            </AspectRatio>
+                          </TabPanel>
+                          <TabPanel p={0} pt={2}>
+                            <AspectRatio
+                              ratio={{ base: 1, md: 16 / 9 }}
+                              maxW="100%"
+                            >
+                              <iframe
+                                title="Westbury Office Street"
+                                src="https://www.google.com/maps/embed?pb=!4v1669765886676!6m8!1m7!1sTcnxcY2Y2Lig8CJSThJlcQ!2m2!1d40.75661651754456!2d-73.55950228715!3f67.12134601477624!4f-4.0828521741744055!5f0.7820865974627469"
+                                style={{
+                                  border: "none",
+                                  height: "100%",
+                                  width: "100%",
+                                  borderRadius: "0.375rem",
+                                  color: "#f3f3f3",
+                                }}
+                                allowFullScreen={false}
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                              />
+                            </AspectRatio>
+                          </TabPanel>
+                        </TabPanels>
+                      </Tabs>
+                    </TabPanel>
+                    <TabPanel p={0} pt={6}>
+                      <Tabs
+                        isLazy
+                        size="sm"
+                        // orientation="vertical"
+                        variant="unstyled"
                       >
-                        <Tab
-                          w={{ base: "100%", sm: "8.6em" }}
-                          fontWeight="semibold"
-                          _selected={{ color: "white", bg: "primary.500" }}
-                          rounded="md"
-                          as={Button}
-                          variant="solid"
-                          rightIcon={<Icon h={5} w={5} as={BiMap} />}
+                        <TabList
+                          gap={2}
+                          justifyContent="center"
+                          flexDirection={{ base: "column", xs: "row" }}
                         >
-                          Map View
-                        </Tab>
-                        <Tab
-                          w={{ base: "100%", sm: "8.6em" }}
-                          fontWeight="semibold"
-                          _selected={{ color: "white", bg: "primary.500" }}
-                          rounded="md"
-                          as={Button}
-                          variant="solid"
-                          rightIcon={<Icon h={5} w={5} as={BiStreetView} />}
-                        >
-                          Street View
-                        </Tab>
-                      </TabList>
+                          <Tab
+                            w={{ base: "100%", sm: "8.6em" }}
+                            fontWeight="semibold"
+                            _selected={{ color: "white", bg: "primary.500" }}
+                            rounded="md"
+                            as={Button}
+                            variant="solid"
+                            rightIcon={<Icon h={5} w={5} as={BiMap} />}
+                          >
+                            Map View
+                          </Tab>
+                          <Tab
+                            w={{ base: "100%", sm: "8.6em" }}
+                            fontWeight="semibold"
+                            _selected={{ color: "white", bg: "primary.500" }}
+                            rounded="md"
+                            as={Button}
+                            variant="solid"
+                            rightIcon={<Icon h={5} w={5} as={BiStreetView} />}
+                          >
+                            Street View
+                          </Tab>
+                        </TabList>
 
-                      <TabPanels>
-                        <TabPanel p={0} pt={2}>
-                          <AspectRatio
-                            ratio={{ base: 1, md: 16 / 9 }}
-                            maxW="100%"
-                          >
-                            <iframe
-                              title="Westbury Office Map"
-                              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3655.8116696361553!2d-73.56175772352869!3d40.75668893487772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c280cb33822bf3:0x68442c7cd931282c!2s66%20Brooklyn%20Ave,%20Westbury,%20NY%2011590!5e1!3m2!1sen!2sus!4v1669765457161!5m2!1sen!2sus"
-                              style={{
-                                border: "none",
-                                height: "100%",
-                                width: "100%",
-                                borderRadius: "0.375rem",
-                                color: "#f3f3f3",
-                              }}
-                              allowFullScreen={false}
-                              loading="lazy"
-                              referrerPolicy="no-referrer-when-downgrade"
-                            />
-                          </AspectRatio>
-                        </TabPanel>
-                        <TabPanel p={0} pt={2}>
-                          <AspectRatio
-                            ratio={{ base: 1, md: 16 / 9 }}
-                            maxW="100%"
-                          >
-                            <iframe
-                              title="Westbury Office Street"
-                              src="https://www.google.com/maps/embed?pb=!4v1669765886676!6m8!1m7!1sTcnxcY2Y2Lig8CJSThJlcQ!2m2!1d40.75661651754456!2d-73.55950228715!3f67.12134601477624!4f-4.0828521741744055!5f0.7820865974627469"
-                              style={{
-                                border: "none",
-                                height: "100%",
-                                width: "100%",
-                                borderRadius: "0.375rem",
-                                color: "#f3f3f3",
-                              }}
-                              allowFullScreen={false}
-                              loading="lazy"
-                              referrerPolicy="no-referrer-when-downgrade"
-                            />
-                          </AspectRatio>
-                        </TabPanel>
-                      </TabPanels>
-                    </Tabs>
-                  </TabPanel>
-                  <TabPanel p={0} pt={6}>
-                    <Tabs
-                      isLazy
-                      size="sm"
-                      // orientation="vertical"
-                      variant="unstyled"
-                    >
-                      <TabList
-                        gap={2}
-                        justifyContent="center"
-                        flexDirection={{ base: "column", xs: "row" }}
-                      >
-                        <Tab
-                          w={{ base: "100%", sm: "8.6em" }}
-                          fontWeight="semibold"
-                          _selected={{ color: "white", bg: "primary.500" }}
-                          rounded="md"
-                          as={Button}
-                          variant="solid"
-                          rightIcon={<Icon h={5} w={5} as={BiMap} />}
-                        >
-                          Map View
-                        </Tab>
-                        <Tab
-                          w={{ base: "100%", sm: "8.6em" }}
-                          fontWeight="semibold"
-                          _selected={{ color: "white", bg: "primary.500" }}
-                          rounded="md"
-                          as={Button}
-                          variant="solid"
-                          rightIcon={<Icon h={5} w={5} as={BiStreetView} />}
-                        >
-                          Street View
-                        </Tab>
-                      </TabList>
-
-                      <TabPanels>
-                        <TabPanel p={0} pt={2}>
-                          <AspectRatio
-                            ratio={{ base: 1, md: 16 / 9 }}
-                            maxW="100%"
-                          >
-                            <iframe
-                              title="Woodbridge Office Map"
-                              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3666.0322650324183!2d-74.29245454625772!3d40.570480486509716!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c3b43787c7a943%3A0x787f23130498f061!2s300%20Kimball%20St%2C%20Woodbridge%2C%20NJ%2007095!5e1!3m2!1sen!2sus!4v1669765966678!5m2!1sen!2sus"
-                              style={{
-                                border: "none",
-                                height: "100%",
-                                width: "100%",
-                                borderRadius: "0.375rem",
-                                color: "#f3f3f3",
-                              }}
-                              allowFullScreen={false}
-                              loading="lazy"
-                              referrerPolicy="no-referrer-when-downgrade"
-                            />
-                          </AspectRatio>
-                        </TabPanel>
-                        <TabPanel p={0} pt={2}>
-                          <AspectRatio
-                            ratio={{ base: 1, md: 16 / 9 }}
-                            maxW="100%"
-                          >
-                            <iframe
-                              title="Woodbridge Office Street"
-                              src="https://www.google.com/maps/embed?pb=!4v1669765851819!6m8!1m7!1sKD8qO05CQpv_gw7JaJeuJg!2m2!1d40.57073619981268!2d-74.29078223233066!3f159.0701538714232!4f-3.7724398134783144!5f0.7820865974627469"
-                              style={{
-                                border: "none",
-                                height: "100%",
-                                width: "100%",
-                                borderRadius: "0.375rem",
-                                color: "#f3f3f3",
-                              }}
-                              allowFullScreen={false}
-                              loading="lazy"
-                              referrerPolicy="no-referrer-when-downgrade"
-                            />
-                          </AspectRatio>
-                        </TabPanel>
-                      </TabPanels>
-                    </Tabs>
-                  </TabPanel>
-                </TabPanels>
-              </Tabs>
-            </CardBody>
-          </Card>
+                        <TabPanels>
+                          <TabPanel p={0} pt={2}>
+                            <AspectRatio
+                              ratio={{ base: 1, md: 16 / 9 }}
+                              maxW="100%"
+                            >
+                              <iframe
+                                title="Woodbridge Office Map"
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3666.0322650324183!2d-74.29245454625772!3d40.570480486509716!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c3b43787c7a943%3A0x787f23130498f061!2s300%20Kimball%20St%2C%20Woodbridge%2C%20NJ%2007095!5e1!3m2!1sen!2sus!4v1669765966678!5m2!1sen!2sus"
+                                style={{
+                                  border: "none",
+                                  height: "100%",
+                                  width: "100%",
+                                  borderRadius: "0.375rem",
+                                  color: "#f3f3f3",
+                                }}
+                                allowFullScreen={false}
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                              />
+                            </AspectRatio>
+                          </TabPanel>
+                          <TabPanel p={0} pt={2}>
+                            <AspectRatio
+                              ratio={{ base: 1, md: 16 / 9 }}
+                              maxW="100%"
+                            >
+                              <iframe
+                                title="Woodbridge Office Street"
+                                src="https://www.google.com/maps/embed?pb=!4v1669765851819!6m8!1m7!1sKD8qO05CQpv_gw7JaJeuJg!2m2!1d40.57073619981268!2d-74.29078223233066!3f159.0701538714232!4f-3.7724398134783144!5f0.7820865974627469"
+                                style={{
+                                  border: "none",
+                                  height: "100%",
+                                  width: "100%",
+                                  borderRadius: "0.375rem",
+                                  color: "#f3f3f3",
+                                }}
+                                allowFullScreen={false}
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                              />
+                            </AspectRatio>
+                          </TabPanel>
+                        </TabPanels>
+                      </Tabs>
+                    </TabPanel>
+                  </TabPanels>
+                </Tabs>
+              </CardBody>
+            </Card>
+          </motion.div>
         </VStack>
       </Container>
     </>

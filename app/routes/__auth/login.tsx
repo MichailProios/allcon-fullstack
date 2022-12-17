@@ -21,6 +21,7 @@ import {
 } from "@chakra-ui/react";
 import { SiMicrosoftazure } from "react-icons/si";
 import type { LoaderFunction } from "@remix-run/node";
+import { motion } from "framer-motion";
 import {
   ValidatedForm,
   validationError,
@@ -224,102 +225,117 @@ export default function Login() {
 
   return (
     <Container maxW="7xl" p={{ base: 1, md: 10 }}>
-      <Center
-        as={ValidatedForm}
-        validator={validator}
-        method="post"
-        id="loginForm"
-        replace
+      <motion.div
+        layout
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 20, opacity: 0 }}
+        transition={{
+          type: "spring",
+          mass: 0.5,
+        }}
       >
-        <Stack spacing={4}>
-          <VStack
-            boxSize={{ base: "auto", xs: "xs", sm: "sm", md: "md" }}
-            h="max-content !important"
-            bg={useColorModeValue("white", "gray.700")}
-            rounded="xl"
-            boxShadow={"2xl"}
-            p={{ base: 5, sm: 10 }}
-            spacing={4}
-          >
-            <Stack align="center">
-              <Heading fontSize="2xl">Sign In</Heading>
-            </Stack>
+        <Center
+          as={ValidatedForm}
+          validator={validator}
+          method="post"
+          id="loginForm"
+          replace
+        >
+          <Stack spacing={4}>
+            <VStack
+              boxSize={{ base: "auto", xs: "xs", sm: "sm", md: "md" }}
+              h="max-content !important"
+              bg={useColorModeValue("white", "gray.700")}
+              rounded="xl"
+              boxShadow={"2xl"}
+              p={{ base: 5, sm: 10 }}
+              spacing={4}
+            >
+              <Stack align="center">
+                <Heading fontSize="2xl">Sign In</Heading>
+              </Stack>
 
-            <ButtonGroup orientation="vertical" w="full">
-              <Button
-                w={"full"}
-                variant={"solid"}
-                leftIcon={<FcGoogle />}
-                onClick={handleGoogleAuth}
+              <ButtonGroup orientation="vertical" w="full">
+                <Button
+                  w={"full"}
+                  variant={"solid"}
+                  leftIcon={<FcGoogle />}
+                  onClick={handleGoogleAuth}
+                >
+                  Continue with Gmail
+                </Button>
+                <Button
+                  w={"full"}
+                  variant={"solid"}
+                  leftIcon={<SiMicrosoftazure color="#0078D4" />}
+                  onClick={handleMicrosoftAuth}
+                >
+                  Continue with Microsoft
+                </Button>
+              </ButtonGroup>
+
+              <Flex
+                w="full"
+                justifyContent="stretch"
+                alignItems="center"
+                gap={2}
               >
-                Continue with Gmail
-              </Button>
-              <Button
-                w={"full"}
-                variant={"solid"}
-                leftIcon={<SiMicrosoftazure color="#0078D4" />}
-                onClick={handleMicrosoftAuth}
-              >
-                Continue with Microsoft
-              </Button>
-            </ButtonGroup>
+                <Divider w="full" />
+                <Text>or</Text>
+                <Divider w="full" />
+              </Flex>
 
-            <Flex w="full" justifyContent="stretch" alignItems="center" gap={2}>
-              <Divider w="full" />
-              <Text>or</Text>
-              <Divider w="full" />
-            </Flex>
+              <VStack spacing={4} w="100%">
+                <EmailTextField
+                  label="Email Address"
+                  name="emailAddress"
+                  placeholder="Enter your email"
+                  rounded="md"
+                  type="email"
+                />
 
-            <VStack spacing={4} w="100%">
-              <EmailTextField
-                label="Email Address"
-                name="emailAddress"
-                placeholder="Enter your email"
-                rounded="md"
-                type="email"
-              />
-
-              <PasswordTextField
-                label="Password"
-                name="password"
-                placeholder="Enter your password"
-                rounded="md"
-              />
-            </VStack>
-            <VStack w="100%" spacing={4}>
-              <Text
-                as={Link}
-                to="/reset"
-                fontSize={{ base: "md", sm: "md" }}
-                _hover={{ textDecoration: "underline" }}
-              >
-                Forgot Password?
-              </Text>
-
-              <SubmitButton
-                w="100%"
-                colorScheme="primary"
-                label="Sign In"
-                type="submit"
-              />
-
-              <Text>
-                Don't have an account?&nbsp;
+                <PasswordTextField
+                  label="Password"
+                  name="password"
+                  placeholder="Enter your password"
+                  rounded="md"
+                />
+              </VStack>
+              <VStack w="100%" spacing={4}>
                 <Text
                   as={Link}
-                  to="/register"
+                  to="/reset"
                   fontSize={{ base: "md", sm: "md" }}
-                  fontWeight="bold"
                   _hover={{ textDecoration: "underline" }}
                 >
-                  Register
+                  Forgot Password?
                 </Text>
-              </Text>
+
+                <SubmitButton
+                  w="100%"
+                  colorScheme="primary"
+                  label="Sign In"
+                  type="submit"
+                />
+
+                <Text>
+                  Don't have an account?&nbsp;
+                  <Text
+                    as={Link}
+                    to="/register"
+                    fontSize={{ base: "md", sm: "md" }}
+                    fontWeight="bold"
+                    _hover={{ textDecoration: "underline" }}
+                  >
+                    Register
+                  </Text>
+                </Text>
+              </VStack>
             </VStack>
-          </VStack>
-        </Stack>
-      </Center>
+          </Stack>
+        </Center>
+      </motion.div>
     </Container>
-    // </SlideFade>
   );
 }

@@ -247,170 +247,186 @@ export default function Index() {
       </Box>
 
       <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={20}>
-        <Stack direction={{ base: "column", xmd: "row" }} spacing={4} w="full">
-          <motion.div
-            whileHover={{ scale: 1.01 }}
-            transition={{
-              type: "tween",
-              duration: 0.2,
-            }}
-            style={{ width: "100%" }}
+        <motion.div
+          layout
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 20, opacity: 0 }}
+          transition={{
+            type: "spring",
+            mass: 0.5,
+          }}
+          style={{ width: "100%" }}
+        >
+          <Stack
+            direction={{ base: "column", xmd: "row" }}
+            spacing={4}
+            w="full"
           >
-            <Card
-              variant="elevated"
-              rounded="md"
-              boxShadow="xl"
-              w="full"
-              as={Link}
-              to={"/about"}
-              draggable={false}
+            <motion.div
+              whileHover={{ scale: 1.01 }}
+              transition={{
+                type: "tween",
+                duration: 0.2,
+              }}
+              style={{ width: "100%" }}
             >
-              <CardBody p={0}>
-                <AspectRatio ratio={16 / 9} w="full">
-                  <ClientOnly>
-                    {() => (
-                      <Suspense fallback={<Skeleton w="full" h="full" />}>
-                        <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <RemixImage
-                            image={data.images.companyThumbnail}
-                            // alt="Company Group Picture"
-                            roundedTopLeft="md"
-                            roundedTopRight="md"
-                            w="full"
-                            loading="lazy"
-                            draggable={false}
-                          />
-                        </ErrorBoundary>
-                      </Suspense>
-                    )}
-                  </ClientOnly>
-                </AspectRatio>
-              </CardBody>
-              <CardFooter
+              <Card
+                variant="elevated"
+                rounded="md"
+                boxShadow="xl"
                 w="full"
-                p={4}
-                m={0}
-                justifyContent="space-between"
-                alignItems="center"
+                as={Link}
+                to={"/about"}
+                draggable={false}
               >
-                <Stack spacing="1">
-                  <Heading size="md">About</Heading>
-                  <Text>Learn more about our values</Text>
-                </Stack>
-                <ArrowForwardIcon />
-              </CardFooter>
-            </Card>
-          </motion.div>
+                <CardBody p={0}>
+                  <AspectRatio ratio={16 / 9} w="full">
+                    <ClientOnly>
+                      {() => (
+                        <Suspense fallback={<Skeleton w="full" h="full" />}>
+                          <ErrorBoundary FallbackComponent={ErrorFallback}>
+                            <RemixImage
+                              image={data.images.companyThumbnail}
+                              // alt="Company Group Picture"
+                              roundedTopLeft="md"
+                              roundedTopRight="md"
+                              w="full"
+                              loading="lazy"
+                              draggable={false}
+                            />
+                          </ErrorBoundary>
+                        </Suspense>
+                      )}
+                    </ClientOnly>
+                  </AspectRatio>
+                </CardBody>
+                <CardFooter
+                  w="full"
+                  p={4}
+                  m={0}
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Stack spacing="1">
+                    <Heading size="md">About</Heading>
+                    <Text>Learn more about our values</Text>
+                  </Stack>
+                  <ArrowForwardIcon />
+                </CardFooter>
+              </Card>
+            </motion.div>
 
-          <motion.div
-            whileHover={{ scale: 1.01 }}
-            transition={{
-              type: "tween",
-              duration: 0.2,
-            }}
-            style={{ width: "100%" }}
-          >
-            <Card
-              variant="elevated"
-              rounded="md"
-              boxShadow="xl"
-              w="full"
-              as={Link}
-              to={"/projects"}
-              draggable={false}
+            <motion.div
+              whileHover={{ scale: 1.01 }}
+              transition={{
+                type: "tween",
+                duration: 0.2,
+              }}
+              style={{ width: "100%" }}
             >
-              <CardBody p={0}>
-                <AspectRatio ratio={16 / 9} w="full">
-                  <ClientOnly>
-                    {() => (
-                      <Suspense fallback={<Skeleton w="full" h="full" />}>
-                        <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <RemixImage
-                            image={data.images.apt724Thumbnail}
-                            // alt="Company Group Picture"
-                            roundedTopLeft="md"
-                            roundedTopRight="md"
-                            w="full"
-                            loading="lazy"
-                            draggable={false}
-                          />
-                        </ErrorBoundary>
-                      </Suspense>
-                    )}
-                  </ClientOnly>
-                </AspectRatio>
-              </CardBody>
-              <CardFooter
-                w="full "
-                p={4}
-                m={0}
-                justifyContent="space-between"
-                alignItems="center"
+              <Card
+                variant="elevated"
+                rounded="md"
+                boxShadow="xl"
+                w="full"
+                as={Link}
+                to={"/projects"}
+                draggable={false}
               >
-                <Stack spacing="1">
-                  <Heading size="md">Projects</Heading>
-                  <Text>Explore our portofolio</Text>
-                </Stack>
-                <ArrowForwardIcon />
-              </CardFooter>
-            </Card>
-          </motion.div>
+                <CardBody p={0}>
+                  <AspectRatio ratio={16 / 9} w="full">
+                    <ClientOnly>
+                      {() => (
+                        <Suspense fallback={<Skeleton w="full" h="full" />}>
+                          <ErrorBoundary FallbackComponent={ErrorFallback}>
+                            <RemixImage
+                              image={data.images.apt724Thumbnail}
+                              // alt="Company Group Picture"
+                              roundedTopLeft="md"
+                              roundedTopRight="md"
+                              w="full"
+                              loading="lazy"
+                              draggable={false}
+                            />
+                          </ErrorBoundary>
+                        </Suspense>
+                      )}
+                    </ClientOnly>
+                  </AspectRatio>
+                </CardBody>
+                <CardFooter
+                  w="full "
+                  p={4}
+                  m={0}
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Stack spacing="1">
+                    <Heading size="md">Projects</Heading>
+                    <Text>Explore our portofolio</Text>
+                  </Stack>
+                  <ArrowForwardIcon />
+                </CardFooter>
+              </Card>
+            </motion.div>
 
-          <motion.div
-            whileHover={{ scale: 1.01 }}
-            transition={{
-              type: "tween",
-              duration: 0.2,
-            }}
-            style={{ width: "100%" }}
-          >
-            <Card
-              variant="elevated"
-              rounded="md"
-              boxShadow="xl"
-              w="full"
-              h="full"
-              as={Link}
-              to={"/resources"}
-              draggable={false}
+            <motion.div
+              whileHover={{ scale: 1.01 }}
+              transition={{
+                type: "tween",
+                duration: 0.2,
+              }}
+              style={{ width: "100%" }}
             >
-              <CardBody p={0}>
-                <AspectRatio ratio={16 / 9} w="full">
-                  <ClientOnly>
-                    {() => (
-                      <Suspense fallback={<Skeleton w="full" h="full" />}>
-                        <ErrorBoundary FallbackComponent={ErrorFallback}>
-                          <RemixImage
-                            image={data.images.officeThumbnail}
-                            roundedTopLeft="md"
-                            roundedTopRight="md"
-                            w="full"
-                            loading="lazy"
-                            draggable={false}
-                          />
-                        </ErrorBoundary>
-                      </Suspense>
-                    )}
-                  </ClientOnly>
-                </AspectRatio>
-              </CardBody>
-              <CardFooter
-                w="full "
-                p={4}
-                m={0}
-                justifyContent="space-between"
-                alignItems="center"
+              <Card
+                variant="elevated"
+                rounded="md"
+                boxShadow="xl"
+                w="full"
+                h="full"
+                as={Link}
+                to={"/resources"}
+                draggable={false}
               >
-                <Stack spacing="1">
-                  <Heading size="md">Resources</Heading>
-                  <Text>View company resources </Text>
-                </Stack>
+                <CardBody p={0}>
+                  <AspectRatio ratio={16 / 9} w="full">
+                    <ClientOnly>
+                      {() => (
+                        <Suspense fallback={<Skeleton w="full" h="full" />}>
+                          <ErrorBoundary FallbackComponent={ErrorFallback}>
+                            <RemixImage
+                              image={data.images.officeThumbnail}
+                              roundedTopLeft="md"
+                              roundedTopRight="md"
+                              w="full"
+                              loading="lazy"
+                              draggable={false}
+                            />
+                          </ErrorBoundary>
+                        </Suspense>
+                      )}
+                    </ClientOnly>
+                  </AspectRatio>
+                </CardBody>
+                <CardFooter
+                  w="full "
+                  p={4}
+                  m={0}
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Stack spacing="1">
+                    <Heading size="md">Resources</Heading>
+                    <Text>View company resources </Text>
+                  </Stack>
 
-                <ArrowForwardIcon />
-              </CardFooter>
-            </Card>
-          </motion.div>
-        </Stack>
+                  <ArrowForwardIcon />
+                </CardFooter>
+              </Card>
+            </motion.div>
+          </Stack>
+        </motion.div>
       </Container>
 
       <Divider />
@@ -419,134 +435,158 @@ export default function Index() {
         <VStack spacing="40px">
           <Heading textAlign="center">Trusted by our Clients</Heading>
 
-          <Box
-            rounded="md"
-            bg="transparent"
-            boxShadow={"lg"}
-            w="full"
-            ref={testimonialsView.ref}
+          <motion.div
+            layout
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 20, opacity: 0 }}
+            transition={{
+              type: "spring",
+              mass: 0.5,
+            }}
+            style={{ width: "100%" }}
           >
-            <Swiper
-              autoplay={{
-                delay: 6000,
-                disableOnInteraction: false,
-              }}
-              pagination={{
-                type: "progressbar",
-              }}
-              modules={[Autoplay, Pagination]}
-              loop
-              cssMode={cssModeBreakpoint}
-              slidesPerView={breakpointSlidesPerView}
-              style={{
-                borderRadius: "0.375rem",
-              }}
-              initialSlide={breakpointInitialSlide}
+            <Box
+              rounded="md"
+              bg="transparent"
+              boxShadow={"lg"}
+              w="full"
+              ref={testimonialsView.ref}
             >
-              {data.testimonials.map((value: any, index: any) => (
-                <SwiperSlide key={index}>
-                  <Card
-                    variant="elevated"
-                    rounded="none"
-                    h={{ base: "420px", sm: "250px" }}
-                    w="full"
-                  >
-                    <CardBody textAlign={{ base: "start", sm: "justify" }}>
-                      {value.content}
-                    </CardBody>
+              <Swiper
+                autoplay={{
+                  delay: 6000,
+                  disableOnInteraction: false,
+                }}
+                pagination={{
+                  type: "progressbar",
+                }}
+                modules={[Autoplay, Pagination]}
+                loop
+                cssMode={cssModeBreakpoint}
+                slidesPerView={breakpointSlidesPerView}
+                style={{
+                  borderRadius: "0.375rem",
+                }}
+                initialSlide={breakpointInitialSlide}
+              >
+                {data.testimonials.map((value: any, index: any) => (
+                  <SwiperSlide key={index}>
+                    <Card
+                      variant="elevated"
+                      rounded="none"
+                      h={{ base: "420px", sm: "250px" }}
+                      w="full"
+                    >
+                      <CardBody textAlign={{ base: "start", sm: "justify" }}>
+                        {value.content}
+                      </CardBody>
 
-                    <Divider />
-                    <CardFooter justify="space-between" alignItems="center">
-                      <HStack spacing={2}>
-                        <Avatar name={value.initials || value.name} />
-                        <Flex direction="column">
-                          <Text fontWeight="bold" fontSize="lg">
-                            {value.name}
-                          </Text>
-                          <Text fontSize="md" color="gray.500">
-                            {value.position}
-                          </Text>
-                        </Flex>
-                      </HStack>
-                      <Icon as={ImQuotesRight} w={8} h={8} />
-                    </CardFooter>
-                  </Card>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </Box>
+                      <Divider />
+                      <CardFooter justify="space-between" alignItems="center">
+                        <HStack spacing={2}>
+                          <Avatar name={value.initials || value.name} />
+                          <Flex direction="column">
+                            <Text fontWeight="bold" fontSize="lg">
+                              {value.name}
+                            </Text>
+                            <Text fontSize="md" color="gray.500">
+                              {value.position}
+                            </Text>
+                          </Flex>
+                        </HStack>
+                        <Icon as={ImQuotesRight} w={8} h={8} />
+                      </CardFooter>
+                    </Card>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </Box>
+          </motion.div>
         </VStack>
       </Container>
       <Divider />
 
       <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={20}>
-        <Stack
-          direction={{ base: "column", md: "row" }}
-          spacing={5}
-          alignItems={{ base: "flex-start", md: "center" }}
-          justifyContent="space-between"
-          rounded="md"
-          boxShadow="xl"
-          bg={useColorModeValue("white", "gray.700")}
-          p={{ base: 8, md: 16 }}
+        <motion.div
+          layout
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 20, opacity: 0 }}
+          transition={{
+            type: "spring",
+            mass: 0.5,
+          }}
+          style={{ width: "100%" }}
         >
-          <Flex
-            w="full"
-            justifyContent={{ base: "center", md: "flex-start" }}
-            flexDirection="column"
-          >
-            <Heading
-              fontSize="3xl"
-              w="full"
-              textAlign={{ base: "center", md: "start" }}
-            >
-              Looking to connect with us?
-            </Heading>
-            <Text
-              fontSize="2xl"
-              lineHeight={1.2}
-              fontWeight="bold"
-              bgGradient="linear(to-l, #018b8b,#005f5f)"
-              bgClip="text"
-              textAlign={{ base: "center", md: "start" }}
-              w="full"
-            >
-              Visit our contact us page to get in touch
-            </Text>
-          </Flex>
           <Stack
-            direction={{ base: "column", sm: "row" }}
-            spacing={3}
+            direction={{ base: "column", md: "row" }}
+            spacing={5}
+            alignItems={{ base: "flex-start", md: "center" }}
             justifyContent="space-between"
-            w="full"
+            rounded="md"
+            boxShadow="xl"
+            bg={useColorModeValue("white", "gray.700")}
+            p={{ base: 8, md: 16 }}
           >
             <Flex
-              gap={3}
               w="full"
-              justifyContent={{ base: "center", md: "flex-end" }}
+              justifyContent={{ base: "center", md: "flex-start" }}
+              flexDirection="column"
             >
-              <Button
-                variant="solid"
-                colorScheme="primary"
-                as={Link}
-                to="/contacts"
-                draggable={false}
-                w={{ base: "full", sm: "auto" }}
+              <Heading
+                fontSize="3xl"
+                w="full"
+                textAlign={{ base: "center", md: "start" }}
               >
-                Contact Us
-              </Button>
-              <Button
-                variant="solid"
-                as={Link}
-                to="/about"
-                draggable={false}
-                w={{ base: "full", sm: "auto" }}
+                Looking to connect with us?
+              </Heading>
+              <Text
+                fontSize="2xl"
+                lineHeight={1.2}
+                fontWeight="bold"
+                bgGradient="linear(to-l, #018b8b,#005f5f)"
+                bgClip="text"
+                textAlign={{ base: "center", md: "start" }}
+                w="full"
               >
-                Learn more
-              </Button>
+                Visit our contact us page to get in touch
+              </Text>
             </Flex>
+            <Stack
+              direction={{ base: "column", sm: "row" }}
+              spacing={3}
+              justifyContent="space-between"
+              w="full"
+            >
+              <Flex
+                gap={3}
+                w="full"
+                justifyContent={{ base: "center", md: "flex-end" }}
+              >
+                <Button
+                  variant="solid"
+                  colorScheme="primary"
+                  as={Link}
+                  to="/contacts"
+                  draggable={false}
+                  w={{ base: "full", sm: "auto" }}
+                >
+                  Contact Us
+                </Button>
+                <Button
+                  variant="solid"
+                  as={Link}
+                  to="/about"
+                  draggable={false}
+                  w={{ base: "full", sm: "auto" }}
+                >
+                  Learn more
+                </Button>
+              </Flex>
+            </Stack>
           </Stack>
-        </Stack>
+        </motion.div>
       </Container>
     </>
   );

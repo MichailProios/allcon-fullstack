@@ -28,7 +28,7 @@ const breakpoints = {
 };
 
 const config = {
-  initialColorMode: "light",
+  initialColorMode: "system",
 };
 
 const styles = {

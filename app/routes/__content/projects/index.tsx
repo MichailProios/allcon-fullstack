@@ -860,12 +860,16 @@ export default function Index() {
           >
             <AnimatePresence>
               {data.projects.map((value: any, index: any) => (
-                <RenderIfVisible key={index} defaultHeight={500}>
+                <RenderIfVisible key={index} defaultHeight={1000}>
                   <motion.div
                     layout
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: 20, opacity: 0 }}
+                    transition={{
+                      type: "spring",
+                      mass: 0.5,
+                    }}
                   >
                     <motion.div
                       whileHover={{ scale: 1.01 }}

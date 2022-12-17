@@ -76,37 +76,49 @@ export default function About() {
       <Container maxW="1200px" px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="26px">
           <Heading textAlign="center">About Us</Heading>
-          <VStack spacing="26px">
-            <Text fontSize="xl" textAlign={{ base: "start", sm: "justify" }}>
-              Allcon Contracting is a renowned provider of high-quality
-              construction services to private and public clients across New
-              York State. Our executive team prioritizes teamwork and hands-on
-              involvement to ensure that all projects are completed efficiently
-              and within budget. Our dedicated staff is meticulous in their
-              attention to detail and consistently goes the extra mile to
-              deliver exceptional results. Our team of architects, planners,
-              designers, and construction specialists work collaboratively to
-              bring their unique talents and expertise to every project.
-            </Text>
-            <AspectRatio ratio={{ base: 4 / 3, md: 16 / 9 }} w="full">
-              <ClientOnly>
-                {() => (
-                  <Suspense fallback={<Skeleton w="full" h="full" />}>
-                    <ErrorBoundary FallbackComponent={ErrorFallback}>
-                      <RemixImage
-                        image={data.allconStaff}
-                        boxShadow="xl"
-                        rounded="md"
-                        userSelect="none"
-                        draggable={false}
-                        loading="lazy"
-                      />
-                    </ErrorBoundary>
-                  </Suspense>
-                )}
-              </ClientOnly>
-            </AspectRatio>
-          </VStack>
+          <motion.div
+            layout
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 20, opacity: 0 }}
+            transition={{
+              type: "spring",
+              mass: 0.5,
+            }}
+          >
+            <VStack spacing="26px">
+              <Text fontSize="xl" textAlign={{ base: "start", sm: "justify" }}>
+                Allcon Contracting is a renowned provider of high-quality
+                construction services to private and public clients across New
+                York State. Our executive team prioritizes teamwork and hands-on
+                involvement to ensure that all projects are completed
+                efficiently and within budget. Our dedicated staff is meticulous
+                in their attention to detail and consistently goes the extra
+                mile to deliver exceptional results. Our team of architects,
+                planners, designers, and construction specialists work
+                collaboratively to bring their unique talents and expertise to
+                every project.
+              </Text>
+              <AspectRatio ratio={{ base: 4 / 3, md: 16 / 9 }} w="full">
+                <ClientOnly>
+                  {() => (
+                    <Suspense fallback={<Skeleton w="full" h="full" />}>
+                      <ErrorBoundary FallbackComponent={ErrorFallback}>
+                        <RemixImage
+                          image={data.allconStaff}
+                          boxShadow="xl"
+                          rounded="md"
+                          userSelect="none"
+                          draggable={false}
+                          loading="lazy"
+                        />
+                      </ErrorBoundary>
+                    </Suspense>
+                  )}
+                </ClientOnly>
+              </AspectRatio>
+            </VStack>
+          </motion.div>
         </VStack>
       </Container>
       <Divider />
@@ -119,12 +131,12 @@ export default function About() {
               <RenderIfVisible key={index} defaultHeight={1200}>
                 <motion.div
                   layout
-                  initial={{ y: 10, opacity: 0 }}
+                  initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: 10, opacity: 0 }}
+                  exit={{ y: 20, opacity: 0 }}
                   transition={{
-                    y: { duration: 0.2 },
-                    default: { ease: "linear" },
+                    type: "spring",
+                    mass: 0.5,
                   }}
                 >
                   <Card

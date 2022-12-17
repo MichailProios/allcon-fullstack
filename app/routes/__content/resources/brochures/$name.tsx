@@ -11,6 +11,7 @@ import { createServerClient } from "~/utils/supabase.server";
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
+import { motion } from "framer-motion";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - Brochures`,
@@ -78,15 +79,27 @@ export default function Brochures() {
       </Breadcrumb>
       <VStack spacing="26px">
         <Heading textAlign="center">{loaderData?.name}</Heading>
-        <Box rounded="md" w="full" h="80vh">
-          <iframe
-            title={loaderData?.name}
-            src={`https://docs.google.com/viewer?url=${loaderData?.data?.publicUrl}&embedded=true`}
-            height="100%"
-            width="100%"
-            style={{ borderRadius: "0.375rem" }}
-          />
-        </Box>
+        <motion.div
+          layout
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 20, opacity: 0 }}
+          transition={{
+            type: "spring",
+            mass: 0.5,
+          }}
+          style={{ width: "100%" }}
+        >
+          <Box rounded="md" w="full" h="80vh">
+            <iframe
+              title={loaderData?.name}
+              src={`https://docs.google.com/viewer?url=${loaderData?.data?.publicUrl}&embedded=true`}
+              height="100%"
+              width="100%"
+              style={{ borderRadius: "0.375rem" }}
+            />
+          </Box>
+        </motion.div>
       </VStack>
     </Container>
   );

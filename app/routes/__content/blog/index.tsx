@@ -20,6 +20,7 @@ import { json } from "@remix-run/node";
 import type { LoaderFunction } from "@remix-run/node";
 import RenderIfVisible from "react-render-if-visible";
 import { createServerClient } from "~/utils/supabase.server";
+import { useState } from "react";
 
 export const loader: LoaderFunction = async ({ request }: any) => {
   try {
@@ -53,6 +54,10 @@ const Index = () => {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: 20, opacity: 0 }}
+                  transition={{
+                    type: "spring",
+                    mass: 0.5,
+                  }}
                 >
                   <Box
                     w="full"

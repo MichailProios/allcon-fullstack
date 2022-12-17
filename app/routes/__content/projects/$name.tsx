@@ -78,6 +78,7 @@ import {
   AiOutlineCheckCircle,
   AiOutlineTag,
 } from "react-icons/ai";
+import { FcVideoFile } from "react-icons/fc";
 import { BiBuildings, BiMap, BiExpand } from "react-icons/bi";
 import { useWindowDimensions } from "~/utils/hooks";
 import { createServerClient } from "~/utils/supabase.server";
@@ -244,231 +245,240 @@ export default function Project() {
           <Heading textAlign="center">{data.project.name}</Heading>
         </VStack>
 
-        <VStack mt={"26px"} w="full" h="full">
-          <Box position={"relative"} w="full">
-            <IconButton
-              display={media.length > 1 ? "flex" : "none"}
-              aria-label="left-arrow"
-              variant="solid"
-              borderRadius="full"
-              position="absolute"
-              left={{ base: "5px", md: "10px" }}
-              top="50%"
-              transform={"translate(0%, -50%)"}
-              zIndex={2}
-              onClick={handlePrev}
-              icon={<ChevronLeftIcon w={6} h={6} />}
-              bgColor="gray.50"
-              textColor="black"
-              _hover={{ bgColor: "gray.300" }}
-              _active={{ bgColor: "gray.400" }}
-            />
+        <motion.div
+          layout
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 20, opacity: 0 }}
+          transition={{
+            type: "spring",
+            mass: 0.5,
+          }}
+        >
+          <VStack mt={"26px"} w="full" h="full">
+            <Box position={"relative"} w="full">
+              <IconButton
+                display={media.length > 1 ? "flex" : "none"}
+                aria-label="left-arrow"
+                variant="solid"
+                borderRadius="full"
+                position="absolute"
+                left={{ base: "5px", md: "10px" }}
+                top="50%"
+                transform={"translate(0%, -50%)"}
+                zIndex={2}
+                onClick={handlePrev}
+                icon={<ChevronLeftIcon w={6} h={6} />}
+                bgColor="gray.50"
+                textColor="black"
+                _hover={{ bgColor: "gray.300" }}
+                _active={{ bgColor: "gray.400" }}
+              />
 
-            <IconButton
-              display={media.length > 1 ? "flex" : "none"}
-              aria-label="right-arrow"
-              variant="solid"
-              borderRadius="full"
-              position="absolute"
-              right={{ base: "5px", md: "10px" }}
-              top="50%"
-              transform={"translate(0%, -50%)"}
-              zIndex={2}
-              onClick={handleNext}
-              icon={<ChevronRightIcon w={6} h={6} />}
-              bgColor="gray.50"
-              textColor="black"
-              _hover={{ bgColor: "gray.300" }}
-              _active={{ bgColor: "gray.400" }}
-            />
+              <IconButton
+                display={media.length > 1 ? "flex" : "none"}
+                aria-label="right-arrow"
+                variant="solid"
+                borderRadius="full"
+                position="absolute"
+                right={{ base: "5px", md: "10px" }}
+                top="50%"
+                transform={"translate(0%, -50%)"}
+                zIndex={2}
+                onClick={handleNext}
+                icon={<ChevronRightIcon w={6} h={6} />}
+                bgColor="gray.50"
+                textColor="black"
+                _hover={{ bgColor: "gray.300" }}
+                _active={{ bgColor: "gray.400" }}
+              />
 
-            <IconButton
-              aria-label="expand-arrow"
-              variant="solid"
-              size={"md"}
-              borderRadius="full"
-              position="absolute"
-              top={{ base: "5px", md: "10px" }}
-              right={{ base: "5px", md: "10px" }}
-              transform={"translate(0%, 0%)"}
-              zIndex={2}
-              onClick={onOpen}
-              icon={<Icon w={5} h={5} as={BiExpand} />}
-              bgColor="gray.50"
-              textColor="black"
-              _hover={{ bgColor: "gray.300" }}
-              _active={{ bgColor: "gray.400" }}
-            />
+              <IconButton
+                aria-label="expand-arrow"
+                variant="solid"
+                size={"md"}
+                borderRadius="full"
+                position="absolute"
+                top={{ base: "5px", md: "10px" }}
+                right={{ base: "5px", md: "10px" }}
+                transform={"translate(0%, 0%)"}
+                zIndex={2}
+                onClick={onOpen}
+                icon={<Icon w={5} h={5} as={BiExpand} />}
+                bgColor="gray.50"
+                textColor="black"
+                _hover={{ bgColor: "gray.300" }}
+                _active={{ bgColor: "gray.400" }}
+              />
 
-            <Box boxShadow="xl" w={"full"}>
-              <Swiper
-                style={{
-                  borderRadius: "0.375rem",
-                }}
-                keyboard={{
-                  enabled: true,
-                }}
-                lazy={{ loadPrevNext: true, loadPrevNextAmount: 2 }}
-                modules={[Lazy, Navigation, Thumbs, Keyboard]}
-                effect={"slide"}
-                thumbs={{ swiper: thumbsSwiper }}
-                ref={sliderRef}
-                spaceBetween={30}
-                // loop={media.length > 1 ? true : false}
-                autoHeight
-                cssMode={cssModeBreakpoint}
-              >
-                {media.map((value: any, index: any) => {
-                  return (
-                    <SwiperSlide key={index}>
-                      <AspectRatio
-                        ratio={{
-                          base: 1,
-                          sm: 16 / 9,
-                        }}
-                        h="full"
-                        w="full"
-                        maxH="full"
-                        maxW="full"
-                      >
-                        <ClientOnly fallback={<Skeleton w="full" h="full" />}>
-                          {() => (
-                            <Suspense fallback={<Skeleton w="full" h="full" />}>
-                              <ErrorBoundary FallbackComponent={ErrorFallback}>
-                                {value.type === "image" ? (
-                                  <RemixImage
-                                    image={value.source + "/public"}
-                                    // alt={`Project Image ${index}`}
-                                    loading="eager"
-                                    w="full"
-                                    h="full"
-                                    draggable={false}
-                                  />
-                                ) : value.type === "video" ? (
-                                  <iframe
-                                    title={`Project Video ${index}`}
-                                    src={value.source}
-                                    allowFullScreen
-                                    draggable={false}
-                                    loading="lazy"
-                                    allow="gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                                    style={{
-                                      border: "none",
-                                      height: "100%",
-                                      width: "100%",
-                                      color: "#f3f3f3",
-                                    }}
-                                  />
-                                ) : null}
-                              </ErrorBoundary>
-                            </Suspense>
-                          )}
-                        </ClientOnly>
-                      </AspectRatio>
-                    </SwiperSlide>
-                  );
-                })}
-              </Swiper>
-            </Box>
-          </Box>
-
-          <Fade
-            in={true}
-            style={{ width: "100%", maxHeight: "100px" }}
-            unmountOnExit={false}
-            transition={{ enter: { duration: 0 }, exit: { duration: 0 } }}
-          >
-            <Box
-              w="full"
-              display={{
-                base: "none",
-                xs: media.length > 1 ? "block" : "none",
-              }}
-            >
-              <AnimatePresence>
+              <Box boxShadow="xl" w={"full"}>
                 <Swiper
-                  onSwiper={setThumbsSwiper}
-                  spaceBetween={8}
-                  slidesPerView={thumbsBreakpoint}
-                  freeMode={true}
-                  watchSlidesProgress={true}
-                  modules={[FreeMode, Navigation, Thumbs]}
                   style={{
                     borderRadius: "0.375rem",
                   }}
-                  ref={sliderRefThumb}
-                  centerInsufficientSlides
+                  keyboard={{
+                    enabled: true,
+                  }}
+                  lazy={{ loadPrevNext: true, loadPrevNextAmount: 2 }}
+                  modules={[Lazy, Navigation, Thumbs, Keyboard]}
+                  effect={"slide"}
+                  thumbs={{ swiper: thumbsSwiper }}
+                  ref={sliderRef}
+                  spaceBetween={30}
+                  // loop={media.length > 1 ? true : false}
+                  autoHeight
+                  cssMode={cssModeBreakpoint}
                 >
                   {media.map((value: any, index: any) => {
                     return (
                       <SwiperSlide key={index}>
-                        <motion.div
-                          whileHover={{ scale: 1.01, cursor: "pointer" }}
-                          transition={{
-                            type: "tween",
-                            duration: 0.1,
+                        <AspectRatio
+                          ratio={{
+                            base: 1,
+                            sm: 16 / 9,
                           }}
-                          key={index}
+                          h="full"
+                          w="full"
+                          maxH="full"
+                          maxW="full"
                         >
-                          <AspectRatio ratio={16 / 9} w="full" h="full">
-                            <ClientOnly
-                              fallback={<Skeleton w="full" h="full" />}
-                            >
-                              {() => (
-                                <Suspense
-                                  fallback={<Skeleton w="full" h="full" />}
+                          <ClientOnly fallback={<Skeleton w="full" h="full" />}>
+                            {() => (
+                              <Suspense
+                                fallback={<Skeleton w="full" h="full" />}
+                              >
+                                <ErrorBoundary
+                                  FallbackComponent={ErrorFallback}
                                 >
-                                  <ErrorBoundary
-                                    FallbackComponent={ErrorFallback}
-                                  >
-                                    {value.type === "image" ? (
-                                      <RemixImage
-                                        image={value.source + "/meta"}
-                                        // alt={`Project Image ${index}`}
-                                        loading="eager"
-                                        // fallback={<Skeleton w="full" h="full" />}
-                                        borderRadius="md"
-                                        zIndex={9000}
-                                        opacity={
-                                          currentSlide === index ? 1 : 0.8
-                                        }
-                                        transition="opacity 200ms"
-                                        w="full"
-                                        h="full"
-                                      />
-                                    ) : value.type === "video" ? (
-                                      <iframe
-                                        title={`Project Video ${index}`}
-                                        src={value.source}
-                                        allow="gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                                        loading="lazy"
-                                        style={{
-                                          border: "none",
-                                          height: "100%",
-                                          width: "100%",
-                                          color: "#f3f3f3",
-                                          borderRadius: "0.375rem",
-                                          opacity:
-                                            currentSlide === index ? 1 : 0.8,
-                                          transition: "opacity 200ms",
-                                          pointerEvents: "none",
-                                        }}
-                                      />
-                                    ) : null}
-                                  </ErrorBoundary>
-                                </Suspense>
-                              )}
-                            </ClientOnly>
-                          </AspectRatio>
-                        </motion.div>
+                                  {value.type === "image" ? (
+                                    <RemixImage
+                                      image={value.source + "/public"}
+                                      // alt={`Project Image ${index}`}
+                                      loading="eager"
+                                      w="full"
+                                      h="full"
+                                      draggable={false}
+                                    />
+                                  ) : value.type === "video" ? (
+                                    <iframe
+                                      title={`Project Video ${index}`}
+                                      src={value.source}
+                                      allowFullScreen
+                                      draggable={false}
+                                      loading="lazy"
+                                      allow="gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                      style={{
+                                        border: "none",
+                                        height: "100%",
+                                        width: "100%",
+                                        color: "#f3f3f3",
+                                      }}
+                                    />
+                                  ) : null}
+                                </ErrorBoundary>
+                              </Suspense>
+                            )}
+                          </ClientOnly>
+                        </AspectRatio>
                       </SwiperSlide>
                     );
                   })}
                 </Swiper>
-              </AnimatePresence>
+              </Box>
             </Box>
-          </Fade>
-        </VStack>
+
+            <Fade
+              in={true}
+              style={{ width: "100%", maxHeight: "100px" }}
+              unmountOnExit={false}
+              transition={{ enter: { duration: 0 }, exit: { duration: 0 } }}
+            >
+              <Box
+                w="full"
+                display={{
+                  base: "none",
+                  xs: media.length > 1 ? "block" : "none",
+                }}
+              >
+                <AnimatePresence>
+                  <Swiper
+                    onSwiper={setThumbsSwiper}
+                    spaceBetween={8}
+                    slidesPerView={thumbsBreakpoint}
+                    freeMode={true}
+                    watchSlidesProgress={true}
+                    modules={[FreeMode, Navigation, Thumbs]}
+                    style={{
+                      borderRadius: "0.375rem",
+                    }}
+                    ref={sliderRefThumb}
+                    centerInsufficientSlides
+                  >
+                    {media.map((value: any, index: any) => {
+                      return (
+                        <SwiperSlide key={index}>
+                          <motion.div
+                            whileHover={{ scale: 1.01, cursor: "pointer" }}
+                            transition={{
+                              type: "tween",
+                              duration: 0.1,
+                            }}
+                            key={index}
+                          >
+                            <AspectRatio ratio={16 / 9} w="full" h="full">
+                              <ClientOnly
+                                fallback={<Skeleton w="full" h="full" />}
+                              >
+                                {() => (
+                                  <Suspense
+                                    fallback={<Skeleton w="full" h="full" />}
+                                  >
+                                    <ErrorBoundary
+                                      FallbackComponent={ErrorFallback}
+                                    >
+                                      {value.type === "image" ? (
+                                        <RemixImage
+                                          image={value.source + "/meta"}
+                                          loading="eager"
+                                          borderRadius="md"
+                                          zIndex={9000}
+                                          opacity={
+                                            currentSlide === index ? 1 : 0.8
+                                          }
+                                          transition="opacity 200ms"
+                                          w="full"
+                                          h="full"
+                                        />
+                                      ) : value.type === "video" ? (
+                                        <Box
+                                          borderRadius="md"
+                                          w="full"
+                                          h="full"
+                                          bgColor="gray.100"
+                                          _dark={{ bgColor: "gray.600" }}
+                                        >
+                                          <Icon
+                                            w="full"
+                                            h="full"
+                                            as={FcVideoFile}
+                                          />
+                                        </Box>
+                                      ) : null}
+                                    </ErrorBoundary>
+                                  </Suspense>
+                                )}
+                              </ClientOnly>
+                            </AspectRatio>
+                          </motion.div>
+                        </SwiperSlide>
+                      );
+                    })}
+                  </Swiper>
+                </AnimatePresence>
+              </Box>
+            </Fade>
+          </VStack>
+        </motion.div>
 
         <Modal
           isOpen={isOpen}
@@ -478,6 +488,7 @@ export default function Project() {
           isCentered
           scrollBehavior="inside"
           size="full"
+          motionPreset="slideInBottom"
         >
           <ModalOverlay />
 
@@ -652,174 +663,191 @@ export default function Project() {
           data.project.description ? (
             <>
               <Heading textAlign="center">Project Information</Heading>
-              <Card rounded="md" boxShadow="xl" w={"full"}>
-                <CardBody>
-                  <Stack divider={<StackDivider />} spacing="4">
-                    {data.project.location && (
-                      <Box>
-                        <Tag size="lg" borderRadius="full">
-                          <Icon h={6} w={6} as={BiMap} ml={-1} mr={2} />
-                          <TagLabel fontSize="lg">Location</TagLabel>
-                        </Tag>
-                        <AspectRatio
-                          ratio={{ base: 1, md: 16 / 9 }}
-                          maxW="100%"
-                          mb={4}
-                          ml={1}
-                          mt={4}
-                        >
-                          <iframe
-                            title={`Project ${data.project.name} location`}
-                            src={data.project.location}
-                            style={{
-                              border: "none",
-                              height: "100%",
-                              width: "100%",
-                              borderRadius: "0.375rem",
-                              color: "#f3f3f3",
-                            }}
-                            allowFullScreen={false}
-                            loading="lazy"
-                            referrerPolicy="no-referrer-when-downgrade"
-                          />
-                        </AspectRatio>
-                      </Box>
-                    )}
-                    {data.project.project_clients && (
-                      <Box>
-                        <HStack alignItems="center">
+              <motion.div
+                layout
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 20, opacity: 0 }}
+                transition={{
+                  type: "spring",
+                  mass: 0.5,
+                }}
+              >
+                <Card rounded="md" boxShadow="xl" w={"full"}>
+                  <CardBody>
+                    <Stack divider={<StackDivider />} spacing="4">
+                      {data.project.location && (
+                        <Box>
                           <Tag size="lg" borderRadius="full">
-                            <Icon h={6} w={6} as={BiBuildings} ml={-1} mr={2} />
-                            <TagLabel fontSize="lg">Client</TagLabel>
+                            <Icon h={6} w={6} as={BiMap} ml={-1} mr={2} />
+                            <TagLabel fontSize="lg">Location</TagLabel>
                           </Tag>
-                          {data.project.project_clients.tag && (
-                            <Badge colorScheme="blue">
-                              {data.project.project_clients.tag}
-                            </Badge>
-                          )}
-                        </HStack>
+                          <AspectRatio
+                            ratio={{ base: 1, md: 16 / 9 }}
+                            maxW="100%"
+                            mb={4}
+                            ml={1}
+                            mt={4}
+                          >
+                            <iframe
+                              title={`Project ${data.project.name} location`}
+                              src={data.project.location}
+                              style={{
+                                border: "none",
+                                height: "100%",
+                                width: "100%",
+                                borderRadius: "0.375rem",
+                                color: "#f3f3f3",
+                              }}
+                              allowFullScreen={false}
+                              loading="lazy"
+                              referrerPolicy="no-referrer-when-downgrade"
+                            />
+                          </AspectRatio>
+                        </Box>
+                      )}
+                      {data.project.project_clients && (
+                        <Box>
+                          <HStack alignItems="center">
+                            <Tag size="lg" borderRadius="full">
+                              <Icon
+                                h={6}
+                                w={6}
+                                as={BiBuildings}
+                                ml={-1}
+                                mr={2}
+                              />
+                              <TagLabel fontSize="lg">Client</TagLabel>
+                            </Tag>
+                            {data.project.project_clients.tag && (
+                              <Badge colorScheme="blue">
+                                {data.project.project_clients.tag}
+                              </Badge>
+                            )}
+                          </HStack>
 
-                        <Text pl="1" pt="2" fontSize="xl">
-                          {data.project.project_clients.name}
-                        </Text>
-                      </Box>
-                    )}
+                          <Text pl="1" pt="2" fontSize="xl">
+                            {data.project.project_clients.name}
+                          </Text>
+                        </Box>
+                      )}
 
-                    {data.project.status && (
-                      <Box>
-                        <HStack alignItems="center">
+                      {data.project.status && (
+                        <Box>
+                          <HStack alignItems="center">
+                            <Tag size="lg" borderRadius="full">
+                              <Icon
+                                h={6}
+                                w={6}
+                                as={AiOutlineCheckCircle}
+                                ml={-1}
+                                mr={2}
+                              />
+                              <TagLabel fontSize="lg">Status</TagLabel>
+                            </Tag>
+                            {data.project.completed ? (
+                              <Badge colorScheme="green">completed</Badge>
+                            ) : (
+                              <Badge colorScheme="yellow">in progress</Badge>
+                            )}
+                          </HStack>
+                          <Text pl="1" pt="2" fontSize="xl">
+                            {data.project.status}
+                          </Text>
+                        </Box>
+                      )}
+
+                      {data.project.project_categories && (
+                        <Box>
+                          <HStack alignItems="center">
+                            <Tag size="lg" borderRadius="full">
+                              <Icon
+                                h={6}
+                                w={6}
+                                as={AiOutlineTag}
+                                ml={-1}
+                                mr={2}
+                              />
+                              <TagLabel fontSize="lg">Category</TagLabel>
+                            </Tag>
+                            {data.project.project_categories.tag && (
+                              <Badge colorScheme="blue">
+                                {data.project.project_categories.name}
+                              </Badge>
+                            )}
+                          </HStack>
+
+                          <Text pl="1" pt="2" fontSize="xl">
+                            {data.project.project_categories.name}
+                          </Text>
+                        </Box>
+                      )}
+
+                      {data.project.cost && (
+                        <Box>
                           <Tag size="lg" borderRadius="full">
                             <Icon
                               h={6}
                               w={6}
-                              as={AiOutlineCheckCircle}
+                              as={AiOutlineDollarCircle}
                               ml={-1}
                               mr={2}
                             />
-                            <TagLabel fontSize="lg">Status</TagLabel>
+                            <TagLabel fontSize="lg">Cost</TagLabel>
                           </Tag>
-                          {data.project.completed ? (
-                            <Badge colorScheme="green">completed</Badge>
-                          ) : (
-                            <Badge colorScheme="yellow">in progress</Badge>
-                          )}
-                        </HStack>
-                        <Text pl="1" pt="2" fontSize="xl">
-                          {data.project.status}
-                        </Text>
-                      </Box>
-                    )}
+                          <Text pl="1" pt="2" fontSize="xl">
+                            {data.project.cost}
+                          </Text>
+                        </Box>
+                      )}
 
-                    {data.project.project_categories && (
-                      <Box>
-                        <HStack alignItems="center">
+                      {data.project.project_designers && (
+                        <Box>
+                          <Tag size="lg" borderRadius="full">
+                            <Avatar
+                              size="xs"
+                              name={data.project.project_designers.initials}
+                              ml={-1}
+                              mr={2}
+                            />
+                            <TagLabel fontSize="lg">Designer</TagLabel>
+                          </Tag>
+                          <Text pl="1" pt="2" fontSize="xl">
+                            {data.project.project_designers.name}
+                          </Text>
+                        </Box>
+                      )}
+
+                      {data.project.description && (
+                        <Box>
                           <Tag size="lg" borderRadius="full">
                             <Icon
                               h={6}
                               w={6}
-                              as={AiOutlineTag}
+                              as={AiOutlineFileText}
                               ml={-1}
                               mr={2}
                             />
-                            <TagLabel fontSize="lg">Category</TagLabel>
+                            <TagLabel fontSize="lg">Description</TagLabel>
                           </Tag>
-                          {data.project.project_categories.tag && (
-                            <Badge colorScheme="blue">
-                              {data.project.project_categories.name}
-                            </Badge>
-                          )}
-                        </HStack>
-
-                        <Text pl="1" pt="2" fontSize="xl">
-                          {data.project.project_categories.name}
-                        </Text>
-                      </Box>
-                    )}
-
-                    {data.project.cost && (
-                      <Box>
-                        <Tag size="lg" borderRadius="full">
-                          <Icon
-                            h={6}
-                            w={6}
-                            as={AiOutlineDollarCircle}
-                            ml={-1}
-                            mr={2}
-                          />
-                          <TagLabel fontSize="lg">Cost</TagLabel>
-                        </Tag>
-                        <Text pl="1" pt="2" fontSize="xl">
-                          {data.project.cost}
-                        </Text>
-                      </Box>
-                    )}
-
-                    {data.project.project_designers && (
-                      <Box>
-                        <Tag size="lg" borderRadius="full">
-                          <Avatar
-                            size="xs"
-                            name={data.project.project_designers.initials}
-                            ml={-1}
-                            mr={2}
-                          />
-                          <TagLabel fontSize="lg">Designer</TagLabel>
-                        </Tag>
-                        <Text pl="1" pt="2" fontSize="xl">
-                          {data.project.project_designers.name}
-                        </Text>
-                      </Box>
-                    )}
-
-                    {data.project.description && (
-                      <Box>
-                        <Tag size="lg" borderRadius="full">
-                          <Icon
-                            h={6}
-                            w={6}
-                            as={AiOutlineFileText}
-                            ml={-1}
-                            mr={2}
-                          />
-                          <TagLabel fontSize="lg">Description</TagLabel>
-                        </Tag>
-                        <Text
-                          pl="1"
-                          pt="2"
-                          fontSize="xl"
-                          textAlign={{ base: "start", sm: "justify" }}
-                        >
-                          <span
-                            dangerouslySetInnerHTML={{
-                              __html: data.project.description,
-                            }}
-                          />
-                        </Text>
-                      </Box>
-                    )}
-                  </Stack>
-                </CardBody>
-              </Card>
+                          <Text
+                            pl="1"
+                            pt="2"
+                            fontSize="xl"
+                            textAlign={{ base: "start", sm: "justify" }}
+                          >
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: data.project.description,
+                              }}
+                            />
+                          </Text>
+                        </Box>
+                      )}
+                    </Stack>
+                  </CardBody>
+                </Card>
+              </motion.div>
             </>
           ) : (
             <Card rounded="md" boxShadow="xl" w={"full"}>

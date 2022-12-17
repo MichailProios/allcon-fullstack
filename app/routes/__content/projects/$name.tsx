@@ -419,6 +419,7 @@ export default function Project() {
                         <SwiperSlide key={index}>
                           <motion.div
                             whileHover={{ scale: 1.01, cursor: "pointer" }}
+                            whileTap={{ scale: 0.99 }}
                             transition={{
                               type: "tween",
                               duration: 0.1,

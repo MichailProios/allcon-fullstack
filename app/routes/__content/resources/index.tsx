@@ -68,7 +68,7 @@ export const loader: LoaderFunction = async ({ request }: any) => {
 const Feature = ({ title, text, icon, url }: FeatureProps) => {
   return (
     <motion.div
-      whileHover={{ scale: 1.01 }}
+      whileHover={{ y: -5 }}
       transition={{
         type: "tween",
         duration: 0.2,

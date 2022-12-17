@@ -98,7 +98,7 @@ export default function Brochures() {
                   }}
                 >
                   <motion.div
-                    whileHover={{ scale: 1.01 }}
+                    whileHover={{ y: -5 }}
                     transition={{
                       type: "tween",
                       duration: 0.2,

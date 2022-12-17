@@ -175,7 +175,7 @@ function NavbarHeader({
         maxW={"1600px"}
       >
         <HStack spacing="20px">
-          <NavLink to={"/"} prefetch="render" rel="prefetch" draggable={false}>
+          <NavLink to={"/"} draggable={false}>
             <Box
               sx={{
                 display: "flex",
@@ -221,12 +221,7 @@ function NavbarHeader({
             {navigationLinks.map((link, index) => (
               <Box key={index}>
                 {!link.subLinks && (
-                  <NavLink
-                    key={index}
-                    to={link.url}
-                    draggable="false"
-                    prefetch="render"
-                  >
+                  <NavLink key={index} to={link.url} draggable="false">
                     {({ isActive }) => (
                       <Button
                         onClick={onClose}
@@ -467,12 +462,7 @@ function NavbarDrawer({
       <DrawerContent>
         <DrawerCloseButton />
         <DrawerHeader p={2} alignSelf="center">
-          <NavLink
-            to={"/"}
-            onClick={onDrawerClose}
-            prefetch="render"
-            rel="prefetch"
-          >
+          <NavLink to={"/"} onClick={onDrawerClose}>
             <Image
               objectFit="contain"
               h={50}
@@ -490,12 +480,7 @@ function NavbarDrawer({
             {navigationLinks.map((link, index) => (
               <Box key={index} w="full">
                 {!link.subLinks && (
-                  <NavLink
-                    key={index}
-                    to={link.url}
-                    draggable="false"
-                    prefetch="render"
-                  >
+                  <NavLink key={index} to={link.url} draggable="false">
                     {({ isActive }) => (
                       <Button
                         onClick={onDrawerClose}
@@ -694,7 +679,7 @@ function NavbarPopover({ link, index }: any) {
       orientation="vertical"
     >
       <PopoverAnchor>
-        <NavLink key={index} to={link.url} draggable="false" prefetch="render">
+        <NavLink key={index} to={link.url}>
           {({ isActive }) => (
             <Button
               onClick={onClose}
@@ -756,7 +741,6 @@ function SubLinks({ link, index, onDrawerClose }: any) {
           key={index}
           to={link.url}
           draggable="false"
-          prefetch="render"
           style={{ width: "100%", marginRight: "-40px" }}
         >
           {({ isActive }) => (
@@ -798,7 +782,6 @@ function SubLinks({ link, index, onDrawerClose }: any) {
               to={subLink.url}
               borderRadius="none"
               fontWeight="normal"
-              prefetch="intent"
               // fontSize="md"
               onClick={onDrawerClose}
             >

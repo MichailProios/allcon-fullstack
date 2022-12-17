@@ -14,12 +14,20 @@ interface LayoutProps {
 }
 
 const navigationLinks = [
-  { label: "About", url: "/about" },
+  {
+    label: "About",
+    url: "/about",
+    subLinks: [
+      { label: "About Us", url: "/about" },
+      { label: "Executives", url: "/about/executives" },
+      { label: "History", url: "/about/history" },
+      { label: "Safety", url: "/about/safety" },
+    ],
+  },
   {
     label: "Blog",
     url: "/blog",
   },
-
   {
     label: "Projects",
     url: "projects",

@@ -264,7 +264,7 @@ export default function Index() {
             w="full"
           >
             <motion.div
-              whileHover={{ scale: 1.01 }}
+              whileHover={{ y: -5 }}
               transition={{
                 type: "tween",
                 duration: 0.2,
@@ -288,7 +288,6 @@ export default function Index() {
                           <ErrorBoundary FallbackComponent={ErrorFallback}>
                             <RemixImage
                               image={data.images.companyThumbnail}
-                              // alt="Company Group Picture"
                               roundedTopLeft="md"
                               roundedTopRight="md"
                               w="full"
@@ -318,7 +317,7 @@ export default function Index() {
             </motion.div>
 
             <motion.div
-              whileHover={{ scale: 1.01 }}
+              whileHover={{ y: -5 }}
               transition={{
                 type: "tween",
                 duration: 0.2,
@@ -372,7 +371,7 @@ export default function Index() {
             </motion.div>
 
             <motion.div
-              whileHover={{ scale: 1.01 }}
+              whileHover={{ y: -5 }}
               transition={{
                 type: "tween",
                 duration: 0.2,

@@ -44,8 +44,8 @@ const Index = () => {
       <VStack spacing="26px" w="full">
         <Heading textAlign="center">Blog Posts</Heading>
 
-        <AnimatePresence>
-          <Box w="full">
+        <Box w="full">
+          <AnimatePresence>
             {postsData.map((post, index) => (
               <RenderIfVisible key={index} defaultHeight={1000}>
                 <motion.div
@@ -196,8 +196,8 @@ const Index = () => {
                 </motion.div>
               </RenderIfVisible>
             ))}
-          </Box>
-        </AnimatePresence>
+          </AnimatePresence>
+        </Box>
       </VStack>
     </Container>
   );

@@ -1,4 +1,4 @@
-import { extendTheme, useColorModeValue } from "@chakra-ui/react";
+import { extendTheme } from "@chakra-ui/react";
 
 const colors = {
   primary: {
@@ -31,8 +31,6 @@ const config = {
   initialColorMode: "light",
 };
 
-const components = {};
-
 const styles = {
   global: (props) => ({
     "html, body": {
@@ -41,6 +39,6 @@ const styles = {
   }),
 };
 
-const theme = extendTheme({ config, colors, styles, components, breakpoints });
+const theme = extendTheme({ config, colors, styles, breakpoints });
 
 export default theme;

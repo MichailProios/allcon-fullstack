@@ -1,35 +1,16 @@
 import {
   Box,
   Heading,
-  Text,
   Container,
-  SlideFade,
   VStack,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbSeparator,
-  SimpleGrid,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Icon,
-  Skeleton,
-  Button,
-  Flex,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
-import { WarningTwoIcon } from "@chakra-ui/icons";
 import { createServerClient } from "~/utils/supabase.server";
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import {
-  Link,
-  useLoaderData,
-  useMatches,
-  useOutletContext,
-} from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - Brochures`,
@@ -73,8 +54,6 @@ export const loader: LoaderFunction = async ({ request, params }: any) => {
 export default function Brochures() {
   const loaderData = useLoaderData();
 
-  console.log(loaderData);
-
   return (
     <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
       <Breadcrumb display={{ base: "none", md: "flex" }}>
@@ -100,13 +79,13 @@ export default function Brochures() {
       <VStack spacing="26px">
         <Heading textAlign="center">{loaderData?.name}</Heading>
         <Box rounded="md" w="full" h="80vh">
-          {/* <iframe
+          <iframe
             title={loaderData?.name}
             src={`https://docs.google.com/viewer?url=${loaderData?.data?.publicUrl}&embedded=true`}
             height="100%"
             width="100%"
             style={{ borderRadius: "0.375rem" }}
-          /> */}
+          />
         </Box>
       </VStack>
     </Container>

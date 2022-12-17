@@ -3,7 +3,6 @@ import {
   Box,
   Heading,
   VStack,
-  SlideFade,
   Image,
   AspectRatio,
   Spacer,
@@ -12,15 +11,13 @@ import {
   Grid,
   Text,
 } from "@chakra-ui/react";
-
 import { Link } from "@remix-run/react";
 import { postsData } from "~/__temp/data";
 import { BsHeart } from "react-icons/bs";
 import { FaRegComment } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
 import { json } from "@remix-run/node";
-import type { LoaderFunction, MetaFunction } from "@remix-run/node";
-
+import type { LoaderFunction } from "@remix-run/node";
 import RenderIfVisible from "react-render-if-visible";
 import { createServerClient } from "~/utils/supabase.server";
 
@@ -43,7 +40,6 @@ export const loader: LoaderFunction = async ({ request }: any) => {
 
 const Index = () => {
   return (
-    // <SlideFade in={true} unmountOnExit reverse delay={0.05}>
     <Container maxW="1200px" px={{ base: 5, md: 8 }} py={16} mx="auto">
       <VStack spacing="26px" w="full">
         <Heading textAlign="center">Blog Posts</Heading>
@@ -204,7 +200,6 @@ const Index = () => {
         </AnimatePresence>
       </VStack>
     </Container>
-    // </SlideFade>
   );
 };
 

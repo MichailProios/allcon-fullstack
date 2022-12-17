@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import {
   Container,
   FormControl,
@@ -11,27 +11,16 @@ import {
   VStack,
   Center,
   InputGroup,
-  InputRightElement,
   Checkbox,
   FormErrorMessage,
-  Textarea,
   Divider,
   Text,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  SlideFade,
-  HStack,
-  Box,
-  useBreakpointValue,
   useToast,
   ButtonGroup,
   Flex,
 } from "@chakra-ui/react";
 import { SiMicrosoftazure } from "react-icons/si";
 import { redirect, json } from "@remix-run/node";
-
 import { createServerClient } from "~/utils/supabase.server";
 import type { SupabaseClient } from "@supabase/auth-helpers-remix";
 import type { Database } from "~/utils/db_types";
@@ -44,10 +33,6 @@ import {
 } from "remix-validated-form";
 import { withZod } from "@remix-validated-form/with-zod";
 import { z } from "zod";
-
-// import * as auth from "app/utils/auth.server";
-// import * as cookie from "app/utils/cookie.server";
-
 import { Link, useActionData, useOutletContext } from "@remix-run/react";
 import { FcGoogle } from "react-icons/fc";
 
@@ -204,7 +189,6 @@ function CheckBox(props: any) {
 
 function SubmitButton(props: any) {
   const isSubmitting = useIsSubmitting();
-  const actionData = useActionData();
 
   return (
     <Button {...props} isLoading={isSubmitting} loadingText="Creating Account">
@@ -276,7 +260,6 @@ export default function Register() {
   }, [actionData, toast]);
 
   return (
-    // <SlideFade in={true} unmountOnExit reverse delay={0.05}>
     <Container maxW="7xl" p={{ base: 1, md: 6 }}>
       <Center
         as={ValidatedForm}
@@ -385,6 +368,5 @@ export default function Register() {
         </Stack>
       </Center>
     </Container>
-    // </SlideFade>
   );
 }

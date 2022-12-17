@@ -1,47 +1,16 @@
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import {
   Text,
-  Button,
-  Center,
-  Image,
-  SlideFade,
-  ScaleFade,
   Box,
-  HStack,
   VStack,
-  Icon,
   Container,
   Heading,
-  Card,
-  CardBody,
-  SimpleGrid,
-  CardFooter,
-  Input,
-  InputLeftElement,
-  InputGroup,
-  Flex,
-  Stack,
-  Select,
-  useColorMode,
-  useColorModeValue,
   Avatar,
   Divider,
 } from "@chakra-ui/react";
-import { ImQuotesLeft, ImQuotesRight } from "react-icons/im";
-
-// import { useDataRefresh } from "remix-utils";
-import { BiBuildings } from "react-icons/bi";
-
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
-
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { useWindowDimensions } from "~/utils/hooks";
-
-// import * as auth from "app/utils/auth.server";
-// import { useTransition } from "@remix-run/react";
-// import Slider from "react-slick";
-import { Search2Icon } from "@chakra-ui/icons";
 import { testimonials } from "~/utils/testimonials";
 import { createServerClient } from "~/utils/supabase.server";
 

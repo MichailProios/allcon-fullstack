@@ -1,26 +1,15 @@
-import {
-  Fragment,
-  Suspense,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import {
   Text,
   Button,
-  Center,
-  Img,
   SlideFade,
   ScaleFade,
   Box,
-  HStack,
   VStack,
   Icon,
   Container,
   Heading,
   Card,
-  CardBody,
   SimpleGrid,
   CardFooter,
   Input,
@@ -36,39 +25,22 @@ import {
   Badge,
   Tabs,
   TabList,
-  TabPanels,
   Tab,
-  TabPanel,
   InputRightElement,
   Kbd,
-  Progress,
   useToast,
-  useColorModeValue,
-  Grid,
-  GridItem,
-  useBreakpoint,
   Menu,
   MenuButton,
   MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
   useDisclosure,
   useOutsideClick,
-  filter,
-  Image,
 } from "@chakra-ui/react";
-import { useBreakpointValue } from "@chakra-ui/react";
-
-import { animateScroll as scroll } from "react-scroll";
 
 import { AnimatePresence, motion } from "framer-motion";
 
 import RenderIfVisible from "react-render-if-visible";
 
-import { redirect, json } from "@remix-run/node";
+import { json } from "@remix-run/node";
 
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 
@@ -78,12 +50,7 @@ import * as cookie from "app/utils/cookie.server";
 import {
   useLoaderData,
   Link,
-  useSubmit,
-  Form,
-  useBeforeUnload,
-  useTransition,
   useFetcher,
-  useMatches,
   useSearchParams,
 } from "@remix-run/react";
 
@@ -95,12 +62,10 @@ import {
   Search2Icon,
 } from "@chakra-ui/icons";
 // import projects from "~/utils/projects";
-import { useFirstRender, useLoading } from "~/utils/hooks";
-import { BiCategory, BiFilter } from "react-icons/bi";
+import { useFirstRender } from "~/utils/hooks";
+import { BiCategory } from "react-icons/bi";
 
 import { createServerClient } from "~/utils/supabase.server";
-import type { SupabaseClient } from "@supabase/auth-helpers-remix";
-import type { Database } from "~/utils/db_types";
 import RemixImage from "~/components/RemixImage";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "~/components/ErrorFallback";
@@ -331,10 +296,6 @@ export default function Index() {
           duration: null,
           isClosable: false,
           position: "bottom",
-          // containerStyle: {
-          //   mt: "80px",
-          //   mr: "10px",
-          // },
         });
       } else if (toastIdRef.current) {
         toast.update(toastIdRef.current, {
@@ -344,10 +305,6 @@ export default function Index() {
           duration: null,
           isClosable: false,
           position: "bottom",
-          // containerStyle: {
-          //   mt: "80px",
-          //   mr: "10px",
-          // },
         });
       }
       const formData = new FormData();

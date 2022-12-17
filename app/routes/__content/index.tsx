@@ -1,10 +1,7 @@
-import { Suspense, Fragment, useRef, useState } from "react";
+import { Suspense, Fragment } from "react";
 import {
   Text,
   Button,
-  Center,
-  Img,
-  SlideFade,
   Box,
   HStack,
   VStack,
@@ -12,37 +9,30 @@ import {
   AspectRatio,
   Skeleton,
   useColorModeValue,
-  ButtonGroup,
   Stack,
   Container,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   Flex,
   Heading,
   Divider,
-  IconButton,
   useBreakpointValue,
   Avatar,
-  Image,
-  Spinner,
-  Fade,
 } from "@chakra-ui/react";
 // import { useDataRefresh } from "remix-utils";
 import { BiBuildings, BiBook } from "react-icons/bi";
 
-import type { LoaderFunction, MetaFunction } from "@remix-run/node";
+import type { LoaderFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { useWindowDimensions } from "~/utils/hooks";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFade, Autoplay, Pagination, Scrollbar, Lazy } from "swiper";
+import { EffectFade, Autoplay, Pagination, Lazy } from "swiper";
 
 import { useInView } from "react-intersection-observer";
-import { ArrowForwardIcon, LinkIcon } from "@chakra-ui/icons";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { ImQuotesRight } from "react-icons/im";
 import { testimonials } from "~/utils/testimonials";
 import { ClientOnly } from "remix-utils/build/react/client-only";
@@ -53,13 +43,8 @@ import { createServerClient } from "~/utils/supabase.server";
 
 export const loader: LoaderFunction = async ({ request }: any) => {
   try {
-    // await auth.protectedRoute(request);
-
     const lupton =
       "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4aee4395-0887-4070-980f-427a13fdb400/hq";
-
-    // const elwood =
-    //   "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c0ce0238-47bb-4d18-f278-79a57d207b00/hq";
 
     const policeStation =
       "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/96f08191-f50b-4359-f535-6c84ab162000/hq";
@@ -256,13 +241,10 @@ export default function Index() {
                   Learn More
                 </Button>
               </Stack>
-              {/* </SlideFade> */}
             </VStack>
           )}
         </ClientOnly>
       </Box>
-
-      {/* </Fade> */}
 
       <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={20}>
         <Stack direction={{ base: "column", xmd: "row" }} spacing={4} w="full">
@@ -400,7 +382,6 @@ export default function Index() {
                         <ErrorBoundary FallbackComponent={ErrorFallback}>
                           <RemixImage
                             image={data.images.officeThumbnail}
-                            // alt="Company Group Picture"
                             roundedTopLeft="md"
                             roundedTopRight="md"
                             w="full"

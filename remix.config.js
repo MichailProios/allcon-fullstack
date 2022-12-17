@@ -5,12 +5,5 @@ module.exports = {
   // assetsBuildDirectory: "public/build",
   // serverBuildPath: "build/index.js",
   // publicPath: "/build/",
-  serverDependenciesToBundle: [
-    // "@formkit/auto-animate",
-    // "@formkit/auto-animate/react",
-    "swiper",
-    "swiper/react",
-    "ssr-window",
-    "dom7",
-  ],
+  serverDependenciesToBundle: ["swiper", "swiper/react", "ssr-window", "dom7"],
 };

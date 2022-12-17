@@ -1,17 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { withEmotionCache } from "@emotion/react";
-import {
-  ChakraProvider,
-  ColorModeScript,
-  cookieStorageManagerSSR,
-  localStorageManager,
-} from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { createBrowserClient } from "@supabase/auth-helpers-remix";
 import { createServerClient } from "~/utils/supabase.server";
 import type { LoaderFunction } from "@remix-run/node";
 import { useCatch, useFetcher, useLoaderData } from "@remix-run/react";
 import { redirect, json } from "@remix-run/node";
-
 import {
   Links,
   LiveReload,
@@ -21,7 +15,8 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import type { MetaFunction, LinksFunction } from "@remix-run/node";
-
+import type { SupabaseClient, Session } from "@supabase/auth-helpers-remix";
+import type { Database } from "~/utils/db_types";
 import { ServerStyleContext, ClientStyleContext } from "app/styles/context";
 
 import Layout from "app/components/Layout";
@@ -29,13 +24,7 @@ import Catch from "app/components/Catch";
 import Error from "app/components/Error";
 
 import theme from "app/styles/theme";
-
 import global from "app/styles/global.css";
-
-import swiperStyles from "app/styles/swiper.css";
-import type { SupabaseClient, Session } from "@supabase/auth-helpers-remix";
-import type { Database } from "~/utils/db_types";
-import type { LoaderArgs } from "@remix-run/node";
 
 export type TypedSupabaseClient = SupabaseClient<Database>;
 export type MaybeSession = Session | null;
@@ -66,7 +55,8 @@ export const links: LinksFunction = () => {
   return [
     {
       rel: "stylesheet",
-      href: swiperStyles,
+      type: "text/css",
+      href: "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css",
     },
 
     {
@@ -109,7 +99,7 @@ export const loader: LoaderFunction = async ({ request }: any) => {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { data: profile, error } = await supabase
+  const { data: profile } = await supabase
     .from("profiles")
     .select()
     .eq("id", user?.id)
@@ -134,17 +124,13 @@ const Document = withEmotionCache(
     const serverStyleData = useContext(ServerStyleContext);
     const clientStyleData = useContext(ClientStyleContext);
 
-    // Only executed on client
     useEffect(() => {
-      // re-link sheet container
       emotionCache.sheet.container = document.head;
-      // re-inject tags
       const tags = emotionCache.sheet.tags;
       emotionCache.sheet.flush();
       tags.forEach((tag) => {
         (emotionCache.sheet as any)._insertTag(tag);
       });
-      // reset cache to reapply global styles
       clientStyleData?.reset();
     }, []);
 

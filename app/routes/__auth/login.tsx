@@ -1,4 +1,4 @@
-import { useState, useEffect, Context } from "react";
+import { useState, useEffect } from "react";
 import {
   Container,
   FormControl,
@@ -12,17 +12,14 @@ import {
   Center,
   InputGroup,
   InputRightElement,
-  Checkbox,
   FormErrorMessage,
   Divider,
   Text,
-  SlideFade,
   ButtonGroup,
   Flex,
   useToast,
 } from "@chakra-ui/react";
 import { SiMicrosoftazure } from "react-icons/si";
-
 import type { LoaderFunction } from "@remix-run/node";
 import {
   ValidatedForm,
@@ -32,15 +29,9 @@ import {
 } from "remix-validated-form";
 import { withZod } from "@remix-validated-form/with-zod";
 import { z } from "zod";
-
 import { redirect, json } from "@remix-run/node";
-
-// import * as auth from "app/utils/auth.server";
-// import * as cookie from "app/utils/cookie.server";
-
 import { Link, useActionData, useOutletContext } from "@remix-run/react";
 import { FcGoogle } from "react-icons/fc";
-
 import { createServerClient } from "~/utils/supabase.server";
 import type { SupabaseClient } from "@supabase/auth-helpers-remix";
 import type { Database } from "~/utils/db_types";
@@ -84,9 +75,6 @@ export async function action({ request }: { request: Request }) {
 export const loader: LoaderFunction = async ({ request }: any) => {
   const response = new Response();
   const supabase = createServerClient({ request, response });
-
-  // const url = new URL(request.url);
-  // const accessToken = url.searchParams.get("auth");
 
   const {
     data: { session },
@@ -162,22 +150,6 @@ function PasswordTextField(props: any) {
   );
 }
 
-// function CheckBox(props: any) {
-//   const { getInputProps } = useField(props.name);
-//   const isSubmitting = useIsSubmitting();
-
-//   return (
-//     <Checkbox
-//       {...props}
-//       {...getInputProps()}
-//       value={"yes"}
-//       readOnly={isSubmitting}
-//     >
-//       {props.label}
-//     </Checkbox>
-//   );
-// }
-
 function SubmitButton(props: any) {
   const isSubmitting = useIsSubmitting();
 
@@ -251,7 +223,6 @@ export default function Login() {
   }, [actionData, toast]);
 
   return (
-    // <SlideFade in={true} unmountOnExit reverse delay={0.05}>
     <Container maxW="7xl" p={{ base: 1, md: 10 }}>
       <Center
         as={ValidatedForm}
@@ -291,13 +262,6 @@ export default function Login() {
               >
                 Continue with Microsoft
               </Button>
-              {/* <Button
-                  w={"full"}
-                  variant={"solid"}
-                  leftIcon={<FaFacebook color="#4968ad" />}
-                >
-                  Continue with Facebook
-                </Button> */}
             </ButtonGroup>
 
             <Flex w="full" justifyContent="stretch" alignItems="center" gap={2}>
@@ -331,7 +295,6 @@ export default function Login() {
               >
                 Forgot Password?
               </Text>
-              {/* </Flex> */}
 
               <SubmitButton
                 w="100%"

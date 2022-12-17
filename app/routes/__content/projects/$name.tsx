@@ -1,7 +1,6 @@
 import { Suspense, useCallback, useRef, useEffect, useState } from "react";
 import {
   Text,
-  SlideFade,
   Box,
   HStack,
   VStack,
@@ -20,21 +19,14 @@ import {
   AspectRatio,
   Tag,
   TagLabel,
-  TagLeftIcon,
   Badge,
   useBreakpointValue,
   useDisclosure,
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
-  ModalCloseButton,
   Fade,
-  Tooltip,
-  useBreakpoint,
-  Image,
   Spinner,
   Breadcrumb,
   BreadcrumbItem,
@@ -48,14 +40,11 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
-  EffectFade,
   Thumbs,
   Lazy,
   FreeMode,
   Pagination,
   Navigation,
-  Scrollbar,
-  Mousewheel,
   Keyboard,
 } from "swiper";
 
@@ -90,7 +79,7 @@ import {
   AiOutlineTag,
 } from "react-icons/ai";
 import { BiBuildings, BiMap, BiExpand } from "react-icons/bi";
-import { useIsDocumentReady, useWindowDimensions } from "~/utils/hooks";
+import { useWindowDimensions } from "~/utils/hooks";
 import { createServerClient } from "~/utils/supabase.server";
 import RemixImage from "~/components/RemixImage";
 import ErrorFallback from "~/components/ErrorFallback";

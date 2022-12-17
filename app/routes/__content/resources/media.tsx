@@ -1,7 +1,7 @@
-import { Box, Heading, Text, Container, SlideFade } from "@chakra-ui/react";
+import { Box, Heading, Text, Container } from "@chakra-ui/react";
 import { WarningTwoIcon } from "@chakra-ui/icons";
 
-import type { LoaderFunction, MetaFunction } from "@remix-run/node";
+import type { MetaFunction } from "@remix-run/node";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - Media`,

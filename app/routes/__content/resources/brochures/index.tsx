@@ -1,43 +1,24 @@
 import {
-  Box,
   Heading,
   Text,
   Container,
-  SlideFade,
   VStack,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbSeparator,
   SimpleGrid,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   Icon,
-  useToast,
-  Alert,
-  AlertTitle,
-  Button,
 } from "@chakra-ui/react";
-import { WarningTwoIcon } from "@chakra-ui/icons";
 import { createServerClient } from "~/utils/supabase.server";
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import {
-  Link,
-  useActionData,
-  useFetcher,
-  useLoaderData,
-  useMatches,
-  useOutletContext,
-} from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import RenderIfVisible from "react-render-if-visible";
 import { AnimatePresence, motion } from "framer-motion";
 
-import type { SupabaseClient } from "@supabase/auth-helpers-remix";
-import type { Database } from "~/utils/db_types";
-import { useEffect, useRef } from "react";
 import { VscFilePdf } from "react-icons/vsc";
 
 export const meta: MetaFunction = ({ params }: any) => ({

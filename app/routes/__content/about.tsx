@@ -3,30 +3,21 @@ import {
   Heading,
   VStack,
   Text,
-  SlideFade,
-  Img,
   Divider,
   Card,
   CardBody,
   Skeleton,
-  Stack,
-  Box,
   Avatar,
   AspectRatio,
-  Image,
 } from "@chakra-ui/react";
 import { ClientOnly } from "remix-utils";
-
-import { Suspense, Fragment, useEffect } from "react";
+import { Suspense, Fragment } from "react";
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import RenderIfVisible from "react-render-if-visible";
 import { AnimatePresence, motion } from "framer-motion";
-
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-
 import { profiles } from "~/utils/profiles";
-import { any } from "zod";
 import RemixImage from "~/components/RemixImage";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "~/components/ErrorFallback";
@@ -104,7 +95,6 @@ export default function About() {
                     <ErrorBoundary FallbackComponent={ErrorFallback}>
                       <RemixImage
                         image={data.allconStaff}
-                        // alt="Company Group Photo"
                         boxShadow="xl"
                         rounded="md"
                         userSelect="none"
@@ -158,7 +148,6 @@ export default function About() {
                                 roundedBottomLeft="md"
                                 objectFit="cover"
                                 image={value.image}
-                                // alt={`${value.title} profile`}
                                 boxShadow="xl"
                                 draggable={false}
                                 userSelect="none"

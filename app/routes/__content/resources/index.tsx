@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import type { ReactElement } from "react";
 import {
   Box,
   SimpleGrid,
@@ -9,21 +9,9 @@ import {
   Flex,
   VStack,
   Heading,
-  SlideFade,
   useColorModeValue,
-  Button,
-  Collapse,
-  Slide,
-  useBreakpointValue,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
 } from "@chakra-ui/react";
-import { Database } from "~/utils/db_types";
-
 import { motion } from "framer-motion";
-import { SupabaseClient } from "@supabase/auth-helpers-remix";
-
 import {
   FcGallery,
   FcFinePrint,
@@ -32,11 +20,10 @@ import {
   FcConferenceCall,
   FcDiploma1,
 } from "react-icons/fc";
-import { Link, useOutletContext } from "@remix-run/react";
-import { ArrowForwardIcon, LinkIcon } from "@chakra-ui/icons";
+import { Link } from "@remix-run/react";
+import { LinkIcon } from "@chakra-ui/icons";
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-
 import { createServerClient } from "~/utils/supabase.server";
 
 interface FeatureProps {
@@ -127,7 +114,6 @@ const Feature = ({ title, text, icon, url }: FeatureProps) => {
 };
 export default function Index() {
   return (
-    // <SlideFade in={true} unmountOnExit reverse delay={0.05}>
     <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
       <VStack spacing="26px">
         <Heading textAlign="center">Resources</Heading>
@@ -183,6 +169,5 @@ export default function Index() {
         </Box>
       </VStack>
     </Container>
-    // </SlideFade>
   );
 }

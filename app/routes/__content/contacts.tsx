@@ -9,21 +9,11 @@ import {
   Heading,
   useColorModeValue,
   VStack,
-  Flex,
-  Text,
   FormErrorMessage,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  SlideFade,
-  Checkbox,
-  ButtonGroup,
   Divider,
   Card,
   Icon,
-  useClipboard,
   useToast,
-  Box,
   CardBody,
   Tabs,
   TabList,
@@ -31,11 +21,9 @@ import {
   Tab,
   TabPanel,
   AspectRatio,
-  HStack,
 } from "@chakra-ui/react";
 import { useActionData } from "@remix-run/react";
 import { useEffect } from "react";
-
 import {
   ValidatedForm,
   validationError,
@@ -45,10 +33,7 @@ import {
 import { withZod } from "@remix-validated-form/with-zod";
 import { z } from "zod";
 import { json } from "@remix-run/node";
-import { PhoneIcon } from "@chakra-ui/icons";
-import { FaFax, FaLinkedin } from "react-icons/fa";
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
-
 import * as mailer from "~/utils/email.server";
 import { BiSend, BiMap, BiStreetView } from "react-icons/bi";
 import { createServerClient } from "~/utils/supabase.server";
@@ -201,8 +186,6 @@ function SubmitButton(props: any) {
 
 export default function Contacts() {
   const actionData = useActionData();
-
-  // const { onCopy } = useClipboard("+1-516-333-3344");
   const toast = useToast();
 
   useEffect(() => {
@@ -222,7 +205,6 @@ export default function Contacts() {
   }, [actionData, toast]);
 
   return (
-    // <SlideFade in={true} unmountOnExit reverse delay={0.05}>
     <>
       <Container
         maxW={"1200px"}
@@ -290,33 +272,11 @@ export default function Contacts() {
                   placeholder="Enter your message"
                   rounded="md"
                 />
-                {/* <VStack spacing={3} w="full"> */}
                 <SubmitButton
                   type="submit"
                   colorScheme="primary"
                   label="Send Message"
                 />
-                {/* <HStack w="full">
-                    <Divider />
-                    <Text userSelect="none">or</Text>
-                    <Divider />
-                  </HStack> */}
-                {/* <Stack direction={{ base: "column", md: "row" }}> */}
-                {/* <Button
-                      rightIcon={<PhoneIcon />}
-                      onClick={() =>
-                        window.open(
-                          "tel:+1-516-333-3339",
-                          "_blank"
-                          // "noopener,noreferrer,resizable"
-                        )
-                      }
-                      w="200px"
-                    >
-                      +1-516-333-3339
-                    </Button> */}
-                {/* </Stack> */}
-                {/* </VStack> */}
               </VStack>
             </VStack>
           </Stack>
@@ -336,13 +296,7 @@ export default function Contacts() {
 
                 <TabPanels>
                   <TabPanel p={0} pt={6}>
-                    <Tabs
-                      // isFitted
-                      isLazy
-                      size="sm"
-                      // orientation="vertical"
-                      variant="unstyled"
-                    >
+                    <Tabs isLazy size="sm" variant="unstyled">
                       <TabList
                         gap={2}
                         justifyContent="center"
@@ -507,6 +461,5 @@ export default function Contacts() {
         </VStack>
       </Container>
     </>
-    // </SlideFade>
   );
 }

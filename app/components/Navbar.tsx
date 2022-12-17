@@ -679,7 +679,7 @@ function NavbarPopover({ link, index }: any) {
       orientation="vertical"
     >
       <PopoverAnchor>
-        <NavLink key={index} to={link.url}>
+        <NavLink key={index} to={link.url} draggable={false}>
           {({ isActive }) => (
             <Button
               onClick={onClose}

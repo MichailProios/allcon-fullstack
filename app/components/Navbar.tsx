@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-import { Link, useFetcher } from "@remix-run/react";
+import { NavLink, Link, useFetcher, useLoaderData } from "@remix-run/react";
 
 import {
   Flex,
@@ -37,7 +37,6 @@ import {
 } from "@chakra-ui/react";
 
 import { RiAccountCircleFill } from "react-icons/ri";
-import { NavLink } from "@remix-run/react";
 
 import {
   ChevronDownIcon,
@@ -46,6 +45,7 @@ import {
   MoonIcon,
   SunIcon,
 } from "@chakra-ui/icons";
+
 import { IoLogOutOutline, IoPersonCircleOutline } from "react-icons/io5";
 
 const logo_full_dark =
@@ -75,22 +75,6 @@ export default function Navbar({ navigationLinks, context }: NavbarProps) {
     }
   }, [breakpoint, onClose]);
 
-  const [profile, setProfile] = useState({
-    authenticated: false,
-    values: {},
-  });
-
-  useEffect(() => {
-    if (context?.profile) {
-      setProfile({
-        authenticated: true,
-        values: { ...context?.profile },
-      });
-    } else {
-      setProfile({ authenticated: false, values: {} });
-    }
-  }, [context?.profile]);
-
   return (
     <>
       <NavbarHeader
@@ -101,8 +85,6 @@ export default function Navbar({ navigationLinks, context }: NavbarProps) {
         colorMode={colorMode}
         toggleColorMode={toggleColorMode}
         navigationLinks={navigationLinks}
-        context={context}
-        profile={profile}
       />
       <NavbarDrawer
         isDrawerOpen={isOpen}
@@ -112,8 +94,6 @@ export default function Navbar({ navigationLinks, context }: NavbarProps) {
         colorMode={colorMode}
         toggleColorMode={toggleColorMode}
         navigationLinks={navigationLinks}
-        profile={profile}
-        context={context}
       />
     </>
   );
@@ -136,8 +116,6 @@ interface NavbarHeaderProps {
     url: string;
     subLinks?: Array<SubLinksProps>;
   }[];
-  profile: any;
-  context: any;
 }
 
 function NavbarHeader({
@@ -148,8 +126,6 @@ function NavbarHeader({
   colorMode,
   toggleColorMode,
   navigationLinks,
-  profile,
-  context,
 }: NavbarHeaderProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -175,13 +151,15 @@ function NavbarHeader({
     });
   }
 
+  const loaderData = useLoaderData();
+
   return (
     <Flex
       h={16}
       alignItems={"center"}
       justifyContent={"center"}
       px={{ base: 4, sm: 6, lg: 8 }}
-      bg={useColorModeValue("gray.50", "gray.800")}
+      bg={useColorModeValue("gray.50", "gray.700")}
       position="sticky"
       top={0}
       zIndex={800}
@@ -300,11 +278,11 @@ function NavbarHeader({
                   variant="ghost"
                   onClick={onOpen}
                   leftIcon={
-                    profile.authenticated ? (
+                    loaderData?.profile ? (
                       <Avatar
                         size="xs"
-                        name={profile.values.full_name}
-                        src={profile.values.avatar_url}
+                        name={loaderData?.profile.full_name}
+                        src={loaderData?.profile.avatar_url}
                       />
                     ) : (
                       <Icon
@@ -317,12 +295,12 @@ function NavbarHeader({
                     )
                   }
                 >
-                  {profile.authenticated
-                    ? profile.values.full_name
+                  {loaderData?.profile
+                    ? loaderData?.profile.full_name
                     : "Join our Community"}
                 </Button>
               </PopoverAnchor>
-              {profile.authenticated ? (
+              {loaderData?.profile ? (
                 <PopoverContent w="full" boxShadow="lg" ref={ref}>
                   <PopoverBody w="full" p={0}>
                     <ButtonGroup
@@ -438,8 +416,6 @@ interface NavbarDrawerProps {
     url: string;
     subLinks?: Array<SubLinksProps>;
   }[];
-  profile: any;
-  context: any;
 }
 
 function NavbarDrawer({
@@ -450,8 +426,6 @@ function NavbarDrawer({
   colorMode,
   toggleColorMode,
   navigationLinks,
-  profile,
-  context,
 }: NavbarDrawerProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -477,6 +451,8 @@ function NavbarDrawer({
       isClosable: true,
     });
   }
+
+  const loaderData = useLoaderData();
 
   return (
     <Drawer
@@ -566,11 +542,11 @@ function NavbarDrawer({
                   variant="ghost"
                   onClick={onOpen}
                   leftIcon={
-                    profile.authenticated ? (
+                    loaderData?.profile ? (
                       <Avatar
                         size="xs"
-                        name={profile.values.full_name}
-                        src={profile.values.avatar_url}
+                        name={loaderData?.profile.full_name}
+                        src={loaderData?.profile.avatar_url}
                       />
                     ) : (
                       <Icon
@@ -583,12 +559,12 @@ function NavbarDrawer({
                     )
                   }
                 >
-                  {profile.authenticated
-                    ? profile.values.full_name
+                  {loaderData?.profile
+                    ? loaderData?.profile.full_name
                     : "Join our Community"}
                 </Button>
               </PopoverAnchor>
-              {profile.authenticated ? (
+              {loaderData?.profile ? (
                 <PopoverContent w="full" boxShadow="lg" ref={ref}>
                   <PopoverBody w="full" p={0}>
                     <ButtonGroup

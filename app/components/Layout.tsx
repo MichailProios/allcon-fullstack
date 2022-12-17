@@ -1,33 +1,12 @@
-import { useEffect, useState, useRef } from "react";
-
-import { motion, useAnimationControls } from "framer-motion";
-
 import type { ReactNode } from "react";
-
-import {
-  Fade,
-  Divider,
-  IconButton,
-  Box,
-  useDisclosure,
-  Show,
-  Tooltip,
-  Center,
-  Skeleton,
-  Spinner,
-  Progress,
-  VStack,
-} from "@chakra-ui/react";
-import Navbar from "app/components/Navbar";
+import { Fade, IconButton, Box, Tooltip } from "@chakra-ui/react";
 import { useWindowDimensions } from "app/utils/hooks";
 import { animateScroll as scroll } from "react-scroll";
 import { useScrollButtonVisibility } from "app/utils/hooks";
 import { ChevronUpIcon } from "@chakra-ui/icons";
-import { useMatches, useTransition } from "@remix-run/react";
+import { useMatches } from "@remix-run/react";
 import Footer from "~/components/Footer";
-
-import { useLoading } from "app/utils/hooks";
-import profiles from "~/utils/profiles";
+import Navbar from "app/components/Navbar";
 
 interface LayoutProps {
   children: ReactNode;

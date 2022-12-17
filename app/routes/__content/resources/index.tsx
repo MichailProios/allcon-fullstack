@@ -15,6 +15,9 @@ import {
   Collapse,
   Slide,
   useBreakpointValue,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
 import { Database } from "~/utils/db_types";
 
@@ -95,6 +98,7 @@ const Feature = ({ title, text, icon, url }: FeatureProps) => {
         position="relative"
         bgColor={useColorModeValue("white", "gray.700")}
         draggable={false}
+        h="full"
       >
         <Flex
           w={16}
@@ -129,8 +133,8 @@ export default function Index() {
         <Heading textAlign="center">Resources</Heading>
         <Box>
           <SimpleGrid
-            columns={{ base: 1, lg: 3 }}
-            spacing={{ base: 10, lg: 4 }}
+            columns={{ base: 1, md: 2, lg: 2, xl: 3 }}
+            spacing={{ base: 4, lg: 4 }}
           >
             <Feature
               icon={<Icon as={FcFinePrint} w={10} h={10} />}

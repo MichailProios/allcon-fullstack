@@ -121,10 +121,8 @@ export const loader: LoaderFunction = async ({ request }: any) => {
     SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY!,
   };
 
-  const cookies = request.headers.get("cookie") ?? "";
-
   return json(
-    { session, user, profile, env, supabase, cookies },
+    { session, user, profile, env, supabase },
     {
       headers: response.headers,
     }
@@ -165,16 +163,7 @@ const Document = withEmotionCache(
         </head>
 
         <body style={{ height: "100%", overflow: "overlay" }}>
-          <ChakraProvider
-            colorModeManager={
-              // cookieStorageManagerSSR(cookies)
-              // typeof cookies === "string" && cookieStorageManagerSSR(cookies)
-              localStorageManager
-            }
-            theme={theme}
-          >
-            {children}
-          </ChakraProvider>
+          <ChakraProvider theme={theme}>{children}</ChakraProvider>
           <ScrollRestoration />
           <Scripts />
           {process.env.NODE_ENV === "development" ? <LiveReload /> : null}
@@ -213,7 +202,7 @@ export default function App() {
 
   return (
     <Document>
-      <Layout context={{ supabase, session, user, profile }}>
+      <Layout>
         <Outlet context={{ supabase, session, user, profile }} />
       </Layout>
     </Document>

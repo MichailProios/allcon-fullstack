@@ -1,7 +1,7 @@
 import { useImage } from "react-image";
 import { Img } from "@chakra-ui/react";
 
-export default function RemixImage(props) {
+export default function RemixImage(props: any) {
   const { src } = useImage({
     srcList: props.image,
     useSuspense: true,

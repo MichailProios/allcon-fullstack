@@ -1,109 +1,109 @@
 export let projects = new Map();
 
 projects
-  // .set("suny-farmingdale-lupton-hall", {
-  //   sector: "public",
-  //   thumbnail:
-  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4aee4395-0887-4070-980f-427a13fdb400",
-  //   path: "/projects/suny-farmingdale-lupton-hall",
-  //   media: [
-  //     {
-  //       video:
-  //         "https://customer-sn71r1ndnen7y1an.cloudflarestream.com/1dbfa8cbc7b88a99a3ca4e0775b3aa29/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-sn71r1ndnen7y1an.cloudflarestream.com%2F1dbfa8cbc7b88a99a3ca4e0775b3aa29%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D36s%26height%3D600&startTime=36s",
-  //       aspectRatio: 16 / 9,
-  //       order: 1,
-  //     },
-  //     {
-  //       image:
-  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4aee4395-0887-4070-980f-427a13fdb400",
-  //       aspectRatio: 16 / 9,
-  //       order: 2,
-  //     },
-  //     {
-  //       image:
-  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/fb31d82d-de7b-4b78-7696-c25a404e7400",
-  //       aspectRatio: 9 / 16,
-  //       order: 3,
-  //     },
-  //     {
-  //       image:
-  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/1475bdbd-5d54-464e-e167-ed882dbafe00",
-  //       aspectRatio: 16 / 9,
-  //       order: 4,
-  //     },
-  //     {
-  //       image:
-  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/d5dbe854-6c92-4437-3ea1-10309d307900",
-  //       aspectRatio: 16 / 9,
-  //       order: 5,
-  //     },
-  //     {
-  //       image:
-  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e31c4ddd-e85a-4308-3c95-751fc2679200",
-  //       aspectRatio: 16 / 9,
-  //       order: 6,
-  //     },
-  //     {
-  //       image:
-  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e09765a8-fcf2-4d7e-80b0-0d7736683d00",
-  //       aspectRatio: 16 / 9,
-  //       order: 7,
-  //     },
-  //     {
-  //       image:
-  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5ed56c9f-3769-4491-df95-27c2d4f8b900",
-  //       aspectRatio: 16 / 9,
-  //       order: 8,
-  //     },
-  //     {
-  //       image:
-  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5e9f56da-0023-42fa-7520-397aac25de00",
-  //       aspectRatio: 16 / 9,
-  //       order: 9,
-  //     },
-  //     {
-  //       image:
-  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/509cc521-880b-41e0-2a05-b81da893f800",
-  //       aspectRatio: 16 / 9,
-  //       order: 10,
-  //     },
-  //     {
-  //       image:
-  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3e869efd-9729-41d4-505c-22378c842300",
-  //       aspectRatio: 16 / 9,
-  //       order: 11,
-  //     },
-  //     {
-  //       image:
-  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/8cfe2996-dd43-4959-922a-3b2cf0f18100",
-  //       aspectRatio: 16 / 9,
-  //       order: 12,
-  //     },
-  //     {
-  //       image:
-  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/8d34b330-ea19-458e-bf90-2f6cf6bf5b00",
-  //       aspectRatio: 16 / 9,
-  //       order: 13,
-  //     },
-  //     {
-  //       image:
-  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/7b6136cc-91ee-4ce6-9b8e-6e985405ae00",
-  //       aspectRatio: 16 / 9,
-  //       order: 14,
-  //     },
-  //   ],
-  //   name: "SUNY Farmingdale Lupton Hall",
-  //   location:
-  //     "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3656.175962884135!2d-73.43184257672124!3d40.75006397777022!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0xeb51b04102116aed!2sLupton%20Hall!5e1!3m2!1sen!2sus!4v1669330021063!5m2!1sen!2sus",
-  //   client: {
-  //     text: "State University Construction Fund",
-  //     tag: "SUNY",
-  //   },
-  //   status: { text: "The project was finished in 2022", completed: true },
-  //   cost: "$10,856,274.00",
-  //   designer: "Hoffmann Architects, Inc.",
-  //   description: `Allcon constructed a unique 90,000sf copper roof for Lupton Hall on the SUNY Farmingdale Campus. Our team proposed and helped develop a distinctive structural design during the initial removal and abatement stages of the project. The design included a high gauge metal framing system that bypassed the concrete deck and attached to the existing framing structure with blind bolts. The roof features a range of intricate craftsmanship, from the artfully fabricated dormers to the carefully sculpted gutter system designed to withstand wind speeds up to 126 mph. We ensured that the copper fabrication used a mix of machine fabrication for the panels to control costs, along with hand-crafted units for the fine intricate detail work. This project is a showcase of Allcon's capabilities and a signature piece of work for Farmingdale's dedication to excellence on campus.`,
-  // })
+  .set("suny-farmingdale-lupton-hall", {
+    sector: "public",
+    thumbnail:
+      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4aee4395-0887-4070-980f-427a13fdb400",
+    path: "/projects/suny-farmingdale-lupton-hall",
+    media: [
+      {
+        video:
+          "https://customer-sn71r1ndnen7y1an.cloudflarestream.com/1dbfa8cbc7b88a99a3ca4e0775b3aa29/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-sn71r1ndnen7y1an.cloudflarestream.com%2F1dbfa8cbc7b88a99a3ca4e0775b3aa29%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D36s%26height%3D600&startTime=36s",
+        aspectRatio: 16 / 9,
+        order: 1,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4aee4395-0887-4070-980f-427a13fdb400",
+        aspectRatio: 16 / 9,
+        order: 2,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/fb31d82d-de7b-4b78-7696-c25a404e7400",
+        aspectRatio: 9 / 16,
+        order: 3,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/1475bdbd-5d54-464e-e167-ed882dbafe00",
+        aspectRatio: 16 / 9,
+        order: 4,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/d5dbe854-6c92-4437-3ea1-10309d307900",
+        aspectRatio: 16 / 9,
+        order: 5,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e31c4ddd-e85a-4308-3c95-751fc2679200",
+        aspectRatio: 16 / 9,
+        order: 6,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e09765a8-fcf2-4d7e-80b0-0d7736683d00",
+        aspectRatio: 16 / 9,
+        order: 7,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5ed56c9f-3769-4491-df95-27c2d4f8b900",
+        aspectRatio: 16 / 9,
+        order: 8,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5e9f56da-0023-42fa-7520-397aac25de00",
+        aspectRatio: 16 / 9,
+        order: 9,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/509cc521-880b-41e0-2a05-b81da893f800",
+        aspectRatio: 16 / 9,
+        order: 10,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3e869efd-9729-41d4-505c-22378c842300",
+        aspectRatio: 16 / 9,
+        order: 11,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/8cfe2996-dd43-4959-922a-3b2cf0f18100",
+        aspectRatio: 16 / 9,
+        order: 12,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/8d34b330-ea19-458e-bf90-2f6cf6bf5b00",
+        aspectRatio: 16 / 9,
+        order: 13,
+      },
+      {
+        image:
+          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/7b6136cc-91ee-4ce6-9b8e-6e985405ae00",
+        aspectRatio: 16 / 9,
+        order: 14,
+      },
+    ],
+    name: "SUNY Farmingdale Lupton Hall",
+    location:
+      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3656.175962884135!2d-73.43184257672124!3d40.75006397777022!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0xeb51b04102116aed!2sLupton%20Hall!5e1!3m2!1sen!2sus!4v1669330021063!5m2!1sen!2sus",
+    client: {
+      text: "State University Construction Fund",
+      tag: "SUNY",
+    },
+    status: { text: "The project was finished in 2022", completed: true },
+    cost: "$10,856,274.00",
+    designer: "Hoffmann Architects, Inc.",
+    description: `Allcon constructed a unique 90,000sf copper roof for Lupton Hall on the SUNY Farmingdale Campus. Our team proposed and helped develop a distinctive structural design during the initial removal and abatement stages of the project. The design included a high gauge metal framing system that bypassed the concrete deck and attached to the existing framing structure with blind bolts. The roof features a range of intricate craftsmanship, from the artfully fabricated dormers to the carefully sculpted gutter system designed to withstand wind speeds up to 126 mph. We ensured that the copper fabrication used a mix of machine fabrication for the panels to control costs, along with hand-crafted units for the fine intricate detail work. This project is a showcase of Allcon's capabilities and a signature piece of work for Farmingdale's dedication to excellence on campus.`,
+  })
   .set("ogs-dot-elwood-ny-operation-facility", {
     sector: "public",
     thumbnail:

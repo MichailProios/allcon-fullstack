@@ -36,6 +36,9 @@ import {
   useBreakpoint,
   Image,
   Spinner,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -62,7 +65,7 @@ import { redirect } from "@remix-run/node";
 
 import { json } from "@remix-run/node";
 
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 // import { useWindowDimensions } from "~/utils/hooks";
 
 // import { GrNext, GrPrevious } from "react-icons/gr";
@@ -236,6 +239,18 @@ export default function Project() {
     // <SlideFade in={true} unmountOnExit reverse delay={0.05}>
     <>
       <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
+        <Breadcrumb display={{ base: "none", md: "flex" }}>
+          <BreadcrumbItem>
+            <BreadcrumbLink as={Link} to="/projects">
+              Projects
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbItem>
+            <BreadcrumbLink as={Link} to={`/projects/${data.project.url}`}>
+              {data.project.name}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
         <VStack spacing="26px" w="full">
           <Heading textAlign="center">{data.project.name}</Heading>
         </VStack>
@@ -310,7 +325,7 @@ export default function Project() {
                 thumbs={{ swiper: thumbsSwiper }}
                 ref={sliderRef}
                 spaceBetween={30}
-                loop={media.length > 1 ? true : false}
+                // loop={media.length > 1 ? true : false}
                 autoHeight
                 cssMode={cssModeBreakpoint}
               >
@@ -549,7 +564,7 @@ export default function Project() {
                     }}
                     ref={sliderRefLarge}
                     spaceBetween={30}
-                    loop={media.length > 1 ? true : false}
+                    // loop={media.length > 1 ? true : false}
                     autoHeight
                     cssMode={cssModeBreakpoint}
                   >

@@ -331,10 +331,10 @@ export default function Index() {
           duration: null,
           isClosable: false,
           position: "bottom",
-          containerStyle: {
-            mt: "80px",
-            mr: "10px",
-          },
+          // containerStyle: {
+          //   mt: "80px",
+          //   mr: "10px",
+          // },
         });
       } else if (toastIdRef.current) {
         toast.update(toastIdRef.current, {
@@ -344,10 +344,10 @@ export default function Index() {
           duration: null,
           isClosable: false,
           position: "bottom",
-          containerStyle: {
-            mt: "80px",
-            mr: "10px",
-          },
+          // containerStyle: {
+          //   mt: "80px",
+          //   mr: "10px",
+          // },
         });
       }
       const formData = new FormData();
@@ -906,9 +906,13 @@ export default function Index() {
                 <RenderIfVisible key={index} defaultHeight={500}>
                   <motion.div
                     layout
-                    initial={{ y: 20, opacity: 0 }}
+                    initial={{ y: 10, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: 20, opacity: 0 }}
+                    exit={{ y: 10, opacity: 0 }}
+                    // transition={{
+                    //   y: { duration: 0.2 },
+                    //   default: { ease: "linear" },
+                    // }}
                   >
                     <motion.div
                       whileHover={{ scale: 1.01 }}
@@ -950,7 +954,6 @@ export default function Index() {
                                     roundedTopLeft="md"
                                     roundedTopRight="md"
                                     image={value.thumbnail + "/thumbnail"}
-                                    // alt={`${value.name} project`}
                                     boxShadow="xl"
                                     draggable={false}
                                     userSelect="none"
@@ -1076,6 +1079,5 @@ export default function Index() {
         )}
       </VStack>
     </Container>
-    // </SlideFade>
   );
 }

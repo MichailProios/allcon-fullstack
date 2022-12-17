@@ -7,14 +7,12 @@ import {
   Text,
   useColorModeValue,
   VisuallyHidden,
-  SlideFade,
   Skeleton,
   Image,
 } from "@chakra-ui/react";
 import { FaLinkedin } from "react-icons/fa";
 import type { ReactNode } from "react";
 import { Link } from "@remix-run/react";
-import { BiMessage } from "react-icons/bi";
 
 const logo_small =
   "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/fa4b2f8e-d107-45eb-e36d-adbb14f13a00/meta";
@@ -49,8 +47,6 @@ const SocialButton = ({
         }}
         as={Link}
         to={href}
-        // prefetch="render"
-        // rel="prefetch"
       >
         <VisuallyHidden>{label}</VisuallyHidden>
         {children}
@@ -113,10 +109,6 @@ export default function SmallCentered() {
           </Text>
 
           <Stack direction={"row"} spacing={6}>
-            {/* <SocialButton label={"Message"} href={"/contacts"} internal>
-              <BiMessage />
-            </SocialButton> */}
-
             <SocialButton
               label={"LinkedIn"}
               href={"https://www.linkedin.com/company/allcon-contracting"}

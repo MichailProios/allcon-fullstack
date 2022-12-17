@@ -81,7 +81,6 @@ export default function About() {
   const data = useLoaderData();
 
   return (
-    // <SlideFade in={true} unmountOnExit reverse delay={0.05}>
     <>
       <Container maxW="1200px" px={{ base: 3, md: 6 }} py={14}>
         <VStack spacing="26px">
@@ -130,9 +129,13 @@ export default function About() {
               <RenderIfVisible key={index} defaultHeight={1200}>
                 <motion.div
                   layout
-                  initial={{ y: 20, opacity: 0 }}
+                  initial={{ y: 10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: 20, opacity: 0 }}
+                  exit={{ y: 10, opacity: 0 }}
+                  transition={{
+                    y: { duration: 0.2 },
+                    default: { ease: "linear" },
+                  }}
                 >
                   <Card
                     variant="elevated"
@@ -212,6 +215,5 @@ export default function About() {
         </VStack>
       </Container>
     </>
-    // </SlideFade>
   );
 }

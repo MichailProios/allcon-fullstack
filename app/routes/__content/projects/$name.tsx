@@ -254,6 +254,7 @@ export default function Project() {
             type: "spring",
             mass: 0.5,
           }}
+          style={{ width: "100%" }}
         >
           <VStack mt={"26px"} w="full" h="full">
             <Box position={"relative"} w="full">
@@ -673,6 +674,7 @@ export default function Project() {
                   type: "spring",
                   mass: 0.5,
                 }}
+                style={{ width: "100%" }}
               >
                 <Card rounded="md" boxShadow="xl" w={"full"}>
                   <CardBody>
@@ -773,7 +775,7 @@ export default function Project() {
                             </Tag>
                             {data.project.project_categories.tag && (
                               <Badge colorScheme="blue">
-                                {data.project.project_categories.name}
+                                {data.project.project_categories.tag}
                               </Badge>
                             )}
                           </HStack>

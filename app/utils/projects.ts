@@ -104,192 +104,193 @@ projects
   //   designer: "Hoffmann Architects, Inc.",
   //   description: `Allcon constructed a unique 90,000sf copper roof for Lupton Hall on the SUNY Farmingdale Campus. Our team proposed and helped develop a distinctive structural design during the initial removal and abatement stages of the project. The design included a high gauge metal framing system that bypassed the concrete deck and attached to the existing framing structure with blind bolts. The roof features a range of intricate craftsmanship, from the artfully fabricated dormers to the carefully sculpted gutter system designed to withstand wind speeds up to 126 mph. We ensured that the copper fabrication used a mix of machine fabrication for the panels to control costs, along with hand-crafted units for the fine intricate detail work. This project is a showcase of Allcon's capabilities and a signature piece of work for Farmingdale's dedication to excellence on campus.`,
   // })
-  .set("ogs-dot-elwood-ny-operation-facility", {
-    sector: "public",
-    thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/36387977-1c91-49f6-dfa8-4bc5c6b6c600",
-    path: "/projects/ogs-dot-elwood-ny-operation-facility",
-    media: [
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ed4adb38-21bf-4b5b-b620-16125cf56700",
-        aspectRatio: 16 / 9,
-        order: 1,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/0fd7e300-c2f9-4058-83d9-1b59e1a6d900",
-        aspectRatio: 16 / 9,
-        order: 2,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2251a5c0-46c9-46ae-6445-9d0cf6eff900",
-        aspectRatio: 16 / 9,
-        order: 3,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/69f7dcdc-7243-4b72-98e2-e3509db0cb00",
-        aspectRatio: 16 / 9,
-        order: 4,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/79e88004-c5e4-44c6-9472-ebf5b6c5df00",
-        aspectRatio: 16 / 9,
-        order: 5,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2fa05c2a-09b1-48b6-b723-520cbaf69000",
-        aspectRatio: 16 / 9,
-        order: 6,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/592a2268-127d-43b7-71f5-3116d504d000",
-        aspectRatio: 16 / 9,
-        order: 7,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/aba7602f-34dc-4ffd-1cf8-51be7cce0c00",
-        aspectRatio: 16 / 9,
-        order: 8,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/36f280e4-143c-442e-bd4c-9ecbfc2ceb00",
-        aspectRatio: 16 / 9,
-        order: 9,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/9492136a-ba4e-47a3-a2b7-c5aac0640800",
-        aspectRatio: 16 / 9,
-        order: 10,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/36387977-1c91-49f6-dfa8-4bc5c6b6c600",
-        aspectRatio: 16 / 9,
-        order: 11,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/91075744-6d21-4f97-84ba-7c50e66ae000",
-        aspectRatio: 16 / 9,
-        order: 12,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/86382856-7487-464c-f1bc-03fe5e2e6000",
-        aspectRatio: 16 / 9,
-        order: 13,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ae21043e-097f-48a8-6acb-ea5d316b2d00",
-        aspectRatio: 16 / 9,
-        order: 14,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3676a5d7-595c-4f95-c0a7-1426c4b67f00",
-        aspectRatio: 16 / 9,
-        order: 15,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c0ce0238-47bb-4d18-f278-79a57d207b00",
-        aspectRatio: 16 / 9,
-        order: 16,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/f5291a6b-1730-4597-9e13-f2a5c1ce3800",
-        aspectRatio: 16 / 9,
-        order: 17,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3092d834-68c3-4760-17ab-2ff5d321ad00",
-        aspectRatio: 16 / 9,
-        order: 18,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/9a557653-a5f1-491d-367b-70de65121600",
-        aspectRatio: 16 / 9,
-        order: 19,
-      },
-    ],
+  // .set("ogs-dot-elwood-ny-operation-facility", {
+  //   sector: "public",
+  //   thumbnail:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/36387977-1c91-49f6-dfa8-4bc5c6b6c600",
+  //   path: "/projects/ogs-dot-elwood-ny-operation-facility",
+  //   media: [
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ed4adb38-21bf-4b5b-b620-16125cf56700",
+  //       aspectRatio: 16 / 9,
+  //       order: 1,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/0fd7e300-c2f9-4058-83d9-1b59e1a6d900",
+  //       aspectRatio: 16 / 9,
+  //       order: 2,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2251a5c0-46c9-46ae-6445-9d0cf6eff900",
+  //       aspectRatio: 16 / 9,
+  //       order: 3,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/69f7dcdc-7243-4b72-98e2-e3509db0cb00",
+  //       aspectRatio: 16 / 9,
+  //       order: 4,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/79e88004-c5e4-44c6-9472-ebf5b6c5df00",
+  //       aspectRatio: 16 / 9,
+  //       order: 5,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2fa05c2a-09b1-48b6-b723-520cbaf69000",
+  //       aspectRatio: 16 / 9,
+  //       order: 6,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/592a2268-127d-43b7-71f5-3116d504d000",
+  //       aspectRatio: 16 / 9,
+  //       order: 7,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/aba7602f-34dc-4ffd-1cf8-51be7cce0c00",
+  //       aspectRatio: 16 / 9,
+  //       order: 8,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/36f280e4-143c-442e-bd4c-9ecbfc2ceb00",
+  //       aspectRatio: 16 / 9,
+  //       order: 9,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/9492136a-ba4e-47a3-a2b7-c5aac0640800",
+  //       aspectRatio: 16 / 9,
+  //       order: 10,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/36387977-1c91-49f6-dfa8-4bc5c6b6c600",
+  //       aspectRatio: 16 / 9,
+  //       order: 11,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/91075744-6d21-4f97-84ba-7c50e66ae000",
+  //       aspectRatio: 16 / 9,
+  //       order: 12,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/86382856-7487-464c-f1bc-03fe5e2e6000",
+  //       aspectRatio: 16 / 9,
+  //       order: 13,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ae21043e-097f-48a8-6acb-ea5d316b2d00",
+  //       aspectRatio: 16 / 9,
+  //       order: 14,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3676a5d7-595c-4f95-c0a7-1426c4b67f00",
+  //       aspectRatio: 16 / 9,
+  //       order: 15,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c0ce0238-47bb-4d18-f278-79a57d207b00",
+  //       aspectRatio: 16 / 9,
+  //       order: 16,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/f5291a6b-1730-4597-9e13-f2a5c1ce3800",
+  //       aspectRatio: 16 / 9,
+  //       order: 17,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3092d834-68c3-4760-17ab-2ff5d321ad00",
+  //       aspectRatio: 16 / 9,
+  //       order: 18,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/9a557653-a5f1-491d-367b-70de65121600",
+  //       aspectRatio: 16 / 9,
+  //       order: 19,
+  //     },
+  //   ],
 
-    name: "OGS DOT Elwood, NY Operation Facility ",
-    location: null,
-    client: {
-      text: "NYS Office of General Services",
-      tag: "OGS",
-    },
+  //   name: "OGS DOT Elwood, NY Operation Facility ",
+  //   location: null,
+  //   client: {
+  //     text: "NYS Office of General Services",
+  //     tag: "OGS",
+  //   },
 
-    status: { text: "The project was finished in 2022", completed: true },
-    cost: "$7,000,000",
-    designer: "Kallen & Lemelson, LLP",
-    description: `Allcon Contracting was selected as the general contractor for the construction of a new DOT Operations Facility in Elwood, NY. The project included the restoration of an existing salt shed, the construction of a new heavy timber shed, and a new vehicle service and storage building, as well as the new operations office. Allcon performed more than 60% of the general contracting work on this project, including interior finishes, masonry, millwork, and metal panel installation. We worked closely with Laland Baptiste, who served as the CM on the project. Our collaborative approach ensured that the building was completed on time and within budget, while addressing any unforeseen field conditions and issues that arose. This was the second project collaboration between Allcon and Laland Baptiste, and our teamwork proved invaluable in delivering a successful project.`,
-  })
-  .set("sca-fiorello-laguardia-highschool", {
-    sector: "public",
-    thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/51598770-6c6c-49fa-c235-410159bb3700",
-    path: "/projects/sca-fiorello-laguardia-highschool",
-    media: [
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/51598770-6c6c-49fa-c235-410159bb3700",
-        aspectRatio: 16 / 9,
-        order: 1,
-      },
-    ],
-    name: "SCA Fiorello H. LaGuardia Highschool",
-    location:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3654.8520104292147!2d-73.98837852352789!3d40.7741368338087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2585fcad1613f:0xcb0f24e1e025feaa!2s100%20Amsterdam%20Ave,%20New%20York,%20NY%2010023!5e1!3m2!1sen!2sus!4v1669673691833!5m2!1sen!2sus",
-    client: {
-      text: "School Construction Authority",
-      tag: "SCA",
-    },
-    status: { text: "The project is in progress", completed: false },
-    cost: null,
-    designer: null,
-    description:
-      "Allcon Contracting has been selected by the School Construction Authority as the general contractor for a project involving the upgrade of the Fiorello H. LaGuardia High School's theater shop. Our team is working closely with the school and the construction manager to ensure that the theater shop is modernized and meets the latest standards for performance spaces. This project is an important part of maintaining the school's infrastructure and ensuring that it remains a top-quality learning environment for students. We are committed to completing this project on time and within budget, and to providing the Fiorello H. LaGuardia High School with a state-of-the-art theater shop that will be a valuable resource for the school community.",
-  })
-  .set("sca-ps146-edward-collins", {
-    sector: "public",
-    thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b83d58f9-1d62-403a-883d-171d68e3b500",
-    path: "/projects/sca-ps146-edward-collins",
-    media: [
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b83d58f9-1d62-403a-883d-171d68e3b500",
-        aspectRatio: 16 / 9,
-        order: 1,
-      },
-    ],
-    name: "SCA PS 146 Edward Collins Elementary School",
-    location:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.0632337292773!2d-73.90829902352601!3d40.82480563070135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f44c8e955555:0xde76fafb865f275!2sP.S.%20146%20Edward%20Collins!5e1!3m2!1sen!2sus!4v1669674006853!5m2!1sen!2sus",
-    client: {
-      text: "School Construction Authority",
-      tag: "SCA",
-    },
-    status: { text: "The project is in progress", completed: false },
-    cost: null,
-    designer: null,
-    description:
-      "Allcon Contracting has been selected by the School Construction Authority as the general contractor for a project involving full program accessibility and low voltage electrical system work at the SCA PS 146 Edward Collins Elementary School. Our team is working closely with the school and the construction manager to ensure that all accessibility requirements are met and that the electrical system is upgraded to meet the latest standards. This project is an important step in making the school more accessible and inclusive for all students, and we are committed to completing it on time and within budget. We are proud to be working with the School Construction Authority on this important project, and to be providing the Edward Collins Elementary School with a modern and functional learning environment.",
-  })
+  //   status: { text: "The project was finished in 2022", completed: true },
+  //   cost: "$7,000,000",
+  //   designer: "Kallen & Lemelson, LLP",
+  //   description: `Allcon Contracting was selected as the general contractor for the construction of a new DOT Operations Facility in Elwood, NY. The project included the restoration of an existing salt shed, the construction of a new heavy timber shed, and a new vehicle service and storage building, as well as the new operations office. Allcon performed more than 60% of the general contracting work on this project, including interior finishes, masonry, millwork, and metal panel installation. We worked closely with Laland Baptiste, who served as the CM on the project. Our collaborative approach ensured that the building was completed on time and within budget, while addressing any unforeseen field conditions and issues that arose. This was the second project collaboration between Allcon and Laland Baptiste, and our teamwork proved invaluable in delivering a successful project.`,
+  // })
+  // .set("sca-fiorello-laguardia-highschool", {
+  //   sector: "public",
+  //   thumbnail:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/51598770-6c6c-49fa-c235-410159bb3700",
+  //   path: "/projects/sca-fiorello-laguardia-highschool",
+  //   media: [
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/51598770-6c6c-49fa-c235-410159bb3700",
+  //       aspectRatio: 16 / 9,
+  //       order: 1,
+  //     },
+  //   ],
+  //   name: "SCA Fiorello H. LaGuardia Highschool",
+  //   location:
+  //     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3654.8520104292147!2d-73.98837852352789!3d40.7741368338087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2585fcad1613f:0xcb0f24e1e025feaa!2s100%20Amsterdam%20Ave,%20New%20York,%20NY%2010023!5e1!3m2!1sen!2sus!4v1669673691833!5m2!1sen!2sus",
+  //   client: {
+  //     text: "School Construction Authority",
+  //     tag: "SCA",
+  //   },
+  //   status: { text: "The project is in progress", completed: false },
+  //   cost: null,
+  //   designer: null,
+  //   description:
+  //     "Allcon Contracting has been selected by the School Construction Authority as the general contractor for a project involving the upgrade of the Fiorello H. LaGuardia High School's theater shop. Our team is working closely with the school and the construction manager to ensure that the theater shop is modernized and meets the latest standards for performance spaces. This project is an important part of maintaining the school's infrastructure and ensuring that it remains a top-quality learning environment for students. We are committed to completing this project on time and within budget, and to providing the Fiorello H. LaGuardia High School with a state-of-the-art theater shop that will be a valuable resource for the school community.",
+  // })
+  // .set("sca-ps146-edward-collins", {
+  //   sector: "public",
+  //   thumbnail:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b83d58f9-1d62-403a-883d-171d68e3b500",
+  //   path: "/projects/sca-ps146-edward-collins",
+  //   media: [
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b83d58f9-1d62-403a-883d-171d68e3b500",
+  //       aspectRatio: 16 / 9,
+  //       order: 1,
+  //     },
+  //   ],
+  //   name: "SCA PS 146 Edward Collins Elementary School",
+  //   location:
+  //     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.0632337292773!2d-73.90829902352601!3d40.82480563070135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f44c8e955555:0xde76fafb865f275!2sP.S.%20146%20Edward%20Collins!5e1!3m2!1sen!2sus!4v1669674006853!5m2!1sen!2sus",
+  //   client: {
+  //     text: "School Construction Authority",
+  //     tag: "SCA",
+  //   },
+  //   status: { text: "The project is in progress", completed: false },
+  //   cost: null,
+  //   designer: null,
+  //   description:
+  //     "Allcon Contracting has been selected by the School Construction Authority as the general contractor for a project involving full program accessibility and low voltage electrical system work at the SCA PS 146 Edward Collins Elementary School. Our team is working closely with the school and the construction manager to ensure that all accessibility requirements are met and that the electrical system is upgraded to meet the latest standards. This project is an important step in making the school more accessible and inclusive for all students, and we are committed to completing it on time and within budget. We are proud to be working with the School Construction Authority on this important project, and to be providing the Edward Collins Elementary School with a modern and functional learning environment.",
+  // })
+
   .set("suny-old-westbury-campus-center", {
     sector: "public",
     thumbnail:
@@ -315,6 +316,7 @@ projects
     // designer: "Hoffmann Architects, Inc.",
     description: `Allcon Contracting has been selected by the State University Construction Fund as the general contractor for a project involving campus center ADA upgrades at the SUNY Old Westbury Campus Center. Our team is working closely with the university and the construction manager to ensure that the campus center is fully accessible to all students, faculty, and staff. This involves a range of upgrades, including the installation of new ramps, elevators, and accessibility features throughout the building. We are committed to completing this project on time and within budget, and to providing the university with a fully accessible campus center that meets the needs of all members of the community. The upgraded SUNY Old Westbury Campus Center will be a state-of-the-art facility that provides accessibility and inclusivity for all.`,
   })
+
   .set("sca-psis218-rafael-hernandez", {
     sector: "public",
     thumbnail:

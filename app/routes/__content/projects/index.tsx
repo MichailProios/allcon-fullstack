@@ -853,187 +853,193 @@ export default function Index() {
               </InputGroup>
             </Stack>
           </VStack>
-          <SimpleGrid
-            columns={{ base: 1, smd: 1, md: 1, xmd: 2, lg: 2, xl: 2 }}
-            spacing={4}
-            w="full"
-          >
-            <AnimatePresence>
-              {data.projects.map((value: any, index: any) => (
-                <RenderIfVisible key={index} defaultHeight={1000}>
-                  <motion.div
-                    layout
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: 20, opacity: 0 }}
-                    transition={{
-                      type: "spring",
-                      mass: 0.5,
-                    }}
-                  >
+          {data.projects.length > 0 ? (
+            <SimpleGrid
+              columns={{ base: 1, smd: 1, md: 1, xmd: 2, lg: 2, xl: 2 }}
+              spacing={4}
+              w="full"
+            >
+              <AnimatePresence>
+                {data.projects.map((value: any, index: any) => (
+                  <RenderIfVisible key={index} defaultHeight={1000}>
                     <motion.div
-                      whileHover={{ y: -5 }}
+                      layout
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: 20, opacity: 0 }}
                       transition={{
-                        type: "tween",
-                        duration: 0.2,
+                        type: "spring",
+                        mass: 0.5,
                       }}
                     >
-                      <Card
-                        variant="elevated"
-                        rounded="md"
-                        boxShadow="xl"
-                        position="relative"
-                        onMouseEnter={(e: any) => {
-                          setShowButton({ index: index, flag: true });
+                      <motion.div
+                        whileHover={{ y: -5 }}
+                        transition={{
+                          type: "tween",
+                          duration: 0.2,
                         }}
-                        onMouseLeave={(e: any) => {
-                          setShowButton({ index: index, flag: false });
-                        }}
-                        as={Link}
-                        to={value.url}
-                        prefetch="none"
-                        draggable={false}
-                        w="full"
                       >
-                        <AspectRatio
-                          key={index}
-                          ratio={{ base: 4 / 3, md: 16 / 9 }}
+                        <Card
+                          variant="elevated"
+                          rounded="md"
+                          boxShadow="xl"
+                          position="relative"
+                          onMouseEnter={(e: any) => {
+                            setShowButton({ index: index, flag: true });
+                          }}
+                          onMouseLeave={(e: any) => {
+                            setShowButton({ index: index, flag: false });
+                          }}
+                          as={Link}
+                          to={value.url}
+                          prefetch="none"
+                          draggable={false}
+                          w="full"
                         >
-                          <ClientOnly fallback={<Skeleton w="full" h="full" />}>
-                            {() => (
-                              <Suspense
-                                fallback={<Skeleton w="full" h="full" />}
-                              >
-                                <ErrorBoundary
-                                  FallbackComponent={ErrorFallback}
+                          <AspectRatio
+                            key={index}
+                            ratio={{ base: 4 / 3, md: 16 / 9 }}
+                          >
+                            <ClientOnly
+                              fallback={<Skeleton w="full" h="full" />}
+                            >
+                              {() => (
+                                <Suspense
+                                  fallback={<Skeleton w="full" h="full" />}
                                 >
-                                  <RemixImage
-                                    roundedTopLeft="md"
-                                    roundedTopRight="md"
-                                    image={value.thumbnail + "/thumbnail"}
-                                    boxShadow="xl"
-                                    draggable={false}
-                                    userSelect="none"
-                                    w="full"
-                                    loading="lazy"
-                                  />
-                                </ErrorBoundary>
-                              </Suspense>
-                            )}
-                          </ClientOnly>
-                        </AspectRatio>
-                        <CardFooter justifyContent="center" p={2}>
-                          <Text textAlign="center" fontSize="xl">
-                            <Highlight
-                              query={data.filter?.search || ""}
-                              styles={{
-                                px: "4px",
-                                py: "4px",
-                                bg: "primary.100",
-                                borderRadius: "0.375rem",
+                                  <ErrorBoundary
+                                    FallbackComponent={ErrorFallback}
+                                  >
+                                    <RemixImage
+                                      roundedTopLeft="md"
+                                      roundedTopRight="md"
+                                      image={value.thumbnail + "/thumbnail"}
+                                      boxShadow="xl"
+                                      draggable={false}
+                                      userSelect="none"
+                                      w="full"
+                                      loading="lazy"
+                                    />
+                                  </ErrorBoundary>
+                                </Suspense>
+                              )}
+                            </ClientOnly>
+                          </AspectRatio>
+                          <CardFooter justifyContent="center" p={2}>
+                            <Text textAlign="center" fontSize="xl">
+                              <Highlight
+                                query={data.filter?.search || ""}
+                                styles={{
+                                  px: "4px",
+                                  py: "4px",
+                                  bg: "primary.100",
+                                  borderRadius: "0.375rem",
+                                }}
+                              >
+                                {value.name as string}
+                              </Highlight>
+                            </Text>
+                          </CardFooter>
+
+                          <Box position="absolute" top="8px" right="8px">
+                            <VStack alignItems="flex-end" spacing={2}>
+                              {value.completed && value.status && (
+                                <Tooltip label={value.status} closeOnScroll>
+                                  <Badge textColor="#22543D" bgColor="#C6F6D5">
+                                    Completed
+                                  </Badge>
+                                </Tooltip>
+                              )}
+
+                              {value.completed === false && value.status && (
+                                <Tooltip label={value.status} closeOnScroll>
+                                  <Badge textColor="#744210" bgColor="#FEFCBF">
+                                    in progress
+                                  </Badge>
+                                </Tooltip>
+                              )}
+
+                              {value.show_category_tag && value.category_tag && (
+                                <Tooltip
+                                  key={index}
+                                  label={value.category_name}
+                                  closeOnScroll
+                                >
+                                  <Badge textColor="#234E52" bgColor="#B2F5EA">
+                                    {value.category_tag}
+                                  </Badge>
+                                </Tooltip>
+                              )}
+
+                              {value.show_client_tag && value.client_tag && (
+                                <Tooltip
+                                  label={value.client_name}
+                                  closeOnScroll
+                                >
+                                  <Badge textColor="#2A4365" bgColor="#BEE3F8">
+                                    {value.client_tag}
+                                  </Badge>
+                                </Tooltip>
+                              )}
+                            </VStack>
+                          </Box>
+
+                          <Box display={{ base: "none", lg: "flex" }}>
+                            <SlideFade
+                              in={
+                                showButton.index === index
+                                  ? showButton.flag
+                                  : false
+                              }
+                              reverse
+                              style={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
                               }}
                             >
-                              {value.name as string}
-                            </Highlight>
-                          </Text>
-                        </CardFooter>
-
-                        <Box position="absolute" top="8px" right="8px">
-                          <VStack alignItems="flex-end" spacing={2}>
-                            {value.completed && value.status && (
-                              <Tooltip label={value.status} closeOnScroll>
-                                <Badge textColor="#22543D" bgColor="#C6F6D5">
-                                  Completed
-                                </Badge>
-                              </Tooltip>
-                            )}
-
-                            {value.completed === false && value.status && (
-                              <Tooltip label={value.status} closeOnScroll>
-                                <Badge textColor="#744210" bgColor="#FEFCBF">
-                                  in progress
-                                </Badge>
-                              </Tooltip>
-                            )}
-
-                            {value.show_category_tag && value.category_tag && (
-                              <Tooltip
-                                key={index}
-                                label={value.category_name}
-                                closeOnScroll
+                              <Box
+                                position="absolute"
+                                top="50%"
+                                left="50%"
+                                transform="translate(-50%, -50%)"
                               >
-                                <Badge textColor="#234E52" bgColor="#B2F5EA">
-                                  {value.category_tag}
-                                </Badge>
-                              </Tooltip>
-                            )}
-
-                            {value.show_client_tag && value.client_tag && (
-                              <Tooltip label={value.client_name} closeOnScroll>
-                                <Badge textColor="#2A4365" bgColor="#BEE3F8">
-                                  {value.client_tag}
-                                </Badge>
-                              </Tooltip>
-                            )}
-                          </VStack>
-                        </Box>
-
-                        <Box display={{ base: "none", lg: "flex" }}>
-                          <SlideFade
-                            in={
-                              showButton.index === index
-                                ? showButton.flag
-                                : false
-                            }
-                            reverse
-                            style={{
-                              position: "absolute",
-                              top: "50%",
-                              left: "50%",
-                              transform: "translate(-50%, -50%)",
-                            }}
-                          >
-                            <Box
-                              position="absolute"
-                              top="50%"
-                              left="50%"
-                              transform="translate(-50%, -50%)"
-                            >
-                              <Button
-                                variant="solid"
-                                boxShadow="lg"
-                                rounded="md"
-                                bgColor="gray.50"
-                                textColor="black"
-                                _hover={{ bgColor: "gray.200" }}
-                              >
-                                View Project
-                              </Button>
-                            </Box>
-                          </SlideFade>
-                        </Box>
-                      </Card>
+                                <Button
+                                  variant="solid"
+                                  boxShadow="lg"
+                                  rounded="md"
+                                  bgColor="gray.50"
+                                  textColor="black"
+                                  _hover={{ bgColor: "gray.200" }}
+                                >
+                                  View Project
+                                </Button>
+                              </Box>
+                            </SlideFade>
+                          </Box>
+                        </Card>
+                      </motion.div>
                     </motion.div>
-                  </motion.div>
-                </RenderIfVisible>
-              ))}
-            </AnimatePresence>
-          </SimpleGrid>
+                  </RenderIfVisible>
+                ))}
+              </AnimatePresence>
+            </SimpleGrid>
+          ) : (
+            <ScaleFade in={true} unmountOnExit>
+              <Box textAlign="center" py={10} px={6}>
+                <QuestionIcon boxSize={"50px"} color="primary.500" />
+                <Heading as="h2" size="lg" mt={6} mb={2}>
+                  No Results
+                </Heading>
+                <Text color={"gray.500"}>
+                  The search terms you provided did not match any of our
+                  records. Please try again using different keywords.
+                </Text>
+              </Box>
+            </ScaleFade>
+          )}
         </VStack>
-        {data.projects.length <= 0 && (
-          <ScaleFade in={true} delay={0.5} unmountOnExit>
-            <Box textAlign="center" py={10} px={6}>
-              <QuestionIcon boxSize={"50px"} color="primary.500" />
-              <Heading as="h2" size="lg" mt={6} mb={2}>
-                No Results
-              </Heading>
-              <Text color={"gray.500"}>
-                The search terms you provided did not match any of our records.
-                Please try again using different keywords.
-              </Text>
-            </Box>
-          </ScaleFade>
-        )}
       </VStack>
     </Container>
   );

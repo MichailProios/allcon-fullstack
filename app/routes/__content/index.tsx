@@ -19,6 +19,7 @@ import {
   Divider,
   useBreakpointValue,
   Avatar,
+  chakra,
 } from "@chakra-ui/react";
 // import { useDataRefresh } from "remix-utils";
 import { BiBuildings, BiBook } from "react-icons/bi";
@@ -28,11 +29,12 @@ import { Link } from "@remix-run/react";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { motion } from "framer-motion";
+import { GrWorkshop } from "react-icons/gr";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Autoplay, Pagination, Lazy } from "swiper";
 
 import { useInView } from "react-intersection-observer";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { ArrowForwardIcon, ChatIcon } from "@chakra-ui/icons";
 import { ImQuotesRight } from "react-icons/im";
 import { testimonials } from "~/utils/testimonials";
 import { ClientOnly } from "remix-utils/build/react/client-only";
@@ -40,6 +42,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "~/components/ErrorFallback";
 import RemixImage from "~/components/RemixImage";
 import { createServerClient } from "~/utils/supabase.server";
+import { FaLinkedin } from "react-icons/fa";
 
 export const loader: LoaderFunction = async ({ request }: any) => {
   try {
@@ -107,11 +110,6 @@ export default function Index() {
   const breakpointInitialSlide = useBreakpointValue(
     { base: 1, lg: 1 },
     { fallback: "lg", ssr: true }
-  );
-
-  const cssModeBreakpoint = useBreakpointValue(
-    { base: true, md: false },
-    { fallback: "md", ssr: false }
   );
 
   return (
@@ -462,19 +460,20 @@ export default function Index() {
                 }}
                 modules={[Autoplay, Pagination]}
                 loop
-                cssMode={cssModeBreakpoint}
+                cssMode={false}
                 slidesPerView={breakpointSlidesPerView}
                 style={{
                   borderRadius: "0.375rem",
                 }}
-                initialSlide={breakpointInitialSlide}
+                autoHeight={true}
+                initialSlide={1}
               >
                 {data.testimonials.map((value: any, index: any) => (
                   <SwiperSlide key={index}>
                     <Card
                       variant="elevated"
                       rounded="none"
-                      h={{ base: "420px", sm: "250px" }}
+                      h={{ base: "100%", xs: "300px", sm: "250px" }}
                       w="full"
                     >
                       <CardBody textAlign={{ base: "start", sm: "justify" }}>
@@ -518,73 +517,70 @@ export default function Index() {
           }}
           style={{ width: "100%" }}
         >
-          <Stack
-            direction={{ base: "column", md: "row" }}
-            spacing={5}
-            alignItems={{ base: "flex-start", md: "center" }}
-            justifyContent="space-between"
+          <Box
+            bg={useColorModeValue("white", "gray.700")}
+            p={{ base: 4, sm: 8 }}
             rounded="md"
             boxShadow="xl"
-            bg={useColorModeValue("white", "gray.700")}
-            p={{ base: 8, md: 16 }}
           >
-            <Flex
-              w="full"
-              justifyContent={{ base: "center", md: "flex-start" }}
-              flexDirection="column"
+            <Stack
+              pos="relative"
+              zIndex={1}
+              direction="column"
+              spacing={5}
+              textAlign="left"
             >
               <Heading
                 fontSize="3xl"
                 w="full"
                 textAlign={{ base: "center", md: "start" }}
               >
-                Looking to connect with us?
+                Looking to connect or work with us?
               </Heading>
               <Text
-                fontSize="2xl"
-                lineHeight={1.2}
-                fontWeight="bold"
-                bgGradient="linear(to-l, #018b8b,#005f5f)"
-                bgClip="text"
-                textAlign={{ base: "center", md: "start" }}
+                fontSize="xl"
+                color={useColorModeValue("gray.600", "gray.400")}
+                textAlign={{ base: "justify", md: "start" }}
                 w="full"
               >
-                Visit our contact us page to get in touch
+                Allcon Contracting is a community of professionals dedicated to
+                providing top-quality construction services. We welcome contact
+                from job seekers and clients through our website or LinkedIn.
               </Text>
-            </Flex>
-            <Stack
-              direction={{ base: "column", sm: "row" }}
-              spacing={3}
-              justifyContent="space-between"
-              w="full"
-            >
-              <Flex
-                gap={3}
-                w="full"
-                justifyContent={{ base: "center", md: "flex-end" }}
-              >
+
+              <Stack direction={{ base: "column", md: "row" }} spacing={3}>
                 <Button
-                  variant="solid"
-                  colorScheme="primary"
+                  leftIcon={<ChatIcon />}
                   as={Link}
                   to="/contacts"
-                  draggable={false}
-                  w={{ base: "full", sm: "auto" }}
+                  rounded="md"
                 >
-                  Contact Us
+                  Send us a Message
                 </Button>
                 <Button
-                  variant="solid"
+                  leftIcon={<Icon as={GrWorkshop} />}
                   as={Link}
-                  to="/about"
-                  draggable={false}
-                  w={{ base: "full", sm: "auto" }}
+                  to="/contacts"
+                  rounded="md"
                 >
-                  Learn more
+                  Employment Opportunities
                 </Button>
-              </Flex>
+                <Button
+                  leftIcon={<Icon as={FaLinkedin} color="#0E76A8" />}
+                  as={Link}
+                  href="#"
+                  rounded="md"
+                  onClick={() =>
+                    window.open(
+                      "https://www.linkedin.com/company/allcon-contracting/"
+                    )
+                  }
+                >
+                  Follow us on LinkedIn
+                </Button>
+              </Stack>
             </Stack>
-          </Stack>
+          </Box>
         </motion.div>
       </Container>
     </>

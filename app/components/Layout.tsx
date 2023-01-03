@@ -15,13 +15,13 @@ interface LayoutProps {
 
 const navigationLinks = [
   {
-    label: "About",
-    url: "/about",
+    label: "Company",
+    url: "/company ",
     subLinks: [
-      { label: "About Us", url: "/about" },
-      { label: "Executives", url: "/about/executives" },
-      { label: "History", url: "/about/history" },
-      { label: "Safety", url: "/about/safety" },
+      { label: "Overview", url: "/company" },
+      { label: "Executives", url: "/company/executives" },
+      { label: "History", url: "/company/history" },
+      { label: "Safety", url: "/company/safety" },
     ],
   },
   {

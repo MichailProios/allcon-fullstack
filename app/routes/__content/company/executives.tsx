@@ -9,6 +9,9 @@ import {
   Skeleton,
   Avatar,
   AspectRatio,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
 import { ClientOnly } from "remix-utils";
 import { Suspense, Fragment } from "react";
@@ -22,6 +25,7 @@ import RemixImage from "~/components/RemixImage";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "~/components/ErrorFallback";
 import { createServerClient } from "~/utils/supabase.server";
+import { Link } from "@remix-run/react";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - About`,
@@ -73,12 +77,24 @@ export default function Executives() {
 
   return (
     <Container maxW="1200px" px={{ base: 3, md: 6 }} py={14}>
+      <Breadcrumb display={{ base: "none", md: "flex" }}>
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/about">
+            About
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/about/executives">
+            Executives
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
       <VStack spacing="26px">
         <Heading textAlign="center">Executives</Heading>
 
         <AnimatePresence>
           {data.profiles.map((value: any, index: any) => (
-            <RenderIfVisible key={index} defaultHeight={1200}>
+            <RenderIfVisible key={index} defaultHeight={800}>
               <motion.div
                 layout
                 initial={{ y: 20, opacity: 0 }}
@@ -127,16 +143,33 @@ export default function Executives() {
                     alignItems={{ base: "center", xl: "stretch" }}
                     w="100%"
                   >
-                    <Avatar
+                    <AspectRatio
+                      ratio={1}
                       h={{ base: "250px", md: "300px", lg: "350px" }}
                       w={{ base: "250px", md: "300px", lg: "350px" }}
-                      showBorder={true}
-                      borderColor="primary.400"
-                      name={value.name}
-                      src={value.image}
-                      mb="5px"
                       display={{ base: "flex", xl: "none" }}
-                    />
+                    >
+                      <ClientOnly>
+                        {() => (
+                          <Suspense fallback={<Skeleton w="full" h="full" />}>
+                            <ErrorBoundary FallbackComponent={ErrorFallback}>
+                              <RemixImage
+                                rounded="full"
+                                objectFit="cover"
+                                image={value.image}
+                                boxShadow="xl"
+                                draggable={false}
+                                userSelect="none"
+                                loading="lazy"
+                                objectPosition="50% 20%"
+                                border="2px"
+                                borderColor="primary.400"
+                              />
+                            </ErrorBoundary>
+                          </Suspense>
+                        )}
+                      </ClientOnly>
+                    </AspectRatio>
                     <Heading fontSize="2xl">{value.title}</Heading>
                     <Text
                       fontSize="xl"

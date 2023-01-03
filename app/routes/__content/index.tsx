@@ -30,7 +30,7 @@ import { Link } from "@remix-run/react";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { motion } from "framer-motion";
-import { GrWorkshop } from "react-icons/gr";
+import { MdWorkOutline } from "react-icons/md";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Autoplay, Pagination, Lazy } from "swiper";
 
@@ -44,7 +44,6 @@ import ErrorFallback from "~/components/ErrorFallback";
 import RemixImage from "~/components/RemixImage";
 import { createServerClient } from "~/utils/supabase.server";
 import { FaLinkedin } from "react-icons/fa";
-import { use100vh } from "react-div-100vh";
 
 export const loader: LoaderFunction = async ({ request }: any) => {
   try {
@@ -529,7 +528,12 @@ export default function Index() {
                   Send us a Message
                 </Button>
                 <Button
-                  leftIcon={<Icon as={GrWorkshop} />}
+                  leftIcon={
+                    <Icon
+                      color={useColorModeValue("black", "white")}
+                      as={MdWorkOutline}
+                    />
+                  }
                   as={Link}
                   to="/contacts"
                   rounded="md"

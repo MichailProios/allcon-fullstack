@@ -94,7 +94,7 @@ export default function Management() {
 
         <AnimatePresence>
           {data.profiles.map((value: any, index: any) => (
-            <RenderIfVisible key={index} defaultHeight={800}>
+            <RenderIfVisible key={index} defaultHeight={600}>
               <motion.div
                 layout
                 initial={{ y: 20, opacity: 0 }}

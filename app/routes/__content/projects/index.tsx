@@ -62,9 +62,8 @@ import {
   Search2Icon,
 } from "@chakra-ui/icons";
 // import projects from "~/utils/projects";
-import { useFirstRender } from "~/utils/hooks";
+import { useFirstRender, useWindowDimensions } from "~/utils/hooks";
 import { BiCategory } from "react-icons/bi";
-
 import { createServerClient } from "~/utils/supabase.server";
 import RemixImage from "~/components/RemixImage";
 import { ErrorBoundary } from "react-error-boundary";
@@ -451,6 +450,8 @@ export default function Index() {
     ref: menuRef,
     handler: () => onClose(),
   });
+
+  const { height } = useWindowDimensions();
 
   return (
     // <SlideFade in={true} unmountOnExit reverse delay={0.05}>
@@ -861,7 +862,7 @@ export default function Index() {
             >
               <AnimatePresence>
                 {data.projects.map((value: any, index: any) => (
-                  <RenderIfVisible key={index} defaultHeight={1000}>
+                  <RenderIfVisible key={index} defaultHeight={500}>
                     <motion.div
                       layout
                       initial={{ y: 20, opacity: 0 }}

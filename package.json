@@ -8,11 +8,11 @@
     "dev:node": "cross-env NODE_ENV=development nodemon --require dotenv/config ./server.js --watch ./server.js",
     "dev:remix": "remix watch",
     "start": "remix build && run-p \"start:*\"",
-    "start:node": "cross-env NODE_ENV=production node ./server.js"
+    "start:node": "cross-env NODE_ENV=production --require dotenv/config node ./server.js"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.15",
-    "@chakra-ui/react": "^2.4.4",
+    "@chakra-ui/react": "^2.4.6",
     "@emotion/cache": "^11.10.5",
     "@emotion/react": "^11.10.5",
     "@emotion/server": "^11.10.0",
@@ -27,7 +27,7 @@
     "cross-env": "^7.0.3",
     "exenv": "^1.2.2",
     "express": "^4.18.2",
-    "framer-motion": "^8.0.2",
+    "framer-motion": "^8.1.5",
     "isbot": "^3.6.5",
     "morgan": "^1.10.0",
     "nodemailer": "^6.8.0",

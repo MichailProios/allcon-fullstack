@@ -46,40 +46,52 @@ export const loader: LoaderFunction = async ({ request }: any) => {
 
 const Index = () => {
   return (
-    <Container maxW="1200px" px={{ base: 3, md: 6 }} py={14}>
-      <Box textAlign="center" py={10} px={6}>
-        <Icon as={FaBlog} boxSize={"50px"} color={"green.300"} />
-        <Heading as="h2" size="xl" mt={6} mb={2}>
-          Coming Soon
-        </Heading>
-        <VStack>
-          <Text color={"gray.500"}>
-            Our blog page is coming soon, but we are excited to bring you a wide
-            variety of informative and interesting content in the near future.
-            Be sure to check back regularly or follow us on social media to stay
-            up-to-date on new blog posts as they are released. We can't wait to
-            share our insights and expertise with you through our blog.
-          </Text>
+    <motion.div
+      layout
+      initial={{ y: 20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: 20, opacity: 0 }}
+      transition={{
+        type: "spring",
+        mass: 0.5,
+      }}
+    >
+      <Container maxW="1200px" px={{ base: 3, md: 6 }} py={14}>
+        <Box textAlign="center" py={10} px={6}>
+          <Icon as={FaBlog} boxSize={"50px"} color={"green.300"} />
+          <Heading as="h2" size="xl" mt={6} mb={2}>
+            Coming Soon
+          </Heading>
+          <VStack>
+            <Text color={"gray.500"}>
+              Our blog page is coming soon, but we are excited to bring you a
+              wide variety of informative and interesting content in the near
+              future. Be sure to check back regularly or follow us on social
+              media to stay up-to-date on new blog posts as they are released.
+              We can't wait to share our insights and expertise with you through
+              our blog.
+            </Text>
 
-          <Text color={"gray.500"}>
-            In the meantime, be sure to follow us on LinkedIn for updates and
-            insights from the Allcon Contracting team.
-          </Text>
+            <Text color={"gray.500"}>
+              In the meantime, be sure to follow us on LinkedIn for updates and
+              insights from the Allcon Contracting team.
+            </Text>
 
-          <Button
-            leftIcon={<Icon as={FaLinkedin} color="#0E76A8" />}
-            rounded="md"
-            onClick={() =>
-              window.open(
-                "https://www.linkedin.com/company/allcon-contracting/"
-              )
-            }
-          >
-            Follow us on LinkedIn
-          </Button>
-        </VStack>
-      </Box>
-    </Container>
+            <Button
+              leftIcon={<Icon as={FaLinkedin} color="#0E76A8" />}
+              rounded="md"
+              onClick={() =>
+                window.open(
+                  "https://www.linkedin.com/company/allcon-contracting/"
+                )
+              }
+            >
+              Follow us on LinkedIn
+            </Button>
+          </VStack>
+        </Box>
+      </Container>
+    </motion.div>
 
     // <Container maxW="1200px" px={{ base: 5, md: 8 }} py={16} mx="auto">
     //   <VStack spacing="26px" w="full">

@@ -526,223 +526,227 @@ projects
   //       `,
   // })
 
-  .set("ogs-creedmoor-psychiatric-center", {
-    sector: "public",
-    thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/6f2edb66-6990-4e99-3549-eba84349e700",
-    path: "/projects/ogs-creedmoor-psychiatric-center",
-    media: [
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/6f2edb66-6990-4e99-3549-eba84349e700",
-        aspectRatio: 16 / 9,
-        order: 1,
-      },
-    ],
+  // .set("ogs-creedmoor-psychiatric-center", {
+  //   sector: "public",
+  //   thumbnail:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/6f2edb66-6990-4e99-3549-eba84349e700",
+  //   path: "/projects/ogs-creedmoor-psychiatric-center",
+  //   media: [
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/6f2edb66-6990-4e99-3549-eba84349e700",
+  //       aspectRatio: 16 / 9,
+  //       order: 1,
+  //     },
+  //   ],
 
-    name: "OGS Creedmoor Psychiatric Center",
-    location:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7313.737956223405!2d-73.73595182882622!3d40.73745849987613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2623da5028dff:0x54d92114be009da!2sCreedmoor%20Psychiatric%20Center!5e1!3m2!1sen!2sus!4v1670272592275!5m2!1sen!2sus",
-    client: {
-      text: "NYS Office of General Services",
-      tag: "OGS",
-    },
+  //   name: "OGS Creedmoor Psychiatric Center",
+  //   location:
+  //     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7313.737956223405!2d-73.73595182882622!3d40.73745849987613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2623da5028dff:0x54d92114be009da!2sCreedmoor%20Psychiatric%20Center!5e1!3m2!1sen!2sus!4v1670272592275!5m2!1sen!2sus",
+  //   client: {
+  //     text: "NYS Office of General Services",
+  //     tag: "OGS",
+  //   },
 
-    status: { text: "The project is finished", completed: true },
-    description: `Allcon was selected by the NYS Office of General Services to perform lobby and security office renovations at the OGS Creedmoor Psychiatric Center. Our team was responsible for the demolition and removal of existing finishes and fixtures. Additionally, we installed a new security system. The project was completed on time and within budget, resulting in a modern lobby and security office for the facility.`,
-  })
-  .set("ogs-army-support-facility", {
-    sector: "public",
-    thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ee12e850-3ddf-45fe-de6e-05cb7994f400",
-    path: "/projects/ogs-army-support-facility",
-    media: [
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ee12e850-3ddf-45fe-de6e-05cb7994f400",
-        aspectRatio: 16 / 9,
-        order: 1,
-      },
-    ],
+  //   status: { text: "The project is finished", completed: true },
+  //   description: `Allcon was selected by the NYS Office of General Services to perform lobby and security office renovations at the OGS Creedmoor Psychiatric Center. Our team was responsible for the demolition and removal of existing finishes and fixtures. Additionally, we installed a new security system. The project was completed on time and within budget, resulting in a modern lobby and security office for the facility.`,
+  // })
 
-    name: "OGS Army Support Facility, AASF1",
-    location:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7307.969775134365!2d-73.1074864639801!3d40.78989700017646!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e837cea1539a51:0x6055aea59b981439!2s201%20Schaefer%20Dr,%20Ronkonkoma,%20NY%2011779!5e1!3m2!1sen!2sus!4v1670273133233!5m2!1sen!2sus",
-    client: {
-      text: "NYS Office of General Services",
-      tag: "OGS",
-    },
+  // .set("ogs-army-support-facility", {
+  //   sector: "public",
+  //   thumbnail:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ee12e850-3ddf-45fe-de6e-05cb7994f400",
+  //   path: "/projects/ogs-army-support-facility",
+  //   media: [
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ee12e850-3ddf-45fe-de6e-05cb7994f400",
+  //       aspectRatio: 16 / 9,
+  //       order: 1,
+  //     },
+  //   ],
 
-    status: { text: "The project is finished", completed: true },
-    description: `Allcon Contracting was selected to provide repairs to the administrative offices at the NYS Office of General Services Army Support Facility. Our team worked closely with OGS to complete the project on time and within budget. The end result was a modern and functional workspace for the facility's administrative staff.`,
-  })
-  .set("suny-farmingdale-nold-hall-entry", {
-    sector: "public",
-    thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/bf9657ee-a363-4ad8-e9cf-d4f04a39c500",
-    path: "/projects/suny-farmingdale-nold-hall-entry",
-    media: [
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/bf9657ee-a363-4ad8-e9cf-d4f04a39c500",
-        aspectRatio: 16 / 9,
-        order: 1,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/d1b34973-95e6-4b99-5e5b-8379fabbf800",
-        aspectRatio: 9 / 16,
-        order: 2,
-      },
-    ],
-    name: "SUNY Farmingdale Nold Hall Entry",
-    location:
-      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3656.2423819162545!2d-73.431517!3d40.748856!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x80fd83aee2558b2c!2sNold%20Athletic%20Complex!5e1!3m2!1sen!2sus!4v1669330154160!5m2!1sen!2sus",
-    client: {
-      text: "State University Construction Fund",
-      tag: "SUNY",
-    },
-    status: { text: "The project is finished", completed: true },
+  //   name: "OGS Army Support Facility, AASF1",
+  //   location:
+  //     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7307.969775134365!2d-73.1074864639801!3d40.78989700017646!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e837cea1539a51:0x6055aea59b981439!2s201%20Schaefer%20Dr,%20Ronkonkoma,%20NY%2011779!5e1!3m2!1sen!2sus!4v1670273133233!5m2!1sen!2sus",
+  //   client: {
+  //     text: "NYS Office of General Services",
+  //     tag: "OGS",
+  //   },
 
-    cost: "Under $2,000,000.00",
-    // designer: "Peter Gisolfi Associates",
-    description: `Allcon Contracting was selected to renovate the entryway of Nold Hall at SUNY Farmingdale. The project included installation of new landscaping, including lawns and grasses, as well as planting. The team also installed new storm drainage utilities and piping, as well as new MEPs (mechanical, electrical, and plumbing) systems. The project was completed on time and within budget, resulting in a modern and functional entryway for the building.`,
-  })
-  .set("500bridgewater", {
-    sector: "public",
-    thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/f80ae0ad-57a4-43aa-af52-16e1e4998d00",
-    path: "/projects/500bridgewater",
-    media: [
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/892eba66-2c7f-4bcd-720e-a2eca582ba00",
-        aspectRatio: 9 / 16,
-        order: 1,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/f80ae0ad-57a4-43aa-af52-16e1e4998d00",
-        aspectRatio: 16 / 9,
-        order: 2,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/eb5a093a-9c50-4991-f1a0-6d037f98aa00",
-        aspectRatio: 9 / 16,
-        order: 3,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/763903ab-172c-4ca0-dcf5-b9391c0ca900",
-        aspectRatio: 9 / 16,
-        order: 4,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/116af262-2bd5-4a8d-d55c-c3ad6cdae100",
-        aspectRatio: 9 / 16,
-        order: 5,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3b66d146-8477-4ba8-c134-dc2c6818d600",
-        aspectRatio: 9 / 16,
-        order: 6,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4a4f6475-73c2-4188-8d16-e9552c2e7e00",
-        aspectRatio: 16 / 9,
-        order: 7,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/0ab086b1-d59a-46b2-c037-0dae62543f00",
-        aspectRatio: 16 / 9,
-        order: 8,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c8711ede-95ac-46ec-e1b0-0da2b13a3900",
-        aspectRatio: 16 / 9,
-        order: 9,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/f3b70054-142f-48da-5494-4f464dde5500",
-        aspectRatio: 16 / 9,
-        order: 10,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/aa953b1b-a9f2-4568-09de-821bf7b40800",
-        aspectRatio: 16 / 9,
-        order: 11,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/087d8719-a6e9-4aba-8bce-839fa539b100",
-        aspectRatio: 16 / 9,
-        order: 12,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4c8ae9e5-fc39-42f2-f6cd-e6445a6c0000",
-        aspectRatio: 16 / 9,
-        order: 13,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/dc23515a-d964-439d-c55c-20bfddadf600",
-        aspectRatio: 9 / 16,
-        order: 14,
-      },
-    ],
+  //   status: { text: "The project is finished", completed: true },
+  //   description: `Allcon Contracting was selected to provide repairs to the administrative offices at the NYS Office of General Services Army Support Facility. Our team worked closely with OGS to complete the project on time and within budget. The end result was a modern and functional workspace for the facility's administrative staff.`,
+  // })
 
-    name: "500 Brighton Houses Inc.", // – Alterations Associated to Superstorm SANDY
-    location:
-      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3665.7652061803356!2d-73.96214!3d40.575355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c244405e66eb9f:0x1353c628363dc2ab!2s500%20Brightwater%20Ct,%20Brooklyn,%20NY%2011235!5e1!3m2!1sen!2sus!4v1669330118025!5m2!1sen!2sus",
+  // .set("suny-farmingdale-nold-hall-entry", {
+  //   sector: "public",
+  //   thumbnail:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/bf9657ee-a363-4ad8-e9cf-d4f04a39c500",
+  //   path: "/projects/suny-farmingdale-nold-hall-entry",
+  //   media: [
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/bf9657ee-a363-4ad8-e9cf-d4f04a39c500",
+  //       aspectRatio: 16 / 9,
+  //       order: 1,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/d1b34973-95e6-4b99-5e5b-8379fabbf800",
+  //       aspectRatio: 9 / 16,
+  //       order: 2,
+  //     },
+  //   ],
+  //   name: "SUNY Farmingdale Nold Hall Entry",
+  //   location:
+  //     "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3656.2423819162545!2d-73.431517!3d40.748856!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x80fd83aee2558b2c!2sNold%20Athletic%20Complex!5e1!3m2!1sen!2sus!4v1669330154160!5m2!1sen!2sus",
+  //   client: {
+  //     text: "State University Construction Fund",
+  //     tag: "SUNY",
+  //   },
+  //   status: { text: "The project is finished", completed: true },
 
-    client: { text: "NYC Housing Preservation & Development", tag: "" },
+  //   cost: "Under $2,000,000.00",
+  //   // designer: "Peter Gisolfi Associates",
+  //   description: `Allcon Contracting was selected to renovate the entryway of Nold Hall at SUNY Farmingdale. The project included installation of new landscaping, including lawns and grasses, as well as planting. The team also installed new storm drainage utilities and piping, as well as new MEPs (mechanical, electrical, and plumbing) systems. The project was completed on time and within budget, resulting in a modern and functional entryway for the building.`,
+  // })
 
-    status: { text: "The project was finished in 2019", completed: true },
-    category: { text: "Other miscellaneous projects", tag: "other" },
-    cost: "$15M",
-    designer: "Purcell Architects P.C.",
-    description: `Allcon Contracting was selected to construct two 3,000 square foot infrastructure building additions on top of the existing parking structure/promenade at the Brighton Beach Brooklyn boardwalk, located just 300 feet from the ocean. This project was necessary due to severe damages incurred during Superstorm Sandy. Allcon's work included the construction of new facilities to house boilers, hot water heaters, electrical services, and a new generator system. The 18-story, 192-unit apartment building for seniors was fully occupied during construction, requiring extensive coordination between Allcon and the construction manager. The project also included the replacement of all windows and balcony doors, as well as the installation of over 15,000 square feet of built-up roofing and 35,000 square feet of unit pavers throughout the building. Through collaboration and efficient work, Allcon was able to complete the project ahead of schedule.`,
-  })
-  .set("suny-farmingdale-knapp-hall", {
-    sector: "public",
-    thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/fe69ee75-b0cd-44f0-3e4b-d947a4b01500",
-    path: "/projects/suny-farmingdale-knapp-hall",
-    media: [
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/fe69ee75-b0cd-44f0-3e4b-d947a4b01500",
-        aspectRatio: 16 / 9,
-        order: 1,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/0011583f-5504-4657-74a9-f53aeee70f00",
-        aspectRatio: 16 / 9,
-        order: 2,
-      },
-    ],
-    name: "SUNY Farmingdale Knapp Hall",
-    location:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.094317333799!2d-73.4306072843586!3d40.75154884313155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e82b26c91a47b9:0x602ee71fc234d348!2sKnapp%20Hall!5e1!3m2!1sen!2sus!4v1670280873146!5m2!1sen!2sus",
-    client: {
-      text: "State University Construction Fund",
-      tag: "SUNY",
-    },
-    status: { text: "The project is finished", completed: true },
-    cost: "Under $3,000,000.00",
-    // designer: "Hoffmann Architects, Inc.",
-    description: `Allcon Contracting was selected as the general contractor for the construction of the Knapp Hall at SUNY Farmingdale. Our scope of work included the demolition of the existing basement kitchen and exterior walls, as well as the installation of new concrete and masonry walls, structural steel, roofing, MEPs, and exterior improvements. Through careful coordination and collaboration with the construction manager and other project stakeholders, we were able to complete the project on time and to the satisfaction of the client.`,
-  })
+  // .set("500bridgewater", {
+  //   sector: "public",
+  //   thumbnail:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/f80ae0ad-57a4-43aa-af52-16e1e4998d00",
+  //   path: "/projects/500bridgewater",
+  //   media: [
+  // {
+  //   image:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/892eba66-2c7f-4bcd-720e-a2eca582ba00",
+  //   aspectRatio: 9 / 16,
+  //   order: 1,
+  // },
+  // {
+  //   image:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/f80ae0ad-57a4-43aa-af52-16e1e4998d00",
+  //   aspectRatio: 16 / 9,
+  //   order: 2,
+  // },
+  // {
+  //   image:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/eb5a093a-9c50-4991-f1a0-6d037f98aa00",
+  //   aspectRatio: 9 / 16,
+  //   order: 3,
+  // },
+  // {
+  //   image:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/763903ab-172c-4ca0-dcf5-b9391c0ca900",
+  //   aspectRatio: 9 / 16,
+  //   order: 4,
+  // },
+  // {
+  //   image:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/116af262-2bd5-4a8d-d55c-c3ad6cdae100",
+  //   aspectRatio: 9 / 16,
+  //   order: 5,
+  // },
+  // {
+  //   image:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/3b66d146-8477-4ba8-c134-dc2c6818d600",
+  //   aspectRatio: 9 / 16,
+  //   order: 6,
+  // },
+  // {
+  //   image:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4a4f6475-73c2-4188-8d16-e9552c2e7e00",
+  //   aspectRatio: 16 / 9,
+  //   order: 7,
+  // },
+  // {
+  //   image:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/0ab086b1-d59a-46b2-c037-0dae62543f00",
+  //   aspectRatio: 16 / 9,
+  //   order: 8,
+  // },
+  // {
+  //   image:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c8711ede-95ac-46ec-e1b0-0da2b13a3900",
+  //   aspectRatio: 16 / 9,
+  //   order: 9,
+  // },
+  // {
+  //   image:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/f3b70054-142f-48da-5494-4f464dde5500",
+  //   aspectRatio: 16 / 9,
+  //   order: 10,
+  // },
+  // {
+  //   image:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/aa953b1b-a9f2-4568-09de-821bf7b40800",
+  //   aspectRatio: 16 / 9,
+  //   order: 11,
+  // },
+  // {
+  //   image:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/087d8719-a6e9-4aba-8bce-839fa539b100",
+  //   aspectRatio: 16 / 9,
+  //   order: 12,
+  // },
+  // {
+  //   image:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4c8ae9e5-fc39-42f2-f6cd-e6445a6c0000",
+  //   aspectRatio: 16 / 9,
+  //   order: 13,
+  // },
+  // {
+  //   image:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/dc23515a-d964-439d-c55c-20bfddadf600",
+  //   aspectRatio: 9 / 16,
+  //   order: 14,
+  // },
+  // ],
+
+  //   name: "500 Brighton Houses Inc.", // – Alterations Associated to Superstorm SANDY
+  //   location:
+  //     "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3665.7652061803356!2d-73.96214!3d40.575355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c244405e66eb9f:0x1353c628363dc2ab!2s500%20Brightwater%20Ct,%20Brooklyn,%20NY%2011235!5e1!3m2!1sen!2sus!4v1669330118025!5m2!1sen!2sus",
+
+  //   client: { text: "NYC Housing Preservation & Development", tag: "" },
+
+  //   status: { text: "The project was finished in 2019", completed: true },
+  //   category: { text: "Other miscellaneous projects", tag: "other" },
+  //   cost: "$15M",
+  //   designer: "Purcell Architects P.C.",
+  //   description: `Allcon Contracting was selected to construct two 3,000 square foot infrastructure building additions on top of the existing parking structure/promenade at the Brighton Beach Brooklyn boardwalk, located just 300 feet from the ocean. This project was necessary due to severe damages incurred during Superstorm Sandy. Allcon's work included the construction of new facilities to house boilers, hot water heaters, electrical services, and a new generator system. The 18-story, 192-unit apartment building for seniors was fully occupied during construction, requiring extensive coordination between Allcon and the construction manager. The project also included the replacement of all windows and balcony doors, as well as the installation of over 15,000 square feet of built-up roofing and 35,000 square feet of unit pavers throughout the building. Through collaboration and efficient work, Allcon was able to complete the project ahead of schedule.`,
+  // })
+
+  // .set("suny-farmingdale-knapp-hall", {
+  //   sector: "public",
+  //   thumbnail:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/fe69ee75-b0cd-44f0-3e4b-d947a4b01500",
+  //   path: "/projects/suny-farmingdale-knapp-hall",
+  //   media: [
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/fe69ee75-b0cd-44f0-3e4b-d947a4b01500",
+  //       aspectRatio: 16 / 9,
+  //       order: 1,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/0011583f-5504-4657-74a9-f53aeee70f00",
+  //       aspectRatio: 16 / 9,
+  //       order: 2,
+  //     },
+  //   ],
+  //   name: "SUNY Farmingdale Knapp Hall",
+  //   location:
+  //     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.094317333799!2d-73.4306072843586!3d40.75154884313155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e82b26c91a47b9:0x602ee71fc234d348!2sKnapp%20Hall!5e1!3m2!1sen!2sus!4v1670280873146!5m2!1sen!2sus",
+  //   client: {
+  //     text: "State University Construction Fund",
+  //     tag: "SUNY",
+  //   },
+  //   status: { text: "The project is finished", completed: true },
+  //   cost: "Under $3,000,000.00",
+  //   // designer: "Hoffmann Architects, Inc.",
+  //   description: `Allcon Contracting was selected as the general contractor for the construction of the Knapp Hall at SUNY Farmingdale. Our scope of work included the demolition of the existing basement kitchen and exterior walls, as well as the installation of new concrete and masonry walls, structural steel, roofing, MEPs, and exterior improvements. Through careful coordination and collaboration with the construction manager and other project stakeholders, we were able to complete the project on time and to the satisfaction of the client.`,
+  // })
   .set("apartment724", {
     thumbnail:
       "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/c71596c6-7bae-47c7-e4fa-868ba422a600",

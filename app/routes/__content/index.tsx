@@ -22,6 +22,7 @@ import {
   chakra,
 } from "@chakra-ui/react";
 // import { useDataRefresh } from "remix-utils";
+import { useWindowDimensionsInitial } from "~/utils/hooks";
 import { BiBuildings, BiBook } from "react-icons/bi";
 
 import type { LoaderFunction } from "@remix-run/node";
@@ -43,6 +44,7 @@ import ErrorFallback from "~/components/ErrorFallback";
 import RemixImage from "~/components/RemixImage";
 import { createServerClient } from "~/utils/supabase.server";
 import { FaLinkedin } from "react-icons/fa";
+import { use100vh } from "react-div-100vh";
 
 export const loader: LoaderFunction = async ({ request }: any) => {
   try {
@@ -94,27 +96,16 @@ export const loader: LoaderFunction = async ({ request }: any) => {
 
 export default function Index() {
   const data = useLoaderData();
-
-  const testimonialsView = useInView();
-
-  const breakpointHeight = useBreakpointValue(
-    { base: `calc(100vh - 164px)`, md: "calc(100vh - 64px)" },
-    { fallback: "md", ssr: true }
-  );
+  const { height } = useWindowDimensionsInitial();
 
   const breakpointSlidesPerView = useBreakpointValue(
     { base: 1, lg: 2 },
     { fallback: "base", ssr: true }
   );
 
-  const breakpointInitialSlide = useBreakpointValue(
-    { base: 1, lg: 1 },
-    { fallback: "lg", ssr: true }
-  );
-
   return (
     <>
-      <Box position="relative">
+      <Box position="relative" h={height ? height - 64 : "100vh"}>
         <Swiper
           autoplay={{
             delay: 5000,
@@ -126,7 +117,7 @@ export default function Index() {
           lazy={{ loadPrevNext: true, loadPrevNextAmount: 1 }}
           allowTouchMove={false}
           style={{
-            height: breakpointHeight,
+            height: height ? height - 64 : "100vh",
           }}
           pagination={{
             clickable: true,
@@ -134,31 +125,17 @@ export default function Index() {
         >
           {data.slideShow.map((img: any, index: any) => (
             <SwiperSlide key={index}>
-              <AspectRatio
-                ratio={16 / 9}
-                height={breakpointHeight}
-                overflow="hidden"
-                display="block"
-                lineHeight={0}
-                h="full"
-                maxW="full"
-                maxH="full"
-              >
+              <AspectRatio ratio={16 / 9} h={height ? height - 64 : "100vh"}>
                 <ClientOnly>
                   {() => (
                     <Suspense
-                      fallback={<Skeleton w="full" h={breakpointHeight} />}
+                      fallback={
+                        <Skeleton w="full" h={height ? height - 64 : "100vh"} />
+                      }
                     >
                       <ErrorBoundary FallbackComponent={ErrorFallback}>
                         <RemixImage
                           image={img}
-                          w={"full"}
-                          h="full"
-                          maxW="full"
-                          maxH="full"
-                          overflow="hidden"
-                          display="block"
-                          lineHeight={0}
                           filter={"brightness(75%)"}
                           draggable={false}
                           loading="lazy"
@@ -443,13 +420,7 @@ export default function Index() {
             }}
             style={{ width: "100%" }}
           >
-            <Box
-              rounded="md"
-              bg="transparent"
-              boxShadow={"lg"}
-              w="full"
-              ref={testimonialsView.ref}
-            >
+            <Box rounded="md" bg="transparent" boxShadow={"lg"} w="full">
               <Swiper
                 autoplay={{
                   delay: 6000,

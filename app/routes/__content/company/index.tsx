@@ -138,8 +138,8 @@ export default function About() {
           </motion.div>
         </VStack>
       </Container>
-
-      <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={20}>
+      <Divider />
+      <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
         <motion.div
           layout
           initial={{ y: 20, opacity: 0 }}
@@ -151,12 +151,10 @@ export default function About() {
           }}
           style={{ width: "100%" }}
         >
-          <Flex
-            // direction={{ base: "column", xmd: "row" }}
-            // spacing={4}
+          <Stack
+            direction={{ base: "column", xmd: "row" }}
+            spacing={4}
             w="full"
-            justifyContent="strech"
-            alignItems="center"
           >
             <motion.div
               whileHover={{ y: -5 }}
@@ -174,35 +172,7 @@ export default function About() {
                 as={Link}
                 to={"/company/management"}
                 draggable={false}
-                // maxW={{ base: "auto", lg: "373px" }}
               >
-                <CardBody>
-                  {/* <AspectRatio ratio={16 / 9} w="full"> */}
-                  {/* <ClientOnly>
-                      {() => ( */}
-                  <AvatarGroup
-                    size={{
-                      base: "xl",
-                      sm: "2xl",
-                      lg: "2xl",
-                    }}
-                    max={maxAvatars}
-                    spacing={"-2rem"}
-                  >
-                    {data.profiles.map((value: any, index: any) => (
-                      <Avatar
-                        key={index}
-                        name={value.name}
-                        src={value.image}
-                        showBorder={true}
-                        borderColor="primary.500"
-                      />
-                    ))}
-                  </AvatarGroup>
-                  {/* )}
-                    </ClientOnly> */}
-                  {/* </AspectRatio> */}
-                </CardBody>
                 <CardFooter
                   w="full"
                   p={4}
@@ -213,6 +183,71 @@ export default function About() {
                   <Stack spacing="1">
                     <Heading size="md">Management Team</Heading>
                     <Text>Learn more about our team</Text>
+                  </Stack>
+                  <ArrowForwardIcon />
+                </CardFooter>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ y: -5 }}
+              transition={{
+                type: "tween",
+                duration: 0.2,
+              }}
+              style={{ width: "100%" }}
+            >
+              <Card
+                variant="elevated"
+                rounded="md"
+                boxShadow="xl"
+                w="full"
+                // as={Link}
+                // to={"/company/management"}
+                draggable={false}
+              >
+                <CardFooter
+                  w="full"
+                  p={4}
+                  m={0}
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Stack spacing="1">
+                    <Heading size="md">History</Heading>
+                    <Text>Learn more about our history</Text>
+                  </Stack>
+                  <ArrowForwardIcon />
+                </CardFooter>
+              </Card>
+            </motion.div>
+            <motion.div
+              whileHover={{ y: -5 }}
+              transition={{
+                type: "tween",
+                duration: 0.2,
+              }}
+              style={{ width: "100%" }}
+            >
+              <Card
+                variant="elevated"
+                rounded="md"
+                boxShadow="xl"
+                w="full"
+                // as={Link}
+                // to={"/company/management"}
+                draggable={false}
+              >
+                <CardFooter
+                  w="full"
+                  p={4}
+                  m={0}
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Stack spacing="1">
+                    <Heading size="md">Safety</Heading>
+                    <Text>Our commitment to safety</Text>
                   </Stack>
                   <ArrowForwardIcon />
                 </CardFooter>
@@ -327,7 +362,7 @@ export default function About() {
                 </CardFooter>
               </Card>
             </motion.div> */}
-          </Flex>
+          </Stack>
         </motion.div>
       </Container>
     </>

@@ -84,7 +84,7 @@ export default function Management() {
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/company/executives">
+          <BreadcrumbLink as={Link} to="/company/management">
             Management
           </BreadcrumbLink>
         </BreadcrumbItem>

@@ -291,236 +291,241 @@ projects
   //     "Allcon Contracting has been selected by the School Construction Authority as the general contractor for a project involving full program accessibility and low voltage electrical system work at the SCA PS 146 Edward Collins Elementary School. Our team is working closely with the school and the construction manager to ensure that all accessibility requirements are met and that the electrical system is upgraded to meet the latest standards. This project is an important step in making the school more accessible and inclusive for all students, and we are committed to completing it on time and within budget. We are proud to be working with the School Construction Authority on this important project, and to be providing the Edward Collins Elementary School with a modern and functional learning environment.",
   // })
 
-  .set("suny-old-westbury-campus-center", {
-    sector: "public",
-    thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/27fa0a33-6c79-4021-cab8-f987ff2c7900",
-    path: "/projects/suny-old-westbury-campus-center",
-    media: [
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/27fa0a33-6c79-4021-cab8-f987ff2c7900",
-        aspectRatio: 16 / 9,
-        order: 1,
-      },
-    ],
-    name: "SUNY Old Westbury Campus Center",
-    location:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7306.979114346205!2d-73.5763718591698!3d40.79889749478871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c286b99dc9e0a5:0xa183cdb7c806a049!2sCampus%20Center,%20Wenwood%20Dr,%20Glen%20Head,%20NY%2011545!5e1!3m2!1sen!2sus!4v1670273585028!5m2!1sen!2sus",
-    client: {
-      text: "State University Construction Fund",
-      tag: "SUNY",
-    },
-    status: { text: "The project is in progress", completed: false },
-    // cost: "$10,856,274.00",
-    // designer: "Hoffmann Architects, Inc.",
-    description: `Allcon Contracting has been selected by the State University Construction Fund as the general contractor for a project involving campus center ADA upgrades at the SUNY Old Westbury Campus Center. Our team is working closely with the university and the construction manager to ensure that the campus center is fully accessible to all students, faculty, and staff. This involves a range of upgrades, including the installation of new ramps, elevators, and accessibility features throughout the building. We are committed to completing this project on time and within budget, and to providing the university with a fully accessible campus center that meets the needs of all members of the community. The upgraded SUNY Old Westbury Campus Center will be a state-of-the-art facility that provides accessibility and inclusivity for all.`,
-  })
+  // .set("suny-old-westbury-campus-center", {
+  //   sector: "public",
+  //   thumbnail:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/27fa0a33-6c79-4021-cab8-f987ff2c7900",
+  //   path: "/projects/suny-old-westbury-campus-center",
+  //   media: [
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/27fa0a33-6c79-4021-cab8-f987ff2c7900",
+  //       aspectRatio: 16 / 9,
+  //       order: 1,
+  //     },
+  //   ],
+  //   name: "SUNY Old Westbury Campus Center",
+  //   location:
+  //     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7306.979114346205!2d-73.5763718591698!3d40.79889749478871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c286b99dc9e0a5:0xa183cdb7c806a049!2sCampus%20Center,%20Wenwood%20Dr,%20Glen%20Head,%20NY%2011545!5e1!3m2!1sen!2sus!4v1670273585028!5m2!1sen!2sus",
+  //   client: {
+  //     text: "State University Construction Fund",
+  //     tag: "SUNY",
+  //   },
+  //   status: { text: "The project is in progress", completed: false },
+  //   // cost: "$10,856,274.00",
+  //   // designer: "Hoffmann Architects, Inc.",
+  //   description: `Allcon Contracting has been selected by the State University Construction Fund as the general contractor for a project involving campus center ADA upgrades at the SUNY Old Westbury Campus Center. Our team is working closely with the university and the construction manager to ensure that the campus center is fully accessible to all students, faculty, and staff. This involves a range of upgrades, including the installation of new ramps, elevators, and accessibility features throughout the building. We are committed to completing this project on time and within budget, and to providing the university with a fully accessible campus center that meets the needs of all members of the community. The upgraded SUNY Old Westbury Campus Center will be a state-of-the-art facility that provides accessibility and inclusivity for all.`,
+  // })
 
-  .set("sca-psis218-rafael-hernandez", {
-    sector: "public",
-    thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/cf40a4b0-0c6b-4990-31ef-02d0ef82d000",
-    path: "/projects/sca-psis218-rafael-hernandez",
-    media: [
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/cf40a4b0-0c6b-4990-31ef-02d0ef82d000",
-        aspectRatio: 16 / 9,
-        order: 1,
-      },
-    ],
-    name: "SCA PS/IS 218 Rafael Hernandez Magnet School",
-    location:
-      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3651.4719044706962!2d-73.92125895243812!3d40.835542724149!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x8da8781af2e34078!2sP.S./I.S.%20218%20Rafael%20Hernandez%20Dual%20Language%20Magnet%20School!5e1!3m2!1sen!2sus!4v1669762170248!5m2!1sen!2sus",
-    client: {
-      text: "School Construction Authority",
-      tag: "SCA",
-    },
-    status: { text: "The project is in progress", completed: false },
-    cost: null,
-    designer: null,
-    description:
-      "Allcon Contracting has been selected by the School Construction Authority as the general contractor for a project involving roof, exterior masonry, parapet, and flood elimination work at the SCA PS/IS 218 Rafael Hernandez Magnet School. Our team is working closely with the school and the construction manager to ensure that the roof, masonry, and parapets are in good condition and that the building is protected from future flooding. This project is an important part of maintaining the school's infrastructure and ensuring that it remains safe and functional for students and staff. We are committed to completing this project on time and within budget, and to providing the Rafael Hernandez Magnet School with a safe and secure building. The upgraded school will be a state-of-the-art facility that provides a safe and secure learning environment for students.",
-  })
-  .set("greatneck-terrace-roofs", {
-    sector: "public",
-    thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400",
-    path: "/projects/greatneck-terrace-roofs",
-    media: [
-      {
-        video:
-          "https://customer-sn71r1ndnen7y1an.cloudflarestream.com/1813d1be91c9949d3fc00053953b0c22/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https://customer-sn71r1ndnen7y1an.cloudflarestream.com/1813d1be91c9949d3fc00053953b0c22/thumbnails/thumbnail.jpg%253Ftime=1m9s&height=600&startTime=1m8s",
-        aspectRatio: 16 / 9,
-        order: 1,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400",
-        aspectRatio: 16 / 9,
-        order: 2,
-      },
+  // .set("sca-psis218-rafael-hernandez", {
+  //   sector: "public",
+  //   thumbnail:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/cf40a4b0-0c6b-4990-31ef-02d0ef82d000",
+  //   path: "/projects/sca-psis218-rafael-hernandez",
+  //   media: [
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/cf40a4b0-0c6b-4990-31ef-02d0ef82d000",
+  //       aspectRatio: 16 / 9,
+  //       order: 1,
+  //     },
+  //   ],
+  //   name: "SCA PS/IS 218 Rafael Hernandez Magnet School",
+  //   location:
+  //     "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3651.4719044706962!2d-73.92125895243812!3d40.835542724149!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x8da8781af2e34078!2sP.S./I.S.%20218%20Rafael%20Hernandez%20Dual%20Language%20Magnet%20School!5e1!3m2!1sen!2sus!4v1669762170248!5m2!1sen!2sus",
+  //   client: {
+  //     text: "School Construction Authority",
+  //     tag: "SCA",
+  //   },
+  //   status: { text: "The project is in progress", completed: false },
+  //   cost: null,
+  //   designer: null,
+  //   description:
+  //     "Allcon Contracting has been selected by the School Construction Authority as the general contractor for a project involving roof, exterior masonry, parapet, and flood elimination work at the SCA PS/IS 218 Rafael Hernandez Magnet School. Our team is working closely with the school and the construction manager to ensure that the roof, masonry, and parapets are in good condition and that the building is protected from future flooding. This project is an important part of maintaining the school's infrastructure and ensuring that it remains safe and functional for students and staff. We are committed to completing this project on time and within budget, and to providing the Rafael Hernandez Magnet School with a safe and secure building. The upgraded school will be a state-of-the-art facility that provides a safe and secure learning environment for students.",
+  // })
 
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/736315aa-97e9-43b3-8ab7-419739e23800",
-        aspectRatio: 16 / 9,
-        order: 3,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e8098e3f-c65b-413d-368b-22b50268b300",
-        aspectRatio: 16 / 9,
-        order: 4,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ed685c0b-cce2-4e23-713f-10f5829e9800",
-        aspectRatio: 16 / 9,
-        order: 5,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ab572a68-7d98-492f-aced-150ccde1d500",
-        aspectRatio: 16 / 9,
-        order: 6,
-      },
-    ],
+  // .set("greatneck-terrace-roofs", {
+  //   sector: "public",
+  //   thumbnail:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400",
+  //   path: "/projects/greatneck-terrace-roofs",
+  //   media: [
+  //     {
+  //       video:
+  //         "https://customer-sn71r1ndnen7y1an.cloudflarestream.com/1813d1be91c9949d3fc00053953b0c22/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https://customer-sn71r1ndnen7y1an.cloudflarestream.com/1813d1be91c9949d3fc00053953b0c22/thumbnails/thumbnail.jpg%253Ftime=1m9s&height=600&startTime=1m8s",
+  //       aspectRatio: 16 / 9,
+  //       order: 1,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e7f76ad3-ea23-4fde-e911-178b09bb5400",
+  //       aspectRatio: 16 / 9,
+  //       order: 2,
+  //     },
 
-    name: "Greatneck Terrace Roofs",
-    location: null,
-    client: null,
-    status: { text: "The project is finshed", completed: true },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/736315aa-97e9-43b3-8ab7-419739e23800",
+  //       aspectRatio: 16 / 9,
+  //       order: 3,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e8098e3f-c65b-413d-368b-22b50268b300",
+  //       aspectRatio: 16 / 9,
+  //       order: 4,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ed685c0b-cce2-4e23-713f-10f5829e9800",
+  //       aspectRatio: 16 / 9,
+  //       order: 5,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ab572a68-7d98-492f-aced-150ccde1d500",
+  //       aspectRatio: 16 / 9,
+  //       order: 6,
+  //     },
+  //   ],
 
-    category: { text: "Other miscellaneous projects", tag: "other" },
-    cost: null,
-    designer: null,
-    description: null,
-  })
-  .set("hillside-support-facility", {
-    sector: "public",
-    thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4fcf5cb0-71bc-4846-bcf2-546c072a9b00",
-    path: "/projects/hillside-support-facility",
-    media: [
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4fcf5cb0-71bc-4846-bcf2-546c072a9b00",
-        aspectRatio: 16 / 9,
-        order: 1,
-      },
-    ],
+  //   name: "Greatneck Terrace Roofs",
+  //   location: null,
+  //   client: null,
+  //   status: { text: "The project is finshed", completed: true },
 
-    name: "LIRR Hillside Support Facility Building",
-    location:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.5732468037418!2d-73.78051308255615!3d40.70644529999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c261161959744f:0x9faba07c1564d147!2sHillside%20Support%20Facility!5e1!3m2!1sen!2sus!4v1670282230897!5m2!1sen!2sus",
-    client: { text: "Metropolitan Transportation Authority", tag: "MTA" },
-    status: { text: "The project is finshed", completed: true },
+  //   category: { text: "Other miscellaneous projects", tag: "other" },
+  //   cost: null,
+  //   designer: null,
+  //   description: null,
+  // })
 
-    category: { text: "Other miscellaneous projects", tag: "other" },
-    cost: "Between $2,000,000.00 and $2,800,000.00",
-    designer: null,
-    description: `Allcon Contracting was selected to perform a variety of tasks at the LIRR Hillside Support Facility Building for the Metropolitan Transportation Authority. Our team was responsible for sounding of the entire facade, masonry work, installation of interior partitions and finishes, rough and finished carpentry, installation of a sprinkler system, work on the fire alarm, HVAC, electrical, and plumbing systems. We worked closely with the MTA and the construction manager to ensure that our work was completed to the highest standards and met all of the agency's requirements. We were committed to completing our tasks on time and within budget, and we are proud of the final result. `,
-  })
-  .set("suny-farmingdale-laffin-hall", {
-    sector: "public",
-    thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5c07d788-c233-4909-fad7-99ff2a8ddd00",
-    path: "/projects/suny-farmingdale-laffin-hall",
-    media: [
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5c07d788-c233-4909-fad7-99ff2a8ddd00",
-        aspectRatio: 16 / 9,
-        order: 1,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/dc4da3ff-05a5-4a33-b2da-ca8cefc16b00",
-        aspectRatio: 16 / 9,
-        order: 2,
-      },
-    ],
-    name: "SUNY Farmingdale Laffin Hall",
-    location:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.137338021592!2d-73.4307236843586!3d40.75076644317949!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e82af9c6412c1f:0x76f31f91061470f5!2sLaffin%20Hall,%20Farmingdale,%20NY%2011735!5e1!3m2!1sen!2sus!4v1670279672888!5m2!1sen!2sus",
-    client: {
-      text: "State University Construction Fund",
-      tag: "SUNY",
-    },
-    status: { text: "The project is finished", completed: true },
-    cost: "Under $1,000,000.00",
-    // designer: "Hoffmann Architects, Inc.",
-    description: `Allcon Contracting was selected to complete a variety of tasks on the renovation of Laffin Hall at SUNY Farmingdale for the State University Construction Fund. Our team was responsible for the sounding of the entire facade, concrete structural repair of columns and overhead, concrete crack repairs, crack injection, rust treatment of existing steel, and power washing. We worked closely with SUNY Farmingdale and the construction manager to ensure that our work met all of the university's requirements and was completed on time and within budget. We are proud of the final result, which has transformed Laffin Hall into a modern and functional building.`,
-  })
-  .set("rockville-centre-police", {
-    sector: "public",
-    thumbnail:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/96f08191-f50b-4359-f535-6c84ab162000",
-    path: "/projects/rockville-centre-police",
-    media: [
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/dbafdcfc-8e14-4674-d149-34eb4c2c8d00",
-        aspectRatio: 16 / 9,
-        order: 1,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b5e300f4-23ef-49e1-3fc6-8b8a5e197500",
-        aspectRatio: 16 / 9,
-        order: 2,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/487f8240-09e0-4850-756a-2da7acbf4200",
-        aspectRatio: 16 / 9,
-        order: 3,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2f27bbb3-2e30-4590-d7c3-66149991d700",
-        aspectRatio: 16 / 9,
-        order: 4,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/98dd58bb-0d87-4df8-8de5-7e65c64d7c00",
-        aspectRatio: 16 / 9,
-        order: 5,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/61a83c0a-7f6e-4d49-2488-b94aa4168600",
-        aspectRatio: 16 / 9,
-        order: 6,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e3d2ab9b-2b03-4a1e-eadb-eba025a3b300",
-        aspectRatio: 16 / 9,
-        order: 7,
-      },
-      {
-        image:
-          "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/96f08191-f50b-4359-f535-6c84ab162000",
-        aspectRatio: 16 / 9,
-        order: 8,
-      },
-    ],
-    name: "Rockville Centre Police Station",
-    location:
-      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3661.2161386469497!2d-73.638444!3d40.658313!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c27b5b05cac5dd:0x65e61c20263ba48a!2s142%20Maple%20Ave,%20Rockville%20Centre,%20NY%2011570!5e1!3m2!1sen!2sus!4v1669330079249!5m2!1sen!2sus",
-    client: { text: "Incorporated Village of Rockville Centre", tag: "" },
-    status: { text: "The project was finished in 2022", completed: true },
-    category: { text: "Other miscellaneous projects", tag: "other" },
-    cost: "$2,344,107.00",
-    designer: "H2M Architects",
-    description: `
-          Allcon was selected to construct a state-of-the-art police headquarters for the Village of Rockville Center. The new facility replaced the outdated and cramped old building. Allcon's work included demolition and asbestos abatement, as well as the construction of new CMU walls, stud-framed walls, and ACT ceilings. The team also built new secure holding cells and sally ports. Allcon's flooring experts installed a combination of carpet, LVT, and ceramic tiles throughout the facility. Custom millwork counters were also manufactured and installed by the Allcon team. New wood doors, windows, and roll-up gates were installed to improve the building's exterior and provide security. Exterior signage, aluminum metal panels, and a handicap lift were also added to provide needed public access.
-        `,
-  })
+  // .set("hillside-support-facility", {
+  //   sector: "public",
+  //   thumbnail:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4fcf5cb0-71bc-4846-bcf2-546c072a9b00",
+  //   path: "/projects/hillside-support-facility",
+  //   media: [
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/4fcf5cb0-71bc-4846-bcf2-546c072a9b00",
+  //       aspectRatio: 16 / 9,
+  //       order: 1,
+  //     },
+  //   ],
+
+  //   name: "LIRR Hillside Support Facility Building",
+  //   location:
+  //     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.5732468037418!2d-73.78051308255615!3d40.70644529999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c261161959744f:0x9faba07c1564d147!2sHillside%20Support%20Facility!5e1!3m2!1sen!2sus!4v1670282230897!5m2!1sen!2sus",
+  //   client: { text: "Metropolitan Transportation Authority", tag: "MTA" },
+  //   status: { text: "The project is finshed", completed: true },
+
+  //   category: { text: "Other miscellaneous projects", tag: "other" },
+  //   cost: "Between $2,000,000.00 and $2,800,000.00",
+  //   designer: null,
+  //   description: `Allcon Contracting was selected to perform a variety of tasks at the LIRR Hillside Support Facility Building for the Metropolitan Transportation Authority. Our team was responsible for sounding of the entire facade, masonry work, installation of interior partitions and finishes, rough and finished carpentry, installation of a sprinkler system, work on the fire alarm, HVAC, electrical, and plumbing systems. We worked closely with the MTA and the construction manager to ensure that our work was completed to the highest standards and met all of the agency's requirements. We were committed to completing our tasks on time and within budget, and we are proud of the final result. `,
+  // })
+
+  // .set("suny-farmingdale-laffin-hall", {
+  //   sector: "public",
+  //   thumbnail:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5c07d788-c233-4909-fad7-99ff2a8ddd00",
+  //   path: "/projects/suny-farmingdale-laffin-hall",
+  //   media: [
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5c07d788-c233-4909-fad7-99ff2a8ddd00",
+  //       aspectRatio: 16 / 9,
+  //       order: 1,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/dc4da3ff-05a5-4a33-b2da-ca8cefc16b00",
+  //       aspectRatio: 16 / 9,
+  //       order: 2,
+  //     },
+  //   ],
+  //   name: "SUNY Farmingdale Laffin Hall",
+  //   location:
+  //     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.137338021592!2d-73.4307236843586!3d40.75076644317949!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e82af9c6412c1f:0x76f31f91061470f5!2sLaffin%20Hall,%20Farmingdale,%20NY%2011735!5e1!3m2!1sen!2sus!4v1670279672888!5m2!1sen!2sus",
+  //   client: {
+  //     text: "State University Construction Fund",
+  //     tag: "SUNY",
+  //   },
+  //   status: { text: "The project is finished", completed: true },
+  //   cost: "Under $1,000,000.00",
+  //   // designer: "Hoffmann Architects, Inc.",
+  //   description: `Allcon Contracting was selected to complete a variety of tasks on the renovation of Laffin Hall at SUNY Farmingdale for the State University Construction Fund. Our team was responsible for the sounding of the entire facade, concrete structural repair of columns and overhead, concrete crack repairs, crack injection, rust treatment of existing steel, and power washing. We worked closely with SUNY Farmingdale and the construction manager to ensure that our work met all of the university's requirements and was completed on time and within budget. We are proud of the final result, which has transformed Laffin Hall into a modern and functional building.`,
+  // })
+
+  // .set("rockville-centre-police", {
+  //   sector: "public",
+  //   thumbnail:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/96f08191-f50b-4359-f535-6c84ab162000",
+  //   path: "/projects/rockville-centre-police",
+  //   media: [
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/dbafdcfc-8e14-4674-d149-34eb4c2c8d00",
+  //       aspectRatio: 16 / 9,
+  //       order: 1,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b5e300f4-23ef-49e1-3fc6-8b8a5e197500",
+  //       aspectRatio: 16 / 9,
+  //       order: 2,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/487f8240-09e0-4850-756a-2da7acbf4200",
+  //       aspectRatio: 16 / 9,
+  //       order: 3,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/2f27bbb3-2e30-4590-d7c3-66149991d700",
+  //       aspectRatio: 16 / 9,
+  //       order: 4,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/98dd58bb-0d87-4df8-8de5-7e65c64d7c00",
+  //       aspectRatio: 16 / 9,
+  //       order: 5,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/61a83c0a-7f6e-4d49-2488-b94aa4168600",
+  //       aspectRatio: 16 / 9,
+  //       order: 6,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/e3d2ab9b-2b03-4a1e-eadb-eba025a3b300",
+  //       aspectRatio: 16 / 9,
+  //       order: 7,
+  //     },
+  //     {
+  //       image:
+  //         "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/96f08191-f50b-4359-f535-6c84ab162000",
+  //       aspectRatio: 16 / 9,
+  //       order: 8,
+  //     },
+  //   ],
+  //   name: "Rockville Centre Police Station",
+  //   location:
+  //     "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3661.2161386469497!2d-73.638444!3d40.658313!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c27b5b05cac5dd:0x65e61c20263ba48a!2s142%20Maple%20Ave,%20Rockville%20Centre,%20NY%2011570!5e1!3m2!1sen!2sus!4v1669330079249!5m2!1sen!2sus",
+  //   client: { text: "Incorporated Village of Rockville Centre", tag: "" },
+  //   status: { text: "The project was finished in 2022", completed: true },
+  //   category: { text: "Other miscellaneous projects", tag: "other" },
+  //   cost: "$2,344,107.00",
+  //   designer: "H2M Architects",
+  //   description: `
+  //         Allcon was selected to construct a state-of-the-art police headquarters for the Village of Rockville Center. The new facility replaced the outdated and cramped old building. Allcon's work included demolition and asbestos abatement, as well as the construction of new CMU walls, stud-framed walls, and ACT ceilings. The team also built new secure holding cells and sally ports. Allcon's flooring experts installed a combination of carpet, LVT, and ceramic tiles throughout the facility. Custom millwork counters were also manufactured and installed by the Allcon team. New wood doors, windows, and roll-up gates were installed to improve the building's exterior and provide security. Exterior signage, aluminum metal panels, and a handicap lift were also added to provide needed public access.
+  //       `,
+  // })
+
   .set("ogs-creedmoor-psychiatric-center", {
     sector: "public",
     thumbnail:

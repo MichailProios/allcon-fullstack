@@ -221,7 +221,7 @@ export default function Index() {
                 </Button>
                 <Button
                   as={Link}
-                  to="about"
+                  to="company"
                   boxShadow="dark-lg"
                   rounded="md"
                   size="md"
@@ -306,7 +306,7 @@ export default function Index() {
                   alignItems="center"
                 >
                   <Stack spacing="1">
-                    <Heading size="md">About</Heading>
+                    <Heading size="md">Company</Heading>
                     <Text>Learn more about our values</Text>
                   </Stack>
                   <ArrowForwardIcon />

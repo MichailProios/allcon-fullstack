@@ -13,6 +13,7 @@ import {
   CardFooter,
   AvatarGroup,
   useBreakpointValue,
+  Flex,
 } from "@chakra-ui/react";
 import { ClientOnly } from "remix-utils";
 import { Suspense, Fragment } from "react";
@@ -45,7 +46,7 @@ export const meta: MetaFunction = ({ params }: any) => ({
     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b4fadc27-355f-443d-f1d2-a3efc3905200/meta",
   "twitter:card":
     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b4fadc27-355f-443d-f1d2-a3efc3905200/meta",
-  "og:url": "https://allconcontracting.com/about",
+  "og:url": "https://allconcontracting.com/company",
 });
 
 export const loader: LoaderFunction = async ({ request }: any) => {
@@ -77,8 +78,13 @@ export const loader: LoaderFunction = async ({ request }: any) => {
 export default function About() {
   const data = useLoaderData();
 
+  // const maxAvatars = useBreakpointValue(
+  //   { base: 1, xs: 2, sm: 3, smd: 4, md: 5, xmd: 1, lg: 2 },
+  //   { fallback: "lg", ssr: true }
+  // );
+
   const maxAvatars = useBreakpointValue(
-    { base: 1, xs: 2, sm: 3, smd: 4, md: 5, xmd: 1, lg: 2 },
+    { base: 1, xs: 2, sm: 3, md: 4, lg: 5 },
     { fallback: "lg", ssr: true }
   );
 
@@ -145,10 +151,12 @@ export default function About() {
           }}
           style={{ width: "100%" }}
         >
-          <Stack
-            direction={{ base: "column", xmd: "row" }}
-            spacing={4}
+          <Flex
+            // direction={{ base: "column", xmd: "row" }}
+            // spacing={4}
             w="full"
+            justifyContent="strech"
+            alignItems="center"
           >
             <motion.div
               whileHover={{ y: -5 }}
@@ -164,35 +172,36 @@ export default function About() {
                 boxShadow="xl"
                 w="full"
                 as={Link}
-                to={"/about/executives"}
+                to={"/company/management"}
                 draggable={false}
+                // maxW={{ base: "auto", lg: "373px" }}
               >
-                <CardBody p={0}>
-                  <AspectRatio ratio={16 / 9} w="full">
-                    {/* <ClientOnly>
+                <CardBody>
+                  {/* <AspectRatio ratio={16 / 9} w="full"> */}
+                  {/* <ClientOnly>
                       {() => ( */}
-                    <AvatarGroup
-                      size={{
-                        base: "xl",
-                        sm: "2xl",
-                        lg: "2xl",
-                      }}
-                      max={maxAvatars}
-                      spacing={"-2rem"}
-                    >
-                      {data.profiles.map((value: any, index: any) => (
-                        <Avatar
-                          key={index}
-                          name={value.name}
-                          src={value.image}
-                          showBorder={true}
-                          borderColor="primary.500"
-                        />
-                      ))}
-                    </AvatarGroup>
-                    {/* )}
+                  <AvatarGroup
+                    size={{
+                      base: "xl",
+                      sm: "2xl",
+                      lg: "2xl",
+                    }}
+                    max={maxAvatars}
+                    spacing={"-2rem"}
+                  >
+                    {data.profiles.map((value: any, index: any) => (
+                      <Avatar
+                        key={index}
+                        name={value.name}
+                        src={value.image}
+                        showBorder={true}
+                        borderColor="primary.500"
+                      />
+                    ))}
+                  </AvatarGroup>
+                  {/* )}
                     </ClientOnly> */}
-                  </AspectRatio>
+                  {/* </AspectRatio> */}
                 </CardBody>
                 <CardFooter
                   w="full"
@@ -202,14 +211,14 @@ export default function About() {
                   alignItems="center"
                 >
                   <Stack spacing="1">
-                    <Heading size="md">Executives</Heading>
+                    <Heading size="md">Management Team</Heading>
                     <Text>Learn more about our team</Text>
                   </Stack>
                   <ArrowForwardIcon />
                 </CardFooter>
               </Card>
             </motion.div>
-
+            {/* 
             <motion.div
               whileHover={{ y: -5 }}
               transition={{
@@ -317,8 +326,8 @@ export default function About() {
                   <ArrowForwardIcon />
                 </CardFooter>
               </Card>
-            </motion.div>
-          </Stack>
+            </motion.div> */}
+          </Flex>
         </motion.div>
       </Container>
     </>

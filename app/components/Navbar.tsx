@@ -70,7 +70,7 @@ export default function Navbar({ navigationLinks, context }: NavbarProps) {
   const breakpoint = useBreakpoint({ ssr: true });
 
   useEffect(() => {
-    if (breakpoint === "lg") {
+    if (breakpoint === "sxl") {
       onClose();
     }
   }, [breakpoint, onClose]);
@@ -217,7 +217,7 @@ function NavbarHeader({
             </Box>
           </NavLink>
 
-          <HStack spacing={"8px"} display={{ base: "none", xlg: "flex" }}>
+          <HStack spacing={"8px"} display={{ base: "none", sxl: "flex" }}>
             {navigationLinks.map((link, index) => (
               <Box key={index}>
                 {!link.subLinks && (
@@ -241,7 +241,7 @@ function NavbarHeader({
           </HStack>
         </HStack>
 
-        <HStack spacing={"8px"} display={{ base: "none", xlg: "flex" }}>
+        <HStack spacing={"8px"} display={{ base: "none", sxl: "flex" }}>
           <IconButton
             variant={"ghost"}
             aria-label="Color Scheme"
@@ -376,7 +376,7 @@ function NavbarHeader({
           </Box>
         </HStack>
 
-        <HStack spacing="8px" display={{ xlg: "none" }}>
+        <HStack spacing="8px" display={{ sxl: "none" }}>
           <IconButton
             variant={"ghost"}
             aria-label="Color Scheme"

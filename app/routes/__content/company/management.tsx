@@ -72,25 +72,25 @@ export const loader: LoaderFunction = async ({ request }: any) => {
   }
 };
 
-export default function Executives() {
+export default function Management() {
   const data = useLoaderData();
 
   return (
     <Container maxW="1200px" px={{ base: 3, md: 6 }} py={14}>
       <Breadcrumb display={{ base: "none", md: "flex" }}>
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/about">
-            About
+          <BreadcrumbLink as={Link} to="/company">
+            Overview
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/about/executives">
-            Executives
+          <BreadcrumbLink as={Link} to="/company/executives">
+            Management
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
       <VStack spacing="26px">
-        <Heading textAlign="center">Executives</Heading>
+        <Heading textAlign="center">Management Team</Heading>
 
         <AnimatePresence>
           {data.profiles.map((value: any, index: any) => (

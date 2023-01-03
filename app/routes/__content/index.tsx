@@ -275,7 +275,7 @@ export default function Index() {
                 boxShadow="xl"
                 w="full"
                 as={Link}
-                to={"/about"}
+                to={"/company"}
                 draggable={false}
               >
                 <CardBody p={0}>
@@ -567,8 +567,6 @@ export default function Index() {
                 </Button>
                 <Button
                   leftIcon={<Icon as={FaLinkedin} color="#0E76A8" />}
-                  as={Link}
-                  href="#"
                   rounded="md"
                   onClick={() =>
                     window.open(

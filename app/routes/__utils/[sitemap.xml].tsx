@@ -15,7 +15,7 @@ export const loader = () => {
                 <loc>https://allconcontracting.com</loc>              
             </url>
              <url>
-                <loc>https://allconcontracting.com/about</loc>
+                <loc>https://allconcontracting.com/company</loc>
             </url>
             <url>
                 <loc>https://allconcontracting.com/projects</loc>

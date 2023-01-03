@@ -133,21 +133,21 @@ export default function Index() {
               columns={{ base: 1, md: 2, lg: 2, xl: 3 }}
               spacing={{ base: 4, lg: 4 }}
             >
-              <Feature
+              {/* <Feature
                 icon={<Icon as={FcFinePrint} w={10} h={10} />}
                 title={"Awards & Recognitions"}
                 text={`The Awards and Recognitions section highlights the company's commitment to excellence and leadership in the construction industry. This dedication to excellence is further demonstrated by the recognition that Allcon has received from industry organizations, publications, clients, and peers.
                 
                 `}
                 url="/resources/awards"
-              />
-              <Feature
+              /> */}
+              {/* <Feature
                 icon={<Icon as={FcConferenceCall} w={10} h={10} />}
                 title={"Diversity & Equality"}
                 text={`The Diversity & Equality section is dedicated to showcasing the company's commitment to promoting diversity and inclusion in the workplace. This section features information on the company's policies and initiatives aimed at promoting equal opportunities and fostering a positive, inclusive work environment. 
                    `}
                 url="/resources/diversity"
-              />
+              /> */}
               <Feature
                 icon={<Icon as={FcCollaboration} w={10} h={10} />}
                 title={"References"}
@@ -155,19 +155,19 @@ export default function Index() {
                    `}
                 url="/resources/references"
               />
-              <Feature
+              {/* <Feature
                 icon={<Icon as={FcDiploma1} w={10} h={10} />}
                 title={"Certifications"}
                 text={`The Certifications section displays the professional certifications that Allcon has earned. This section provides insight into our work and customer service quality. These certifications also serve as social proof for potential clients, showing that we have met industry standards.`}
                 url="/resources/certifications"
-              />
-              <Feature
+              /> */}
+              {/* <Feature
                 icon={<Icon as={FcGallery} w={10} h={10} />}
                 title={"Media"}
                 text={`The Media section features a variety of additional content, including videos and images of our accomplishments. You can also see behind-the-scenes footage of our team at work. Explore this section to see even more examples of the high-quality workmanship that sets us apart from other contractors.
                 `}
                 url="/resources/media"
-              />
+              /> */}
 
               <Feature
                 icon={<Icon as={FcRules} w={10} h={10} />}

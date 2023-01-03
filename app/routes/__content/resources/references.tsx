@@ -7,11 +7,15 @@ import {
   Heading,
   Avatar,
   Divider,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { testimonials } from "~/utils/testimonials";
+import { Link } from "@remix-run/react";
 import { createServerClient } from "~/utils/supabase.server";
 import { motion } from "framer-motion";
 export const meta: MetaFunction = ({ params }: any) => ({
@@ -54,6 +58,18 @@ export default function Index() {
 
   return (
     <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
+      <Breadcrumb display={{ base: "none", md: "flex" }}>
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/resources">
+            Resources
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/resources/references">
+            References
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
       <VStack spacing="26px">
         <Heading textAlign="center">References</Heading>
         <motion.div

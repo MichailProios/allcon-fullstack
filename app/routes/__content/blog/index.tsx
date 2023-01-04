@@ -13,6 +13,8 @@ import {
   Icon,
   Avatar,
   Link,
+  Skeleton,
+  useColorModeValue,
 } from "@chakra-ui/react";
 // import { Link } from "@remix-run/react";
 import { BsHeart } from "react-icons/bs";
@@ -22,11 +24,15 @@ import { json } from "@remix-run/node";
 import type { LoaderFunction } from "@remix-run/node";
 import RenderIfVisible from "react-render-if-visible";
 import { createServerClient } from "~/utils/supabase.server";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
 import { WarningTwoIcon } from "@chakra-ui/icons";
 
 import type { MetaFunction } from "@remix-run/node";
+import { ClientOnly } from "remix-utils";
+import { ErrorBoundary } from "react-error-boundary";
+import RemixImage from "~/components/RemixImage";
+import ErrorFallback from "~/components/ErrorFallback";
 
 export const loader: LoaderFunction = async ({ request }: any) => {
   try {
@@ -100,7 +106,7 @@ const Index = () => {
                 userProfile:
                   "https://lh3.googleusercontent.com/a/AEdFTp5-DGFL7R5gMGuJGmncPmthHqmYMkD3BBdAkQJWCQ=s96-c",
                 headerImage:
-                  "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/36387977-1c91-49f6-dfa8-4bc5c6b6c600/public",
+                  "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/5239820f-cde5-42d2-e593-d87e5d321b00/public",
               },
               {
                 id: "3",
@@ -141,13 +147,29 @@ const Index = () => {
                     boxShadow="lg"
                     border="1px solid #08090a1a"
                   >
-                    {index === 0 ? (
-                      <AspectRatio ratio={16 / 9}>
-                        <Image alt="header image" src={post.headerImage} />
-                      </AspectRatio>
-                    ) : (
-                      ""
-                    )}
+                    <AspectRatio
+                      ratio={16 / 9}
+                      h="full"
+                      w="full"
+                      maxH="full"
+                      maxW="full"
+                    >
+                      <ClientOnly fallback={<Skeleton w="full" h="full" />}>
+                        {() => (
+                          <Suspense fallback={<Skeleton w="full" h="full" />}>
+                            <ErrorBoundary FallbackComponent={ErrorFallback}>
+                              <RemixImage
+                                image={post.headerImage}
+                                loading="eager"
+                                w="full"
+                                h="full"
+                                draggable={false}
+                              />
+                            </ErrorBoundary>
+                          </Suspense>
+                        )}
+                      </ClientOnly>
+                    </AspectRatio>
 
                     <Grid
                       templateColumns={{ base: "1fr", sm: "max-content 1fr" }}
@@ -169,13 +191,14 @@ const Index = () => {
                           display={{ base: "flex", sm: "none" }}
                         >
                           <Text
-                            color="#4d5760"
+                            color="gray.600"
+                            _dark={{ color: "gray.400" }}
                             fontSize="14px"
                             fontWeight="500"
                           >
                             {post.username}
                           </Text>
-                          <Text color="#4d5760" fontSize="12px">
+                          <Text textColor="gray" fontSize="12px">
                             {post.publishedDate}
                           </Text>
                         </VStack>
@@ -187,13 +210,18 @@ const Index = () => {
                           display={{ base: "none", sm: "flex" }}
                         >
                           <Text
-                            color="#4d5760"
+                            color="gray.600"
+                            _dark={{ color: "gray.400" }}
                             fontSize="14px"
-                            fontWeight="500"
+                            // fontWeight="500"
                           >
                             {post.username}
                           </Text>
-                          <Text color="#4d5760" fontSize="12px">
+                          <Text
+                            color="gray.600"
+                            _dark={{ color: "gray.400" }}
+                            fontSize="12px"
+                          >
                             {post.publishedDate}
                           </Text>
                         </VStack>
@@ -202,7 +230,7 @@ const Index = () => {
                             href={post.postLink}
                             isExternal
                             _hover={{
-                              color: "#323ebe",
+                              color: "primary.600",
                               textDecoration: "none",
                             }}
                             as={Link}
@@ -211,7 +239,12 @@ const Index = () => {
                           </Text>
                         </Heading>
                         {post?.tagList?.length > 0 && (
-                          <HStack mt="3" fontSize="14px" color="#64707d">
+                          <HStack
+                            mt="3"
+                            fontSize="14px"
+                            color="gray.600"
+                            _dark={{ color: "gray.400" }}
+                          >
                             {post.tagList!.map((tag, idx) => (
                               <Text key={idx}>#{tag}</Text>
                             ))}

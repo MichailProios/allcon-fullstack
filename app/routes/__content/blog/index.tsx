@@ -81,7 +81,8 @@ const Index = () => {
                 postLink:
                   "https://www.linkedin.com/feed/update/urn:li:activity:7012154499112837120",
                 publishedDate: "23 December 2022",
-                userProfile: "",
+                userProfile:
+                  "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/00e0dec2-db41-4be2-d206-cb473ba82b00/meta",
                 headerImage:
                   "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/7b6136cc-91ee-4ce6-9b8e-6e985405ae00/public",
               },

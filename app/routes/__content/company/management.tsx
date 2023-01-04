@@ -28,12 +28,12 @@ import { createServerClient } from "~/utils/supabase.server";
 import { Link } from "@remix-run/react";
 
 export const meta: MetaFunction = ({ params }: any) => ({
-  title: `Allcon Contracting - About`,
+  title: `Allcon Contracting - Management`,
   description: `Allcon Contracting is built on a reputation of delivering high
               quality projects serving a variety of private and public clients
               throughout New York State.`,
 
-  "og:title": "Allcon Contracting - About",
+  "og:title": "Allcon Contracting - Management",
   "og:type": "business",
   "og:site_name": "Allcon Contracting",
   "og:description": `Allcon Contracting is built on a reputation of delivering high
@@ -43,7 +43,7 @@ export const meta: MetaFunction = ({ params }: any) => ({
     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b4fadc27-355f-443d-f1d2-a3efc3905200/meta",
   "twitter:card":
     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/b4fadc27-355f-443d-f1d2-a3efc3905200/meta",
-  "og:url": "https://allconcontracting.com/about",
+  "og:url": "https://allconcontracting.com/company/management",
 });
 
 export const loader: LoaderFunction = async ({ request }: any) => {
@@ -145,8 +145,18 @@ export default function Management() {
                   >
                     <AspectRatio
                       ratio={1}
-                      h={{ base: "250px", md: "300px", lg: "350px" }}
-                      w={{ base: "250px", md: "300px", lg: "350px" }}
+                      h={{
+                        base: "220px",
+                        xs: "250px",
+                        md: "300px",
+                        lg: "350px",
+                      }}
+                      w={{
+                        base: "220px",
+                        xs: "250px",
+                        md: "300px",
+                        lg: "350px",
+                      }}
                       display={{ base: "flex", xl: "none" }}
                     >
                       <ClientOnly>

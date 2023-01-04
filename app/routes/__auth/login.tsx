@@ -256,7 +256,11 @@ export default function Login() {
                 <Heading fontSize="2xl">Sign In</Heading>
               </Stack>
 
-              <ButtonGroup orientation="vertical" w="full">
+              <ButtonGroup
+                orientation="vertical"
+                w="full"
+                // size={{ base: "sm", sm: "md" }}
+              >
                 <Button
                   w={"full"}
                   variant={"solid"}
@@ -317,6 +321,7 @@ export default function Login() {
                   colorScheme="primary"
                   label="Sign In"
                   type="submit"
+                  // size={{ base: "sm", sm: "md" }}
                 />
 
                 <Text>

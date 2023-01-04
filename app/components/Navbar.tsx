@@ -355,6 +355,7 @@ function NavbarHeader({
                         as={Link}
                         to="/login"
                         onClick={onClose}
+                        draggable={false}
                       >
                         Sign In
                       </Button>
@@ -364,6 +365,7 @@ function NavbarHeader({
                         colorScheme="primary"
                         as={Link}
                         to="/register"
+                        draggable={false}
                         onClick={onClose}
                       >
                         Sign Up
@@ -612,6 +614,7 @@ function NavbarDrawer({
                         w="full"
                         as={Link}
                         to="/login"
+                        draggable={false}
                         onClick={() => {
                           onClose();
                           onDrawerClose();
@@ -625,6 +628,7 @@ function NavbarDrawer({
                         colorScheme="primary"
                         as={Link}
                         to="/register"
+                        draggable={false}
                         onClick={() => {
                           onClose();
                           onDrawerClose();

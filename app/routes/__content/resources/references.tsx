@@ -19,18 +19,18 @@ import { Link } from "@remix-run/react";
 import { createServerClient } from "~/utils/supabase.server";
 import { motion } from "framer-motion";
 export const meta: MetaFunction = ({ params }: any) => ({
-  title: `Allcon Contracting - Testimonials`,
-  description: `Allcon Contracting testimonials from clients.`,
+  title: `Allcon Contracting - References`,
+  description: `The References section features comments and reviews from past clients.`,
 
-  "og:title": "Allcon Contracting - Testimonials",
+  "og:title": "Allcon Contracting - References",
   "og:type": "business",
   "og:site_name": "Allcon Contracting",
-  "og:description": `Allcon Contracting testimonials from clients.`,
+  "og:description": `The References section features comments and reviews from past clients.`,
   "og:image":
     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/60f073c3-a567-471e-9bc6-9096dcc65500/meta",
   "twitter:card":
     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/60f073c3-a567-471e-9bc6-9096dcc65500/meta",
-  "og:url": "https://allconcontracting.com/testimonials",
+  "og:url": "https://allconcontracting.com/resources/references",
 });
 
 export const loader: LoaderFunction = async ({ request }: any) => {
@@ -108,9 +108,7 @@ export default function Index() {
                   </Text>
                 </Box>
               </VStack>
-              {data.references.length - 1 !== index && (
-                <Divider my={6} w="100vw" />
-              )}
+              {data.references.length - 1 !== index && <Divider my={6} />}
             </Fragment>
           ))}
         </motion.div>

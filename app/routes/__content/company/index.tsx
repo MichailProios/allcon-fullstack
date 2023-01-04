@@ -31,12 +31,12 @@ import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Link } from "@remix-run/react";
 
 export const meta: MetaFunction = ({ params }: any) => ({
-  title: `Allcon Contracting - About`,
+  title: `Allcon Contracting - Company`,
   description: `Allcon Contracting is built on a reputation of delivering high
               quality projects serving a variety of private and public clients
               throughout New York State.`,
 
-  "og:title": "Allcon Contracting - About",
+  "og:title": "Allcon Contracting - Company",
   "og:type": "business",
   "og:site_name": "Allcon Contracting",
   "og:description": `Allcon Contracting is built on a reputation of delivering high
@@ -253,115 +253,6 @@ export default function About() {
                 </CardFooter>
               </Card>
             </motion.div>
-            {/* 
-            <motion.div
-              whileHover={{ y: -5 }}
-              transition={{
-                type: "tween",
-                duration: 0.2,
-              }}
-              style={{ width: "100%" }}
-            >
-              <Card
-                variant="elevated"
-                rounded="md"
-                boxShadow="xl"
-                w="full"
-                as={Link}
-                to={"/projects"}
-                draggable={false}
-              >
-                <CardBody p={0}>
-                  <AspectRatio ratio={16 / 9} w="full">
-                    <ClientOnly>
-                      {() => (
-                        <Suspense fallback={<Skeleton w="full" h="full" />}>
-                          <ErrorBoundary FallbackComponent={ErrorFallback}>
-                            <RemixImage
-                              // image={data.images.apt724Thumbnail}
-                              // alt="Company Group Picture"
-                              roundedTopLeft="md"
-                              roundedTopRight="md"
-                              w="full"
-                              loading="lazy"
-                              draggable={false}
-                            />
-                          </ErrorBoundary>
-                        </Suspense>
-                      )}
-                    </ClientOnly>
-                  </AspectRatio>
-                </CardBody>
-                <CardFooter
-                  w="full "
-                  p={4}
-                  m={0}
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
-                  <Stack spacing="1">
-                    <Heading size="md">History</Heading>
-                    <Text>Learn more about our history</Text>
-                  </Stack>
-                  <ArrowForwardIcon />
-                </CardFooter>
-              </Card>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ y: -5 }}
-              transition={{
-                type: "tween",
-                duration: 0.2,
-              }}
-              style={{ width: "100%" }}
-            >
-              <Card
-                variant="elevated"
-                rounded="md"
-                boxShadow="xl"
-                w="full"
-                h="full"
-                as={Link}
-                to={"/resources"}
-                draggable={false}
-              >
-                <CardBody p={0}>
-                  <AspectRatio ratio={16 / 9} w="full">
-                    <ClientOnly>
-                      {() => (
-                        <Suspense fallback={<Skeleton w="full" h="full" />}>
-                          <ErrorBoundary FallbackComponent={ErrorFallback}>
-                            <RemixImage
-                              // image={data.images.officeThumbnail}
-                              roundedTopLeft="md"
-                              roundedTopRight="md"
-                              w="full"
-                              loading="lazy"
-                              draggable={false}
-                            />
-                          </ErrorBoundary>
-                        </Suspense>
-                      )}
-                    </ClientOnly>
-                  </AspectRatio>
-                </CardBody>
-                <CardFooter
-                  w="full "
-                  p={4}
-                  m={0}
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
-                  <Stack spacing="1">
-                    <Heading size="md">Safety</Heading>
-                    <Text>Our commitment to safety</Text>
-                  </Stack>
-
-                  <ArrowForwardIcon />
-                </CardFooter>
-              </Card>
-            </motion.div> */}
           </Stack>
         </motion.div>
       </Container>

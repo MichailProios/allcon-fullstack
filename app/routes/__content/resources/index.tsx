@@ -45,7 +45,7 @@ export const meta: MetaFunction = ({ params }: any) => ({
     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/60f073c3-a567-471e-9bc6-9096dcc65500/meta",
   "twitter:card":
     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/60f073c3-a567-471e-9bc6-9096dcc65500/meta",
-  "og:url": "https://allconcontracting.com/References",
+  "og:url": "https://allconcontracting.com/resources",
 });
 
 export const loader: LoaderFunction = async ({ request }: any) => {
@@ -114,7 +114,7 @@ const Feature = ({ title, text, icon, url }: FeatureProps) => {
 };
 export default function Index() {
   return (
-    <Container maxW={"1200px"} px={{ base: 3, md: 6 }} py={14}>
+    <Container maxW={"1400px"} px={{ base: 3, md: 6 }} py={14}>
       <VStack spacing="26px">
         <Heading textAlign="center">Resources</Heading>
 

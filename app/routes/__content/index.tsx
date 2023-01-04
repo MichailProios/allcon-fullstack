@@ -538,7 +538,7 @@ export default function Index() {
                   to="/contacts"
                   rounded="md"
                 >
-                  Employment Opportunities
+                  Career Opportunities
                 </Button>
                 <Button
                   leftIcon={<Icon as={FaLinkedin} color="#0E76A8" />}

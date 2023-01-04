@@ -18,23 +18,36 @@ export const loader = () => {
                 <loc>https://allconcontracting.com/company</loc>
             </url>
             <url>
-                <loc>https://allconcontracting.com/projects</loc>
-            </url>
-             <url>
-                <loc>https://allconcontracting.com/resources</loc>
+                <loc>https://allconcontracting.com/company/management</loc>
             </url>
             <url>
                 <loc>https://allconcontracting.com/blog</loc>
             </url>
-             <url>
-                <loc>https://allconcontracting.com/awards</loc>
+            <url>
+                <loc>https://allconcontracting.com/projects</loc>
             </url>
-             <url>
-                <loc>https://allconcontracting.com/testimonies</loc>
+            <url>
+                <loc>https://allconcontracting.com/resources</loc>
             </url>
-             <url>
+            <url>
+                <loc>https://allconcontracting.com/resources/references</loc>
+            </url>
+            <url>
+                <loc>https://allconcontracting.com/resources/brochures</loc>
+            </url>
+            <url>
                 <loc>https://allconcontracting.com/contacts</loc>
             </url>
+            <url>
+                <loc>https://allconcontracting.com/contacts/locations</loc>
+            </url>
+            <url>
+                <loc>https://allconcontracting.com/login</loc>
+            </url>
+            <url>
+                <loc>https://allconcontracting.com/register</loc>
+            </url>
+        
             ${projectLinks.join("")}          
         </urlset>
         `;

@@ -23,12 +23,12 @@ import { VscFilePdf } from "react-icons/vsc";
 
 export const meta: MetaFunction = ({ params }: any) => ({
   title: `Allcon Contracting - Brochures`,
-  description: `Allcon Contracting Brochures.`,
+  description: `The Brochures section features a collection of PDF brochures that provide detailed information on the company's services and capabilities.`,
 
   "og:title": "Allcon Contracting - Brochures",
   "og:type": "business",
   "og:site_name": "Allcon Contracting",
-  "og:description": `Allcon Contracting Brochures.`,
+  "og:description": `The Brochures section features a collection of PDF brochures that provide detailed information on the company's services and capabilities.`,
   "og:image":
     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/60f073c3-a567-471e-9bc6-9096dcc65500/meta",
   "twitter:card":

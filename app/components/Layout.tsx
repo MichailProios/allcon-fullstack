@@ -20,8 +20,8 @@ const navigationLinks = [
     subLinks: [
       { label: "Overview", url: "/company" },
       { label: "Management", url: "/company/management" },
-      { label: "History", url: "/company/history" },
-      { label: "Safety", url: "/company/safety" },
+      // { label: "History", url: "/company/history" },
+      // { label: "Safety", url: "/company/safety" },
     ],
   },
   {
@@ -47,11 +47,11 @@ const navigationLinks = [
     url: "resources",
     subLinks: [
       { label: "All Resources", url: "/resources" },
-      { label: "Awards", url: "/resources/awards" },
-      { label: "Diversity", url: "/resources/diversity" },
+      // { label: "Awards", url: "/resources/awards" },
+      // { label: "Diversity", url: "/resources/diversity" },
       { label: "References", url: "/resources/references" },
-      { label: "Certifications", url: "/resources/certifications" },
-      { label: "Media", url: "/resources/media" },
+      // { label: "Certifications", url: "/resources/certifications" },
+      // { label: "Media", url: "/resources/media" },
       { label: "Brochures", url: "/resources/brochures" },
     ],
   },
@@ -59,9 +59,9 @@ const navigationLinks = [
     label: "Contacts",
     url: "contacts",
     subLinks: [
-      { label: "Contact Us", url: "/contacts" },
-      { label: "Careers", url: "/contacts/careers" },
-      { label: "Offices", url: "/contacts/offices" },
+      { label: "Connect", url: "/contacts" },
+      // { label: "Opportunities", url: "/contacts/opportunities" },
+      { label: "Locations", url: "/contacts/locations" },
     ],
   },
 ];

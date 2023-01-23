@@ -216,8 +216,10 @@ function NavbarHeader({
               />
             </Box>
           </NavLink>
+        </HStack>
 
-          <HStack spacing={"8px"} display={{ base: "none", sxl: "flex" }}>
+        <HStack spacing={"8px"} display={{ base: "none", lg: "flex" }}>
+          <HStack spacing={"8px"}>
             {navigationLinks.map((link, index) => (
               <Box key={index}>
                 {!link.subLinks && (
@@ -239,9 +241,6 @@ function NavbarHeader({
               </Box>
             ))}
           </HStack>
-        </HStack>
-
-        <HStack spacing={"8px"} display={{ base: "none", sxl: "flex" }}>
           <IconButton
             variant={"ghost"}
             aria-label="Color Scheme"
@@ -252,133 +251,9 @@ function NavbarHeader({
           >
             {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
           </IconButton>
-          <Box>
-            <Popover
-              closeDelay={200}
-              openDelay={0}
-              isLazy
-              placement="bottom"
-              lazyBehavior="unmount"
-              isOpen={isOpen}
-              returnFocusOnClose={false}
-              autoFocus={false}
-              orientation="vertical"
-              matchWidth
-            >
-              <PopoverAnchor>
-                <Button
-                  isActive={isOpen}
-                  pr={2}
-                  pl={2}
-                  variant="ghost"
-                  onClick={onOpen}
-                  leftIcon={
-                    loaderData?.profile ? (
-                      <Avatar
-                        size="xs"
-                        name={loaderData?.profile.full_name}
-                        src={loaderData?.profile.avatar_url}
-                      />
-                    ) : (
-                      <Icon
-                        color="gray.600"
-                        _dark={{ color: "gray.300" }}
-                        w={6}
-                        h={6}
-                        as={RiAccountCircleFill}
-                      />
-                    )
-                  }
-                >
-                  {loaderData?.profile
-                    ? loaderData?.profile.full_name
-                    : "Join our Community"}
-                </Button>
-              </PopoverAnchor>
-              {loaderData?.profile ? (
-                <PopoverContent w="full" boxShadow="lg" ref={ref}>
-                  <PopoverBody w="full" p={0}>
-                    <ButtonGroup
-                      size="md"
-                      w="full"
-                      variant="ghost"
-                      orientation="vertical"
-                      spacing={0}
-                      alignItems="center"
-                      justifyContent="center"
-                    >
-                      <Button
-                        fontSize="sm"
-                        w="full"
-                        onClick={onClose}
-                        borderRadius="none"
-                        as={Link}
-                        to="/profile"
-                        rightIcon={
-                          <Icon w={5} h={5} as={IoPersonCircleOutline} />
-                        }
-                      >
-                        Profile
-                      </Button>
-
-                      <Button
-                        fontSize="sm"
-                        w="full"
-                        onClick={() => {
-                          onClose();
-                          handleLogout();
-                        }}
-                        borderRadius="none"
-                        rightIcon={<Icon w={5} h={5} as={IoLogOutOutline} />}
-                      >
-                        Sign Out
-                      </Button>
-                    </ButtonGroup>
-                  </PopoverBody>
-                </PopoverContent>
-              ) : (
-                <PopoverContent w="full" boxShadow="lg" ref={ref}>
-                  <PopoverBody w="full" p={0}>
-                    <Text p={2} textAlign="center">
-                      Become a Member
-                    </Text>
-                    <Divider w="full" />
-                    <ButtonGroup
-                      p={2}
-                      size="sm"
-                      w="full"
-                      justifyContent="center"
-                    >
-                      <Button
-                        fontSize="sm"
-                        w="full"
-                        as={Link}
-                        to="/login"
-                        onClick={onClose}
-                        draggable={false}
-                      >
-                        Sign In
-                      </Button>
-                      <Button
-                        fontSize="sm"
-                        w="full"
-                        colorScheme="primary"
-                        as={Link}
-                        to="/register"
-                        draggable={false}
-                        onClick={onClose}
-                      >
-                        Sign Up
-                      </Button>
-                    </ButtonGroup>
-                  </PopoverBody>
-                </PopoverContent>
-              )}
-            </Popover>
-          </Box>
         </HStack>
 
-        <HStack spacing="8px" display={{ sxl: "none" }}>
+        <HStack spacing="8px" display={{ lg: "none" }}>
           <IconButton
             variant={"ghost"}
             aria-label="Color Scheme"
@@ -507,7 +382,7 @@ function NavbarDrawer({
             ))}
           </VStack>
         </DrawerBody>
-        <DrawerFooter w="full" justifyContent="center" alignItems="center">
+        {/* <DrawerFooter w="full" justifyContent="center" alignItems="center">
           <Box>
             <Popover
               closeDelay={200}
@@ -642,7 +517,7 @@ function NavbarDrawer({
               )}
             </Popover>
           </Box>
-        </DrawerFooter>
+        </DrawerFooter> */}
       </DrawerContent>
     </Drawer>
   );

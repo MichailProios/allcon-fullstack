@@ -220,7 +220,7 @@ export default function Project() {
 
   const cssModeBreakpoint = useBreakpointValue(
     { base: true, md: false },
-    { fallback: "md", ssr: false }
+    { fallback: "md", ssr: true }
   );
 
   const { height } = useWindowDimensions();

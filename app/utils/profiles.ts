@@ -17,13 +17,13 @@ profiles
     subtitle: "President of Administration and Marketing",
     description: `Since founding Allcon Contracting in 2001, Marko has grown the company from a small renovations firm to a full-service general contracting firm. He has worked on many high-profile projects for private and public clients throughout the Tri-State area. Marko's dedication to maintaining strong client relationships, delivering superior projects, and providing exceptional customer service was shaped by his early experiences working alongside his father, John, at Bistakis Corp. during weekends and summers. During this time, Marko gained valuable knowledge and skills in the construction business, as well as the character-building qualities of a strong work ethic, honesty, integrity, and the importance of delivering a quality product. As the CEO and partner of Allcon Contracting Corp, Marko is responsible for running all aspects of the business, from administration and marketing to estimating, project management, client relations, and human resources.`,
   })
-  .set("josephgrant", {
-    image:
-      "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ab43ecec-9056-44ed-a7a2-72e159843500/public",
-    title: "Joseph Grant",
-    subtitle: "Executive",
-    description: `Joseph holds a bachelor's degree from the New York Institute of Technology and has almost 30 years of experience in architecture, construction management, and general contracting. He is a registered architect in eight states and has been involved in many of NYC's largest projects. Prior to joining Allcon, Joseph served as a Senior Vice President at The LiRo Group, where he directed all architecture activities and coordinated select construction management efforts. Before that, he was a Senior Construction Manager at Lend Lease, responsible for interior construction on the $1 billion+ 432 Park Avenue high-rise mixed-use building. Earlier in his career, while at Davis Brody Bond, Joseph served as the managing architect for the World Trade Center Memorial and Museum, as well as Columbia University's Manhattanville Phase I Campus development project. For his work on the 9/11 Memorial and Museum, he received the AIA Presidential Citation and Delta Recognition.`,
-  })
+  // .set("josephgrant", {
+  //   image:
+  //     "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/ab43ecec-9056-44ed-a7a2-72e159843500/public",
+  //   title: "Joseph Grant",
+  //   subtitle: "Executive",
+  //   description: `Joseph holds a bachelor's degree from the New York Institute of Technology and has almost 30 years of experience in architecture, construction management, and general contracting. He is a registered architect in eight states and has been involved in many of NYC's largest projects. Prior to joining Allcon, Joseph served as a Senior Vice President at The LiRo Group, where he directed all architecture activities and coordinated select construction management efforts. Before that, he was a Senior Construction Manager at Lend Lease, responsible for interior construction on the $1 billion+ 432 Park Avenue high-rise mixed-use building. Earlier in his career, while at Davis Brody Bond, Joseph served as the managing architect for the World Trade Center Memorial and Museum, as well as Columbia University's Manhattanville Phase I Campus development project. For his work on the 9/11 Memorial and Museum, he received the AIA Presidential Citation and Delta Recognition.`,
+  // })
   .set("nikolaosgiannikouris", {
     image:
       "https://imagedelivery.net/pOMYaxY9FUVJceQstM4HuQ/118fe6db-678c-4fff-e1dd-74a4f40c5000/public",

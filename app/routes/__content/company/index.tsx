@@ -190,7 +190,7 @@ export default function About() {
             </motion.div>
 
             <motion.div
-              whileHover={{ y: -5 }}
+              // whileHover={{ y: -5 }}
               transition={{
                 type: "tween",
                 duration: 0.2,
@@ -204,6 +204,8 @@ export default function About() {
                 w="full"
                 // as={Link}
                 // to={"/company/management"}
+                _dark={{ color: "gray.400" }}
+                color="gray.300"
                 draggable={false}
               >
                 <CardFooter
@@ -222,7 +224,7 @@ export default function About() {
               </Card>
             </motion.div>
             <motion.div
-              whileHover={{ y: -5 }}
+              // whileHover={{ y: -5 }}
               transition={{
                 type: "tween",
                 duration: 0.2,
@@ -234,6 +236,8 @@ export default function About() {
                 rounded="md"
                 boxShadow="xl"
                 w="full"
+                _dark={{ color: "gray.400" }}
+                color="gray.300"
                 // as={Link}
                 // to={"/company/management"}
                 draggable={false}

@@ -318,7 +318,7 @@ export default function Index() {
             w="full"
           >
             <motion.div
-              whileHover={{ y: -5 }}
+              // whileHover={{ y: -5 }}
               transition={{
                 type: "tween",
                 duration: 0.2,
@@ -333,6 +333,8 @@ export default function Index() {
                 // as={Link}
                 // to={"/contacts/opportunities"}
                 draggable={false}
+                _dark={{ color: "gray.400" }}
+                color="gray.300"
               >
                 <CardFooter
                   w="full"

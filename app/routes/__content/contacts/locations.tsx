@@ -130,7 +130,7 @@ export default function Locations() {
                 <Tabs isFitted isLazy colorScheme="primary">
                   <TabList>
                     <Tab>New York Office</Tab>
-                    <Tab>New Jersey Office</Tab>
+                    {/* <Tab>New Jersey Office</Tab> */}
                   </TabList>
 
                   <TabPanels>
@@ -211,7 +211,7 @@ export default function Locations() {
                         </TabPanels>
                       </Tabs>
                     </TabPanel>
-                    <TabPanel p={0} pt={6}>
+                    {/* <TabPanel p={0} pt={6}>
                       <Tabs
                         isLazy
                         size="sm"
@@ -292,7 +292,7 @@ export default function Locations() {
                           </TabPanel>
                         </TabPanels>
                       </Tabs>
-                    </TabPanel>
+                    </TabPanel> */}
                   </TabPanels>
                 </Tabs>
               </CardBody>
